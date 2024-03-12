@@ -1,184 +1,172 @@
-﻿;Annot. level;HMDB;Chemical class
-(2-methoxyethoxy)propanoic acid isomer;2;;Organi
-(gamma)Glu-Leu/Ile;2;;AA-pep
-1-Methyluric acid;1;HMDB03099;AroHeP:Xenobi
-1-Methylxanthine;1;HMDB10738;AroHeP
-1,3-Dimethyluric acid;1;HMDB01857;AroHeP
-1,7-Dimethyluric acid;1;HMDB11103;AroHeP
-2-acetamido-4-methylphenyl acetate;2;;AroHoM
-2-Aminoadipic acid;1;HMDB00510;AA-pep
-2-Hydroxybenzyl alcohol;1;HMDB59709;AroHoM
-2-Isopropylmalic acid;1;HMDB00402;Organi
-2-methoxy-N-[3-oxo-3-(pyrrolidin-1-yl)propyl]acetamide (and isomers);2;;AA-pep
-2-Methylhippuric acid;1;HMDB11723;AA-pep:AcyGly
-2-Octenoylcarnitine;2;HMDB13324;Lipids
-2,2-Dimethylglutaric acid;1;;Lipids
-2,6 Dimethylheptanoyl carnitine;2;HMDB06320;Lipids:AcyCar
-3-Hydroxybenzyl alcohol;1;HMDB59712;AroHoM
-3-Hydroxyphenylacetic acid;1;HMDB00440;AroHoM
-3-Indole carboxylic acid glucuronide;2;HMDB13189;Carboh
-3-Methyl-2-oxovaleric acid;1;HMDB00491;Lipids
-3-Methylcrotonylglycine;1;HMDB00459;AA-pep:AcyGly
-3,3-Dimethylglutaric acid;1;HMDB02441;Lipids
-3,4-Dihydroxybenzeneacetic acid;1;HMDB01336;AroHoM
-3,5-dihydroxybenzoic acid/3,4-dihydroxybenzoic acid;2;;AroHoM
-3,7-Dimethyluric acid;1;HMDB01982;AroHeP
-4-Acetamidobutanoic acid isomer 2;2;;Lipids
-4-Acetamidobutanoic acid isomer 3;2;;Lipids
-4-Hydroxybenzoic acid;1;HMDB00500;AroHoM
-4-Methylhippuric acid/3-Methylhippuric acid;1;;AA-pep:AcyGly
-5-Hydroxyindoleacetic acid;1;HMDB00763;AroHeP
-5-Sulfosalicylic acid;1;HMDB11725;AroHoM
-5,6-Dihydrouracil;1;HMDB00076;AliHeM
-6-(2-hydroxyethoxy)-6-oxohexanoic acid;2;;Organi
-6-(carboxymethoxy)-hexanoic acid;2;;Organi
-9-Methylxanthine;2;HMDB59716;AroHeP
-Acetaminophen;1;HMDB01859;AroHoM:Xenobi
-Acetaminophen glucuronide;1;HMDB10316;Carboh
-Acetylphenylalanine;1;HMDB00512;AA-pep
-Adipoylcarnitine;2;;Lipids:AcyCar
-alpha-N-Phenylacetyl-glutamine;1;HMDB06344;AA-pep
-Aminosalicyluric acid;2;;AA-pep
-Aniline isomer;2;;AroHoM
-Asp-Leu/Ile isomer 1;2;;AA-pep
-Asp-Leu/Ile isomer 2;2;;AA-pep
-Aspartic acid;1;HMDB00191;AA-pep
-Azelaic acid;1;HMDB00784;Organi
-Benzoic acid isomer;2;;AroHoM
-Butyrylcarnitine;1;HMDB02013;Lipids:AcyCar
-Caffeine;1;HMDB01847;AroHeP:Xenobi
-Chenodeoxycholic acid isomer;2;;Lipids:Steroi
-Cinnamoylglycine;1;HMDB11621;AA-pep:AcyGly
-Citric acid;1;HMDB00094;Organi
-Creatine;1;HMDB00064;AA-pep
-Decadienylcarnitine isomer 2;2;;Lipids:AcyCar
-Decanoylcarnitine;1;HMDB00651;Lipids:AcyCar
-Decanoylcarnitine isomer;2;;Lipids:AcyCar
-Decenoylcarnitine isomer 1;2;;Lipids:AcyCar
-Decenoylcarnitine isomer 2;2;;Lipids:AcyCar
-Dehydroepiandrosterone 3-glucuronide;1;HMDB10348;Lipids:Steroi
-Dehydroepiandrosterone sulfate;1;HMDB01032;Lipids:Steroi
-Deoxyhexose;1;HMDB00849;Carboh
-Dihydroneopterin isomer;2;;AroHeP
-Dihydroxyphenylethyleneglycol isomer;2;HMDB00318;AroHoM
-Dimethylguanosine;2;HMDB04824;Nucleo
-Dimethylnonenoylcarnitine/Undecenoylcarnitine;2;;Lipids:AcyCar
-FMNH2;2;HMDB01142;AroHeP
-Fumaric acid;1;HMDB00134;Lipids
-Gentisic acid;1;HMDB00152;AroHoM
-Glu-Val;2;HMDB59717;AA-pep
-Gluconic acid and/or isomers;2;;Carboh
-Glucuronic acid and/or isomers;2;;Carboh
-Glutamine;1;HMDB00641;AA-pep
-Glyceric acid;1;HMDB00139;Carboh
-Glycocholic acid isomer 2;2;;Lipids:Steroi
-Glycocholic acid isomer 3;2;;Lipids:Steroi
-Heptenoylcarnitine isomer;2;;Lipids:AcyCar
-Heptylmalonic acid;2;HMDB59719;Lipids
-Hexanoylcarnitine;1;HMDB00756;Lipids:AcyCar
-Hexanoylcarnitine isomer;2;;Lipids:AcyCar
-Hexanoylglycine;1;HMDB00701;AA-pep:AcyGly
-Hippuric acid;1;HMDB00714;AA-pep:AcyGly
-Hydroxyanthranilic acid isomer;2;;AroHeM
-Hydroxybenzyl alcohol isomer;2;;AroHeM
-Hydroxyoctanoylcarnitine;2;;Lipids:AcyCar
-Hydroxyphenyllactic acid;1;HMDB00755;AroHoM
-Hydroxysuberic acid isomer 1;2;;Organi
-Hydroxysuberic acid isomer 2;2;;Organi
-Hypoxanthine;1;HMDB00157;AroHeP
-Indoleacetic acid;1;HMDB00197;AroHeP
-Indoleacetic acid isomer;2;;AroHeP
-Indoleacetyl glutamine;2;HMDB13240;AA-pep
-Isovalerylalanine isomer;2;;AA-pep
-Ketoleucine;1;HMDB00695;Lipids
-Kynurenic acid;1;HMDB00715;AA-pep
-Kynurenine isomer;2;;AA-pep
-Lysine;1;HMDB00182;AA-pep
-Malic acid;1;HMDB00156;Organi
-meta-Hydroxyhippuric acid;2;HMDB06116;AA-pep:AcyGly
-Methoxysalicylic acid isomer;2;;AroHoM
-Methyl (hydroxymethyl)pyrrolidine-carboxylate/Methyl (hydroxy)piperidine-carboxylate;2;;AA-pep
-Methylglutarylcarnitine isomer 1;2;;Lipids:AcyCar
-Methylglutarylcarnitine isomer 2;2;;Lipids:AcyCar
-Methylhippuric acid isomer;2;;AA-pep
-Methylinosine;2;;Nucleo
-Mevalonic acid isomer 1;2;;Organi
-Mevalonic acid isomer 2;2;;Organi
-Mevalonic acid isomer 3;2;;Organi
-Monoethyl phthalate;2;HMDB02120;AroHoM:Xenobi
-N-Acetyl-aspartic acid;1;HMDB00812;AA-pep
-N-Acetylisoleucine;1;;AA-pep
-N-Acetylleucine;1;HMDB11756;AA-pep
-N-Acetyltryptophan;1;HMDB13713;AA-pep
-N-Acetyltryptophan isomer 3;2;;AA-pep
-N1-Acetylspermidine;2;HMDB01276;Organi
-N2-Acetylaminoadipic acid;2;;AA-pep
-N4-Acetylcytidine;1;HMDB05923;Nucleo
-Niacinamide;2;HMDB01406;AroHeM
-Nicotinic acid isomer;2;;AroHeM
-Nicotinuric acid isomer;2;;AA-pep
-Nonenoylcarnitine isomer 1;2;;Lipids:AcyCar
-Normetanephrine isomer;2;;AroHoM
-Octanoylcarnitine;1;HMDB00791;Lipids:AcyCar
-Octanoylcarnitine isomer;2;;Lipids:AcyCar
-Ortho-Hydroxyphenylacetic acid;1;HMDB00669;AroHoM
-Oxoglutaric acid;2;HMDB00208;Organi
-Oxoproline isomer;2;;AA-pep
-p-Anisic acid;1;HMDB01101;AroHoM
-p-Hydroxyhippuric acid;2;HMDB13678;AA-pep:AcyGly
-p-Hydroxymandelic acid;1;HMDB00822;AroHoM
-p-Hydroxyphenylacetic acid;1;HMDB00020;AroHoM
-Pantothenic acid;1;HMDB00210;AliAcy
-Paraxanthine/Theophylline;2;;AroHeP
-Pentose;2;;Carboh
-Phe-Tyr-Asp (and isomers);2;;AA-pep
-Phenylalanine;1;HMDB00159;AA-pep
-Porphobilinogen;1;HMDB00245;Organi
-Proline;1;;AA-pep
-Proline betaine;1;HMDB04827;AliHeM
-Propionylcarnitine isomer 1;2;;Lipids:AcyCar
-Propionylcarnitine isomer 2;2;;Lipids:AcyCar
-Pyridoxamine isomer 1;2;;AroHeM
-Pyridoxic acid isomer 1;2;;AroHeM
-Pyridoxic acid isomer 2;2;;AroHeM
-Pyridylacetylglycine;2;HMDB59723;AA-pep:AcyGly:Xenobi
-Pyrocatechol sulfate;2;HMDB59724;AroHoM
-Pyroglutamic acid;1;HMDB00267;AliHeM
-Pyrroledicarboxylic acid;2;;AroHeM
-Pyruvic acid;1;HMDB00243;Organi
-Quinic acid;1;HMDB03072;AliHoM
-Salicylic acid;1;HMDB01895;AroHoM:Xenobi
-Sebacic acid;1;HMDB00792;Organi
-Suberic acid;1;HMDB00893;Organi
-Sulfosalicylic acid isomer;2;;AroHoM
-Taurine;1;HMDB00251;Organi
-Testosterone glucuronide;2;HMDB03193;Lipids:Steroi
-Tetrahydrohippuric acid;2;;AA-pep:AcyGly
-Theobromine;1;HMDB02825;AroHeP:Xenobi
-Threo-3-Phenylserine;1;HMDB02184;AA-pep
-Threonic acid/Erythronic acid;2;;Carboh
-Tiglylcarnitine/2-Ethylacrylylcarnitine;2;;Lipids:AcyCar
-Tiglylglycine;1;HMDB00959;AA-pep:AcyGly
-Trimethylamine N-oxide;1;HMDB00925;AliAcy
-Tryptamine;1;HMDB00303;AroHeP
-Tryptophan;1;HMDB00929;AA-pep
-Tyr-Ala/Ala-Tyr/Phe-Ser/Ser-Phe;2;;AA-pep
-Tyrosine;1;HMDB00158;AA-pep
-Urocanic acid;2;HMDB00301;AroHeM
-Valerylcarnitine;2;HMDB13128;Lipids:AcyCar
-Valerylglycine isomer 1;2;;AA-pep:AcyGly
-Valerylglycine isomer 2;2;;AA-pep:AcyGly
-Xanthosine;1;HMDB00299;Nucleo
-Xanthurenic acid;1;HMDB00881;AA-pep
-HU_198;35;22,98;M
-HU_199;33;21,04;M
-HU_200;46;23,89;M
-HU_201;34;20,24;M
-HU_202;42;28,06;M
-HU_203;25;19,95;F
-HU_204;31;29,06;M
-HU_205;33;28,37;M
-HU_206;45;22,15;F
-HU_207;33;19,47;F
-HU_208;27;18,61;F
-HU_209;17,5;21,48;F
+﻿,Annot. level,HMDB,Chemical class
+(2-methoxyethoxy)propanoic acid isomer,2,,Organi
+(gamma)Glu-Leu/Ile,2,,AA-pep
+1-Methyluric acid,1,HMDB03099,AroHeP:Xenobi
+1-Methylxanthine,1,HMDB10738,AroHeP
+"1,3-Dimethyluric acid",1,HMDB01857,AroHeP
+"1,7-Dimethyluric acid",1,HMDB11103,AroHeP
+2-acetamido-4-methylphenyl acetate,2,,AroHoM
+2-Aminoadipic acid,1,HMDB00510,AA-pep
+2-Hydroxybenzyl alcohol,1,HMDB59709,AroHoM
+2-Isopropylmalic acid,1,HMDB00402,Organi
+2-methoxy-N-[3-oxo-3-(pyrrolidin-1-yl)propyl]acetamide (and isomers),2,,AA-pep
+2-Methylhippuric acid,1,HMDB11723,AA-pep:AcyGly
+2-Octenoylcarnitine,2,HMDB13324,Lipids
+"2,2-Dimethylglutaric acid",1,,Lipids
+"2,6 Dimethylheptanoyl carnitine",2,HMDB06320,Lipids:AcyCar
+3-Hydroxybenzyl alcohol,1,HMDB59712,AroHoM
+3-Hydroxyphenylacetic acid,1,HMDB00440,AroHoM
+3-Indole carboxylic acid glucuronide,2,HMDB13189,Carboh
+3-Methyl-2-oxovaleric acid,1,HMDB00491,Lipids
+3-Methylcrotonylglycine,1,HMDB00459,AA-pep:AcyGly
+"3,3-Dimethylglutaric acid",1,HMDB02441,Lipids
+"3,4-Dihydroxybenzeneacetic acid",1,HMDB01336,AroHoM
+"3,5-dihydroxybenzoic acid/3,4-dihydroxybenzoic acid",2,,AroHoM
+"3,7-Dimethyluric acid",1,HMDB01982,AroHeP
+4-Acetamidobutanoic acid isomer 2,2,,Lipids
+4-Acetamidobutanoic acid isomer 3,2,,Lipids
+4-Hydroxybenzoic acid,1,HMDB00500,AroHoM
+4-Methylhippuric acid/3-Methylhippuric acid,1,,AA-pep:AcyGly
+5-Hydroxyindoleacetic acid,1,HMDB00763,AroHeP
+5-Sulfosalicylic acid,1,HMDB11725,AroHoM
+"5,6-Dihydrouracil",1,HMDB00076,AliHeM
+6-(2-hydroxyethoxy)-6-oxohexanoic acid,2,,Organi
+6-(carboxymethoxy)-hexanoic acid,2,,Organi
+9-Methylxanthine,2,HMDB59716,AroHeP
+Acetaminophen,1,HMDB01859,AroHoM:Xenobi
+Acetaminophen glucuronide,1,HMDB10316,Carboh
+Acetylphenylalanine,1,HMDB00512,AA-pep
+Adipoylcarnitine,2,,Lipids:AcyCar
+alpha-N-Phenylacetyl-glutamine,1,HMDB06344,AA-pep
+Aminosalicyluric acid,2,,AA-pep
+Aniline isomer,2,,AroHoM
+Asp-Leu/Ile isomer 1,2,,AA-pep
+Asp-Leu/Ile isomer 2,2,,AA-pep
+Aspartic acid,1,HMDB00191,AA-pep
+Azelaic acid,1,HMDB00784,Organi
+Benzoic acid isomer,2,,AroHoM
+Butyrylcarnitine,1,HMDB02013,Lipids:AcyCar
+Caffeine,1,HMDB01847,AroHeP:Xenobi
+Chenodeoxycholic acid isomer,2,,Lipids:Steroi
+Cinnamoylglycine,1,HMDB11621,AA-pep:AcyGly
+Citric acid,1,HMDB00094,Organi
+Creatine,1,HMDB00064,AA-pep
+Decadienylcarnitine isomer 2,2,,Lipids:AcyCar
+Decanoylcarnitine,1,HMDB00651,Lipids:AcyCar
+Decanoylcarnitine isomer,2,,Lipids:AcyCar
+Decenoylcarnitine isomer 1,2,,Lipids:AcyCar
+Decenoylcarnitine isomer 2,2,,Lipids:AcyCar
+Dehydroepiandrosterone 3-glucuronide,1,HMDB10348,Lipids:Steroi
+Dehydroepiandrosterone sulfate,1,HMDB01032,Lipids:Steroi
+Deoxyhexose,1,HMDB00849,Carboh
+Dihydroneopterin isomer,2,,AroHeP
+Dihydroxyphenylethyleneglycol isomer,2,HMDB00318,AroHoM
+Dimethylguanosine,2,HMDB04824,Nucleo
+Dimethylnonenoylcarnitine/Undecenoylcarnitine,2,,Lipids:AcyCar
+FMNH2,2,HMDB01142,AroHeP
+Fumaric acid,1,HMDB00134,Lipids
+Gentisic acid,1,HMDB00152,AroHoM
+Glu-Val,2,HMDB59717,AA-pep
+Gluconic acid and/or isomers,2,,Carboh
+Glucuronic acid and/or isomers,2,,Carboh
+Glutamine,1,HMDB00641,AA-pep
+Glyceric acid,1,HMDB00139,Carboh
+Glycocholic acid isomer 2,2,,Lipids:Steroi
+Glycocholic acid isomer 3,2,,Lipids:Steroi
+Heptenoylcarnitine isomer,2,,Lipids:AcyCar
+Heptylmalonic acid,2,HMDB59719,Lipids
+Hexanoylcarnitine,1,HMDB00756,Lipids:AcyCar
+Hexanoylcarnitine isomer,2,,Lipids:AcyCar
+Hexanoylglycine,1,HMDB00701,AA-pep:AcyGly
+Hippuric acid,1,HMDB00714,AA-pep:AcyGly
+Hydroxyanthranilic acid isomer,2,,AroHeM
+Hydroxybenzyl alcohol isomer,2,,AroHeM
+Hydroxyoctanoylcarnitine,2,,Lipids:AcyCar
+Hydroxyphenyllactic acid,1,HMDB00755,AroHoM
+Hydroxysuberic acid isomer 1,2,,Organi
+Hydroxysuberic acid isomer 2,2,,Organi
+Hypoxanthine,1,HMDB00157,AroHeP
+Indoleacetic acid,1,HMDB00197,AroHeP
+Indoleacetic acid isomer,2,,AroHeP
+Indoleacetyl glutamine,2,HMDB13240,AA-pep
+Isovalerylalanine isomer,2,,AA-pep
+Ketoleucine,1,HMDB00695,Lipids
+Kynurenic acid,1,HMDB00715,AA-pep
+Kynurenine isomer,2,,AA-pep
+Lysine,1,HMDB00182,AA-pep
+Malic acid,1,HMDB00156,Organi
+meta-Hydroxyhippuric acid,2,HMDB06116,AA-pep:AcyGly
+Methoxysalicylic acid isomer,2,,AroHoM
+Methyl (hydroxymethyl)pyrrolidine-carboxylate/Methyl (hydroxy)piperidine-carboxylate,2,,AA-pep
+Methylglutarylcarnitine isomer 1,2,,Lipids:AcyCar
+Methylglutarylcarnitine isomer 2,2,,Lipids:AcyCar
+Methylhippuric acid isomer,2,,AA-pep
+Methylinosine,2,,Nucleo
+Mevalonic acid isomer 1,2,,Organi
+Mevalonic acid isomer 2,2,,Organi
+Mevalonic acid isomer 3,2,,Organi
+Monoethyl phthalate,2,HMDB02120,AroHoM:Xenobi
+N-Acetyl-aspartic acid,1,HMDB00812,AA-pep
+N-Acetylisoleucine,1,,AA-pep
+N-Acetylleucine,1,HMDB11756,AA-pep
+N-Acetyltryptophan,1,HMDB13713,AA-pep
+N-Acetyltryptophan isomer 3,2,,AA-pep
+N1-Acetylspermidine,2,HMDB01276,Organi
+N2-Acetylaminoadipic acid,2,,AA-pep
+N4-Acetylcytidine,1,HMDB05923,Nucleo
+Niacinamide,2,HMDB01406,AroHeM
+Nicotinic acid isomer,2,,AroHeM
+Nicotinuric acid isomer,2,,AA-pep
+Nonenoylcarnitine isomer 1,2,,Lipids:AcyCar
+Normetanephrine isomer,2,,AroHoM
+Octanoylcarnitine,1,HMDB00791,Lipids:AcyCar
+Octanoylcarnitine isomer,2,,Lipids:AcyCar
+Ortho-Hydroxyphenylacetic acid,1,HMDB00669,AroHoM
+Oxoglutaric acid,2,HMDB00208,Organi
+Oxoproline isomer,2,,AA-pep
+p-Anisic acid,1,HMDB01101,AroHoM
+p-Hydroxyhippuric acid,2,HMDB13678,AA-pep:AcyGly
+p-Hydroxymandelic acid,1,HMDB00822,AroHoM
+p-Hydroxyphenylacetic acid,1,HMDB00020,AroHoM
+Pantothenic acid,1,HMDB00210,AliAcy
+Paraxanthine/Theophylline,2,,AroHeP
+Pentose,2,,Carboh
+Phe-Tyr-Asp (and isomers),2,,AA-pep
+Phenylalanine,1,HMDB00159,AA-pep
+Porphobilinogen,1,HMDB00245,Organi
+Proline,1,,AA-pep
+Proline betaine,1,HMDB04827,AliHeM
+Propionylcarnitine isomer 1,2,,Lipids:AcyCar
+Propionylcarnitine isomer 2,2,,Lipids:AcyCar
+Pyridoxamine isomer 1,2,,AroHeM
+Pyridoxic acid isomer 1,2,,AroHeM
+Pyridoxic acid isomer 2,2,,AroHeM
+Pyridylacetylglycine,2,HMDB59723,AA-pep:AcyGly:Xenobi
+Pyrocatechol sulfate,2,HMDB59724,AroHoM
+Pyroglutamic acid,1,HMDB00267,AliHeM
+Pyrroledicarboxylic acid,2,,AroHeM
+Pyruvic acid,1,HMDB00243,Organi
+Quinic acid,1,HMDB03072,AliHoM
+Salicylic acid,1,HMDB01895,AroHoM:Xenobi
+Sebacic acid,1,HMDB00792,Organi
+Suberic acid,1,HMDB00893,Organi
+Sulfosalicylic acid isomer,2,,AroHoM
+Taurine,1,HMDB00251,Organi
+Testosterone glucuronide,2,HMDB03193,Lipids:Steroi
+Tetrahydrohippuric acid,2,,AA-pep:AcyGly
+Theobromine,1,HMDB02825,AroHeP:Xenobi
+Threo-3-Phenylserine,1,HMDB02184,AA-pep
+Threonic acid/Erythronic acid,2,,Carboh
+Tiglylcarnitine/2-Ethylacrylylcarnitine,2,,Lipids:AcyCar
+Tiglylglycine,1,HMDB00959,AA-pep:AcyGly
+Trimethylamine N-oxide,1,HMDB00925,AliAcy
+Tryptamine,1,HMDB00303,AroHeP
+Tryptophan,1,HMDB00929,AA-pep
+Tyr-Ala/Ala-Tyr/Phe-Ser/Ser-Phe,2,,AA-pep
+Tyrosine,1,HMDB00158,AA-pep
+Urocanic acid,2,HMDB00301,AroHeM
+Valerylcarnitine,2,HMDB13128,Lipids:AcyCar
+Valerylglycine isomer 1,2,,AA-pep:AcyGly
+Valerylglycine isomer 2,2,,AA-pep:AcyGly
+Xanthosine,1,HMDB00299,Nucleo
+Xanthurenic acid,1,HMDB00881,AA-pep

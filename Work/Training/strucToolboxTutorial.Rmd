@@ -758,11 +758,11 @@ As a first step we need to reorganise and convert the Excel data file into a Dat
 url = 'https://github.com/CIMCB/MetabWorkflowTutorial/raw/master/GastricCancer_NMR.xlsx'
 
 # read in file directly from github...
-# X=read.xlsx(url)
+X=read.xlsx(url)
 
 # ...or use BiocFileCache
-path = bfcrpath(bfc,url)
-X = read.xlsx(path)
+# path = bfcrpath(bfc,url)
+# X = read.xlsx(path)
 
 # sample meta data
 SM=X[,1:4]

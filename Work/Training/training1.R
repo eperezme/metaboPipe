@@ -2,8 +2,8 @@
 # # Original code
 data('sacurine',package = 'ropls')
 # 
-# sacurine$variableMetadata$annotation=rownames(sacurine$variableMetadata)
-# rownames(sacurine$variableMetadata)=1:nrow(sacurine$variableMetadata)
+# sacurine$metaboliteMetadata$annotation=rownames(sacurine$metaboliteMetadata)
+# rownames(sacurine$metaboliteMetadata)=1:nrow(sacurine$metaboliteMetadata)
 # colnames(sacurine$dataMatrix)=1:ncol(sacurine$dataMatrix)
 # 
 # Bioconductor packages
@@ -23,27 +23,42 @@ library(readxl)
 file <- "Training/Data/pr5b00354_si_002.xls"
 
 # Load data
-data_pos <- read.csv("Training/Data/data_pos.csv", sep = ";", row.names = 1, header = TRUE)
-data_neg <- read.csv("Training/Data/data_neg.csv", sep = ";", row.names = 1, header = TRUE)
+data_pos <- read.csv("Training/Data/data_pos.csv", sep = ",", row.names = 1, header = TRUE, dec = ",")
+data_neg <- read.csv("Training/Data/data_neg.csv", sep = ";", row.names = 1, header = F, dec = ",")
+
 
 # Load annotations
-sampledata <- read.csv("Training/Data/sampleMetadata.csv", sep = ";", row.names = 1, header = TRUE)
-metabolitedata <- read.csv("Training/Data/metabolitedata.csv", sep = ";", row.names = 1, header = TRUE)
+sampledata <- read.csv("Training/Data/sampleMetadata.csv", sep = ";", row.names = 1, header = TRUE, dec = ",")
 
-generate_experiment <- function(data_neg, sampleMetadata, metaboliteMetadata) {
-  # Move the annotations to a new column and rename the features by index to avoid issues
-  metaboliteMetadata$annotation <- rownames(metaboliteMetadata)
-  rownames(metaboliteMetadata) <- NULL  # Clear existing row names
+
+metabolitedata <- read.csv("Training/Data/metabolitedata.csv", sep = ",", row.names = 1, header = TRUE)
+
+# Create DatasetExperiment
+DE <- DatasetExperiment(data = data_neg,
+                        sample_meta = sampledata,
+                        variable_meta = metabolitedata,
+                        name = 'Test')
+
+metabolitedata <- metabolitedata[rownames(metabolitedata) %in% data_neg[1,],]
+metabolitedata$annotation <- rownames(metabolitedata)
+rownames(metabolitedata)=1:nrow(metabolitedata)
+
+
+
+
+generate_experiment <- function(dataMatrix, sampleMetadata, metaboliteMetadata) {
+
+  # metaboliteMetadata$annotation=rownames(metaboliteMetadata)
+  # rownames(metaboliteMetadata)=1:nrow(metaboliteMetadata)
+  # colnames(dataMatrix)=1:ncol(dataMatrix)
   
-  # Assign row names directly to data frames
-  rownames(data_neg) <- seq_len(nrow(data_neg))
+  
   
   # Create DatasetExperiment
-  DE <- DatasetExperiment(data = as.data.frame(data_neg),
+  DE <- DatasetExperiment(data = data_neg,
                           sample_meta = sampleMetadata,
                           variable_meta = metaboliteMetadata,
-                          name = 'Test',
-                          description = 'Description test')
+                          name = 'Test')
   return(DE)
 }
 
