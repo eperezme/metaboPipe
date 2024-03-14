@@ -810,6 +810,7 @@ M = model_apply(M,DE)
 filtered = predicted(M)
 
 # summary of filtered data
+DE
 filtered
 
 ```

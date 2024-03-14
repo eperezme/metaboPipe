@@ -1,0 +1,85 @@
+Analyte,Q1,Q3,RT
+Creatinine,114.1,44.1,0.876
+Glycine,211.2,75.9,3.68
+Alanine,225.2,44.2,4.03
+Serine,241.2,60,3.6
+Histamine,247,154,3.09
+Proline,251.2,70.3,4
+Valine,253.2,72.2,4.59
+Threonine,255.2,74.1,3.83
+Phenylethylamine,257.2,105.2,5.39
+Taurine,261,126.1,3.43
+Putrescine,266.1,113.9,4.96
+cis-4-Hydroxyproline,267.1,68,3.58
+trans-4-Hydroxyproline,267.15,68,3.39
+Leucine,267.3,43,4.85
+Isoleucine,267.3,69,4.87
+Asparagine,268.2,87,3.47
+Aspartic acid,269.2,116.2,3.73
+Glutamine,282.2,130,3.49
+Glutamic acid,283.2,130.2,3.72
+Methionine,285.1,104.2,4.52
+Dopamine,289.2,137.2,4.3
+Histidine,291.1,110.2,3.08
+2-Aminoadipic acid,297.1,144.2,3.87
+Phenylalanine,301.2,120.2,4.9
+Methionine sulfoxide,301.2,88.1,3.61
+Arginine,310,217,3.19
+N2-Acetyl-ornithine,310.2,217.3,3.72
+Citrulline,311.2,113.1,3.57
+Serotonin,312.3,160.2,4.46
+Tyrosine,317.2,136.1,4.26
+DOPA,333.1,198.1,4.01
+Asymmetric dimethylarginine,338.2,46,3.34
+Total-dimethylarginine,338.2,70.1,3.34
+Symmetric dimethylarginine,338.2,307,4.88
+Tryptophan,340.2,188.2,4.79
+Kynurenine,344.2,146.2,4.75
+Carnosine,362.2,110.1,3.08
+3-Nitrotyrosine,362.2,136.1,4.77
+Ornithine,403.2,310.2,4.68
+Lysine,417.2,324.2,4.79
+Spermidine,551.2,193.2,5.45
+Spermine,743.3,193.2,5.76
+Sarcosine,225.1,44.2,3.78
+"N1,N12-Diacetylspermine",422.4,171.2,4.61
+Tyramine,273.2,121.1,4.62
+Creatine,132.1,90,0.907
+Phosphocreatine,212.1,90.1,0.917
+Betaine,118.1,59.2,0.923
+Choline,104.2,60.1,0.854
+Trimethylamine N-oxide,76,58,0.878
+Methylhistidine,305.1,212.1,3.17
+Homocysteine,271.1,136.1,3.49
+Analyte-PA053,113.2,69.1,0.852
+Analyte-PA054,117.1,47.1,0.875
+Analyte-PA055,127.1,66.1,0.919
+Analyte-PA056,135.1,93,0.906
+Analyte-PA057,213.2,77.9,3.7
+Analyte-PA058,226.2,45.2,4.04
+Analyte-PA059,228.2,47.1,3.79
+Analyte-PA060,242.2,60,3.61
+Analyte-PA061,254.2,73.3,4
+Analyte-PA062,261.2,80.2,4.59
+Analyte-PA063,263,128,3.46
+Analyte-PA064,268.2,86.2,4.87
+Analyte-PA065,272.2,119.2,3.73
+Analyte-PA066,276.3,124.2,4.63
+Analyte-PA067,286.2,133.2,3.73
+Analyte-PA068,287.2,135,3.49
+Analyte-PA069,289.1,108.2,4.53
+Analyte-PA070,292.1,111.2,3.09
+Analyte-PA071,293.1,141.1,4.31
+Analyte-PA072,302.2,121.2,4.91
+Analyte-PA073,316,223,3.19
+Analyte-PA074,316.3,164.2,4.46
+Analyte-PA075,318.1,120.2,3.58
+Analyte-PA076,336.1,201.1,4.01
+Analyte-PA077,342.2,189.2,4.8
+Analyte-PA078,344.2,77.2,3.35
+Analyte-PA079,363.2,270.1,4.96
+Analyte-PA080,405.2,312.2,4.69
+Analyte-PA081,428.4,174.2,4.61
+Analyte-PA082,559.2,193.2,5.45
+Analyte-PA083,751.3,193.2,5.75
+Analyte-PA084,85,66,0.874
