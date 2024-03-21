@@ -1628,20 +1628,33 @@ data <- as.data.frame(read.xlsx(file.path(temp,"LC_MS_raw_data.xlsx"),sheet = 'D
 The imported data needs to be converted to `DatasetExperiment` format for use with `structToolbox`.
 
 ```{r}
-# extract sample meta data
+# extract sample meta data (Cols 1 to 8)
 SM = data[ ,1:8]
 
+
 # add coloumn for sample type (QC, blank etc)
+# Add blanks id
 blanks=c(1,2,33,34,65,66)
+
+# add QC id
 QCs=c(3,4,11,18,25,32,35,36,43,50,57,64)
+
+# add sample type
 SM$sample_type='Sample'
+
+# add blanks
 SM$sample_type[blanks]='Blank'
+
+# add QCs
 SM$sample_type[QCs]='QC'
+
+
 
 # put qc/blank labels in all factors for plotting later
 SM$biol.batch[SM$sample_type!='Sample']=SM$sample_type[SM$sample_type!='Sample']
 SM$time.point[SM$sample_type!='Sample']=SM$sample_type[SM$sample_type!='Sample']
 SM$condition[SM$sample_type!='Sample']=SM$sample_type[SM$sample_type!='Sample']
+
 
 # convert to factors
 SM$biol.batch=ordered(SM$biol.batch,c('9','10','11','12','QC','Blank'))
@@ -1650,12 +1663,18 @@ SM$condition=factor(SM$condition)
 SM$sample_type=factor(SM$sample_type)
 
 # variable meta data
+# Use the colnames of the data as the variable meta data
 VM = data.frame('annotation'=colnames(data)[9:ncol(data)])
 
-# raw data
+
+# Create the raw data matrix
 X = data[,9:ncol(data)]
+
+                
 # convert 0 to NA
 X[X==0]=NA
+
+
 # force to numeric; any non-numerics will become NA
 X=data.frame(lapply(X,as.numeric),check.names = FALSE)
 

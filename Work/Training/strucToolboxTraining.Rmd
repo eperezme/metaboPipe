@@ -1,0 +1,403 @@
+---
+title: "strucToolbox Training"
+output: html_notebook
+---
+
+
+```{r}
+## install additional bioc packages for vignette if needed
+#BiocManager::install(c('pmp', 'ropls', 'BiocFileCache'))
+
+## install additional CRAN packages if needed
+#install.packages(c('cowplot', 'openxlsx'))
+
+suppressPackageStartupMessages({
+    # Bioconductor packages
+    library(SummarizedExperiment)
+    library(structToolbox)
+    library(pmp)
+    library(ropls)
+    library(BiocFileCache)
+  
+    # CRAN libraries
+    library(ggplot2)
+    library(gridExtra)
+    library(cowplot)
+    library(openxlsx)
+    library(VIM)
+    library(dplyr)
+})
+
+
+# use the BiocFileCache
+bfc <- BiocFileCache(ask = FALSE)
+```
+
+
+
+## LC-MS-based metabolomics dataset
+
+The LC-MS-based metabolomics dataset from the STATegra multi-omics dataset (see Introduction) can be found on [github](https://github.com/STATegraData/STATegraData) and must be extracted from zip file prior to data analysis.
+
+```{r, warning=FALSE, message=FALSE }
+# path to zip
+zipfile = "https://raw.github.com/STATegraData/STATegraData/master/Script_STATegra_Metabolomics.zip"
+
+## retrieve from BiocFileCache
+path = bfcrpath(bfc,zipfile)
+temp = bfccache(bfc)
+
+## ... or download to temp location
+# path = tempfile()
+# temp = tempdir()
+# download.file(zipfile,path)
+
+# unzip
+unzip(zipfile=path, files = "LC_MS_raw_data.xlsx", exdir=temp)
+
+# read samples
+data <- as.data.frame(read.xlsx(file.path(temp,"LC_MS_raw_data.xlsx"),sheet = 'Data'))
+```
+
+The imported data needs to be converted to `DatasetExperiment` format for use with `structToolbox`.
+
+```{r}
+# extract sample meta data (Cols 1 to 8)
+SM = data[ ,1:8]
+
+
+# add coloumn for sample type (QC, blank etc)
+# Add blanks id
+blanks=c(1,2,33,34,65,66)
+
+# add QC id
+QCs=c(3,4,11,18,25,32,35,36,43,50,57,64)
+
+# add sample type
+SM$sample_type='Sample'
+
+# add blanks
+SM$sample_type[blanks]='Blank'
+
+# add QCs
+SM$sample_type[QCs]='QC'
+
+
+
+# put qc/blank labels in all factors for plotting later
+SM$biol.batch[SM$sample_type!='Sample']=SM$sample_type[SM$sample_type!='Sample']
+SM$time.point[SM$sample_type!='Sample']=SM$sample_type[SM$sample_type!='Sample']
+SM$condition[SM$sample_type!='Sample']=SM$sample_type[SM$sample_type!='Sample']
+
+
+# convert to factors
+SM$biol.batch=ordered(SM$biol.batch,c('9','10','11','12','QC','Blank'))
+SM$time.point=ordered(SM$time.point,c('0h','2h','6h','12h','18h','24h','QC','Blank'))
+SM$condition=factor(SM$condition)
+SM$sample_type=factor(SM$sample_type)
+
+# variable meta data
+# Use the colnames of the data as the variable meta data
+colnames(data)=gsub("-", "_", colnames(data))
+
+VM = data.frame('annotation'=colnames(data)[9:ncol(data)])
+
+
+# Create the raw data matrix
+X = data[,9:ncol(data)]
+
+                
+# convert 0 to NA
+X[X==0]=NA
+
+
+# force to numeric; any non-numerics will become NA
+X=data.frame(lapply(X,as.numeric),check.names = FALSE)
+
+# make sure row/col names match
+rownames(X)=data$label
+rownames(SM)=data$label
+rownames(VM)=colnames(X)
+
+
+# create DatasetExperiment object
+DE = DatasetExperiment(
+  data = X, 
+  sample_meta = SM, 
+  variable_meta = VM, 
+  name = 'STATegra Metabolomics LCMS',
+  description = 'https://www.nature.com/articles/s41597-019-0202-7'
+)
+
+DE
+```
+
+
+# Preprocessing
+
+```{r}
+# prepare model sequence
+MS = filter_smeta(mode = 'include', levels='QC', factor_name = 'sample_type') +
+     knn_impute(neighbours=5) +
+     vec_norm() + 
+     log_transform(base = 10) 
+
+# apply model sequence
+MS = model_apply(MS, DE)
+```
+
+
+### FILTER MISSING VALUES 
+```{r}
+filter_MV <- function(dataset_exp, threshold = 0.8) {
+  # Check if threshold is specified and valid
+  if (missing(threshold)) {
+    threshold <- 0.8  # Default threshold
+    cat("No threshold specified. Defaulting to 0.8.\n")
+  } else {
+    # Check if threshold is between 0 and 1
+    if (threshold < 0 || threshold > 1) {
+      stop("Threshold must be between 0 and 1.")
+    }
+    # Check if threshold is a numeric value
+    if (!is.numeric(threshold)) {
+      stop("Threshold must be a numeric value.")
+    }
+    cat(paste0("Threshold value: ", threshold, "\n"))
+  }
+  
+  # Calculate number of rows and columns in the dataset
+  nrows <- nrow(assay(dataset_exp))
+  ncols <- ncol(assay(dataset_exp))
+  
+  # Calculate the threshold values based on the modified 80% rule
+  row_threshold <- ncols * threshold
+  col_threshold <- nrows * threshold
+  
+  # Filter rows based on the modified 80% rule
+  row_counts <- rowSums(!is.na(assay(dataset_exp)))
+  dataset_exp <- dataset_exp[row_counts >= row_threshold, ]
+  
+  # Filter columns based on the modified 80% rule
+  col_counts <- colSums(!is.na(assay(dataset_exp)))
+  dataset_exp <- dataset_exp[, col_counts >= col_threshold]
+  
+  # Calculate the number of rows and columns removed
+  removed_rows <- nrows - sum(row_counts >= row_threshold)
+  removed_cols <- ncols - sum(col_counts >= col_threshold)
+  
+  # Print information about removed rows and columns
+  if (removed_rows == 0) {
+    cat('No rows removed\n')
+  } else {
+    cat(paste0('Number of rows removed: ', removed_rows, '\n'))
+  }
+  
+  if (removed_cols == 0) {
+    cat('No columns removed\n')
+  } else {
+    cat(paste0('Number of columns removed: ', removed_cols, '\n'))
+  }
+  
+  return(dataset_exp)
+}
+
+```
+
+## View the MV of datasets
+```{r}
+aggr(assay(DE))
+DE_f<- filter_MV(DE, threshold = 0.8)
+aggr(assay(DE_f))
+
+C = mv_histogram(by_sample = FALSE)
+chart_plot(C, DE)
+chart_plot(C, DE_f)
+
+
+```
+
+
+
+
+## Now we Impute Missing Values
+```{r}
+# Impute Missing Values
+
+# Impute missing values using missForest
+library(missForest)
+  # Create new DatasetExperiment object
+DE_impForest <- DE_f
+  # Impute missing values
+forest_result <- missForest(assay(DE_f), maxiter = 10, ntree = 100)
+  # Replace missing values with imputed values
+assay(DE_impForest) <- forest_result$ximp
+
+
+impute_forest <- function(dataset_experiment) {
+  # Load required library
+  library(missForest)
+  
+  # Create a copy of the DatasetExperiment object
+  DE_imp <- dataset_experiment
+  
+  # Impute missing values
+  forest_result <- missForest(assay(dataset_experiment), maxiter = 10, ntree = 100)
+  
+  # Replace missing values with imputed values
+  assay(DE_imp) <- forest_result$ximp
+  
+  return(DE_imp)
+}
+
+
+```
+
+```{r}
+# Impute missing values using imputeLCMD
+library(imputeLCMD)
+  # Create new DatasetExperiment object
+DE_impLCMD <- DE_f
+  # Impute missing values
+QRILC_result <- impute.QRILC(assay(DE_f))
+  # Replace missing values with imputed values
+assay(DE_impLCMD) <- QRILC_result[[1]]
+
+
+impute_QRILC <- function(dataset_experiment) {
+  # Load required library
+  library(imputeLCMD)
+  
+  # Create a copy of the DatasetExperiment object
+  DE_imp <- dataset_experiment
+  
+  # Impute missing values
+  imputed_data <- impute.QRILC(assay(dataset_experiment))
+  
+  # Replace missing values with imputed values
+  assay(DE_imp) <- imputed_data[[1]]
+  
+  return(DE_imp)
+}
+
+
+```
+
+
+```{r}
+DE_Forest <- impute_forest(DE)
+DE_QRILC <- impute_QRILC(DE)
+```
+
+
+```{r}
+P <- PCA(number_components = 5)
+
+PF <-  model_apply(P, DE_impForest)
+PQ <-  model_apply(P, DE_impLCMD)
+PDE <-  model_apply(P, DE_QRILC)
+PFDE <- model_apply(P, DE_Forest)
+
+AP <- autoscale() + PCA(number_components = 5)
+
+APF <- model_apply(AP, DE_impForest)
+APQ <- model_apply(AP, DE_impLCMD)
+APDE <- model_apply(AP, DE_QRILC)
+APFDE <- model_apply(AP, DE_Forest)
+
+
+
+
+
+
+C = pca_scores_plot(factor_name = 'condition')
+# chart_plot(C, PF)       # NOT BAD but 99% of the variance is explained by the first component
+# chart_plot(C, PQ)       # NOT BAD but 99% of the variance is explained by the first component
+# chart_plot(C, PDE)      # BAD and 99% of the variance is explained by the first component
+# chart_plot(C, PFDE)     # BAD and 99% of the variance is explained by the first component
+
+
+chart_plot(C, APF[2])   # NOT BAD but 50% of the variance is explained by the first component
+chart_plot(C, APQ[2])   # NOT BAD but 50% of the variance is explained by the first component
+# chart_plot(C, APDE[2])  # BAD
+# chart_plot(C, APFDE[2]) # BAD
+
+
+
+
+
+
+
+
+```
+
+
+
+
+
+## PC-PR2
+```{r}
+library(pcpr2)
+
+z_meta <- DE_impLCMD$sample_meta %>% select(c("condition", "time.point"))
+
+DE_impLCMD$sample_meta
+output <- runPCPR2(as.matrix(assay(DE_impLCMD)), z_meta)
+output <- runPCPR2(transcripts, Z_metadata)
+output$pR2
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
