@@ -1,0 +1,288 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{ulaszewskaNutrimetabolomicsIntegrativeAction2019a}{article}{}
+      \name{author}{46}{}{%
+        {{hash=7e9220b6229f32242f10a67f1ce8cdd7}{%
+           family={Ulaszewska},
+           familyi={U\bibinitperiod},
+           given={Marynka\bibnamedelima M.},
+           giveni={M\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=cae9a45c1f9245f9b637886f69d0f40d}{%
+           family={Weinert},
+           familyi={W\bibinitperiod},
+           given={Christoph\bibnamedelima H.},
+           giveni={C\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=eb45bcfe0298fdf0a60965132202b6c0}{%
+           family={Trimigno},
+           familyi={T\bibinitperiod},
+           given={Alessia},
+           giveni={A\bibinitperiod}}}%
+        {{hash=0165980d7111fb7bd26c796d4d3371ae}{%
+           family={Portmann},
+           familyi={P\bibinitperiod},
+           given={Reto},
+           giveni={R\bibinitperiod}}}%
+        {{hash=20cf5aa7117f5d70509b6647956b5a1c}{%
+           family={Andres\bibnamedelima Lacueva},
+           familyi={A\bibinitperiod\bibinitdelim L\bibinitperiod},
+           given={Cristina},
+           giveni={C\bibinitperiod}}}%
+        {{hash=38d202067c33a05b2a5c3b1d46550de5}{%
+           family={Badertscher},
+           familyi={B\bibinitperiod},
+           given={René},
+           giveni={R\bibinitperiod}}}%
+        {{hash=63ac5746e80f367ebf112368a25ffadd}{%
+           family={Brennan},
+           familyi={B\bibinitperiod},
+           given={Lorraine},
+           giveni={L\bibinitperiod}}}%
+        {{hash=3b690ffa6bcead6f86853f1f560fa51d}{%
+           family={Brunius},
+           familyi={B\bibinitperiod},
+           given={Carl},
+           giveni={C\bibinitperiod}}}%
+        {{hash=d188c8077c8f96f4c1f1918940194873}{%
+           family={Bub},
+           familyi={B\bibinitperiod},
+           given={Achim},
+           giveni={A\bibinitperiod}}}%
+        {{hash=361c41a8a4376817ddb027f84c152749}{%
+           family={Capozzi},
+           familyi={C\bibinitperiod},
+           given={Francesco},
+           giveni={F\bibinitperiod}}}%
+        {{hash=7d5f77a9b28938ab535114f218074c3b}{%
+           family={Cialiè\bibnamedelima Rosso},
+           familyi={C\bibinitperiod\bibinitdelim R\bibinitperiod},
+           given={Marta},
+           giveni={M\bibinitperiod}}}%
+        {{hash=c10c1ee954e43d44c867c1f58f4a9ac1}{%
+           family={Cordero},
+           familyi={C\bibinitperiod},
+           given={Chiara\bibnamedelima E.},
+           giveni={C\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=49b853015387a507485809e9ca9aea37}{%
+           family={Daniel},
+           familyi={D\bibinitperiod},
+           given={Hannelore},
+           giveni={H\bibinitperiod}}}%
+        {{hash=9ff7e0b93c8beeac3d5c856c0f284852}{%
+           family={Durand},
+           familyi={D\bibinitperiod},
+           given={Stéphanie},
+           giveni={S\bibinitperiod}}}%
+        {{hash=30e21f13bdd148d64d7796ebe2e2a24b}{%
+           family={Egert},
+           familyi={E\bibinitperiod},
+           given={Bjoern},
+           giveni={B\bibinitperiod}}}%
+        {{hash=c7027ed33875d2804164a61dcb3dbcc4}{%
+           family={Ferrario},
+           familyi={F\bibinitperiod},
+           given={Paola\bibnamedelima G.},
+           giveni={P\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=0783e62db9056ef92cc7163b0c6f8618}{%
+           family={Feskens},
+           familyi={F\bibinitperiod},
+           given={Edith\bibnamedelima J.M.},
+           giveni={E\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=fb11a88a3fa55139c69662a04588ffba}{%
+           family={Franceschi},
+           familyi={F\bibinitperiod},
+           given={Pietro},
+           giveni={P\bibinitperiod}}}%
+        {{hash=44bb3fcae693f6c0acabd83692c3096c}{%
+           family={Garcia-Aloy},
+           familyi={G\bibinithyphendelim A\bibinitperiod},
+           given={Mar},
+           giveni={M\bibinitperiod}}}%
+        {{hash=754de67b0858f994b094391799bebb03}{%
+           family={Giacomoni},
+           familyi={G\bibinitperiod},
+           given={Franck},
+           giveni={F\bibinitperiod}}}%
+        {{hash=b4fe54b69e23e45df4c6d43557d36c20}{%
+           family={Giesbertz},
+           familyi={G\bibinitperiod},
+           given={Pieter},
+           giveni={P\bibinitperiod}}}%
+        {{hash=c69b6804c6a75e4e1b80b47c551143e9}{%
+           family={González-Domínguez},
+           familyi={G\bibinithyphendelim D\bibinitperiod},
+           given={Raúl},
+           giveni={R\bibinitperiod}}}%
+        {{hash=4ee891ab3ce5e98a8ed0f0199f305865}{%
+           family={Hanhineva},
+           familyi={H\bibinitperiod},
+           given={Kati},
+           giveni={K\bibinitperiod}}}%
+        {{hash=31f8fcc36c9ac3791a9afb19dc716624}{%
+           family={Hemeryck},
+           familyi={H\bibinitperiod},
+           given={Lieselot\bibnamedelima Y.},
+           giveni={L\bibinitperiod\bibinitdelim Y\bibinitperiod}}}%
+        {{hash=872ba8172bc47dcf8fd970af49acf811}{%
+           family={Kopka},
+           familyi={K\bibinitperiod},
+           given={Joachim},
+           giveni={J\bibinitperiod}}}%
+        {{hash=5b3844c83fa79bb79b8dae8f8fb02e2c}{%
+           family={Kulling},
+           familyi={K\bibinitperiod},
+           given={Sabine\bibnamedelima E.},
+           giveni={S\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=366df0d305daa21d5d6001177b8c5586}{%
+           family={Llorach},
+           familyi={L\bibinitperiod},
+           given={Rafael},
+           giveni={R\bibinitperiod}}}%
+        {{hash=aaaf9553365573fefa618a85486915b8}{%
+           family={Manach},
+           familyi={M\bibinitperiod},
+           given={Claudine},
+           giveni={C\bibinitperiod}}}%
+        {{hash=3aff62db15f90a5b98f5b0dd22919079}{%
+           family={Mattivi},
+           familyi={M\bibinitperiod},
+           given={Fulvio},
+           giveni={F\bibinitperiod}}}%
+        {{hash=140527e989e40fc5ec581dd66af4ffca}{%
+           family={Migné},
+           familyi={M\bibinitperiod},
+           given={Carole},
+           giveni={C\bibinitperiod}}}%
+        {{hash=491fc5a8019ce7b0b8d4fbb514be11c5}{%
+           family={Münger},
+           familyi={M\bibinitperiod},
+           given={Linda\bibnamedelima H.},
+           giveni={L\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=6022f018bfd805c4b40154d609db3e21}{%
+           family={Ott},
+           familyi={O\bibinitperiod},
+           given={Beate},
+           giveni={B\bibinitperiod}}}%
+        {{hash=1ccd5d62bed3e6b97d89a95bc0604a5d}{%
+           family={Picone},
+           familyi={P\bibinitperiod},
+           given={Gianfranco},
+           giveni={G\bibinitperiod}}}%
+        {{hash=a6bbc20bb53288e0bb36fe33192d850e}{%
+           family={Pimentel},
+           familyi={P\bibinitperiod},
+           given={Grégory},
+           giveni={G\bibinitperiod}}}%
+        {{hash=b8e6137931daa6acef2a2d0ae26ac397}{%
+           family={Pujos-Guillot},
+           familyi={P\bibinithyphendelim G\bibinitperiod},
+           given={Estelle},
+           giveni={E\bibinitperiod}}}%
+        {{hash=b03d02cd8ea6db786ddb8dbc4b07fee5}{%
+           family={Riccadonna},
+           familyi={R\bibinitperiod},
+           given={Samantha},
+           giveni={S\bibinitperiod}}}%
+        {{hash=299ac468a33f20eba2f91b51d9a28432}{%
+           family={Rist},
+           familyi={R\bibinitperiod},
+           given={Manuela\bibnamedelima J.},
+           giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=d3ac365befcddb35001f24e17aa5d9c4}{%
+           family={Rombouts},
+           familyi={R\bibinitperiod},
+           given={Caroline},
+           giveni={C\bibinitperiod}}}%
+        {{hash=a1ce21b29aa03f7d92cb5dc2ae5de81e}{%
+           family={Rubert},
+           familyi={R\bibinitperiod},
+           given={Josep},
+           giveni={J\bibinitperiod}}}%
+        {{hash=25ba79d277cb829c6fffa7a9e391de26}{%
+           family={Skurk},
+           familyi={S\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+        {{hash=209cdb947815097ba0572ed63b7fd169}{%
+           family={Sri\bibnamedelima Harsha},
+           familyi={S\bibinitperiod\bibinitdelim H\bibinitperiod},
+           given={Pedapati\bibnamedelimb S.\bibnamedelimi C.},
+           giveni={P\bibinitperiod\bibinitdelim S\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=77b13034299b419e17cae26fdaf807af}{%
+           family={Van\bibnamedelima Meulebroek},
+           familyi={V\bibinitperiod\bibinitdelim M\bibinitperiod},
+           given={Lieven},
+           giveni={L\bibinitperiod}}}%
+        {{hash=c6b1894d8e9eb0e5e269a2ee807ad3ff}{%
+           family={Vanhaecke},
+           familyi={V\bibinitperiod},
+           given={Lynn},
+           giveni={L\bibinitperiod}}}%
+        {{hash=f55b27522a0accc27357cf4583413e3c}{%
+           family={Vázquez-Fresno},
+           familyi={V\bibinithyphendelim F\bibinitperiod},
+           given={Rosa},
+           giveni={R\bibinitperiod}}}%
+        {{hash=9d5ad49ceb2813c1f755e04f53a14492}{%
+           family={Wishart},
+           familyi={W\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=ed9dc1a5dd3a967bf2da19b258f5e376}{%
+           family={Vergères},
+           familyi={V\bibinitperiod},
+           given={Guy},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{c16f80e9e5c080f466dce0aaf2336533}
+      \strng{fullhash}{72bf67cde2e388b335665decc058c929}
+      \strng{bibnamehash}{c16f80e9e5c080f466dce0aaf2336533}
+      \strng{authorbibnamehash}{c16f80e9e5c080f466dce0aaf2336533}
+      \strng{authornamehash}{c16f80e9e5c080f466dce0aaf2336533}
+      \strng{authorfullhash}{72bf67cde2e388b335665decc058c929}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{abstract}{The life sciences are currently being transformed by an unprecedented wave of developments in molecular analysis, which include important advances in instrumental analysis as well as biocomputing. In light of the central role played by metabolism in nutrition, metabolomics is rapidly being established as a key analytical tool in human nutritional studies. Consequently, an increasing number of nutritionists integrate metabolomics into their study designs. Within this dynamic landscape, the potential of nutritional metabolomics (nutrimetabolomics) to be translated into a science, which can impact on health policies, still needs to be realized. A key element to reach this goal is the ability of the research community to join, to collectively make the best use of the potential offered by nutritional metabolomics. This article, therefore, provides a methodological description of nutritional metabolomics that reflects on the state-of-the-art techniques used in the laboratories of the Food Biomarker Alliance (funded by the European Joint Programming Initiative “A Healthy Diet for a Healthy Life” (JPI HDHL)) as well as points of reflections to harmonize this field. It is not intended to be exhaustive but rather to present a pragmatic guidance on metabolomic methodologies, providing readers with useful “tips and tricks” along the analytical workflow.}
+      \field{issn}{1613-4133}
+      \field{journaltitle}{Molecular Nutrition \& Food Research}
+      \field{langid}{english}
+      \field{number}{1}
+      \field{shorttitle}{Nutrimetabolomics}
+      \field{title}{Nutrimetabolomics: {{An Integrative Action}} for {{Metabolomic Analyses}} in {{Human Nutritional Studies}}}
+      \field{volume}{63}
+      \field{year}{2019}
+      \field{dateera}{ce}
+      \field{pages}{1800384}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1002/mnfr.201800384
+      \endverb
+      \verb{file}
+      \verb C\:\\Users\\eduar\\Zotero\\storage\\LVNPBYRS\\Ulaszewska et al. - 2019 - Nutrimetabolomics An Integrative Action for Metab.pdf;C\:\\Users\\eduar\\Zotero\\storage\\EC2GAJQ3\\mnfr.html
+      \endverb
+      \keyw{GC–MS,LC–MS,metabolomics,NMR,nutrition}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
