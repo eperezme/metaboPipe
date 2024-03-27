@@ -261,7 +261,7 @@ I aquí tens el resultat \@parcla i el títol és: \@title
 \newcommand{\fitxacode}{Ficha Del Trabajo Final}
 \newcommand{\titolcode}{Título del trabajo:}
 \newcommand{\nomautorcode}{Nombre del autor/a:}
-\newcommand{\nompdccode}{Nombre del tutor/a de TF:}
+\newcommand{\nompdccode}{Nombre del director/a de TF:}
 \newcommand{\nompracode}{Nombre del/de la PRA:}
 \newcommand{\datalliuramentcode}{Fecha de entrega:}
 \newcommand{\titulaciocode}{Titulación o programa:}
@@ -305,7 +305,7 @@ Reservados todos los derechos. Está prohibida la reproducción total o parcial 
 \newcommand{\fitxacode}{Fitxa del Treball Final}
 \newcommand{\titolcode}{Títol del treball:}
 \newcommand{\nomautorcode}{Nom de l'autor/a:}
-\newcommand{\nompdccode}{Nom del Tutor/a del TF:}
+\newcommand{\nompdccode}{Nom del director/a del TF:}
 \newcommand{\nompracode}{Nom del de/la PRA:}
 \newcommand{\datalliuramentcode}{Data de lliurament:}
 \newcommand{\titulaciocode}{Titulació o programa:}
