@@ -1071,7 +1071,7 @@ For the `structToolbox` package, SVM functionality provided by the `r CRANpkg("e
 
 The 1H-NMR dataset used and described in [Mendez et al., (2020)](https://link.springer.com/article/10.1007/s11306-019-1588-0,%20https://github.com/CIMCB/MetabWorkflowTutorial) and in this vignette contains processed spectra of urine samples obtained from gastric cancer and healthy patients [Chan et al., (2016)](https://www.nature.com/articles/bjc2015414). The raw experimental data is available through Metabolomics Workbench ([PR000699](http://dx.doi.org/10.21228/M8B10B)) and the processed version is available from [here](https://github.com/CIMCB/MetabWorkflowTutorial/raw/master/GastricCancer_NMR.xlsx) as an Excel data file.
 
-For simplicity we will use a pre-processed version of the 1H-NMR "Gastric cancer" dataset using the `structToolbox` package. Details in regards to pre-processing are reported in the "NMR_clinical_metabolomics" vignette of the \`r Biocpkg("structToolbox") package.
+For simplicity we will use a pre-processed version of the 1H-NMR "Gastric cancer" dataset using the `structToolbox` package. Details in regards to pre-processing are reported in the "NMR_clinical_metabolomics" vignette of the `r Biocpkg("structToolbox")` package.
 
 ```{r}
 # summary of DatasetExperiment object

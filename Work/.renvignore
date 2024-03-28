@@ -1,0 +1,5 @@
+# Ignore Training folder
+/Training/
+
+# Ignore GenerateTargets.R
+R/GenerateTargets.R

@@ -37,6 +37,8 @@ unzip(zipfile=path, files = "LC_MS_raw_data.xlsx", exdir=temp)
 # read samples
 data <- as.data.frame(read.xlsx(file.path(temp,"LC_MS_raw_data.xlsx"),sheet = 'Data'))
 
+# Save data as a csv file
+# write.csv(data, file = "data.csv")
 
 ##### PREPARING DATA FOR EXPERIMENT ######
 
@@ -60,6 +62,11 @@ VM = data.frame('annotation'=colnames(data)[8:ncol(data)])
 # Create the raw data matrix
 X = data[,8:ncol(data)]
 X$sample_id = SM$sample_id
+
+# Save data as csv files
+write.csv(X, file = "data/dataMatrix.csv", row.names = FALSE)
+write.csv(SM, file = "data/sampleMetadata.csv", row.names = FALSE)
+write.csv(VM, file = "data/variableMetadata.csv", row.names = FALSE)
 
 
 # Create the experiment

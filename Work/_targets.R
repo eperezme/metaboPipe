@@ -1,14 +1,51 @@
 # _targets.R file:
 library(targets)
-source("R/functions.R")
+library(crew)
+# Load all R scripts in the R/ directory.
+file.sources <- list.files("R", pattern = "*.R", full.names=TRUE)
+invisible(sapply(file.sources, source, .GlobalEnv))
 
+# Declare libraries
+# These are the libraries that the pipeline depends on.
+
+# To create a list with all the libraries to copy-paste:
+# cat(paste(shQuote(unique(renv::dependencies(path = "R")$Package), type="cmd"), collapse=", "))
+
+tar_option_set(
+  packages = c("structToolbox", "SummarizedExperiment", 
+               "VIM", "impute", "imputeLCMD", "missForest"))
+
+
+
+# Declare controller
+# Create a controller with 5 workers and a 3-second idle time.
 controller <- crew::crew_controller_local(
   name = "Controller",
   workers = 5,
   seconds_idle = 3
 )
+
+dataMatrixPath <- "data/dataMatrix.csv"
+sampleMetadataPath <- "data/sampleMetadata.csv"
+variableMetadataPath <- "data/variableMetadata.csv"
+
+# Define the pipeline.
 tar_option_set(controller = controller)
 list(
-  tar_target(x, seq_len(1000)),
-  tar_target(y, Sys.sleep(1), pattern = map(x)) # Run for 1 second.
+
+  # Define the paths to the data files
+  tar_target(dataMatrixFile, dataMatrixPath, format = "file"),
+  tar_target(sampleMetadataFile, sampleMetadataPath, format = "file"),
+  tar_target(variableMetadataFile, variableMetadataPath, format = "file"),
+  
+  # Read the data files
+  tar_target(dataMatrix, read.csv(dataMatrixFile, ), format = "feather"),
+  tar_target(sampleMetadata, read.csv(sampleMetadataFile), format = "feather"),
+  tar_target(variableMetadata, read.csv(variableMetadataFile), format = "feather"),
+  
+  
+  # Create a DatasetExperiment object
+  tar_target(experiment, createExperiment(dataMatrix, sampleMetadata, variableMetadata))
+
+  
 )

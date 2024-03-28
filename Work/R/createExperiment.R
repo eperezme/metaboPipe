@@ -1,3 +1,5 @@
+
+# Sort by sample_id
 sort_by_sample_id <- function(df) {
   # sort by sample_id
   df=df[order(df$sample_id),]
@@ -5,7 +7,7 @@ sort_by_sample_id <- function(df) {
 }
 
 
-
+# Process the dataset to create the DatasetExperiment object
 createExperiment <- function(dataMatrix, sampleMetadata, variableMetadata, 
                              experiment_name = "Name", experiment_description = "Description") {
   # dataMatrix should have a row for each sample and a column for each feature
@@ -45,6 +47,7 @@ createExperiment <- function(dataMatrix, sampleMetadata, variableMetadata,
   
   
   # Create a DatasetExperiment object
+  # require(structToolbox)
   DE <- DatasetExperiment(data = dataMatrix,
                           sample_meta = sampleMetadata,
                           variable_meta = variableMetadata,

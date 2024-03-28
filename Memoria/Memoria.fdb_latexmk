@@ -1,26 +1,26 @@
 # Fdb version 4
-["biber Memoria"] 1711551450.23647 "Memoria.bcf" "Memoria.bbl" "Memoria" 1711551734.26107 0
-  "Memoria.bcf" 1711551734 107313 75056fb5471ffc8360596d38ad1dec6e "pdflatex"
+["biber Memoria"] 1711551450.23647 "Memoria.bcf" "Memoria.bbl" "Memoria" 1711621729.29504 0
+  "Memoria.bcf" 1711621729 107313 75056fb5471ffc8360596d38ad1dec6e "pdflatex"
   "library.bib" 1711547497 123384 d38a7ae271d541a5fd30a637621084af ""
   (generated)
   "Memoria.bbl"
   "Memoria.blg"
   (rewritten before read)
-["pdflatex"] 1711551732.38399 "c:/Users/eduar/Desktop/TFM/Memoria/Memoria.tex" "Memoria.pdf" "Memoria" 1711551734.26163 0
-  "Memoria.aux" 1711551733 8614 cc31620eab82fc1dc04cdff5f549b153 "pdflatex"
+["pdflatex"] 1711621727.61525 "c:/Users/eduar/Desktop/TFM/Memoria/Memoria.tex" "Memoria.pdf" "Memoria" 1711621729.29558 0
+  "Memoria.aux" 1711621729 8614 cc31620eab82fc1dc04cdff5f549b153 "pdflatex"
   "Memoria.bbl" 1711551451 13000 f0899e42ce08eb8e484b05fc393640b4 "biber Memoria"
-  "Memoria.lof" 1711551734 323 5ea6d60c46273e19f96fab36fdfb7ded "pdflatex"
-  "Memoria.lot" 1711551734 190 84e9851f92b610fc7b63f18d7621c1e0 "pdflatex"
-  "Memoria.run.xml" 1711551734 2424 a601a87b52db0a996237e0137b9d99f8 "pdflatex"
-  "Memoria.tex" 1711551731 11650 48b607c993d1fce9cbb70a926215ac46 ""
-  "Memoria.toc" 1711551734 1453 704d6298284d564bf59800e9349ba3cc "pdflatex"
+  "Memoria.lof" 1711621729 323 5ea6d60c46273e19f96fab36fdfb7ded "pdflatex"
+  "Memoria.lot" 1711621729 190 84e9851f92b610fc7b63f18d7621c1e0 "pdflatex"
+  "Memoria.run.xml" 1711621729 2424 a601a87b52db0a996237e0137b9d99f8 "pdflatex"
+  "Memoria.tex" 1711621727 11656 8416d49e64017b4eb5fc14aa77eff690 ""
+  "Memoria.toc" 1711621729 1453 704d6298284d564bf59800e9349ba3cc "pdflatex"
   "TFUOC.cls" 1711548023 20638 d4a511c22e5a61efe98d04a5a8a2a634 ""
   "Template/Rplotmanh.png" 1709017665 47093 3d99902e2792149ab0426f19e089e705 ""
   "Template/UOCllargub.jpg" 1709017665 151410 088754637caec476fa24ae15cbab0462 ""
   "Template/eimt.png" 1709017665 3446 4721f02f05d00ab5dc7d7397fe1e1559 ""
   "Template/licenc/ccbyncsa.png" 1709017665 9007 d56014dda04064fa8d83f9afa79d5121 ""
   "Template/noulogo.png" 1709017665 20022 88d0abedab165f70c13152c87632c8c7 ""
-  "c:/Users/eduar/Desktop/TFM/Memoria/Memoria.tex" 1711551731 11650 48b607c993d1fce9cbb70a926215ac46 ""
+  "c:/Users/eduar/Desktop/TFM/Memoria/Memoria.tex" 1711621727 11656 8416d49e64017b4eb5fc14aa77eff690 ""
   "e:/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc" 1709130334 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "e:/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1709130778 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "e:/texlive/2023/texmf-dist/fonts/tfm/adobe/palatino/pplb7t.tfm" 1709133157 1616 371d1ee60c04b008c8fd760060cd34f1 ""
