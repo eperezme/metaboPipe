@@ -10,12 +10,13 @@
 
 #### RANDOM FOREST ####
 impute_RF <- function(dataset_experiment) {
-
+  # doParallel::registerDoParallel(cores=4)
   # Create a copy of the DatasetExperiment object
   DE_imp <- dataset_experiment
   
   # Impute missing values
-  forest_result <- missForest::missForest(SummarizedExperiment::assay(dataset_experiment), maxiter = 10, ntree = 100)
+  # forest_result <- missForest::missForest(SummarizedExperiment::assay(dataset_experiment), maxiter = 100, ntree = 1000, parallelize = "forests")
+  forest_result <- missForest::missForest(SummarizedExperiment::assay(dataset_experiment), maxiter = 100, ntree = 1000)
   
   # Replace missing values with imputed values
   SummarizedExperiment::assay(DE_imp) <- forest_result$ximp

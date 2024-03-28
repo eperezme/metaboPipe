@@ -1,6 +1,7 @@
 # _targets.R file:
 library(targets)
 library(crew)
+# library(doParallel)
 # Load all R scripts in the R/ directory.
 file.sources <- list.files("R", pattern = "*.R", full.names=TRUE)
 invisible(sapply(file.sources, source, .GlobalEnv))
@@ -13,7 +14,7 @@ invisible(sapply(file.sources, source, .GlobalEnv))
 
 tar_option_set(
   packages = c("structToolbox", "SummarizedExperiment", 
-               "VIM", "impute", "imputeLCMD", "missForest"))
+               "VIM", "impute", "imputeLCMD", "missForest", "doParallel"))
 
 
 
@@ -45,7 +46,13 @@ list(
   
   
   # Create a DatasetExperiment object
-  tar_target(experiment, createExperiment(dataMatrix, sampleMetadata, variableMetadata))
+  tar_target(experiment, createExperiment(dataMatrix, sampleMetadata, variableMetadata)),
 
+  # Filter missing values
+  tar_target(filtered_experiment, filter_MV(experiment)),
   
+  # impute missing values
+  tar_target(QRILC_imputed_experiment, impute_QRILC(filtered_experiment)),
+  tar_target(RF_imputed_experiment, impute_RF(filtered_experiment))
+  # tar_target(knn_imputed_experiment, impute_kNN(filtered_experiment))
 )

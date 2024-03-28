@@ -1,5 +1,5 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|a51501bf1dda90ec|||||||||||||||
+.Random.seed|object|1dfcae6a7352fbfa|||||||||||||||
 controller|object|cbeb69798ed90694|||||||||||||||
 createExperiment|function|0401d2ce52c5c5fc|||||||||||||||
 data|stem||a8099f7416643fd7|252cf062b46fdd1a|33550471||t19810.4953516446s||0|rds|local|vector|||0.031||error in evaluating the argument x in selecting a method for function nrow  operator is invalid for atomic vectors
@@ -8,11 +8,13 @@ dataMatrixFile|stem|e56efa493ace1135|ad445ee90fa30439|43a6a1508fe01234|305534170
 dataMatrixPath|object|dc793f7d9168a105|||||||||||||||
 experiment|stem|b8e4d5bab1cfafc0|d25a394cea0acb79|3f2f0017ac88f5d7|1275671355||t19810.5824377156s|b2b18f3efaf1359a|32671|rds|local|vector|||0.062||
 file|stem|8d5f105d95b33d21|0d4b7516032e01d0|ef46db3751d8e999|1735323524|data.csv|t19810.48561299s|613332da545f8655|100160|file|local|vector|||1.266||
-file.sources|object|86a898605d95c864|||||||||||||||
+file.sources|object|64717cac062d0113|||||||||||||||
 filter_MV|function|87973b8818c24511|||||||||||||||
+filtered_experiment|stem|bb537adac5516a32|8356df951f97a80e|abd6c1a6e74a042a|1541397327||t19810.6702154014s|5f21b31aa2eea9e5|28980|rds|local|vector|||1.734||
 impute_kNN|function|b35279393145795f|||||||||||||||
 impute_QRILC|function|41afd6c32170e50f|||||||||||||||
-impute_RF|function|a8fbcddc677ae5e2|||||||||||||||
+impute_RF|function|874c01d3e7352e28|||||||||||||||
+knn_imputed_experiment|stem||1659373fa66bff43|9e408a1fed1bb472|1942708377||t19810.6702180733s||0|rds|local|vector|||0||list object cannot be coerced to type double
 loaded_data|stem|2608c65d48a44d81|4b5720a6eb301553|853fadefeb5ecfcb|-1375280449||t19810.5025955628s|041b33a1184fa43f|30666|rds|local|vector|||1.25||
 predata|stem|90372fd72e618c4c|8f226899bba81dcc|8df6a2807b39fea7|-124856033||t19810.5213339393s||30802|rds|local|vector|||||_build_ target predata has feather format, so it must have class data.frame, RecordBatch, or Table.
 prepare_dataMatrix|function|7951dd6fab0e7e15|||||||||||||||
@@ -21,6 +23,8 @@ prepare_sampleMetadata|function|7c9fad4dd2a2e42b|||||||||||||||
 prepare_SampleMetadata|function|7c9fad4dd2a2e42b|||||||||||||||
 prepare_variableMetadata|function|f2f4e2928a861f49|||||||||||||||
 prepare_VariableMetadata|function|f2f4e2928a861f49|||||||||||||||
+QRILC_imputed_experiment|stem|227ba1373f47a011|4791b67afdf7194c|29962af7365c767d|933534627||t19810.6702179026s|b44b35046e73dcc6|29112|rds|local|vector|||0.172||
+RF_imputed_experiment|stem|fd1a98dec1f2e303|0589cc56b003d981|4ef49b77d419eb97|1170504115||t19810.6774759181s|d6a90ff531155ee9|29097|rds|local|vector|||5.937||
 sampleMetadata|stem|5070e80a73538628|31b2fa2d1e7405c7|64a9c1ba74e03990|1365251500||t19810.5824363731s|a92d429256740063|6386|feather|local|vector|||0||
 sampleMetadataFile|stem|38e9c64d5c00da39|fe151db9efc4aa52|57d0b5fcfc44662b|1261395379|data/sampleMetadata.csv|t19810.5819025128s|70f5616202d5196a|6515|file|local|vector|||1.516||
 sampleMetadataPath|object|ad72ff96e204738f|||||||||||||||
