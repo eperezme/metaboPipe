@@ -23,8 +23,8 @@ suppressPackageStartupMessages({
 file.sources <- list.files("R", pattern = "*.R", full.names=TRUE)
 invisible(sapply(file.sources, source, .GlobalEnv))
 
-file.sources <- list.files("R/MAI", pattern = "*.R", full.names=TRUE)
-invisible(sapply(file.sources, source, .GlobalEnv))
+# file.sources <- list.files("R/MAI", pattern = "*.R", full.names=TRUE)
+# invisible(sapply(file.sources, source, .GlobalEnv))
 
 # use the BiocFileCache
 bfc <- BiocFileCache(ask = FALSE)

@@ -1,5 +1,6 @@
 # _targets.R file:
 library(targets)
+library(tarchetypes)
 library(crew)
 # library(doParallel)
 # Load all R scripts in the R/ directory.
@@ -12,37 +13,40 @@ invisible(sapply(file.sources, source, .GlobalEnv))
 # To create a list with all the libraries to copy-paste:
 # cat(paste(shQuote(unique(renv::dependencies(path = "R")$Package), type="cmd"), collapse=", "))
 
-# tar_option_set(
-#   packages = c("structToolbox", "SummarizedExperiment", 
-#                "VIM", "impute", "imputeLCMD", "missForest", "doParallel"))
+tar_option_set(
+  packages = c("structToolbox", "SummarizedExperiment",
+               "VIM", "impute", "imputeLCMD", "missForest", "caret", "pcaMethods"))
 
 
 
 # Declare controller
 # Create a controller with 5 workers and a 3-second idle time.
-controller <- crew::crew_controller_local(
-  name = "Controller",
-  workers = 5,
-  seconds_idle = 3
-)
+# controller <- crew::crew_controller_local(
+#   name = "Controller",
+#   workers = 2,
+#   seconds_idle = 3
+# )
+# tar_option_set(controller = controller)
 
 dataMatrixPath <- "data/dataMatrix.csv"
 sampleMetadataPath <- "data/sampleMetadata.csv"
 variableMetadataPath <- "data/variableMetadata.csv"
 
 # Define the pipeline.
-tar_option_set(controller = controller)
 list(
-
+  tar_file_read(dataMatrix, dataMatrixPath, read.csv(!!.x)),
+  tar_file_read(sampleMetadata, sampleMetadataPath, read.csv(!!.x)),
+  tar_file_read(variableMetadata, variableMetadataPath, read.csv(!!.x)),
+  
   # Define the paths to the data files
-  tar_target(dataMatrixFile, dataMatrixPath, format = "file"),
-  tar_target(sampleMetadataFile, sampleMetadataPath, format = "file"),
-  tar_target(variableMetadataFile, variableMetadataPath, format = "file"),
+  # tar_target(dataMatrixFile, dataMatrixPath, format = "file"),
+  # tar_target(sampleMetadataFile, sampleMetadataPath, format = "file"),
+  # tar_target(variableMetadataFile, variableMetadataPath, format = "file"),
   
   # Read the data files
-  tar_target(dataMatrix, read.csv(dataMatrixFile, ), format = "feather"),
-  tar_target(sampleMetadata, read.csv(sampleMetadataFile), format = "feather"),
-  tar_target(variableMetadata, read.csv(variableMetadataFile), format = "feather"),
+  # tar_target(dataMatrix, read.csv(dataMatrixFile, ), format = "feather"),
+  # tar_target(sampleMetadata, read.csv(sampleMetadataFile), format = "feather"),
+  # tar_target(variableMetadata, read.csv(variableMetadataFile), format = "feather"),
   
   
   # Create a DatasetExperiment object

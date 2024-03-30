@@ -33,11 +33,17 @@ impute_mean <- function(dataset_experiment) {
   # Create a copy of the DatasetExperiment object
   DE_imp <- dataset_experiment
   
-  # Impute missing values
-  imputed_data <- colMeans(SummarizedExperiment::assay(dataset_experiment), na.rm = TRUE)
+  # Extract the data matrix
+  data_matrix <- SummarizedExperiment::assay(dataset_experiment)
+  
+  # Impute missing values column-wise
+  data_matrix[] <- lapply(data_matrix, function(x) {
+    x[is.na(x)] <- mean(x, na.rm = T)
+    x
+  })
   
   # Replace missing values with imputed values
-  SummarizedExperiment::assay(DE_imp, withDimnames=FALSE) <- imputed_data
+  SummarizedExperiment::assay(DE_imp, withDimnames = FALSE) <- data_matrix
   
   return(DE_imp)
 }
