@@ -13,8 +13,18 @@ suppressPackageStartupMessages({
   library(openxlsx)
   library(VIM)
   library(dplyr)
+  library(caret)
+  library(missForest)
+  library(pcaMethods)
+  library(parallel)
 })
 
+# Source all files in the R/ directory
+file.sources <- list.files("R", pattern = "*.R", full.names=TRUE)
+invisible(sapply(file.sources, source, .GlobalEnv))
+
+file.sources <- list.files("R/MAI", pattern = "*.R", full.names=TRUE)
+invisible(sapply(file.sources, source, .GlobalEnv))
 
 # use the BiocFileCache
 bfc <- BiocFileCache(ask = FALSE)
@@ -69,6 +79,7 @@ write.csv(SM, file = "data/sampleMetadata.csv", row.names = FALSE)
 write.csv(VM, file = "data/variableMetadata.csv", row.names = FALSE)
 
 
+
 # Create the experiment
 DE <- createExperiment(X, SM, VM, "LCMS Raw test", "Description Test")
 DE
@@ -82,6 +93,15 @@ filtered_experiment
 
 
 ## impute
+
+mainImputed_experiment <- impute_MAI(DE, "random_forest", "PPCA")
+mainImputed_experiment <- impute_MAI(filtered_experiment, "random_forest", "PPCA")
+
+plot_density_single_with_legend(new$N_methyl_L_histidine, imp$N_methyl_L_histidine)
+
+
+orig <- DE$data
+
 
 QRImputed_experiment <- impute_QRILC(filtered_experiment)
 RFImputed_experiment <- impute_RF(filtered_experiment)

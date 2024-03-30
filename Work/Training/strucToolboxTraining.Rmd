@@ -118,6 +118,11 @@ X=data.frame(lapply(X,as.numeric),check.names = FALSE)
 rownames(X)=data$label
 rownames(SM)=data$label
 rownames(VM)=colnames(X)
+```
+
+
+```{r}
+
 
 
 # create DatasetExperiment object

@@ -12,9 +12,9 @@ invisible(sapply(file.sources, source, .GlobalEnv))
 # To create a list with all the libraries to copy-paste:
 # cat(paste(shQuote(unique(renv::dependencies(path = "R")$Package), type="cmd"), collapse=", "))
 
-tar_option_set(
-  packages = c("structToolbox", "SummarizedExperiment", 
-               "VIM", "impute", "imputeLCMD", "missForest", "doParallel"))
+# tar_option_set(
+#   packages = c("structToolbox", "SummarizedExperiment", 
+#                "VIM", "impute", "imputeLCMD", "missForest", "doParallel"))
 
 
 
@@ -52,7 +52,13 @@ list(
   tar_target(filtered_experiment, filter_MV(experiment)),
   
   # impute missing values
-  tar_target(QRILC_imputed_experiment, impute_QRILC(filtered_experiment)),
-  tar_target(RF_imputed_experiment, impute_RF(filtered_experiment))
-  # tar_target(knn_imputed_experiment, impute_kNN(filtered_experiment))
+  # tar_target(mai_imputed_experiment, impute_MAI(filtered_experiment, "random_forest", "Single"))
+  tar_target(mean_imputed, impute_mean(filtered_experiment)),
+  tar_target(median_imputed, impute_median(filtered_experiment)),
+  tar_target(RF_imputed, impute_RF(filtered_experiment)),
+  tar_target(QRILC_imputed, impute_QRILC(filtered_experiment)),
+  tar_target(knn_imputed, impute_kNN(filtered_experiment, 5)),
+  tar_target(svd_imputed, impute_SVD(filtered_experiment, k = 5)),
+  tar_target(bpca_imputed, impute_bpca(filtered_experiment, nPCs = 5)),
+  tar_target(ppca_imputed, impute_ppca(filtered_experiment, nPCs = 5))
 )
