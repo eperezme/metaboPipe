@@ -38,17 +38,6 @@ list(
   tar_file_read(sampleMetadata, sampleMetadataPath, read.csv(!!.x)),
   tar_file_read(variableMetadata, variableMetadataPath, read.csv(!!.x)),
   
-  # Define the paths to the data files
-  # tar_target(dataMatrixFile, dataMatrixPath, format = "file"),
-  # tar_target(sampleMetadataFile, sampleMetadataPath, format = "file"),
-  # tar_target(variableMetadataFile, variableMetadataPath, format = "file"),
-  
-  # Read the data files
-  # tar_target(dataMatrix, read.csv(dataMatrixFile, ), format = "feather"),
-  # tar_target(sampleMetadata, read.csv(sampleMetadataFile), format = "feather"),
-  # tar_target(variableMetadata, read.csv(variableMetadataFile), format = "feather"),
-  
-  
   # Create a DatasetExperiment object
   tar_target(experiment, createExperiment(dataMatrix, sampleMetadata, variableMetadata)),
 
