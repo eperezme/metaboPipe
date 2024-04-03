@@ -20,9 +20,9 @@ createExperiment <- function(dataMatrix, sampleMetadata, variableMetadata,
     stop("Number of (columns - 1) in dataMatrix and rows in variableMetadata do not match.")
   }
   
-  # sort by sample_id
-  dataMatrix=sort_by_sample_id(dataMatrix)
-  sampleMetadata=sort_by_sample_id(sampleMetadata)
+  # # sort by sample_id
+  # dataMatrix=sort_by_sample_id(dataMatrix)
+  # sampleMetadata=sort_by_sample_id(sampleMetadata)
   
   # Drop dataMatrix$sample_id
   dataMatrix$sample_id=NULL

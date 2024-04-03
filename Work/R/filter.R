@@ -61,13 +61,30 @@ filter_MV <- function(dataset_exp, threshold = 0.8, plot = TRUE) {
     cat(paste0('Number of columns removed: ', removed_cols, '\n'))
   }
   
-  par(mfrow=c(2,2))
-  plot(plot_before)
-  plot(plot_after)
-  par(mfrow=c(1,1))
+  # par(mfrow=c(2,2))
+  # plot(plot_before)
+  # plot(plot_after)
+  # par(mfrow=c(1,1))
   
   return(dataset_exp)
 }
+# 
+# 
+# # HOW MANY FOLD CHANGES? DEPENDS ON SAMPLES? ON METABOLITES? ON PPM AND PEAK?
+# M = blank_filter(
+#   fold_change = 1,
+#   blank_label = "Blank",
+#   qc_label = "QC",
+#   factor_name = "sample_type",
+#   fraction_in_blank = 0)
+# 
+# M = model_apply(M,filtered_experiment)
+# 
+# test <- predicted(M)
+# 
+# test
+# 
+# blank_filter_hist(M)
 
 # DE
 # A <- rsd_filter(rsd_threshold = 20, qc_label= "QC", factor_name = "condition")
