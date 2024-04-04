@@ -56,5 +56,13 @@ list(
   tar_target(knn_imputed, impute_kNN(filtered_experiment, 5)),
   tar_target(svd_imputed, impute_SVD(filtered_experiment, k = 5)),
   tar_target(bpca_imputed, impute_bpca(filtered_experiment, nPCs = 5)),
-  tar_target(ppca_imputed, impute_ppca(filtered_experiment, nPCs = 5))
+  tar_target(ppca_imputed, impute_ppca(filtered_experiment, nPCs = 5)),
+  
+  # The report summary
+  tar_quarto(
+    processing_report,
+    path = "processing_report.qmd",
+    quiet = FALSE,
+    packages = c("targets", "tidyverse")
+  )
 )

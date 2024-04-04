@@ -6,7 +6,18 @@ sort_by_sample_id <- function(df) {
 }
 
 
-# Process the dataset to create the DatasetExperiment object
+#' Process the dataset to create the DatasetExperiment object
+#'
+#' @param dataMatrix 
+#' @param sampleMetadata 
+#' @param variableMetadata 
+#' @param experiment_name 
+#' @param experiment_description 
+#'
+#' @return A \code{DatasetExperiment} object.
+#' @export
+#'
+#' @examples
 createExperiment <- function(dataMatrix, sampleMetadata, variableMetadata,
                              experiment_name = "Name", experiment_description = "Description") {
   # dataMatrix should have a row for each sample and a column for each feature
@@ -18,10 +29,6 @@ createExperiment <- function(dataMatrix, sampleMetadata, variableMetadata,
   if (ncol(dataMatrix) - 1 != nrow(variableMetadata)) {
     stop("Number of (columns - 1) in dataMatrix and rows in variableMetadata do not match.")
   }
-
-  # # sort by sample_id
-  # dataMatrix=sort_by_sample_id(dataMatrix)
-  # sampleMetadata=sort_by_sample_id(sampleMetadata)
 
   # Drop dataMatrix$sample_id
   dataMatrix$sample_id <- NULL
