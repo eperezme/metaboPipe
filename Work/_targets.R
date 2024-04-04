@@ -4,7 +4,7 @@ library(tarchetypes)
 library(crew)
 # library(doParallel)
 # Load all R scripts in the R/ directory.
-file.sources <- list.files("R", pattern = "*.R", full.names=TRUE)
+file.sources <- list.files("R", pattern = "*.R", full.names = TRUE)
 invisible(sapply(file.sources, source, .GlobalEnv))
 
 # Declare libraries
@@ -14,8 +14,11 @@ invisible(sapply(file.sources, source, .GlobalEnv))
 # cat(paste(shQuote(unique(renv::dependencies(path = "R")$Package), type="cmd"), collapse=", "))
 
 tar_option_set(
-  packages = c("structToolbox", "SummarizedExperiment",
-               "VIM", "impute", "imputeLCMD", "missForest", "caret", "pcaMethods"))
+  packages = c(
+    "structToolbox", "SummarizedExperiment",
+    "VIM", "impute", "imputeLCMD", "missForest", "caret", "pcaMethods"
+  )
+)
 
 
 
@@ -37,13 +40,13 @@ list(
   tar_file_read(dataMatrix, dataMatrixPath, read.csv(!!.x)),
   tar_file_read(sampleMetadata, sampleMetadataPath, read.csv(!!.x)),
   tar_file_read(variableMetadata, variableMetadataPath, read.csv(!!.x)),
-  
+
   # Create a DatasetExperiment object
   tar_target(experiment, createExperiment(dataMatrix, sampleMetadata, variableMetadata)),
 
   # Filter missing values
   tar_target(filtered_experiment, filter_MV(experiment)),
-  
+
   # impute missing values
   # tar_target(mai_imputed_experiment, impute_MAI(filtered_experiment, "random_forest", "Single"))
   tar_target(mean_imputed, impute_mean(filtered_experiment)),
@@ -55,6 +58,3 @@ list(
   tar_target(bpca_imputed, impute_bpca(filtered_experiment, nPCs = 5)),
   tar_target(ppca_imputed, impute_ppca(filtered_experiment, nPCs = 5))
 )
-
-
-

@@ -112,4 +112,3 @@ B <- sb_corr(order_col = "order", batch_col = "biol.batch", qc_col = "sample_typ
 B <- model_apply(B, DE)
 
 test <- predicted(B)
-     
