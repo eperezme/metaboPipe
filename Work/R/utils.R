@@ -1,28 +1,41 @@
 # Function to convert DatasetExperiment to a data frame for metaboanalyst
 
 library(MetaboAnalystR)
-DE_to_metaboanalyst <- function(dataset_experiment) {
+DE_to_metaboanalyst <- function(dataset_experiment, file_name = "data/metaboData.csv") {
   # Extract the data matrix
   data_matrix <- SummarizedExperiment::assay(dataset_experiment)
   
   # Extract the sample metadata
-  sample_metadata <- DataFrame::as.data.frame(colData(dataset_experiment))
+  sample_metadata <- SummarizedExperiment::as.data.frame(SummarizedExperiment::rowData(dataset_experiment))
   
   # Extract the variable metadata
-  variable_metadata <- DataFrame::as.data.frame(rowData(dataset_experiment))
+  # variable_metadata <- SummarizedExperiment::as.data.frame(SummarizedExperiment::colData(dataset_experiment))
   
   # Convert the data matrix to a data frame
-  data_frame <- as.data.frame(data_matrix)
+  # data_frame <- as.data.frame(data_matrix)
   
   # Add the sample metadata to the data frame
-  data_frame <- cbind(sample_metadata, data_frame)
+  data_frame <- cbind(sample_metadata, data_matrix)
   
   # Add the variable metadata to the data frame
-  data_frame <- cbind(variable_metadata, data_frame)
-  
+  # data_frame <- cbind(variable_metadata, data_frame)
+  write.csv(data_frame, file = "data/metaboData.csv", row.names = FALSE)
   return(data_frame)
 
 }
+
+metabData <- rowData(experiment) %>%
+  as.tibble() %>%
+  select(sample_id, condition, sample_type, time.point, biol.batch) %>%
+  left_join(
+    SummarizedExperiment::assay(experiment) %>%
+      mutate(
+        sample_id = rownames(.)
+      ),
+    by = "sample_id"
+  )
+
+
 
 # Load a dataframe to metaboanalystR data object
 # mSet <- InitDataObjects("conc", "stat", FALSE);
