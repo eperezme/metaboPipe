@@ -16,7 +16,7 @@ invisible(sapply(file.sources, source, .GlobalEnv))
 tar_option_set(
   packages = c(
     "structToolbox", "SummarizedExperiment",
-    "VIM", "impute", "imputeLCMD", "missForest", "caret", "pcaMethods"
+    "VIM", "impute", "imputeLCMD", "missForest", "caret", "pcaMethods", "metabolomicsWorkbenchR", "tidyverse"
   )
 )
 
@@ -42,10 +42,13 @@ list(
   tar_file_read(variableMetadata, variableMetadataPath, read.csv(!!.x)),
 
   # Create a DatasetExperiment object
-  tar_target(experiment, createExperiment(dataMatrix, sampleMetadata, variableMetadata)),
+  # tar_target(experiment, createExperiment(dataMatrix, sampleMetadata, variableMetadata)),
+  
+  tar_target(experiment, metabolomicsWorkbenchR::do_query(context = "study", input_item = "analysis_id", input_value = "AN004436", output_item = "DatasetExperiment")),
 
   # Filter missing values
-  tar_target(filtered_experiment, filter_MV(experiment)),
+  tar_target(na_experiment, zero_to_na(experiment)),
+  tar_target(filtered_experiment, filter_MV(na_experiment)),
 
   # impute missing values
   # tar_target(mai_imputed_experiment, impute_MAI(filtered_experiment, "random_forest", "Single"))
@@ -56,13 +59,13 @@ list(
   tar_target(knn_imputed, impute_kNN(filtered_experiment, 5)),
   tar_target(svd_imputed, impute_SVD(filtered_experiment, k = 5)),
   tar_target(bpca_imputed, impute_bpca(filtered_experiment, nPCs = 5)),
-  tar_target(ppca_imputed, impute_ppca(filtered_experiment, nPCs = 5)),
+  tar_target(ppca_imputed, impute_ppca(filtered_experiment, nPCs = 5))
   
   # The report summary
-  tar_quarto(
-    processing_report,
-    path = "processing_report.qmd",
-    quiet = FALSE,
-    packages = c("targets", "tidyverse")
-  )
+  # tar_quarto(
+  #   processing_report,
+  #   path = "processing_report.qmd",
+  #   quiet = FALSE,
+  #   packages = c("targets", "tidyverse")
+  # )
 )

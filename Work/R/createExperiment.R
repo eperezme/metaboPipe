@@ -30,6 +30,12 @@ createExperiment <- function(dataMatrix, sampleMetadata, variableMetadata,
     stop("Number of (columns - 1) in dataMatrix and rows in variableMetadata do not match.")
   }
 
+  # convert 0 to NA
+  dataMatrix <- dataMatrix %>% mutate_if(is.character, as.numeric)
+  dataMatrix[dataMatrix == 0] <- NA
+  dataMatrix <- data.frame(lapply(dataMatrix, as.numeric), check.names = FALSE)
+  
+  
   # Drop dataMatrix$sample_id
   dataMatrix$sample_id <- NULL
 
@@ -39,11 +45,6 @@ createExperiment <- function(dataMatrix, sampleMetadata, variableMetadata,
 
   # Make metabolites underscore for compatibility
   colnames(dataMatrix) <- gsub("-", "_", colnames(dataMatrix))
-
-
-  # convert 0 to NA
-  dataMatrix[dataMatrix == 0] <- NA
-  dataMatrix <- data.frame(lapply(dataMatrix, as.numeric), check.names = FALSE)
 
 
   # Check row/col names match

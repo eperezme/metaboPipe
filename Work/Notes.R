@@ -59,10 +59,16 @@ print(
   )
 
 SE <- do_query(context = "study", input_item = "analysis_id", input_value = "AN004436", output_item = "SummarizedExperiment")
-DE <- do_query(context = "study", input_item = "analysis_id", input_value = "AN004436", output_item = "DatasetExperiment")
+DE <- metabolomicsWorkbenchR::do_query(context = "study", input_item = "analysis_id", input_value = "AN004436", output_item = "DatasetExperiment")
+
+# Zero_to_na
+SummarizedExperiment::assay(DE) <- SummarizedExperiment::assay(DE) %>% mutate_all(as.numeric) %>% replace(.==0, NA)
 
 colData(DE)
 View(rowData(DE))
 assay(DE)
+
+
+
 
 
