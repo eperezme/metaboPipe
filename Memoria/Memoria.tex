@@ -112,11 +112,63 @@ A maximum of 250 words, detailing the purpose, contexto of application, methodol
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Introduction}
 
-Esta plantilla se concibe como una guía para el estudiante. Se puede adaptar a las necesidades de cada trabajo, siempre que el/la tutor/a del trabajo esté de acuerdo.
-
 \section{General description}
 
+Metabolomics, a powerful and evolving field within the realm of systems biology, plays a pivotal role in unraveling the intricate web of biochemical processes occurring within living organisms. As we delve into the molecular intricacies of biological systems, the generation of vast and complex datasets poses a significant challenge. Challenges in standardizing nutritional metabolomics include experimental design, sample preparation, and data analysis, which impact result validity and reproducibility. Efforts by the international community aim to establish standard procedures and infrastructure for advancing nutritional metabolomics research. This master thesis project aims for the creation of a modular pipeline designed to streamline the processing of targeted metabolomics data to a usable and meaningful dataset for further analysis and biological interpretation.
+
 \section{Context and justification}
+
+Metabolomics is a rapidly evolving field within biology that focuses on the comprehensive study of the metabolite composition of cell types, tissues, organs, or organisms \cite{pattiMetabolomicsApogeeOmics2012,zhangSerumMetabolomicsNovel2012,chenGuideMetabolomicsAnalysis2022a}. It aims to measure, identify and (semi-)quantify those metabolites. Metabolites are chemical compounds that undergo analysis through conventional chemical assessment methods like mass spectrometry (MS) and nuclear magnetic resonance (NMR) spectrometry. MS approaches are commonly integrated with gas chromatography (GS) and liquid chromatography (LC), leading to the development of two advanced techniques known as gas chromatography-MS (GC-MS) and liquid chromatography-MS (LC-MS). All of these analytical platforms and methodologies generate large amounts of high-dimensional and complex experimental raw data.
+
+However, the statistical analysis of metabolomics data presents significant challenges, attributable not only to the inherent complexity of metabolomics as a research discipline but also to the intricate nature of the data itself. Notwithstanding that numerous studies have explored various methodologies for metabolomic data management, the field still lacks an accepted standard for preprocessing and pretreatment of such data.
+
+One of the obstacles the field encounters is the lack of well defined terminology, as the terms “data preprocessing” and “data pretreatment” have not been used consistently in metabolomics literature [4].
+
+The objectives of data preprocessing/pretreatment encompass two primary aims: firstly, to rectify or mitigate instrumental artifacts and extraneous biological variance, thereby amplifying the signal-to-noise ratio (SNR); and secondly, to effectively transform the data into interpretable spectral profiles through processes such as centering, scaling, and dimensionality reduction [4,5]. The choice of preprocessing and pretreatment methods can significantly impact the downstream analysis and interpretation of metabolomic data [6] so the steps should be carefully selected based on the specific characteristics of the data and the research.
+
+By establishing a standardized approach to preprocessing and pretreatment of metabolomic data, the field can improve the quality, comparability, and reproducibility of metabolomic studies. This would facilitate data integration, enable the development of robust statistical models, and enhance our understanding of the complex metabolic processes underlying health and disease.
+
+
+\subsection{Preprocessing of data}
+
+Given the inherent dissimilarities in data acquisition techniques, unique preprocessing procedures are imperative before embarking on statistical analyses in metabolomics investigations. NMR spectra, for instance, often exhibit signal shifts along the axis due to factors like pH fluctuations [7]. Thus, meticulous preprocessing is indispensable to ensure robust statistical analyses and facilitate inter-spectral signal comparisons. This involves techniques such as binning, peak fitting with spectral databases, and exclusion of unstable or non-informative spectral regions (e.g., water peaks) [3,4,8]. By refining the dataset to a subset of relevant metabolites, statistical methods can effectively discern variations in signal intensity among sample groups [9].
+
+
+The preprocessing workflows diverge between MS-based and NMR-based metabolomic analyses. In MS-based profiling, data are presented as three-dimensional (3D) tables, in contrast to the two-dimensional (2D) tables derived from GC-MS data preprocessing [4,8]. GC-MS preprocessing entails deconvolution and peak integration to generate intensity profiles for each sample feature corresponding to {RT/m/z} pairs. Notably, metabolite identification strategies differ between GC-MS and LC-MS methodologies. While GC-MS relies on reproducible mass spectra and extensive databases for metabolite identification based on characteristic fragment ions, MS-based methods prioritize automation, accuracy, peak identification, integration, and annotation [10,11].
+
+
+While the primary objective of preprocessing is to render data comparable across samples despite instrumental discrepancies, the strategies employed in MS-based methodologies differ from those in NMR-based approaches. Moreover, variations exist between preprocessing methodologies utilized in GC-MS and LC-MS metabolomic analyses, underscoring the intricate nature of metabolomics data preprocessing.
+
+
+\subsubsection{MS-based data preprocessing}
+
+MS-based analysis involves the measurement of mass-to-charge ratios (m/z). When combined with either LC or GC, the resulting raw GC/LC-MS data encompass three measured variables: m/z, chromatographic retention time (RT), and intensity count, thereby constituting a three-dimensional (3D) data structure.
+To streamline the data and eliminate spectral noise and irrelevant biological variability, a two-dimensional (2D) features table is generated through peak picking. This table encompasses all quantified metabolic features from the analyzed samples, with rows corresponding to samples and columns representing variables such as peak areas or intensities, characterized by m/z and retention time in minutes or scan number (m/z-RT pairs).
+The preprocessing of MS data involves several steps: 1) denoising and baseline correction; 2) alignment across all samples; 3) peak picking; 4) merging the peaks; and 5) creating a data matrix [3,4,10,12–17].
+
+
+\subsubsection{NMR-based data preprocessing}
+Similar to MS-based analysis, NMR-based analysis generates a 2D structure of feature data matrix with the samples in the rows and the spectral data points in the columns. Also similar to MS-based analysis, the NMR-based analysis (e.g., 1H NMR analysis) requires data preprocessing to mitigate non-biologically relevant effects. The following data preprocessing steps could be performed: 1) baseline correction; 2) peak binning; 3) peak alignment; 4) quality control; 5) create a data matrix [4,5,15–20].
+Preprocessing by either MS or NMR constructs a data matrix containing the relative abundances of a set of mass spectra for a group of samples or subjects under different conditions. The metabolomics data matrix are typically constructed in such a way that each row of the data matrix represents a subject and each column represents the mass spectra (metabolite intensities or metabolite relative abundances, peak or peak intensities).
+
+
+\subsection{Pretreatment of Data}
+\subsubsection{Handling Missing Values}
+Within datasets, missing values or zeros can arise due to a variety of factors, both biological and technical in nature. Categorizations by Sun Xia delineate these zeros into four distinct categories: 1) Structural zeros, 2) Sampling zeros, 3) Values below the limit of detection (LOD), and 4) Zeros derived from negative values that are automatically transformed.
+\begin{enumerate}
+    \item \textbf{Structural zeros} pertain to peaks absent from a sample or chromatogram due to genuine biological absence rather than technical errors. For instance, if a compound is not present in a biological sample, the corresponding peak for that compound is deemed a structural zero.
+    \item \textbf{Sampling zeros} refer to peaks present in samples but missed during peak picking.
+    \item \textbf{Values below LOD} represent intensities or abundances falling below the detection limit of the mass spectrometer.
+    \item \textbf{Negative value zeros} result from negative intensity or abundance values,
+    considered spectral artifacts or noise, and subsequently transformed to zero.
+\end{enumerate}
+
+Identifying the origins of these zeros poses a challenge, and their prevalence presents a significant obstacle for statistical analyses [4,21]. Hence, practical approaches for managing zeros include:
+\begin{enumerate}
+    \item \textbf{Filtering} based on a threshold, such as the 80\% rule.
+    \item \textbf{Imputation} techniques, which can involve substituting zeros with the mean, minimum (or half of the minimum) of non-missing values, or simply zero.
+    \item Utilizing \textbf{missing data estimation algorithms} to employ various methods for handling missing values.
+\end{enumerate}
 
 \section{State of the art}
 

@@ -2,19 +2,24 @@
 \contentsline {chapter}{\numberline {1}Introduction}{8}{chapter.1}%
 \contentsline {section}{\numberline {1.1}General description}{8}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Context and justification}{8}{section.1.2}%
-\contentsline {section}{\numberline {1.3}State of the art}{8}{section.1.3}%
-\contentsline {chapter}{\numberline {2}Objectives}{9}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Main objective}{9}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Specific objectives}{9}{section.2.2}%
-\contentsline {chapter}{\numberline {3}Sustainable development goals}{10}{chapter.3}%
-\contentsline {chapter}{\numberline {4}Approach and methodology}{11}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Methodology}{11}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Planning and calendar}{11}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Risk analysis}{11}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Final products}{11}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Chapters structure}{11}{section.4.5}%
-\contentsline {chapter}{\numberline {5}Materials and methods}{12}{chapter.5}%
-\contentsline {chapter}{\numberline {6}Results}{13}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Conclusion and future vision}{14}{chapter.7}%
-\contentsline {chapter}{\numberline {8}Glossary}{15}{chapter.8}%
-\contentsline {chapter}{Bibliography}{16}{chapter*.4}%
+\contentsline {subsection}{\numberline {1.2.1}Preprocessing of data}{9}{subsection.1.2.1}%
+\contentsline {subsubsection}{MS-based data preprocessing}{9}{subsubsection*.4}%
+\contentsline {subsubsection}{NMR-based data preprocessing}{10}{subsubsection*.5}%
+\contentsline {subsection}{\numberline {1.2.2}Pretreatment of Data}{10}{subsection.1.2.2}%
+\contentsline {subsubsection}{Handling Missing Values}{10}{subsubsection*.6}%
+\contentsline {section}{\numberline {1.3}State of the art}{11}{section.1.3}%
+\contentsline {chapter}{\numberline {2}Objectives}{12}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Main objective}{12}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Specific objectives}{12}{section.2.2}%
+\contentsline {chapter}{\numberline {3}Sustainable development goals}{13}{chapter.3}%
+\contentsline {chapter}{\numberline {4}Approach and methodology}{14}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Methodology}{14}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Planning and calendar}{14}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Risk analysis}{14}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Final products}{14}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Chapters structure}{14}{section.4.5}%
+\contentsline {chapter}{\numberline {5}Materials and methods}{15}{chapter.5}%
+\contentsline {chapter}{\numberline {6}Results}{16}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Conclusion and future vision}{17}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Glossary}{18}{chapter.8}%
+\contentsline {chapter}{Bibliography}{19}{chapter*.7}%
