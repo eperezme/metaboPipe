@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.2.23)  15 APR 2024 13:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.2.23)  15 APR 2024 13:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1459,13 +1459,13 @@ File: Template/eimt.png Graphic file (type png)
 Package pdftex.def Info: Template/eimt.png  used on input line 171.
 (pdftex.def)             Requested size: 73.03314pt x 9.95863pt.
 [10]
-Overfull \hbox (8.3184pt too wide) in paragraph at lines 177--178
+Overfull \hbox (8.3184pt too wide) in paragraph at lines 180--181
 []\OT1/ppl/m/n/12 Es im-por-tante tener en cuenta que el tra-bajo fi-nal tiene que ser com-pren-si-ble para cualquier
  []
 
 File: Template/noulogo.png Graphic file (type png)
 <use Template/noulogo.png>
-Package pdftex.def Info: Template/noulogo.png  used on input line 179.
+Package pdftex.def Info: Template/noulogo.png  used on input line 182.
 (pdftex.def)             Requested size: 165.26283pt x 42.67912pt.
 
 Package fancyhdr Warning: \headheight is too small (35.0pt): 
@@ -1476,13 +1476,13 @@ Package fancyhdr Warning: \headheight is too small (35.0pt):
 
 File: Template/eimt.png Graphic file (type png)
 <use Template/eimt.png>
-Package pdftex.def Info: Template/eimt.png  used on input line 179.
+Package pdftex.def Info: Template/eimt.png  used on input line 182.
 (pdftex.def)             Requested size: 73.03314pt x 9.95863pt.
 [11]
 Chapter 2.
 File: Template/noulogo.png Graphic file (type png)
 <use Template/noulogo.png>
-Package pdftex.def Info: Template/noulogo.png  used on input line 188.
+Package pdftex.def Info: Template/noulogo.png  used on input line 191.
 (pdftex.def)             Requested size: 165.26283pt x 42.67912pt.
 
 Package fancyhdr Warning: \headheight is too small (35.0pt): 
@@ -1493,7 +1493,7 @@ Package fancyhdr Warning: \headheight is too small (35.0pt):
 
 File: Template/eimt.png Graphic file (type png)
 <use Template/eimt.png>
-Package pdftex.def Info: Template/eimt.png  used on input line 188.
+Package pdftex.def Info: Template/eimt.png  used on input line 191.
 (pdftex.def)             Requested size: 73.03314pt x 9.95863pt.
 [12
 
@@ -1501,7 +1501,7 @@ Package pdftex.def Info: Template/eimt.png  used on input line 188.
 Chapter 3.
 File: Template/noulogo.png Graphic file (type png)
 <use Template/noulogo.png>
-Package pdftex.def Info: Template/noulogo.png  used on input line 195.
+Package pdftex.def Info: Template/noulogo.png  used on input line 198.
 (pdftex.def)             Requested size: 165.26283pt x 42.67912pt.
 
 Package fancyhdr Warning: \headheight is too small (35.0pt): 
@@ -1512,7 +1512,7 @@ Package fancyhdr Warning: \headheight is too small (35.0pt):
 
 File: Template/eimt.png Graphic file (type png)
 <use Template/eimt.png>
-Package pdftex.def Info: Template/eimt.png  used on input line 195.
+Package pdftex.def Info: Template/eimt.png  used on input line 198.
 (pdftex.def)             Requested size: 73.03314pt x 9.95863pt.
 [13
 
@@ -1520,7 +1520,7 @@ Package pdftex.def Info: Template/eimt.png  used on input line 195.
 Chapter 4.
 File: Template/noulogo.png Graphic file (type png)
 <use Template/noulogo.png>
-Package pdftex.def Info: Template/noulogo.png  used on input line 219.
+Package pdftex.def Info: Template/noulogo.png  used on input line 222.
 (pdftex.def)             Requested size: 165.26283pt x 42.67912pt.
 
 Package fancyhdr Warning: \headheight is too small (35.0pt): 
@@ -1531,19 +1531,19 @@ Package fancyhdr Warning: \headheight is too small (35.0pt):
 
 File: Template/eimt.png Graphic file (type png)
 <use Template/eimt.png>
-Package pdftex.def Info: Template/eimt.png  used on input line 219.
+Package pdftex.def Info: Template/eimt.png  used on input line 222.
 (pdftex.def)             Requested size: 73.03314pt x 9.95863pt.
 [14
 
 ]
 Chapter 5.
-LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 222.
+LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 225.
 (/usr/local/texlive/2023basic/texmf-dist/tex/latex/psnfss/ts1ppl.fd
 File: ts1ppl.fd 2001/06/04 font definitions for TS1/ppl.
 )
 File: Template/noulogo.png Graphic file (type png)
 <use Template/noulogo.png>
-Package pdftex.def Info: Template/noulogo.png  used on input line 234.
+Package pdftex.def Info: Template/noulogo.png  used on input line 237.
 (pdftex.def)             Requested size: 165.26283pt x 42.67912pt.
 
 
@@ -1555,7 +1555,7 @@ Package fancyhdr Warning: \headheight is too small (35.0pt):
 
 File: Template/eimt.png Graphic file (type png)
 <use Template/eimt.png>
-Package pdftex.def Info: Template/eimt.png  used on input line 234.
+Package pdftex.def Info: Template/eimt.png  used on input line 237.
 (pdftex.def)             Requested size: 73.03314pt x 9.95863pt.
 [15
 
@@ -1564,11 +1564,11 @@ Chapter 6.
 <Template/Rplotmanh.png, id=145, 474.77374pt x 501.875pt>
 File: Template/Rplotmanh.png Graphic file (type png)
 <use Template/Rplotmanh.png>
-Package pdftex.def Info: Template/Rplotmanh.png  used on input line 242.
+Package pdftex.def Info: Template/Rplotmanh.png  used on input line 245.
 (pdftex.def)             Requested size: 199.16928pt x 210.541pt.
 File: Template/noulogo.png Graphic file (type png)
 <use Template/noulogo.png>
-Package pdftex.def Info: Template/noulogo.png  used on input line 255.
+Package pdftex.def Info: Template/noulogo.png  used on input line 258.
 (pdftex.def)             Requested size: 165.26283pt x 42.67912pt.
 
 Package fancyhdr Warning: \headheight is too small (35.0pt): 
@@ -1579,7 +1579,7 @@ Package fancyhdr Warning: \headheight is too small (35.0pt):
 
 File: Template/eimt.png Graphic file (type png)
 <use Template/eimt.png>
-Package pdftex.def Info: Template/eimt.png  used on input line 255.
+Package pdftex.def Info: Template/eimt.png  used on input line 258.
 (pdftex.def)             Requested size: 73.03314pt x 9.95863pt.
 [16
 
@@ -1587,7 +1587,7 @@ Package pdftex.def Info: Template/eimt.png  used on input line 255.
 Chapter 7.
 File: Template/noulogo.png Graphic file (type png)
 <use Template/noulogo.png>
-Package pdftex.def Info: Template/noulogo.png  used on input line 296.
+Package pdftex.def Info: Template/noulogo.png  used on input line 299.
 (pdftex.def)             Requested size: 165.26283pt x 42.67912pt.
 
 Package fancyhdr Warning: \headheight is too small (35.0pt): 
@@ -1598,7 +1598,7 @@ Package fancyhdr Warning: \headheight is too small (35.0pt):
 
 File: Template/eimt.png Graphic file (type png)
 <use Template/eimt.png>
-Package pdftex.def Info: Template/eimt.png  used on input line 296.
+Package pdftex.def Info: Template/eimt.png  used on input line 299.
 (pdftex.def)             Requested size: 73.03314pt x 9.95863pt.
 [17
 
@@ -1606,7 +1606,7 @@ Package pdftex.def Info: Template/eimt.png  used on input line 296.
 Chapter 8.
 File: Template/noulogo.png Graphic file (type png)
 <use Template/noulogo.png>
-Package pdftex.def Info: Template/noulogo.png  used on input line 301.
+Package pdftex.def Info: Template/noulogo.png  used on input line 304.
 (pdftex.def)             Requested size: 165.26283pt x 42.67912pt.
 
 Package fancyhdr Warning: \headheight is too small (35.0pt): 
@@ -1617,18 +1617,18 @@ Package fancyhdr Warning: \headheight is too small (35.0pt):
 
 File: Template/eimt.png Graphic file (type png)
 <use Template/eimt.png>
-Package pdftex.def Info: Template/eimt.png  used on input line 301.
+Package pdftex.def Info: Template/eimt.png  used on input line 304.
 (pdftex.def)             Requested size: 73.03314pt x 9.95863pt.
 [18
 
 ]
-Overfull \hbox (73.7015pt too wide) in paragraph at lines 313--314
+Overfull \hbox (73.7015pt too wide) in paragraph at lines 316--317
 []\OT1/ppl/m/n/12 Informaci[]on de como citar doc-u-men-tos: [][]$http : / / biblioteca . uoc . edu / es / recursos / citacion-[]bibliogra^^Lca$[][]. 
  []
 
 File: Template/noulogo.png Graphic file (type png)
 <use Template/noulogo.png>
-Package pdftex.def Info: Template/noulogo.png  used on input line 316.
+Package pdftex.def Info: Template/noulogo.png  used on input line 319.
 (pdftex.def)             Requested size: 165.26283pt x 42.67912pt.
 
 Package fancyhdr Warning: \headheight is too small (35.0pt): 
@@ -1639,14 +1639,14 @@ Package fancyhdr Warning: \headheight is too small (35.0pt):
 
 File: Template/eimt.png Graphic file (type png)
 <use Template/eimt.png>
-Package pdftex.def Info: Template/eimt.png  used on input line 316.
+Package pdftex.def Info: Template/eimt.png  used on input line 319.
 (pdftex.def)             Requested size: 73.03314pt x 9.95863pt.
 [19
 
 ]
 File: Template/noulogo.png Graphic file (type png)
 <use Template/noulogo.png>
-Package pdftex.def Info: Template/noulogo.png  used on input line 322.
+Package pdftex.def Info: Template/noulogo.png  used on input line 325.
 (pdftex.def)             Requested size: 165.26283pt x 42.67912pt.
 
 
@@ -1658,7 +1658,7 @@ Package fancyhdr Warning: \headheight is too small (35.0pt):
 
 File: Template/eimt.png Graphic file (type png)
 <use Template/eimt.png>
-Package pdftex.def Info: Template/eimt.png  used on input line 322.
+Package pdftex.def Info: Template/eimt.png  used on input line 325.
 (pdftex.def)             Requested size: 73.03314pt x 9.95863pt.
 [20] (./Memoria.aux)
  ***********
@@ -1678,7 +1678,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  75i,21n,85p,1783b,1810s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2023basic/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2023basic/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2023basic/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on Memoria.pdf (21 pages, 326271 bytes).
+Output written on Memoria.pdf (21 pages, 326393 bytes).
 PDF statistics:
  269 PDF objects out of 1000 (max. 8388607)
  228 compressed objects within 3 object streams

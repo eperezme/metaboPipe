@@ -1,13 +1,13 @@
 # Fdb version 4
-["biber Memoria"] 0 "Memoria.bcf" "Memoria.bbl" "Memoria" 1713179731.59941 -1
-  "Memoria.bcf" 1713179731.19232 107575 6de35235c3080f7069745e595493e5a0 "pdflatex"
+["biber Memoria"] 0 "Memoria.bcf" "Memoria.bbl" "Memoria" 1713179795.60104 -1
+  "Memoria.bcf" 1713179795.1343 107575 6de35235c3080f7069745e595493e5a0 "pdflatex"
   "library.bib" 1712848378.76379 143152 a79f8063c9af25242bfa9812a73cb9fc ""
   (generated)
   "Memoria.bbl"
   "Memoria.blg"
   (rewritten before read)
-["pdflatex"] 1713179728.67951 "/Users/eduardperezmendez/Desktop/TFM/Memoria/Memoria.tex" "Memoria.pdf" "Memoria" 1713179731.59994 0
-  "/Users/eduardperezmendez/Desktop/TFM/Memoria/Memoria.tex" 1713179728.00177 20363 b5dde5caaa6c0e21aa2c7ef868b3e2eb ""
+["pdflatex"] 1713179792.05601 "/Users/eduardperezmendez/Desktop/TFM/Memoria/Memoria.tex" "Memoria.pdf" "Memoria" 1713179795.60148 0
+  "/Users/eduardperezmendez/Desktop/TFM/Memoria/Memoria.tex" 1713179787.2163 20490 da4b92066939329452b954a685475141 ""
   "/usr/local/texlive/2023basic/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2023basic/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2023basic/texmf-dist/fonts/tfm/adobe/palatino/pplb7t.tfm" 1136768653 1616 371d1ee60c04b008c8fd760060cd34f1 ""
@@ -137,13 +137,13 @@
   "/usr/local/texlive/2023basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1708714914.76448 5472579 2f39db79f3cee8ecaf5c73ecf607f5a4 ""
   "/usr/local/texlive/2023basic/texmf-var/web2c/pdftex/pdflatex.fmt" 1708714999 8220829 d467a7e363a938b2216a2600d7f15b38 ""
   "/usr/local/texlive/2023basic/texmf.cnf" 1678817979 628 bde3cc671e29677eea4172140533535c ""
-  "Memoria.aux" 1713179731.18062 10455 c035cf4c4420b26dca377e537420c63b "pdflatex"
+  "Memoria.aux" 1713179795.03262 10455 bd8d803840426589eac97fc4d81dac9f "pdflatex"
   "Memoria.bbl" 1713179604.22914 22087 1a5438d9129cd198823dce1c17f2b929 "biber Memoria"
-  "Memoria.lof" 1713179731.19468 323 e7c4d6355777a98996b0eab49f8da8c0 "pdflatex"
-  "Memoria.lot" 1713179731.1956 190 84e9851f92b610fc7b63f18d7621c1e0 "pdflatex"
-  "Memoria.run.xml" 1713179731.19434 2424 a601a87b52db0a996237e0137b9d99f8 "pdflatex"
-  "Memoria.tex" 1713179728.00177 20363 b5dde5caaa6c0e21aa2c7ef868b3e2eb ""
-  "Memoria.toc" 1713179731.19461 1881 4adc47fdb6826dcd805ac41874505c47 "pdflatex"
+  "Memoria.lof" 1713179795.13564 323 e7c4d6355777a98996b0eab49f8da8c0 "pdflatex"
+  "Memoria.lot" 1713179795.1357 190 84e9851f92b610fc7b63f18d7621c1e0 "pdflatex"
+  "Memoria.run.xml" 1713179795.13545 2424 a601a87b52db0a996237e0137b9d99f8 "pdflatex"
+  "Memoria.tex" 1713179787.2163 20490 da4b92066939329452b954a685475141 ""
+  "Memoria.toc" 1713179795.13558 1881 4adc47fdb6826dcd805ac41874505c47 "pdflatex"
   "TFUOC.cls" 1711797352.59135 20638 d4a511c22e5a61efe98d04a5a8a2a634 ""
   "Template/Rplotmanh.png" 1711797352.60559 47093 7af39fdcfcbbec88d14d46f31e7832aa ""
   "Template/UOCllargub.jpg" 1711797352.60801 151410 20ef896d35cafabc1575a1ba0ded97d9 ""
