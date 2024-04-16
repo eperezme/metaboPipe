@@ -1,0 +1,137 @@
+---
+title: "Target Markdown"
+output: html_document
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+library(targets)
+
+```
+
+Target Markdown is a powerful R Markdown interface for reproducible analysis pipelines, and the chapter at https://books.ropensci.org/targets/markdown.html walks through it in detail. This R Markdown report the example from the chapter. Try it out in both interactive and non-interactive modes, either by running the code chunks in different ways or setting the `tar_interactive` chunk option.
+
+# Packages
+
+The example requires several R packages, and `targets` must be version 0.5.0.9000 or above. 
+
+# Setup
+
+If you are using old versions of `targets` (<= 0.7.0) and/or `knitr` (<= 1.33), you will need to load the `targets` package in the R Markdown document in order for Target Markdown code chunks to work.
+
+```{r}
+tar_unscript()
+```
+
+Near the top of the document, you may also wish to remove the `_targets_r` directory previously written by non-interactive runs of the report. Otherwise, your pipeline may contain superfluous targets.
+
+# Globals
+
+We first define some global options/functions common to all targets. The function below plots a histogram of ozone concentrations, and our histogram target will need it.
+
+```{targets example-globals, tar_globals = TRUE}
+options(tidyverse.quiet = TRUE)
+
+tar_option_set(packages = c("structToolbox", "SummarizedExperiment",
+    "VIM", "impute", "imputeLCMD", "missForest", "caret", "pcaMethods", 
+    "metabolomicsWorkbenchR", "tidyverse", "tarchetypes"))
+file.sources <- list.files("R", pattern = "*.R", full.names = TRUE)
+invisible(sapply(file.sources, source, .GlobalEnv))
+```
+
+# Targets
+```{targets other globals}
+tar_script({library(tarchetypes)})
+
+```
+
+
+Our first target borrows the `airquality` dataset built into base R.
+
+```{r path}
+dataMatrixPath <- "data/dataMatrix.csv"
+sampleMetadataPath <- "data/sampleMetadata.csv"
+variableMetadataPath <- "data/variableMetadata.csv"
+```
+
+Our next targets preprocess the data, make a histogram, and fit a model.
+
+```{targets downstream-targets}
+list(
+  tar_file_read(dataMatrix, dataMatrixPath, read.csv(!!.x)),
+  tar_file_read(sampleMetadata, sampleMetadataPath, read.csv(!!.x)),
+  tar_file_read(variableMetadata, variableMetadataPath, read.csv(!!.x))
+)
+```
+
+Set the `tar_simple` chunk option to `TRUE` to define a single target with the command in the code chunk. The chunk below only contains `biglm(Ozone ~ Wind + Temp, data)` in the source, but because `tar_simple` is `TRUE`, it is shorthand for `tar_target(name = fit, command = biglm(Ozone ~ Wind + Temp, data))`. All other arguments to `tar_target()` are set to their default values (configurable with `tar_option_set()`).
+
+```{targets experiment, tar_simple = TRUE}
+createExperiment(dataMatrix, sampleMetadata, variableMetadata)
+```
+
+
+### Filter Missing values
+```{targets Missing Values}
+list(
+  tar_target(na_experiment, zero_to_na(experiment)),
+  tar_target(filtered_experiment, filter_MV(na_experiment))
+)
+
+```
+
+
+
+### Impute Missing values
+```{targets Impute Missing Values}
+list(
+  tar_target(mean_imputed, impute_mean(filtered_experiment)),
+  tar_target(median_imputed, impute_median(filtered_experiment)),
+  tar_target(RF_imputed, impute_RF(filtered_experiment)),
+  tar_target(QRILC_imputed, impute_QRILC(filtered_experiment)),
+  tar_target(knn_imputed, impute_kNN(filtered_experiment, 5)),
+  tar_target(svd_imputed, impute_SVD(filtered_experiment, k = 5)),
+  tar_target(bpca_imputed, impute_bpca(filtered_experiment, nPCs = 5)),
+  tar_target(ppca_imputed, impute_ppca(filtered_experiment, nPCs = 5))
+)
+
+```
+
+### Blank Filter
+```{targets Blank Filter}
+
+list( 
+  tar_target(blank_filtered, filter_blanks(knn_imputed, fold_change = 20, 
+                                           blank_label = 'Blank', qc_label = 'QC', 
+                                           factor_name = 'sample_type', 
+                                           fraction_in_blank = 0 ))
+  )
+
+```
+
+# Pipeline
+
+If you ran all the `{targets}` chunks in non-interactive mode, then your R scripts are set up to run the pipeline.
+
+```{r}
+tar_make()
+```
+
+# Output
+
+You can retrieve results from the `_targets/` data store using `tar_read()` or `tar_load()`.
+
+
+
+```{r}
+print(filtered_experiment$data)
+print(blank_filtered$data)
+```
+
+The `targets` dependency graph helps your readers understand the steps of your pipeline at a high level.
+
+```{r}
+tar_visnetwork()
+```
+
+At this point, you can go back and run `{targets}` chunks in interactive mode without interfering with the code or data of the non-interactive pipeline.
