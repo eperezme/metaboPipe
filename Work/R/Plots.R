@@ -56,7 +56,7 @@ distribution_boxplot <- function(dataset_experiment, factor_name, per_class = FA
   }
 
 sample_missing_values_plot <- function(dataset_experiment) {
-  
+  library(structToolbox)
   C = mv_sample_filter() + mv_sample_filter_hist()
   chart_plot(C, dataset_experiment)
 }

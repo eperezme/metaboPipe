@@ -129,3 +129,8 @@ filter_blanks <- function(dataset_experiment, fold_change = 20, blank_label = 'b
 #
 # filtered <- predicted(A)
 # filtered
+# sb_corrected<- batch_correction(blank_filtered, 
+#                  order_col = "order", 
+#                  batch_col = "biol.batch", 
+#                  qc_col = "sample_type", 
+#                  qc_label = 'QC')
