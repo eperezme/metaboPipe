@@ -24,7 +24,7 @@ filter_MV <- function(dataset_exp, threshold = 0.8) {
   ncols <- ncol(SummarizedExperiment::assay(dataset_exp))
   
   
-  M <- mv_sample_filter(mv_threshold = threshold*100) + mv_feature_filter(mv_threshold = threshold*100)
+  M <- mv_sample_filter(mv_threshold = threshold*100) + mv_feature_filter(threshold = threshold*100, method = "across", factor_name = 'sample_type')
   C <- mv_sample_filter_hist()
   M = model_apply(M, dataset_exp)
   chart_plot(C, M)

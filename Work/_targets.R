@@ -42,16 +42,15 @@ list(
   tar_file_read(variableMetadata, variableMetadataPath, read.csv(!!.x)),
 
   # Create a DatasetExperiment object
-  # tar_target(experiment, createExperiment(dataMatrix, sampleMetadata, variableMetadata)),
+  tar_target(experiment, createExperiment(dataMatrix, sampleMetadata, variableMetadata)),
   
-  tar_target(experiment, metabolomicsWorkbenchR::do_query(context = "study", input_item = "analysis_id", input_value = "AN004436", output_item = "DatasetExperiment")),
+  # tar_target(experiment, metabolomicsWorkbenchR::do_query(context = "study", input_item = "analysis_id", input_value = "AN004436", output_item = "DatasetExperiment")),
 
   # Filter missing values
   tar_target(na_experiment, zero_to_na(experiment)),
   tar_target(filtered_experiment, filter_MV(na_experiment)),
 
   # impute missing values
-  # tar_target(mai_imputed_experiment, impute_MAI(filtered_experiment, "random_forest", "Single"))
   tar_target(mean_imputed, impute_mean(filtered_experiment)),
   tar_target(median_imputed, impute_median(filtered_experiment)),
   tar_target(RF_imputed, impute_RF(filtered_experiment)),
@@ -59,7 +58,26 @@ list(
   tar_target(knn_imputed, impute_kNN(filtered_experiment, 5)),
   tar_target(svd_imputed, impute_SVD(filtered_experiment, k = 5)),
   tar_target(bpca_imputed, impute_bpca(filtered_experiment, nPCs = 5)),
-  tar_target(ppca_imputed, impute_ppca(filtered_experiment, nPCs = 5))
+  tar_target(ppca_imputed, impute_ppca(filtered_experiment, nPCs = 5)),
+
+  # Remove outliers
+  # somehow
+  
+  
+  
+  # blank filter
+  tar_target(blank_filtered, filter_blanks(knn_imputed, fold_change = 20, blank_label = 'Blank', qc_label = 'QC', factor_name = 'sample_type', fraction_in_blank = 0 )),
+  
+  
+  # Signal drift and batch correction
+  tar_target(batch_corrected, sb_corr(blank_filtered, 
+                                      order_col = "order", 
+                                      batch_col = "biol.batch", 
+                                      qc_col = "sample_type", 
+                                      qc_label = 'QC'))
+  
+  
+  
   
   # The report summary
   # tar_quarto(
