@@ -1,0 +1,954 @@
+The following text is a Git repository with code. The structure of the text are sections that begin with ----, followed by a single line containing the file path and file name, followed by a variable amount of lines containing the file contents. The text representing the Git repository ends when the symbols --END-- are encounted. Any further text beyond --END-- are meant to be interpreted as instructions using the aforementioned Git repository as context.
+----
+Work\.Rprofile
+source("renv/activate.R")
+
+----
+Work\.renvignore
+# Ignore Training folder
+/Training/
+
+# Ignore GenerateTargets.R
+R/GenerateTargets.R
+----
+Work\Notes.R
+library(targets)
+library(tidyverse)
+
+
+# Load the experiment
+tar_load("experiment")
+# dataexperiment <-
+
+
+as_tibble() %>% bind_cols(rowData(experiment) %>% as_tibble() %>% select(sample_id))
+
+rowData(experiment) %>%
+  as_tibble() %>%
+  select(sample_id)
+
+# Create the metadata table
+# Metadata table containing multiple factors and covariates
+# This is a general table containing various descriptors for the data to be analyzed
+#
+# The sample IDs must be identical to the metabolomics data;
+# The column after sample IDs should be the primary metadata of interest;
+# The metadata can contain either categorical (with at least three replicates per group) or continuous values (covariates);
+# Missing values are not allowed - you will be asked to manually "fix" the missing values if detected
+# A screenshot of a metadata table is shown below.
+
+library(SummarizedExperiment)
+metabData <- rowData(experiment) %>%
+  as.tibble() %>%
+  select(sample_id, condition, sample_type, time.point, biol.batch) %>%
+  left_join(
+    SummarizedExperiment::assay(experiment) %>%
+      mutate(
+        sample_id = rownames(.)
+      ),
+    by = "sample_id"
+  )
+
+
+#### Metabolomics Workbench ####
+# BiocManager::install("metabolomicsWorkbenchR")
+library(metabolomicsWorkbenchR)
+names(metabolomicsWorkbenchR::context)
+
+# View Inputs
+context_inputs('study')
+
+# View Outputs
+context_outputs('study')
+
+# Query a study summary
+S <- do_query('study','study_id','ST000336','summary')
+t(S)
+
+# View the analysis
+print(
+  t(
+    do_query(context = "study", input_item = "study_id", input_value = "ST000336", output_item = "analysis")
+    )
+  )
+
+SE <- do_query(context = "study", input_item = "analysis_id", input_value = "AN004436", output_item = "SummarizedExperiment")
+DE <- metabolomicsWorkbenchR::do_query(context = "study", input_item = "analysis_id", input_value = "AN004436", output_item = "DatasetExperiment")
+
+# Zero_to_na
+SummarizedExperiment::assay(DE) <- SummarizedExperiment::assay(DE) %>% mutate_all(as.numeric) %>% replace(.==0, NA)
+
+colData(DE)
+View(rowData(DE))
+assay(DE)
+
+
+
+
+
+
+----
+Work\R\Plots.R
+# Function to plot density plots for one variable with a legend
+plot_density_single_with_legend <- function(original_var, imputed_var) {
+  original_density <- ggplot(data = NULL, aes(x = original_var, fill = "Original")) +
+    geom_density(alpha = 0.5) +
+    labs(title = "Density Plot Comparison") +
+    geom_density(data = NULL, aes(x = imputed_var, fill = "Imputed"), alpha = 0.5) +
+    labs(title = "Density Plot Comparison") +
+    scale_fill_manual(name = "Data", values = c("Original" = "blue", "Imputed" = "red")) +
+    theme_minimal()
+
+  print(original_density)
+}
+
+
+plot_boxplots <- function(data, title = "Boxplot of Columns") {
+  # Convert data to long format for boxplot
+  data_long <- reshape2::melt(data)
+
+  # Plot vertical boxplots
+  ggplot(data_long, aes(x = variable, y = value)) +
+    geom_boxplot() +
+    labs(title = title, x = "Columns", y = "Values") +
+    coord_flip() # Rotate the plot to make it vertical
+}
+
+
+distribution_boxplot <- function(dataset_experiment, number = 50, plot_by = c("samples", "metabolites"), factor_name, per_class = TRUE ) {
+  # If the plot_by argument is not valid, stop the function
+  if (!plot_by %in% c("samples", "metabolites")) {
+    stop("Invalid plot_by argument. Must be either 'samples' or 'metabolites'.")
+  }
+  # If plot_by is samples, make by_sample == TRUE
+  if (plot_by == "samples") {
+    by_sample <- TRUE
+  } else {
+    by_sample <- FALSE
+  }
+  C <- DatasetExperiment_boxplot(factor_name= factor_name, number = number, by_sample = by_sample, per_class = per_class)
+  chart_plot(C, dataset_experiment)
+}
+
+
+plot_heatmap <- function(dataset_experiment, na_colour = "#FF00E4") {
+  # Create a heatmap of the data
+  C <- DatasetExperiment_heatmap(na_colour = na_colour)
+  chart_plot(C, dataset_experiment)
+}
+
+missing_values_plot <- function(dataset_experiment) {
+  VIM::aggr(SummarizedExperiment::assay(dataset_experiment))
+}
+
+distribution_boxplot <- function(dataset_experiment, factor_name, per_class = FALSE ) {
+  C <- DatasetExperiment_dist(factor_name= factor_name, per_class = per_class)
+  chart_plot(C, dataset_experiment)
+  }
+
+sample_missing_values_plot <- function(dataset_experiment) {
+  library(structToolbox)
+  C = mv_sample_filter() + mv_sample_filter_hist()
+  chart_plot(C, dataset_experiment)
+}
+
+# PLOT DENSITIES BEFORE AND AFTER
+ba_plot <- function(DE_before, DE_after, factor_name = "sample_type") {
+  C <- compare_dist(factor_name = factor_name)
+  plot <- chart_plot(C, DE_before, DE_after)
+  return(plot)
+}
+----
+Work\R\createExperiment.R
+# Sort by sample_id
+sort_by_sample_id <- function(df) {
+  # sort by sample_id
+  df <- df[order(df$sample_id), ]
+  return(df)
+}
+
+
+#' Process the dataset to create the DatasetExperiment object
+#'
+#' @param dataMatrix 
+#' @param sampleMetadata 
+#' @param variableMetadata 
+#' @param experiment_name 
+#' @param experiment_description 
+#'
+#' @return A \code{DatasetExperiment} object.
+#' @export
+#'
+#' @examples
+createExperiment <- function(dataMatrix, sampleMetadata, variableMetadata,
+                             experiment_name = "Name", experiment_description = "Description") {
+  # dataMatrix should have a row for each sample and a column for each feature
+  # Check dimensions
+  if (nrow(dataMatrix) != nrow(sampleMetadata)) {
+    stop("Number of rows in dataMatrix and sampleMetadata do not match.")
+  }
+
+  if (ncol(dataMatrix) - 1 != nrow(variableMetadata)) {
+    stop("Number of (columns - 1) in dataMatrix and rows in variableMetadata do not match.")
+  }
+
+  # convert 0 to NA
+  dataMatrix <- dataMatrix %>% mutate_if(is.character, as.numeric)
+  dataMatrix[dataMatrix == 0] <- NA
+  dataMatrix <- data.frame(lapply(dataMatrix, as.numeric), check.names = FALSE)
+  
+  
+  # Drop dataMatrix$sample_id
+  dataMatrix$sample_id <- NULL
+
+
+  # Create new annotation col for variableMetadata == colnames of dataMatrix
+  variableMetadata$annotation <- colnames(dataMatrix)
+
+  # Make metabolites underscore for compatibility
+  colnames(dataMatrix) <- gsub("-", "_", colnames(dataMatrix))
+
+
+  # Check row/col names match
+  rownames(dataMatrix) <- sampleMetadata$sample_id
+  rownames(sampleMetadata) <- sampleMetadata$sample_id
+  rownames(variableMetadata) <- colnames(dataMatrix)
+
+
+  # Create a DatasetExperiment object
+  # require(structToolbox)
+  DE <- DatasetExperiment(
+    data = dataMatrix,
+    sample_meta = sampleMetadata,
+    variable_meta = variableMetadata,
+    name = experiment_name,
+    description = experiment_description
+  )
+
+  return(DE)
+}
+
+----
+Work\R\filter.R
+# Filter Missing values
+
+filter_MV <- function(dataset_exp, threshold = 0.8) {
+  # IDEA
+  # Filter SAMPLES by Blank
+  # and filter Features by 
+  
+  # Check if threshold is specified and valid
+  if (missing(threshold)) {
+    threshold <- 0.8 # Default threshold
+    cat("No threshold specified. Defaulting to 0.8.\n")
+  } else {
+    # Check if threshold is between 0 and 1
+    if (threshold < 0 || threshold > 1) {
+      stop("Threshold must be between 0 and 1.")
+    }
+    # Check if threshold is a numeric value
+    if (!is.numeric(threshold)) {
+      stop("Threshold must be a numeric value.")
+    }
+    cat(paste0("Threshold value: ", threshold, "\n"))
+  }
+  
+  ncols <- ncol(SummarizedExperiment::assay(dataset_exp))
+  
+  
+  M <- mv_sample_filter(mv_threshold = threshold*100) + mv_feature_filter(threshold = threshold*100, method = "across", factor_name = 'sample_type')
+  C <- mv_sample_filter_hist()
+  M = model_apply(M, dataset_exp)
+  chart_plot(C, M)
+  
+  filtered_experiment <- predicted(M)
+  
+  # Calculate the number of rows and columns removed
+  removed_rows <- nrow(SummarizedExperiment::assay(dataset_exp)) - nrow(SummarizedExperiment::assay(filtered_experiment))
+  removed_cols <- ncol(SummarizedExperiment::assay(dataset_exp)) - ncol(SummarizedExperiment::assay(filtered_experiment))
+  
+  # Print information about removed rows and columns
+  if (removed_rows == 0) {
+    cat("No rows removed\n")
+  } else {
+    cat(paste0("Number of rows removed: ", removed_rows, "\n"))
+  }
+  
+  if (removed_cols == 0) {
+    cat("No columns removed\n")
+  } else {
+    cat(paste0("Number of columns removed: ", removed_cols, "\n"))
+  }
+  
+  # 
+  # # Plot before filtering
+  # plot_before <- VIM::aggr(SummarizedExperiment::assay(dataset_exp), plot = plot)
+
+  # # Calculate the threshold values based on the modified 80% rule
+  # row_threshold <- ncols * threshold
+  # col_threshold <- nrows * threshold
+  # 
+  # # Filter rows based on the modified 80% rule
+  # row_counts <- rowSums(!is.na(SummarizedExperiment::assay(dataset_exp)))
+  # dataset_exp <- dataset_exp[row_counts >= row_threshold, ]
+  # 
+  # # Filter columns based on the modified 80% rule
+  # col_counts <- colSums(!is.na(SummarizedExperiment::assay(dataset_exp)))
+  # dataset_exp <- dataset_exp[, col_counts >= col_threshold]
+  # 
+  # 
+  # # Genereate after plot
+  # plot_after <- VIM::aggr(SummarizedExperiment::assay(dataset_exp), plot = plot)
+  # 
+  # # Plot before and after
+  # 
+  # 
+
+  # 
+  # # par(mfrow=c(2,2))
+  # # plot(plot_before)
+  # # plot(plot_after)
+  # # par(mfrow=c(1,1))
+
+  return(filtered_experiment)
+}
+# Make 0 as NA
+zero_to_na <- function(dataset_exp) {
+  modified_de <- dataset_exp
+  df <- SummarizedExperiment::assay(dataset_exp)
+  df <- df %>% mutate_if(is.character, as.numeric)
+  df[df == 0] <- NA
+  SummarizedExperiment::assay(modified_de, withDimnames = FALSE) <- df
+  return(modified_de)
+}
+
+
+filter_blanks <- function(dataset_experiment, fold_change = 20, blank_label = 'blank', qc_label = 'QC', factor_name = 'sample_type', fraction_in_blank = 0) {
+  M <- blank_filter(
+    fold_change = fold_change,
+    blank_label = blank_label,
+    qc_label = qc_label,
+    factor_name = factor_name,
+    fraction_in_blank = fraction_in_blank
+  )
+  M <- model_apply(M, dataset_experiment)
+  filtered_experiment <- predicted(M)
+  
+  return(filtered_experiment)
+}
+
+#
+#
+# # HOW MANY FOLD CHANGES? DEPENDS ON SAMPLES? ON METABOLITES? ON PPM AND PEAK?
+# M = blank_filter(
+#   fold_change = 1,
+#   blank_label = "Blank",
+#   qc_label = "QC",
+#   factor_name = "sample_type",
+#   fraction_in_blank = 0)
+#
+# M = model_apply(M,filtered_experiment)
+#
+# test <- predicted(M)
+#
+# test
+#
+# blank_filter_hist(M)
+
+# DE
+# A <- rsd_filter(rsd_threshold = 20, qc_label= "QC", factor_name = "condition")
+# A <- model_apply(A,DE)
+#
+# filtered <- predicted(A)
+# filtered
+# sb_corrected<- batch_correction(blank_filtered, 
+#                  order_col = "order", 
+#                  batch_col = "biol.batch", 
+#                  qc_col = "sample_type", 
+#                  qc_label = 'QC')
+
+----
+Work\R\imputation.R
+# #### MAI (AUTO) ####
+# impute_MAI <- function(dataset_experiment, MCAR, MNAR, ncores = 1, ntree = 300, proximity = FALSE) {
+#
+#   # Create a copy of the DatasetExperiment object
+#   DE_imp <- dataset_experiment
+#
+#   # Impute missing values
+#   result <- MAI(t(SummarizedExperiment::assay(dataset_experiment)),
+#                            MCAR_algorithm = MCAR,
+#                            MNAR_algorithm= MNAR,
+#                            n_cores = ncores,
+#                            forest_list_args = list( # random forest arguments for training
+#                              ntree = ntree,
+#                              proximity = proximity
+#                              ),
+#                            verbose = TRUE # allows console message output
+#                            )
+#
+#   # Replace missing values with imputed values
+#   SummarizedExperiment::assay(DE_imp, withDimnames = FALSE) <- t(result$Imputed_data)
+#
+#   return(DE_imp)
+# }
+
+
+
+
+
+
+#### MEAN ####
+
+impute_mean <- function(dataset_experiment) {
+  # Create a copy of the DatasetExperiment object
+  DE_imp <- dataset_experiment
+
+  # Extract the data matrix
+  data_matrix <- SummarizedExperiment::assay(dataset_experiment)
+
+  # Impute missing values column-wise
+  data_matrix[] <- lapply(data_matrix, function(x) {
+    x[is.na(x)] <- mean(x, na.rm = T)
+    x
+  })
+
+  # Replace missing values with imputed values
+  SummarizedExperiment::assay(DE_imp, withDimnames = FALSE) <- data_matrix
+
+  return(DE_imp)
+}
+
+
+#### MEDIAN ####
+impute_median <- function(dataset_experiment) {
+  # Create a copy of the DatasetExperiment object
+  DE_imp <- dataset_experiment
+
+  # Extract the data matrix
+  data_matrix <- SummarizedExperiment::assay(dataset_experiment)
+
+  # Impute missing values column-wise
+  data_matrix[] <- lapply(data_matrix, function(x) {
+    x[is.na(x)] <- median(x, na.rm = T)
+    x
+  })
+
+  # Replace missing values with imputed values
+  SummarizedExperiment::assay(DE_imp, withDimnames = FALSE) <- data_matrix
+
+  return(DE_imp)
+}
+
+
+
+#### RANDOM FOREST ####
+impute_RF <- function(dataset_experiment) {
+  # doParallel::registerDoParallel(cores=4)
+  # Create a copy of the DatasetExperiment object
+  DE_imp <- dataset_experiment
+
+  # Impute missing values
+  # forest_result <- missForest::missForest(SummarizedExperiment::assay(dataset_experiment), maxiter = 100, ntree = 1000, parallelize = "forests")
+  forest_result <- missForest::missForest(SummarizedExperiment::assay(dataset_experiment), maxiter = 100, ntree = 1000)
+
+  # Replace missing values with imputed values
+  SummarizedExperiment::assay(DE_imp, withDimnames = FALSE) <- forest_result$ximp
+
+  return(DE_imp)
+}
+
+#### QRILC ####
+impute_QRILC <- function(dataset_experiment) {
+  # Create a copy of the DatasetExperiment object
+  DE_imp <- dataset_experiment
+
+  # Impute missing values
+  imputed_data <- imputeLCMD::impute.QRILC(SummarizedExperiment::assay(dataset_experiment))
+
+  # Replace missing values with imputed values
+  SummarizedExperiment::assay(DE_imp, withDimnames = FALSE) <- imputed_data[[1]]
+
+  return(DE_imp)
+}
+
+
+#### kNN ####
+impute_kNN <- function(dataset_experiment, k = 5) {
+  # Create a copy of the DatasetExperiment object
+  DE_imp <- dataset_experiment
+
+  # Extract the data matrix
+  data_matrix <- SummarizedExperiment::assay(dataset_experiment)
+
+  # Impute missing values
+  imputed_data <- impute::impute.knn(as.matrix(data_matrix), k = k)
+
+  # Replace missing values with imputed values
+  SummarizedExperiment::assay(DE_imp, withDimnames = FALSE) <- imputed_data$data
+
+  return(DE_imp)
+}
+
+
+
+#### SVD ####
+
+
+impute_SVD <- function(dataset_experiment, K = 5, center = TRUE, ...) {
+  # Create a copy of the DatasetExperiment object
+  DE_imp <- dataset_experiment
+
+  # Extract the data matrix
+  data_matrix <- SummarizedExperiment::assay(dataset_experiment)
+
+  # Call wrapper function to impute missing values
+  impute_results <- pcaMethods::pca(data_matrix, method = "svdImpute", nPcs = K, center = center, ...)
+  plotPcs(impute_results, type = "scores")
+  imputed_data <- pcaMethods::completeObs(impute_results)
+
+  # Replace missing values with imputed values
+  SummarizedExperiment::assay(DE_imp, withDimnames = FALSE) <- imputed_data
+
+  return(DE_imp)
+}
+
+#### BPCA ####
+impute_bpca <- function(dataset_experiment, nPCs = 5, ...) {
+  # Create a copy of the DatasetExperiment object
+  DE_imp <- dataset_experiment
+
+  # Extract the data matrix
+  data_matrix <- SummarizedExperiment::assay(dataset_experiment)
+
+  # Call wrapper function to impute missing values
+  pc <- pcaMethods::pca(data_matrix, method = "bpca", nPCs = nPCs, ...)
+
+  imputed_data <- pcaMethods::completeObs(pc)
+
+  slplot(pc)
+
+  # Replace missing values with imputed values
+  SummarizedExperiment::assay(DE_imp, withDimnames = FALSE) <- imputed_data
+
+  return(DE_imp)
+}
+
+
+
+#### PPCA ####
+impute_ppca <- function(dataset_experiment, nPCs = 5, ...) {
+  # Create a copy of the DatasetExperiment object
+  DE_imp <- dataset_experiment
+
+  # Extract the data matrix
+  data_matrix <- SummarizedExperiment::assay(dataset_experiment)
+
+  # Call wrapper function to impute missing values
+  impute_results <- pcaMethods::pca(data_matrix, method = "ppca", nPcs = nPCs, ...)
+  pcaMethods::plotPcs(impute_results, type = "scores")
+  imputed_data <- pcaMethods::completeObs(impute_results)
+
+  # Replace missing values with imputed values
+  SummarizedExperiment::assay(DE_imp, withDimnames = FALSE) <- imputed_data
+
+  return(DE_imp)
+}
+#
+# #### nsKNN ####
+# impute_nsKNN <- function(dataset_experiment, k = 5) {
+#
+#   # Create a copy of the DatasetExperiment object
+#   DE_imp <- dataset_experiment
+#
+#   # Extract the data matrix
+#   data_matrix <- SummarizedExperiment::assay(dataset_experiment)
+#
+#   # Call wrapper function to impute missing values
+#   inputed_data <- nsKNN(missingData, k,
+#         iters = 4, weighted = TRUE, scale = TRUE,
+#         shuffle = TRUE
+#         )
+#
+#   # Replace missing values with imputed values
+#   SummarizedExperiment::assay(DE_imp) <- imputed_data
+#
+#   return(DE_imp)
+# }
+
+----
+Work\R\prepareExampleData.R
+prepare_dataMatrix <- function(data, first_col) {
+  # Select the columns for the reads
+  X <- data[, first_col:ncol(data)]
+  X$sample_id <- data$label
+
+  return(X)
+}
+
+prepare_sampleMetadata <- function(data, first_col, last_col) {
+  # Create SampleMetadata dataframe
+  SM <- data[, first_col:last_col]
+  SM$sample_id <- data$label
+
+  # Define QC and blank samples
+  blanks <- c(1, 2, 33, 34, 65, 66)
+  QCs <- c(3, 4, 11, 18, 25, 32, 35, 36, 43, 50, 57, 64)
+
+  # Set sample_type based on sample id
+  SM$sample_type <- ifelse(data$label %in% blanks, "Blank",
+    ifelse(data$label %in% QCs, "QC", "Sample")
+  )
+
+  return(SM)
+}
+
+prepare_variableMetadata <- function(data, first_col) {
+  # Create variableMetadata object
+  VM <- data.frame(annotation = colnames(data)[first_col:ncol(data)])
+
+  return(VM)
+}
+
+----
+Work\R\utils.R
+# Signal drift and batch correction
+batch_correction <- function(dataset_exp, order_col, batch_col, qc_col, qc_label) {
+  
+  M <- sb_corr(
+    order_col = order_col,
+    batch_col = batch_col,
+    qc_col = qc_col,
+    qc_label = qc_label,
+    use_log = TRUE,
+    spar_lim = c(-1.5, 1.5),
+    min_qc=4
+    )
+  
+  M <- model_apply(M, dataset_exp)
+  
+  return(predicted(M))
+}
+
+
+factor_sample_col <- function(dataset_exp, col) {
+  dataset_exp$sample_meta[, col] <- lapply(dataset_exp$sample_meta[, col], factor)
+  return(dataset_exp)
+}
+  
+  ### THIS IS FOR PLOTING THE SIGNAL DRIFT AND BATCH CORRECTION #### \
+  # BUT WE COULD USE A PCA PLOT INSTEAD
+  
+  # C = feature_profile(
+  #   run_order=order_col,
+  #   qc_label=qc_label,
+  #   qc_column=qc_col,
+  #   colour_by='batch_qc',
+  #   feature_to_plot=,
+  #   plot_sd=FALSE
+  # )
+  
+
+
+----
+Work\Test.qmd
+---
+title: "Simpson's Paradox in Palmer Penguins"
+format:
+  html:
+    toc: true
+execute: 
+  echo: false
+---
+
+```{r}
+#| label: load
+#| message: false
+targets::tar_load(na_experiment)
+targets::tar_load(experiment)
+targets::tar_load(filtered_experiment)
+source("./R/Plots.R")
+```
+
+The goal of this analysis is to determine how bill length and depth are related in three species of penguins from Antarctica.
+
+## Methods
+
+We analyzed the relationship between bill length and depth using linear models. One model did not take into account species (single slope and intercept; "combined model"), one model added a parameter for species (same slope, different intercepts; "species model"), and another model added both a parameter for species and the interaction between species and bill length (different slopes, different intercepts; "interaction model").
+
+## Results
+
+```{r}
+#| label: missing-values
+
+
+missing_values_plot(na_experiment)
+missing_values_plot(filtered_experiment)
+
+```
+
+The model that did not account for species ("combined model") shows a negative relationship between bill length and depth overall (@fig-combined-plot).
+
+The models that did account for species show the opposite result: a positive relationship between bill length and depth for each species (@fig-species-plot; @fig-interaction-plot).
+
+Furthermore, the combined model explained less of the variation in the data (adjusted *R* squared `r mod_stats$combined_model$r.squared`) than models accounting for species (adjusted *R* squared `r mod_stats$species_model$r.squared` and `r mod_stats$interaction_model$r.squared`, species model and interaction model, respectively ).
+
+In the models accounting for species, the relationship between bill depth and length (the slope) appears very similar for each species (@fig-species-plot; @fig-interaction-plot).
+
+
+## Imputation
+```{r}
+
+```
+
+
+## Transformations
+
+```{r}
+
+```
+
+
+## Conclusion
+
+The penguins data is an example of "Simpson's Paradox," whereby aggregation of data can hide trends that are happening at more nested levels. We need to be careful of this when analyzing data.
+
+## Figures
+
+```{r}
+#| label: fig-combined-plot
+#| fig-cap: "Combined model"
+ggplot(
+  filter(model_predictions, model_name == "combined_model"),
+  aes(x = bill_length_mm)
+) +
+  geom_point(aes(y = bill_depth_mm)) +
+  geom_line(aes(y = .fitted)) +
+  labs(
+    y = "Bill length (mm)",
+    x = "Bill depth (mm)"
+  )
+```
+
+```{r}
+#| label: fig-species-plot
+#| fig-cap: "Species model"
+ggplot(
+  filter(model_predictions, model_name == "species_model"),
+  aes(x = bill_length_mm, color = species)
+) +
+  geom_point(aes(y = bill_depth_mm)) +
+  geom_line(aes(y = .fitted)) +
+  labs(
+    y = "Bill length (mm)",
+    x = "Bill depth (mm)"
+  ) +
+  theme(legend.position = "bottom")
+```
+
+```{r}
+#| label: fig-interaction-plot
+#| fig-cap: "Interaction model"
+ggplot(
+  filter(model_predictions, model_name == "interaction_model"),
+  aes(x = bill_length_mm, color = species)
+) +
+  geom_point(aes(y = bill_depth_mm)) +
+  geom_line(aes(y = .fitted)) +
+  labs(
+    y = "Bill length (mm)",
+    x = "Bill depth (mm)"
+  ) +
+  theme(legend.position = "bottom")
+```
+----
+Work\Test2.R
+filtered_experiment$sample_meta$order <- factor(filtered_experiment$sample_meta$order)
+filtered_experiment$sample_meta$biol.batch <- factor(filtered_experiment$sample_meta$biol.batch)
+
+# ST001764
+# https://www.ebi.ac.uk/metabolights/editor/MTBLS7832/files
+
+View(DE$sample_meta)
+View(DE$variable_meta)
+View(filtered_experiment$sample_meta)
+View(filtered_experiment$variable_meta)
+
+DE$sample_meta$run_order <- 1:nrow(DE$sample_meta)
+DE$sample_meta$Type <- factor(DE$sample_meta$sample_type)
+DE$sample_meta$batch_qc <- DE$sample_meta$biol.batch
+DE$sample_meta$batch_qc[DE$sample_meta$Type == "QC"] <- "QC"
+DE$sample_meta$batch_qc[DE$sample_meta$Type == "Blank"] <- "Blank"
+
+# convert to factors
+DE$sample_meta$biol.batch <- factor(DE$sample_meta$biol.batch)
+DE$sample_meta$Type <- factor(DE$sample_meta$Type)
+DE$sample_meta$Class <- factor(DE$sample_meta$Class)
+DE$sample_meta$batch_qc <- factor(DE$sample_meta$batch_qc)
+
+
+#### BATCH CORRECTION ####
+M <- # batch correction
+  sb_corr(
+    order_col = "order",
+    batch_col = "biol.batch",
+    qc_col = "sample_type",
+    qc_label = "QC",
+    # spar_lim = c(0.6,0.8)
+  )
+
+
+#### BLANK FILTER ####
+# HOW MANY FOLD CHANGES? DEPENDS ON SAMPLES? ON METABOLITES? ON PPM AND PEAK?
+M <- blank_filter(
+  fold_change = 20,
+  blank_label = "Blank",
+  qc_label = "QC",
+  factor_name = "sample_type",
+  fraction_in_blank = 0
+)
+
+M <- model_apply(M, filtered_experiment)
+
+test <- predicted(M)
+
+test
+
+
+C <- blank_filter_hist()
+chart_plot(C, M)
+
+
+C <- feature_profile(
+  run_order = "order",
+  qc_label = "QC",
+  qc_column = "sample_type",
+  colour_by = "sample_type",
+  feature_to_plot = "L.histidine",
+  plot_sd = FALSE
+)
+
+chart_plot(C, M, QRILC_imputed) + ylab("PPM") + ggtitle("Before")
+chart_plot(C, test) + ylab("PPM") + ggtitle("After")
+
+----
+Work\Work.Rproj
+Version: 1.0
+
+RestoreWorkspace: Default
+SaveWorkspace: Default
+AlwaysSaveHistory: Default
+
+EnableCodeIndexing: Yes
+UseSpacesForTab: Yes
+NumSpacesForTab: 2
+Encoding: UTF-8
+
+RnwWeave: Sweave
+LaTeX: XeLaTeX
+
+----
+Work\_targets.R
+# _targets.R file:
+library(targets)
+library(tarchetypes)
+library(crew)
+# library(doParallel)
+# Load all R scripts in the R/ directory.
+file.sources <- list.files("R", pattern = "*.R", full.names = TRUE)
+invisible(sapply(file.sources, source, .GlobalEnv))
+
+# Declare libraries
+# These are the libraries that the pipeline depends on.
+
+# To create a list with all the libraries to copy-paste:
+# cat(paste(shQuote(unique(renv::dependencies(path = "R")$Package), type="cmd"), collapse=", "))
+
+tar_option_set(
+  packages = c(
+    "structToolbox", "SummarizedExperiment",
+    "VIM", "impute", "imputeLCMD", "missForest", "caret", "pcaMethods", "metabolomicsWorkbenchR", "tidyverse"
+  )
+)
+
+
+
+# Declare controller
+# Create a controller with 5 workers and a 3-second idle time.
+# controller <- crew::crew_controller_local(
+#   name = "Controller",
+#   workers = 2,
+#   seconds_idle = 3
+# )
+# tar_option_set(controller = controller)
+
+dataMatrixPath <- "data/dataMatrix.csv"
+sampleMetadataPath <- "data/sampleMetadata.csv"
+variableMetadataPath <- "data/variableMetadata.csv"
+
+# Define the pipeline.
+list(
+  # LOAD THE DATA
+  tar_file_read(dataMatrix, dataMatrixPath, read.csv(!!.x)),
+  tar_file_read(sampleMetadata, sampleMetadataPath, read.csv(!!.x)),
+  tar_file_read(variableMetadata, variableMetadataPath, read.csv(!!.x)),
+
+  
+  # Create a DatasetExperiment object
+  tar_target(raw_experiment, createExperiment(dataMatrix, sampleMetadata, variableMetadata)),
+
+  tar_target(experiment, factor_sample_col(raw_experiment, c("sample_type", "biol.batch"))),
+  
+  # tar_target(experiment, metabolomicsWorkbenchR::do_query(context = "study", input_item = "analysis_id", input_value = "AN004436", output_item = "DatasetExperiment")),
+  
+  
+  #### FILTERING ####
+  # Filter missing values
+  tar_target(na_experiment, zero_to_na(experiment)),
+  tar_target(no_na_experiment, filter_MV(na_experiment)),
+  
+  # blank filter
+  tar_target(filtered_experiment, filter_blanks(no_na_experiment, fold_change = 20, 
+                                           blank_label = 'Blank', qc_label = 'QC', 
+                                           factor_name = 'sample_type', fraction_in_blank = 0 )),
+  
+  # Signal drift and batch correction
+  tar_target(batch_corrected, batch_correction(filtered_experiment, 
+                                               order_col = "order", 
+                                               batch_col = "biol.batch", 
+                                               qc_col = "sample_type", 
+                                               qc_label = 'QC')),
+  
+  #### IMPUTE ####
+  # impute missing values
+  tar_target(mean_imputed, impute_mean(batch_corrected)),
+  tar_target(median_imputed, impute_median(batch_corrected)),
+  tar_target(RF_imputed, impute_RF(batch_corrected)),
+  tar_target(QRILC_imputed, impute_QRILC(batch_corrected)),
+  tar_target(knn_imputed, impute_kNN(batch_corrected, 5)),
+  tar_target(svd_imputed, impute_SVD(batch_corrected, k = 5)),
+  tar_target(bpca_imputed, impute_bpca(batch_corrected, nPCs = 5)),
+  tar_target(ppca_imputed, impute_ppca(batch_corrected, nPCs = 5))
+  
+  # Remove outliers
+  # somehow
+  
+  
+  
+  
+
+
+  
+  
+  
+  
+  # The report summary
+  # tar_quarto(
+  #   processing_report,
+  #   path = "processing_report.qmd",
+  #   quiet = FALSE,
+  #   packages = c("targets", "tidyverse")
+  # )
+)
+
+--END--
