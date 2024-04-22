@@ -34,4 +34,33 @@ factor_sample_col <- function(dataset_exp, col) {
   #   plot_sd=FALSE
   # )
   
+#### dataMatrix ####
+data.extract <- function(dataset_exp) {
+  return(SummarizedExperiment::assay(dataset_exp))
+}
+
+data.modify <- function(dataset_exp, data) {
+  SummarizedExperiment::assay(dataset_exp, withDimnames = FALSE) <- data
+  return(dataset_exp)
+}
+
+#### sampleMetadata ####
+sample.data.extract <- function(dataset_exp) {
+  return(dataset_exp$sample_meta)
+}
+
+sample.data.modify <- function(dataset_exp, sample_meta) {
+  dataset_exp$sample_meta <- sample_meta
+  return(dataset_exp)
+}
+
+#### variableMetadata ####
+variable.data.extract <- function(dataset_exp) {
+  return(dataset_exp$variable_meta)
+}
+
+variable.data.modify <- function(dataset_exp, variable_meta) {
+  dataset_exp$variable_meta <- variable_meta
+  return(dataset_exp)
+}
 
