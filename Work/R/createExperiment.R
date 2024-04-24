@@ -27,7 +27,7 @@ createExperiment <- function(dataMatrix, sampleMetadata, variableMetadata,
   }
 
   if (ncol(dataMatrix) != nrow(variableMetadata)) {
-    stop("Number of (columns - 1) in dataMatrix and rows in variableMetadata do not match.")
+    stop("Number of columns in dataMatrix and rows in variableMetadata do not match.")
   }
 
   # convert 0 to NA

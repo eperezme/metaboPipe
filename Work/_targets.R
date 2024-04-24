@@ -16,7 +16,7 @@ invisible(sapply(file.sources, source, .GlobalEnv))
 tar_option_set(
   packages = c(
     "structToolbox", "SummarizedExperiment",
-    "VIM", "impute", "imputeLCMD", "missForest", "caret", "pcaMethods", "metabolomicsWorkbenchR", "tidyverse"
+    "VIM", "impute", "imputeLCMD", "missForest", "caret", "pcaMethods", "tidyverse"
   )
 )
 
@@ -46,10 +46,20 @@ fold_change <- 20
 
 
 # OTHER DATASET
-# dataMatrixPath <- "data/dataMatrix.csv"
-# sampleMetadataPath <- "data/sampleMetadata.csv"
-# variableMetadataPath <- "data/variableMetadata.csv"
-# factor_cols <- c("sample_type", "biol.batch")
+dataMatrixPath <- "data/dataMatrix.csv"
+sampleMetadataPath <- "data/sampleMetadata.csv"
+variableMetadataPath <- "data/variableMetadata.csv"
+factor_cols <- c("sample_type", "biol.batch")
+sample_type_col <- 'sample_type'
+order_col <- 'order'
+batch_col <- NA
+
+
+# blank filter
+blank_label <- NA
+qc_label <- 'QC'
+fold_change <- 20
+
 
 # Declare controller
 # Create a controller with 5 workers and a 3-second idle time.
@@ -64,7 +74,7 @@ fold_change <- 20
 # Define the pipeline.
 list(
   # LOAD THE DATA
-  tar_file_read(dataMatrix, dataMatrixPath, read.csv(!!.x)),
+  tar_file_read(dataMatrix, dataMatrixPath, read.csv(!!.x, sep = ";")),
   tar_file_read(sampleMetadata, sampleMetadataPath, read.csv(!!.x)),
   tar_file_read(variableMetadata, variableMetadataPath, read.csv(!!.x)),
 
@@ -96,12 +106,12 @@ list(
                                                batch_col = batch_col, 
                                                qc_col = sample_type_col, 
                                                qc_label = qc_label),
-           skip = is.na(batch_col) & is.na(order_col) & is.na(sample_type_col) & is.na(qc_label)),
+           skip = is.na(batch_col) | is.na(order_col) | is.na(sample_type_col) | is.na(qc_label)),
   
   
   
   #### NORMALIZATION ####
-  
+  tar_target(normalized, normalize_pqn(filtered_experiment, qc_label, sample_type_col)),
   
   
   
