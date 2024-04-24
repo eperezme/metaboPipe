@@ -67,3 +67,18 @@ ba_plot <- function(DE_before, DE_after, factor_name = "sample_type") {
   plot <- chart_plot(C, DE_before, DE_after)
   return(plot)
 }
+
+batch_plot <- function(dataset_experiment, order_col, batch_col, qc_col, qc_label, colour_by_col, feature_to_plot, ylab = 'Peak area', title = 'Feature vs run_order') {
+  corrected_feature_name <- make.names(feature_to_plot) # Make sure the feature name is the same as the column name in the dataset
+  
+  C = feature_profile(
+    run_order=order_col,
+    qc_label=qc_label,
+    qc_column=qc_col,
+    colour_by=colour_by_col,
+    feature_to_plot=corrected_feature_name,
+    plot_sd=FALSE
+  )
+  
+  chart_plot(C, dataset_experiment) + ylab(ylab) + ggtitle(title)
+}

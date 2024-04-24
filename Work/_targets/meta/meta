@@ -1,23 +1,29 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|886ca5b9bba08b24|||||||||||||||
+.Random.seed|object|4292203470147eb5|||||||||||||||
 ba_plot|function|cb9d5a91c878c31e|||||||||||||||
-batch_corrected|stem|2e9f407a95d7ee9f|4425ca74d09d7480|b6dea618f777b1c0|116382976||t19829.5752279722s|5e4d9d410626c79c|14359|rds|local|vector|||0.172||
+batch_col|object|cc2a87d2e8da5ad1|||||||||||||||
+batch_corrected|stem|06d891948c15f17b|586339b92d3952bb|741bf594af765701|116382976||t19837.4787535828s|51dd741ef560d688|3006602|rds|local|vector|||11.063||
 batch_correction|function|2aff09293da3346d|||||||||||||||
 blank_filtered|stem|f2f50d701b5c8575|60773986dfd85693|7d5f52a2ae07ee11|188804660||t19829.5341512567s|de28679cc081f708|9939|rds|local|vector|||0.093||
+blank_label|object|c8f634b61ef52fcb|||||||||||||||
 bpca_imputed|stem|2a759acd55bc756b|5f085f7ba9f0ad90|4b401d2b223783af|390088702||t19829.5607910001s|a21be1a99c3d3b87|11369|rds|local|vector|||0.078||
-createExperiment|function|13a99f68b9f32db8|||||||||||||||
-dataMatrix|stem|3548ce2e40dd199f|d0a2e0dc7210599b|9725ed1207584684|-1216177655||t19817.4710254301s|7ad062d9a77253de|30028|rds|local|vector|||0.016||
-dataMatrix_file|stem|e56efa493ace1135|ad445ee90fa30439|43a6a1508fe01234|1596646977|data/dataMatrix.csv|t19812.3677832052s|75af63cc5f3c80be|97736|file|local|vector|||0||
-dataMatrixPath|object|dc793f7d9168a105|||||||||||||||
+createExperiment|function|4ac0aa8c8c808bc0|||||||||||||||
+data.extract|function|20d3a6d32e26e7bf|||||||||||||||
+data.modify|function|7ab9248940cf8e61|||||||||||||||
+dataMatrix|stem|5021cf09c0816ea9|d0a2e0dc7210599b|a25b7f030e59f3dd|-1216177655||t19837.4753235958s|8fbb9706e5a62259|1827376|rds|local|vector|||1.219||
+dataMatrix_file|stem|e4e090a791d758bf|ad445ee90fa30439|27d64a82f22cb3f8|1596646977|data/MTBLS79/data.csv|t19837.4750288085s|959916e9a35bab17|3687387|file|local|vector|||0||
+dataMatrixPath|object|8477614670761c94|||||||||||||||
 distribution_boxplot|function|dac2e005ce75a8f6|||||||||||||||
-experiment|stem|f40583f45808ee9d|af83ea7f7376bcf7|be567ca4fb5e70aa|1275671355||t19829.5752204955s|82e0c4003ea6d33f|32926|rds|local|vector|||0.063||
+experiment|stem|3c6a1443bb0caef4|aef076208249d964|f10329937bc4df23|1275671355||t19837.4786038475s|e62679d4e235f81b|1854429|rds|local|vector|||0.031||
 factor_col|function|75fc89048f4b9011|||||||||||||||
+factor_cols|object|8604b0f0a07ed9d1|||||||||||||||
 factor_sample_col|function|8117ef5b3f2c811d|||||||||||||||
 factorized_experiment|stem||95c11d0b6d7031f8|c74a2c462afd6006|1643039527||t19829.5534935309s||0|rds|local|vector|||0.016||could not find function factor_col
 file.sources|object|310345eb5bfc463d|||||||||||||||
 filter_blanks|function|d84564d1934455cf|||||||||||||||
 filter_MV|function|1f41978d5bb2d780|||||||||||||||
-filtered_experiment|stem|70da2c3a9e09ee40|fcb8466873a2163b|d9b0d70a6ccc772e|1541397327||t19829.5752258019s|338db0e92b47ada9|11356|rds|local|vector|||0.109||
+filtered_experiment|stem|6364724e24377957|b0fe5f9b7da9b355|753656a3dd0a19c7|1541397327||t19837.478624464s|577d67e3e522823c|1854407|rds|local|vector|||0.234|no chart defined for model_seq|
+fold_change|object|fd0531637108ffa4|||||||||||||||
 impute_bpca|function|a4969f03b23bf92b|||||||||||||||
 impute_kNN|function|224af4343b4a69b3|||||||||||||||
 impute_mean|function|a8ef5a47502f4cba|||||||||||||||
@@ -28,27 +34,35 @@ impute_RF|function|f13b8b6f953abce9|||||||||||||||
 impute_SVD|function|c34a993d8949f5f1|||||||||||||||
 knn_imputed|stem|cdbbb1a28bb7c4c0|079314671a3f1d15|be4d00a50de8aaae|-1828165751||t19829.5607894666s|49ee041fdf21bd1e|11338|rds|local|vector|||0.015||
 mean_imputed|stem|9aadaf86e47da7bf|6822a62ec457612d|70015f31dfca880c|2041862737||t19829.5607502557s|f4fb9a232e20ae12|11393|rds|local|vector|||0.016||
-median_imputed|stem|ba5baa5677d0a157|dfa36efc2bbdf6c0|6d2b1935432e39aa|-1869399872||t19829.57522825s|315a983b484ea9d6|14500|rds|local|vector|||0.016||
+median_imputed|stem|b588b332cd740147|dfa36efc2bbdf6c0|770cb6d533fb90b8|-1869399872||t19837.478762929s|07c1156da3d05b5a|3007788|rds|local|vector|||0.094||
 missing_values_plot|function|c35e611cc07b0b33|||||||||||||||
-na_experiment|stem|f40583f45808ee9d|4e96502bd03589c3|103068699adbba87|-1721841237||t19829.5752214794s|82e0c4003ea6d33f|32926|rds|local|vector|||0.062||
+na_experiment|stem|3c6a1443bb0caef4|4e96502bd03589c3|1124eb491c8ac6c7|-1721841237||t19837.4786189588s|e62679d4e235f81b|1854429|rds|local|vector|||1.047||
+na_threshold|object|90bfba72a0cdea44|||||||||||||||
 no_na_experiment|stem|a4d1830ac60b8e83|5831644093abac28|c9ad7f489adad8c5|1819839856||t19829.5752244246s|e8c1aece2ea958be|31044|rds|local|vector|||0.234|no chart defined for model_seq|
+order_col|object|dbec361bf43a462d|||||||||||||||
 plot_boxplots|function|46e7bf59ce329611|||||||||||||||
 plot_density_single_with_legend|function|13fe543fda3bfef8|||||||||||||||
 plot_heatmap|function|ee0f88a50a7eb30b|||||||||||||||
-ppca_imputed|stem|7e9cd5b92888ddf6|d11f4e05c3ac774c|12665732f5ccd92f|-1919099318||t19829.5607499779s||11380|rds|local|vector|||0.031||Invalid data format.Run checkDatadata, verboseTRUE for details
+ppca_imputed|stem|7e9cd5b92888ddf6|d11f4e05c3ac774c|ccbdd7be4af98931|-1919099318||t19829.5607499779s||11380|rds|local|vector|||0.031||Invalid data format.Run checkDatadata, verboseTRUE for details
 prepare_dataMatrix|function|7951dd6fab0e7e15|||||||||||||||
 prepare_sampleMetadata|function|7c9fad4dd2a2e42b|||||||||||||||
 prepare_variableMetadata|function|f2f4e2928a861f49|||||||||||||||
+qc_label|object|b1be87da46ae519b|||||||||||||||
 QRILC_imputed|stem|4b340a0c7de0d856|4791b67afdf7194c|92e9ec050b05acdb|1448397525||t19829.5607901147s|58b5287807faad74|11456|rds|local|vector|||0.047||
-raw_experiment|stem|ed05a642e66ccf6d|d25a394cea0acb79|6db8f30e3a5492a6|-722832788||t19829.5752196505s|1c8becc72d3007b1|32882|rds|local|vector|||0.156|There was 1 warning in mutate.ℹ In argument sample_id  .Primitiveas.doublesample_id.Caused by warning NAs introduced by coercion|
+raw_experiment|stem|9e6a989c4f34fa85|d25a394cea0acb79|435eb90585b3398d|-722832788||t19837.4786004093s|a6aeaca6e48bd842|1854394|rds|local|vector|||1.813||
 RF_imputed|stem|e400117d2851b312|0589cc56b003d981|9278688efb7fdb4f|-783125404||t19829.5607891013s|8c6efb355d9853aa|11436|rds|local|vector|||3.344||
+sample.data.extract|function|e9da1fde81828348|||||||||||||||
+sample.data.modify|function|3f6b26b3cf379ba3|||||||||||||||
 sample_missing_values_plot|function|2846f46d872d7c8e|||||||||||||||
-sampleMetadata|stem|30dec79da25e1124|a6a482d9b2dc5d5e|4537d40cd9d732ba|1365251500||t19829.5752176251s|d98ac8164c21df12|1075|rds|local|vector|||0||
-sampleMetadata_file|stem|692b7c8cbfdc2e7b|fe151db9efc4aa52|57d0b5fcfc44662b|1599139535|data/sampleMetadata.csv|t19829.5749423572s|3796cfe824b8a467|5759|file|local|vector|||6.937||
-sampleMetadataPath|object|ad72ff96e204738f|||||||||||||||
+sample_type_col|object|188cf665c40e2a68|||||||||||||||
+sampleMetadata|stem|49ef384c52ed4548|a6a482d9b2dc5d5e|5e6621c0bedad390|1365251500||t19837.4753066719s|86112166bc4eca28|1071|rds|local|vector|||0||
+sampleMetadata_file|stem|4da4c05586968081|fe151db9efc4aa52|9ce1a1647e108f35|1599139535|data/MTBLS79/sample_meta.csv|t19837.4738533449s|7c8084976cc90fb5|3991|file|local|vector|||6.078||
+sampleMetadataPath|object|1a286b08d65046e1|||||||||||||||
 sort_by_sample_id|function|c7e4f56c220d0834|||||||||||||||
 svd_imputed|stem|a3c0c2f2f7474ed4|e61d86890274eea8|d3595b5cb7c2d19b|-16932172||t19829.5607914979s|aa414c3960e7de60|11377|rds|local|vector|||0.031||
-variableMetadata|stem|4877d596b9cea6e6|1d5d265565d69c43|fae835ab192787fe|1808082123||t19817.4710255574s|223b22a344e875f5|926|rds|local|vector|||0||
-variableMetadata_file|stem|ad72f360513152b6|0a041816754ee7ec|006cc5b62b5ce42e|697230901|data/variableMetadata.csv|t19812.3677832516s|d36c00e600a96dc8|2696|file|local|vector|||0||
-variableMetadataPath|object|3b73c6fa41e75bbf|||||||||||||||
+variable.data.extract|function|f228dd415bb251ce|||||||||||||||
+variable.data.modify|function|f90fffd1d952b1a2|||||||||||||||
+variableMetadata|stem|6da88a355ce2561a|1d5d265565d69c43|10fccdcc204ea469|1808082123||t19837.4679984584s|3d4bdb1f1ea84b86|14884|rds|local|vector|||0||
+variableMetadata_file|stem|9570cc6aec58afdd|0a041816754ee7ec|e68054b976c1b8f6|697230901|data/MTBLS79/variable_meta.csv|t19837.4274962217s|2f33a35902e58cdb|27091|file|local|vector|||0||
+variableMetadataPath|object|b50aa850997ffa71|||||||||||||||
 zero_to_na|function|f49008e83f84e8bf|||||||||||||||

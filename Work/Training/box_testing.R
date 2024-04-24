@@ -1,3 +1,21 @@
+suppressPackageStartupMessages({
+  # Bioconductor packages
+  library(structToolbox)
+  library(pmp)
+  library(ropls)
+  library(BiocFileCache)
+  
+  # CRAN libraries
+  library(ggplot2)
+  library(gridExtra)
+  library(cowplot)
+  library(openxlsx)
+})
+
+
+# use the BiocFileCache
+bfc <- BiocFileCache(ask = FALSE)
+
 # the pmp SE object
 SE = MTBLS79
 
@@ -5,6 +23,11 @@ SE = MTBLS79
 DE = as.DatasetExperiment(SE)
 DE$name = 'MTBLS79'
 DE$description = 'Converted from SE provided by the pmp package'
+
+assay(DE)
+colData(DE)
+rowData(DE)
+
 
 # add a column indicating the order the samples were measured in
 DE$sample_meta$run_order = 1:nrow(DE)

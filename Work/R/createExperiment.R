@@ -26,7 +26,7 @@ createExperiment <- function(dataMatrix, sampleMetadata, variableMetadata,
     stop("Number of rows in dataMatrix and sampleMetadata do not match.")
   }
 
-  if (ncol(dataMatrix) - 1 != nrow(variableMetadata)) {
+  if (ncol(dataMatrix) != nrow(variableMetadata)) {
     stop("Number of (columns - 1) in dataMatrix and rows in variableMetadata do not match.")
   }
 
