@@ -68,7 +68,3 @@ colData(DE)
 View(rowData(DE))
 assay(DE)
 
-
-
-
-
