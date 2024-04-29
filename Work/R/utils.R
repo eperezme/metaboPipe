@@ -1,5 +1,5 @@
 # Signal drift and batch correction function
-# This function performs signal drift and batch correction on the given experiment dataset
+# This function performs signal drift and batch correction on the given experiment dataset QC-RSC method
 # Arguments:
 #   dataset_exp: Experiment dataset with samples and variables
 #   order_col: Column indicating the order of samples
@@ -109,3 +109,88 @@ variable.data.modify <- function(dataset_exp, variable_meta) {
   dataset_exp$variable_meta <- variable_meta
   return(dataset_exp)
 }
+
+
+
+# Function to create a dataSet of Metaboanalyst
+
+toMetaboAnalyst <- function(dataset_exp, class_col = "sample_type") {
+  # Extract data matrix
+  dataMatrix_extracted <- SummarizedExperiment::assay(dataset_exp)
+  sampleMetadata_extracted <- sample.data.extract(dataset_exp)
+  
+  # Extract relevant information using dplyr
+  samples_name <- rownames(dataMatrix_extracted)
+  classes <- dplyr::pull(sampleMetadata_extracted, {{ class_col }})
+  
+  # Create data frame for MetaboAnalyst
+  MetaboDataMatrix <- data.frame(Sample = samples_name,
+                                 Label = classes,
+                                 dataMatrix_extracted)
+  
+  # Create a directory to save the processed data
+  dir.create("Analysis", showWarnings = FALSE)
+  
+  # Save the data frame as a CSV file
+  write.csv(MetaboDataMatrix, file = "Analysis/MetaboAnalystData.csv", row.names = FALSE)
+  MetaboAnalyst_load_data()
+  
+}
+
+
+
+
+
+MetaboAnalyst_load_data <- function() {
+  library(MetaboAnalystR)
+  withr::with_dir("Analysis", {
+  # Initialize MetaboAnalyst data objects
+  mSet <- InitDataObjects("conc", "stat", FALSE)
+  
+  # Read text data
+  mSet <- Read.TextData(mSet, "MetaboAnalystData.csv", "rowu", "disc")
+  
+  # Print read message
+  print(mSet$msgSet$read.msg)
+  # Perform sanity check on data
+  tryCatch({
+    mSet <- SanityCheckData(mSet)
+  }, error = function(e) {
+    cat("Error occurred during data processing:", conditionMessage(e), "\n")
+  })
+  
+  # Reset working directory
+})
+  return(mSet)
+}
+  
+
+
+metaboNorm <- function(mSet, rowNorm = "NULL", transNorm = "NULL", scaleNorm = "NULL", ref=NULL, ratio=FALSE, ratioNum=20 ) {
+  withr::with_dir("Analysis", {
+    # file.copy("data_orig.qs", "data_proc.qs", overwrite = TRUE)
+    mSet <- ReplaceMin(mSet)
+  # Perform data normalization
+    mSet<-PreparePrenormData(mSet);
+    mSet<-Normalization(mSet, rowNorm, transNorm, scaleNorm, ref, ratio, ratioNum);
+  
+    # View feature normalization
+    tryCatch({
+    mSet<-PlotNormSummary(mSet, "feature_norm", format="png", dpi=300, width=NA)
+    
+    # View sample normalization
+    mSet<-PlotSampleNormSummary(mSet, "sample_norm", format="png", dpi=300, width=NA)
+    }, error = function(e) {
+      cat("Error occurred during plot:", conditionMessage(e), "\n")
+    })
+  })
+  
+  return(mSet)
+}
+  
+save_metabo <- function(mSet) {
+  withr::with_dir("Analysis", {
+  SaveTransformedData(mSet)
+  })
+}
+

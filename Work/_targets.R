@@ -16,7 +16,7 @@ invisible(sapply(file.sources, source, .GlobalEnv))
 tar_option_set(
   packages = c(
     "structToolbox", "SummarizedExperiment",
-    "VIM", "impute", "imputeLCMD", "missForest", "caret", "pcaMethods", "tidyverse"
+    "VIM", "impute", "imputeLCMD", "missForest", "caret", "pcaMethods", "tidyverse", "MetaboAnalystR", "tinytex"
   )
 )
 
@@ -34,6 +34,7 @@ factor_cols <- c("Type", "Batch", "Class", "batch_qc")
 sample_type_col <- 'Type'
 order_col <- 'run_order'
 batch_col <- 'Batch'
+internal_standard_col <- 'IS'
 
 
 # blank filter
@@ -45,20 +46,20 @@ fold_change <- 20
 
 
 
-# OTHER DATASET
-dataMatrixPath <- "data/dataMatrix.csv"
-sampleMetadataPath <- "data/sampleMetadata.csv"
-variableMetadataPath <- "data/variableMetadata.csv"
-factor_cols <- c("sample_type", "biol.batch")
-sample_type_col <- 'sample_type'
-order_col <- 'order'
-batch_col <- NA
-
-
-# blank filter
-blank_label <- NA
-qc_label <- 'QC'
-fold_change <- 20
+# # OTHER DATASET
+# dataMatrixPath <- "data/dataMatrix.csv"
+# sampleMetadataPath <- "data/sampleMetadata.csv"
+# variableMetadataPath <- "data/variableMetadata.csv"
+# factor_cols <- c("sample_type", "biol.batch")
+# sample_type_col <- 'sample_type'
+# order_col <- 'order'
+# batch_col <- NA
+# 
+# 
+# # blank filter
+# blank_label <- NA
+# qc_label <- 'QC'
+# fold_change <- 20
 
 
 # Declare controller
@@ -74,7 +75,7 @@ fold_change <- 20
 # Define the pipeline.
 list(
   # LOAD THE DATA
-  tar_file_read(dataMatrix, dataMatrixPath, read.csv(!!.x, sep = ";")),
+  tar_file_read(dataMatrix, dataMatrixPath, read.csv(!!.x, sep = ",")),
   tar_file_read(sampleMetadata, sampleMetadataPath, read.csv(!!.x)),
   tar_file_read(variableMetadata, variableMetadataPath, read.csv(!!.x)),
 
@@ -108,23 +109,34 @@ list(
                                                qc_label = qc_label),
            skip = is.na(batch_col) | is.na(order_col) | is.na(sample_type_col) | is.na(qc_label)),
   
+  #### Save to Metaboanalyst ####
+  # tar_target(metaboSave, toMetaboAnalyst(batch_corrected, 'Class')),
+  # tar_target(metnorm, metaboNorm(metaboSave, "QuantileNorm", "LogNorm", "MeanCenter")),
+  # tar_target(save, save_metabo(metnorm))
+  
+
+  
   
   
   #### NORMALIZATION ####
-  tar_target(normalized, normalize_pqn(filtered_experiment, qc_label, sample_type_col)),
-  
-  
-  
-  #### IMPUTE ####
-  # impute missing values
-  tar_target(mean_imputed, impute_mean(batch_corrected)),
-  tar_target(median_imputed, impute_median(batch_corrected)),
-  tar_target(RF_imputed, impute_RF(batch_corrected)),
-  tar_target(QRILC_imputed, impute_QRILC(batch_corrected)),
-  tar_target(knn_imputed, impute_kNN(batch_corrected, 5)),
-  tar_target(svd_imputed, impute_SVD(batch_corrected, k = 5)),
-  tar_target(bpca_imputed, impute_bpca(batch_corrected, nPCs = 5)),
-  tar_target(ppca_imputed, impute_ppca(batch_corrected, nPCs = 5))
+  tar_target(normalized, normalize(batch_corrected, 'Class', "QuantileNorm", "LogNorm", "AutoNorm"))
+  # tar_target(normalized_pqn, normalize_pqn(filtered_experiment, qc_label, sample_type_col)),
+  # tar_target(normalized_pq, normalize_pq(filtered_experiment, qc_label, sample_type_col)),
+  # tar_target(normalized_vln, normalize_vln(filtered_experiment)),
+  # tar_target(normalized_csn, normalize_csn(filtered_experiment, scaling_factor = 1)),
+  # 
+  # 
+  # 
+  # #### IMPUTE ####
+  # # impute missing values
+  # tar_target(mean_imputed, impute_mean(batch_corrected)),
+  # tar_target(median_imputed, impute_median(batch_corrected)),
+  # tar_target(RF_imputed, impute_RF(batch_corrected)),
+  # tar_target(QRILC_imputed, impute_QRILC(batch_corrected)),
+  # tar_target(knn_imputed, impute_kNN(batch_corrected, 5)),
+  # tar_target(svd_imputed, impute_SVD(batch_corrected, k = 5)),
+  # tar_target(bpca_imputed, impute_bpca(batch_corrected, nPCs = 5)),
+  # tar_target(ppca_imputed, impute_ppca(batch_corrected, nPCs = 5))
   
   # Remove outliers
   # somehow
