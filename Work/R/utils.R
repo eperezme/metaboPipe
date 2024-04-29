@@ -114,13 +114,13 @@ variable.data.modify <- function(dataset_exp, variable_meta) {
 
 # Function to create a dataSet of Metaboanalyst
 
-toMetaboAnalyst <- function(dataset_exp, class_col = "sample_type") {
+toMetaboAnalyst <- function(dataset_exp, class_col = "sample_type", sample_id = "sample_id") {
   # Extract data matrix
   dataMatrix_extracted <- SummarizedExperiment::assay(dataset_exp)
   sampleMetadata_extracted <- sample.data.extract(dataset_exp)
   
   # Extract relevant information using dplyr
-  samples_name <- rownames(dataMatrix_extracted)
+  samples_name <- dplyr::pull(sampleMetadata_extracted, {{ sample_id }})
   classes <- dplyr::pull(sampleMetadata_extracted, {{ class_col }})
   
   # Create data frame for MetaboAnalyst

@@ -52,7 +52,7 @@ normalize_csn <- function(dataset_experiment, scaling_factor = 1) {
 
 
 ##### Normalization with MetaboAnalystR
-normalize <- function(dataset_experiment, factor_col, rowNorm = NULL, transNorm = NULL, scaleNorm = NULL, ref = NULL, ratio = FALSE, ratioNum = 20) {
+normalize <- function(dataset_experiment, factor_col, sample_id_col , rowNorm = NULL, transNorm = NULL, scaleNorm = NULL, ref = NULL, ratio = FALSE, ratioNum = 20) {
   # Check if the rowNorm argument is valid
   if (!is.null(rowNorm) && !rowNorm %in% c("QuantileNorm", "CompNorm", "SumNorm", "MedianNorm", "SpecNorm", "NULL")) {
     stop("Invalid rowNorm argument. Must be one of 'QuantileNorm', 'CompNorm', 'SumNorm', 'MedianNorm', 'SpecNorm', or NULL.")
@@ -65,19 +65,43 @@ normalize <- function(dataset_experiment, factor_col, rowNorm = NULL, transNorm 
   if (!is.null(scaleNorm) && !scaleNorm %in% c("MeanCenter", "AutoNorm", "ParetoNorm", "RangeNorm", "NULL")) {
     stop("Invalid scaleNorm argument. Must be one of 'MeanCenter', 'AutoNorm', 'ParetoNorm', 'RangeNorm', or 'NULL'.")
   }
+  if (rowNorm == 'CompNorm' & is.null(ref)) {
+    stop("Reference Feature must be specified for 'CompNorm' normalization.")
+  }
+
+  
+  
   
   # Create a metaboanalyst object
-  toMetaboAnalyst(dataset_experiment, factor_col)
+  toMetaboAnalyst(dataset_experiment, factor_col, sample_id_col)
   mSet <- MetaboAnalyst_load_data()
   mSet <- metaboNorm(mSet, rowNorm, transNorm, scaleNorm, ref, ratio, ratioNum)
   save_metabo(mSet)
   
-  data <- read.csv("Analysis/data_normalized.csv", header = F, row.names = 1) %>%
+  # Now we have to rebuild the dataset_experiment object
+  normalizedData <- read.csv("Analysis/data_normalized.csv", header = F, row.names = 1) %>%
     t() %>% 
-    as.data.frame() %>% 
-    mutate(V1 = as.numeric(V1)) %>% 
-    rename(sample_id = V1)
+    as.data.frame() %>%
+    rename(sample_id = V1) %>% 
+    arrange(sample_id)
   
-  return(data)
+  rownames(normalizedData) <- normalizedData$sample_id
+  
+  if (rowNorm == 'CompNorm' & !is.null(ref)) {
+    Filt <- structToolbox::filter_by_name(mode = "exclude", 
+                                          dimension = "variable", 
+                                          ref)
+    Filt <- model_apply(Filt, dataset_experiment)
+    dataset_experiment <- predicted(Filt)
+  }
+  
+  
+  # Reorder the rows of df1 based on the row names from df2
+  order <- assay(dataset_experiment) %>% rownames()
+  sortedData <- normalizedData[order, , drop = FALSE]
+  sortedData <- sortedData %>% select(-sample_id, -Label)
+  # Modify the dataset_experiment object
+  dataset_experiment <- data.modify(dataset_experiment, sortedData)
+  return(dataset_experiment)
 }
 

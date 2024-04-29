@@ -50,6 +50,7 @@ variableMetadataPath <- "data/ST000284/variableMetadata.csv"
 
 # Columns setting
 factor_cols <- c("Groups", "Gender", "Smoking", "Alcohol", "Diagnosis", "Stage")
+sample_id_col <- "sample_id"
 sample_type_col <- "sample_type"
 group_col <- "Groups"
 order_col <- NA
@@ -159,7 +160,7 @@ list(
   
   
   #### NORMALIZATION ####
-  tar_target(normalized, normalize(imputed, group_col, rowNorm, transNorm, scaleNorm, ref = ref))
+  tar_target(normalized, normalize(imputed, group_col, sample_id_col = sample_id_col, rowNorm, transNorm, scaleNorm, ref = ref))
   # tar_target(normalized_pqn, normalize_pqn(filtered_experiment, qc_label, sample_type_col)),
   # tar_target(normalized_pq, normalize_pq(filtered_experiment, qc_label, sample_type_col)),
   # tar_target(normalized_vln, normalize_vln(filtered_experiment)),
