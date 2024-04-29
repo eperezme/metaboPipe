@@ -54,7 +54,7 @@ normalize_csn <- function(dataset_experiment, scaling_factor = 1) {
 ##### Normalization with MetaboAnalystR
 normalize <- function(dataset_experiment, factor_col, rowNorm = NULL, transNorm = NULL, scaleNorm = NULL, ref = NULL, ratio = FALSE, ratioNum = 20) {
   # Check if the rowNorm argument is valid
-  if (!is.null(rowNorm) && !rowNorm %in% c("QuantileNorm", "CompNorm", "SumNorm", "MedianNorm", "SpecNorm")) {
+  if (!is.null(rowNorm) && !rowNorm %in% c("QuantileNorm", "CompNorm", "SumNorm", "MedianNorm", "SpecNorm", "NULL")) {
     stop("Invalid rowNorm argument. Must be one of 'QuantileNorm', 'CompNorm', 'SumNorm', 'MedianNorm', 'SpecNorm', or NULL.")
   }
   # Check if the transNorm argument is valid
@@ -72,7 +72,12 @@ normalize <- function(dataset_experiment, factor_col, rowNorm = NULL, transNorm 
   mSet <- metaboNorm(mSet, rowNorm, transNorm, scaleNorm, ref, ratio, ratioNum)
   save_metabo(mSet)
   
+  data <- read.csv("Analysis/data_normalized.csv", header = F, row.names = 1) %>%
+    t() %>% 
+    as.data.frame() %>% 
+    mutate(V1 = as.numeric(V1)) %>% 
+    rename(sample_id = V1)
   
-  
+  return(data)
 }
 

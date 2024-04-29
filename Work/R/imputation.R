@@ -1,27 +1,17 @@
-# #### MAI (AUTO) ####
-# impute_MAI <- function(dataset_experiment, MCAR, MNAR, ncores = 1, ntree = 300, proximity = FALSE) {
-#
-#   # Create a copy of the DatasetExperiment object
-#   DE_imp <- dataset_experiment
-#
-#   # Impute missing values
-#   result <- MAI(t(SummarizedExperiment::assay(dataset_experiment)),
-#                            MCAR_algorithm = MCAR,
-#                            MNAR_algorithm= MNAR,
-#                            n_cores = ncores,
-#                            forest_list_args = list( # random forest arguments for training
-#                              ntree = ntree,
-#                              proximity = proximity
-#                              ),
-#                            verbose = TRUE # allows console message output
-#                            )
-#
-#   # Replace missing values with imputed values
-#   SummarizedExperiment::assay(DE_imp, withDimnames = FALSE) <- t(result$Imputed_data)
-#
-#   return(DE_imp)
-# }
 
+# WARPER
+impute <- function(dataset_experiment, method, ...) {
+  switch(method,
+         "mean"    = impute_mean(dataset_experiment),
+         "median"  = impute_median(dataset_experiment),
+         "RF"      = impute_RF(dataset_experiment),
+         "QRILC"   = impute_QRILC(dataset_experiment),
+         "kNN"     = impute_kNN(dataset_experiment, ...),
+         "SVD"     = impute_SVD(dataset_experiment, ...),
+         "bpca"    = impute_bpca(dataset_experiment, ...),
+         "ppca"    = impute_ppca(dataset_experiment, ...)
+  )
+}
 
 
 

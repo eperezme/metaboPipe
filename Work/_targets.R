@@ -20,30 +20,61 @@ tar_option_set(
   )
 )
 
-#### GLOBAL VARIABLES ####
-# MTBLS79 DATASET
-dataMatrixPath <- "data/MTBLS79/data.csv"
-sampleMetadataPath <- "data/MTBLS79/sample_meta.csv"
-variableMetadataPath <- "data/MTBLS79/variable_meta.csv"
+# #### GLOBAL VARIABLES ####
+# # MTBLS79 DATASET
+# dataMatrixPath <- "data/MTBLS79/data.csv"
+# sampleMetadataPath <- "data/MTBLS79/sample_meta.csv"
+# variableMetadataPath <- "data/MTBLS79/variable_meta.csv"
+# 
+# 
+# na_threshold <- 0.8
+# 
+# # Columns setting
+# factor_cols <- c("Type", "Batch", "Class", "batch_qc")
+# sample_type_col <- 'Type'
+# order_col <- 'run_order'
+# batch_col <- 'Batch'
+# internal_standard_col <- 'IS'
+# 
+# 
+# # blank filter
+# blank_label <- NA
+# qc_label <- 'QC'
+# fold_change <- 20
+# 
 
-
-na_threshold <- 0.8
+#### ST000284 DATASET #####
+dataMatrixPath <- "data/ST000284/dataMatrix.csv"
+sampleMetadataPath <- "data/ST000284/sampleMetadata.csv"
+variableMetadataPath <- "data/ST000284/variableMetadata.csv"
 
 # Columns setting
-factor_cols <- c("Type", "Batch", "Class", "batch_qc")
-sample_type_col <- 'Type'
-order_col <- 'run_order'
-batch_col <- 'Batch'
-internal_standard_col <- 'IS'
+factor_cols <- c("Groups", "Gender", "Smoking", "Alcohol", "Diagnosis", "Stage")
+sample_type_col <- "sample_type"
+group_col <- "Groups"
+order_col <- NA
+batch_col <- NA
+internal_standard_col <- NA
 
+# Filter Missing values threshold
+na_threshold <- 0.8
 
 # blank filter
 blank_label <- NA
-qc_label <- 'QC'
+qc_label <- NA
 fold_change <- 20
 
 
+# NORMALIZATION
+# rowNorm = c("QuantileNorm", "CompNorm", "SumNorm", "MedianNorm", "SpecNorm", 'NULL')
+rowNorm <-  "CompNorm"
 
+#transNorm = c("LogNorm", "CrNorm", "NULL")
+transNorm <- "LogNorm"
+
+# scaleNorm = c("MeanCenter", "AutoNorm", "ParetoNorm", "RangeNorm", "NULL")
+scaleNorm <- "AutoNorm"
+ref <- "Creatinine (114.1 / 44.0)"
 
 
 # # OTHER DATASET
@@ -71,18 +102,21 @@ fold_change <- 20
 # )
 # tar_option_set(controller = controller)
 
+# Make sure the names are valid.
+ref <- make.names(ref)
 
 # Define the pipeline.
 list(
   # LOAD THE DATA
   tar_file_read(dataMatrix, dataMatrixPath, read.csv(!!.x, sep = ",")),
-  tar_file_read(sampleMetadata, sampleMetadataPath, read.csv(!!.x)),
-  tar_file_read(variableMetadata, variableMetadataPath, read.csv(!!.x)),
+  tar_file_read(sampleMetadata, sampleMetadataPath, read.csv(!!.x, sep = ",")),
+  tar_file_read(variableMetadata, variableMetadataPath, read.csv(!!.x, sep = ",")),
 
   
   # Create a DatasetExperiment object
   tar_target(raw_experiment, createExperiment(dataMatrix, sampleMetadata, variableMetadata)),
-
+  
+  # Factorize the cols
   tar_target(experiment, factor_sample_col(raw_experiment, factor_cols)),
   
   
@@ -109,26 +143,10 @@ list(
                                                qc_label = qc_label),
            skip = is.na(batch_col) | is.na(order_col) | is.na(sample_type_col) | is.na(qc_label)),
   
-  #### Save to Metaboanalyst ####
-  # tar_target(metaboSave, toMetaboAnalyst(batch_corrected, 'Class')),
-  # tar_target(metnorm, metaboNorm(metaboSave, "QuantileNorm", "LogNorm", "MeanCenter")),
-  # tar_target(save, save_metabo(metnorm))
-  
 
-  
-  
-  
-  #### NORMALIZATION ####
-  tar_target(normalized, normalize(batch_corrected, 'Class', "QuantileNorm", "LogNorm", "AutoNorm"))
-  # tar_target(normalized_pqn, normalize_pqn(filtered_experiment, qc_label, sample_type_col)),
-  # tar_target(normalized_pq, normalize_pq(filtered_experiment, qc_label, sample_type_col)),
-  # tar_target(normalized_vln, normalize_vln(filtered_experiment)),
-  # tar_target(normalized_csn, normalize_csn(filtered_experiment, scaling_factor = 1)),
-  # 
-  # 
-  # 
   # #### IMPUTE ####
   # # impute missing values
+  tar_target(imputed, impute(filtered_experiment, "RF")),
   # tar_target(mean_imputed, impute_mean(batch_corrected)),
   # tar_target(median_imputed, impute_median(batch_corrected)),
   # tar_target(RF_imputed, impute_RF(batch_corrected)),
@@ -138,6 +156,18 @@ list(
   # tar_target(bpca_imputed, impute_bpca(batch_corrected, nPCs = 5)),
   # tar_target(ppca_imputed, impute_ppca(batch_corrected, nPCs = 5))
   
+  
+  
+  #### NORMALIZATION ####
+  tar_target(normalized, normalize(imputed, group_col, rowNorm, transNorm, scaleNorm, ref = ref))
+  # tar_target(normalized_pqn, normalize_pqn(filtered_experiment, qc_label, sample_type_col)),
+  # tar_target(normalized_pq, normalize_pq(filtered_experiment, qc_label, sample_type_col)),
+  # tar_target(normalized_vln, normalize_vln(filtered_experiment)),
+  # tar_target(normalized_csn, normalize_csn(filtered_experiment, scaling_factor = 1)),
+  # 
+  # 
+  # 
+
   # Remove outliers
   # somehow
   
