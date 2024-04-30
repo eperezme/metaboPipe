@@ -47,12 +47,8 @@ normalize_csn <- function(dataset_experiment, scaling_factor = 1) {
 
 #### Internal Standard Normalization (ISN) ####
 
-
-
-
-
 ##### Normalization with MetaboAnalystR
-normalize <- function(dataset_experiment, factor_col, sample_id_col , rowNorm = NULL, transNorm = NULL, scaleNorm = NULL, ref = NULL, ratio = FALSE, ratioNum = 20) {
+normalize_metab <- function(dataset_experiment, factor_col, sample_id_col , rowNorm = NULL, transNorm = NULL, scaleNorm = NULL, ref = NULL, ratio = FALSE, ratioNum = 20) {
   # Check if the rowNorm argument is valid
   if (!is.null(rowNorm) && !rowNorm %in% c("QuantileNorm", "CompNorm", "SumNorm", "MedianNorm", "SpecNorm", "NULL")) {
     stop("Invalid rowNorm argument. Must be one of 'QuantileNorm', 'CompNorm', 'SumNorm', 'MedianNorm', 'SpecNorm', or NULL.")
@@ -69,7 +65,7 @@ normalize <- function(dataset_experiment, factor_col, sample_id_col , rowNorm = 
     stop("Reference Feature must be specified for 'CompNorm' normalization.")
   }
 
-  
+  ref <- make.names(ref)
   
   
   # Create a metaboanalyst object

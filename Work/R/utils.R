@@ -8,7 +8,7 @@
 #   qc_label: Label for quality control
 # Returns:
 #   Corrected experiment dataset
-batch_correction <- function(dataset_exp, order_col, batch_col, qc_col, qc_label) {
+warper_batch_correction <- function(dataset_exp, order_col, batch_col, qc_col, qc_label) {
   
   # Perform signal drift and batch correction using the sb_corr function
   M <- sb_corr(
@@ -28,6 +28,7 @@ batch_correction <- function(dataset_exp, order_col, batch_col, qc_col, qc_label
   return(predicted(M))
 }
 
+
 # Function to convert sample columns to factors
 # This function converts specified columns in the sample metadata to factors
 # Arguments:
@@ -35,11 +36,21 @@ batch_correction <- function(dataset_exp, order_col, batch_col, qc_col, qc_label
 #   col: Column(s) to be converted to factors
 # Returns:
 #   Experiment dataset with specified columns converted to factors
-factor_sample_col <- function(dataset_exp, col) {
+warper_factor_sample_col <- function(dataset_exp, col) {
   # Convert specified columns to factors using lapply
-  dataset_exp$sample_meta[, col] <- lapply(dataset_exp$sample_meta[, col], factor)
+  mod_dataset <- dataset_exp$sample_meta
+  mod_dataset[, col] <- lapply(mod_dataset[, col], factor)
+  
+  dataset_exp$sample_meta <- mod_dataset
+  
+  # # Create a new instance of the S4 class object with modified data
+  # new_dataset_exp <- dataset_exp
+  # new_dataset_exp$sample_meta <- mod_dataset
+  
   return(dataset_exp)
 }
+
+
 
 # Function to extract data matrix from experiment dataset
 # This function extracts the data matrix from a SummarizedExperiment object
@@ -176,10 +187,11 @@ metaboNorm <- function(mSet, rowNorm = "NULL", transNorm = "NULL", scaleNorm = "
   
     # View feature normalization
     tryCatch({
-    mSet<-PlotNormSummary(mSet, "feature_norm", format="png", dpi=300, width=NA)
+      dir.create("Plots", showWarnings = FALSE)
+      mSet<-PlotNormSummary(mSet, "Plots/Normalization_features", format="png", dpi=300, width=NA)
     
     # View sample normalization
-    mSet<-PlotSampleNormSummary(mSet, "sample_norm", format="png", dpi=300, width=NA)
+      mSet<-PlotSampleNormSummary(mSet, "Plots/Normalization_samples", format="png", dpi=300, width=NA)
     }, error = function(e) {
       cat("Error occurred during plot:", conditionMessage(e), "\n")
     })
@@ -194,3 +206,14 @@ save_metabo <- function(mSet) {
   })
 }
 
+save_plot <- function(data, name){
+  withr::with_dir("Analysis", {
+    dir.create("Plots", showWarnings = FALSE)
+    png(filename=paste0("Plots/", name, ".png"), width=1080, height=450, res=100)
+    VIM::aggr(SummarizedExperiment::assay(data), plot = TRUE, numbers = TRUE)
+    dev.off()
+    svg(filename=paste0("Plots/", name, ".svg"), width=12)
+    VIM::aggr(SummarizedExperiment::assay(data), plot = TRUE, numbers = TRUE)
+    dev.off()
+  })
+}

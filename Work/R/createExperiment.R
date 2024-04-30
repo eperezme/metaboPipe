@@ -18,8 +18,13 @@ sort_by_sample_id <- function(df) {
 #' @export
 #'
 #' @examples
-createExperiment <- function(dataMatrix, sampleMetadata, variableMetadata,
+warper_createExperiment <- function(dataMatrix, sampleMetadata, variableMetadata,
                              experiment_name = "Name", experiment_description = "Description") {
+  # Convert tibbles to data frames
+  dataMatrix <- as.data.frame(dataMatrix)
+  sampleMetadata <- as.data.frame(sampleMetadata)
+  variableMetadata <- as.data.frame(variableMetadata)
+  
   # dataMatrix should have a row for each sample and a column for each feature
   # Check dimensions
   if (nrow(dataMatrix) != nrow(sampleMetadata)) {
@@ -65,3 +70,5 @@ createExperiment <- function(dataMatrix, sampleMetadata, variableMetadata,
 
   return(DE)
 }
+
+

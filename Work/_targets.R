@@ -47,35 +47,40 @@ tar_option_set(
 dataMatrixPath <- "data/ST000284/dataMatrix.csv"
 sampleMetadataPath <- "data/ST000284/sampleMetadata.csv"
 variableMetadataPath <- "data/ST000284/variableMetadata.csv"
+separator <- ","
+
+
 
 # Columns setting
 factor_cols <- c("Groups", "Gender", "Smoking", "Alcohol", "Diagnosis", "Stage")
 sample_id_col <- "sample_id"
 sample_type_col <- "sample_type"
 group_col <- "Groups"
-order_col <- NA
-batch_col <- NA
-internal_standard_col <- NA
+
+# order_col <- 'Order'
+# batch_col <- 'Batch'
+# internal_standard_col <- NA
 
 # Filter Missing values threshold
-na_threshold <- 0.8
+na_threshold <- 0.99
 
 # blank filter
-blank_label <- NA
-qc_label <- NA
+filter_blank <- TRUE
+blank_label <- 'Blank'
+qc_label <- 'QC'
 fold_change <- 20
 
 
 # NORMALIZATION
 # rowNorm = c("QuantileNorm", "CompNorm", "SumNorm", "MedianNorm", "SpecNorm", 'NULL')
 rowNorm <-  "CompNorm"
+ref <- "Creatinine (114.1 / 44.0)"
 
 #transNorm = c("LogNorm", "CrNorm", "NULL")
 transNorm <- "LogNorm"
 
 # scaleNorm = c("MeanCenter", "AutoNorm", "ParetoNorm", "RangeNorm", "NULL")
 scaleNorm <- "AutoNorm"
-ref <- "Creatinine (114.1 / 44.0)"
 
 
 # # OTHER DATASET
@@ -104,70 +109,36 @@ ref <- "Creatinine (114.1 / 44.0)"
 # tar_option_set(controller = controller)
 
 # Make sure the names are valid.
-ref <- make.names(ref)
+
 
 # Define the pipeline.
 list(
   # LOAD THE DATA
-  tar_file_read(dataMatrix, dataMatrixPath, read.csv(!!.x, sep = ",")),
-  tar_file_read(sampleMetadata, sampleMetadataPath, read.csv(!!.x, sep = ",")),
-  tar_file_read(variableMetadata, variableMetadataPath, read.csv(!!.x, sep = ",")),
-
+  load_data(data, dataMatrixPath, sampleMetadataPath, variableMetadataPath, separator = sep),
+  
+  
   
   # Create a DatasetExperiment object
-  tar_target(raw_experiment, createExperiment(dataMatrix, sampleMetadata, variableMetadata)),
+  createExperiment(experiment, data),
   
   # Factorize the cols
-  tar_target(experiment, factor_sample_col(raw_experiment, factor_cols)),
+  factorize_cols(factorized, experiment, factor_cols),
   
   
   #### FILTERING ####
   # Filter missing values
-  tar_target(na_experiment, zero_to_na(experiment)),
-  tar_target(filtered_experiment, filter_MV(na_experiment, na_threshold)),
+  filter(filtered, factorized, threshold = na_threshold),
   
-  # blank filter
-  tar_skip(blank_filtered, filter_blanks(filtered_experiment, fold_change = fold_change, 
-                                           blank_label = blank_label, qc_label = qc_label, 
-                                           factor_name = sample_type, fraction_in_blank = 0 ),
-           skip = is.na(blank_label)),
-  
-  
-  
-  
-  #### BATCH CORRECTION ####
-
-  tar_skip(batch_corrected, batch_correction(filtered_experiment, 
-                                               order_col = order_col, 
-                                               batch_col = batch_col, 
-                                               qc_col = sample_type_col, 
-                                               qc_label = qc_label),
-           skip = is.na(batch_col) | is.na(order_col) | is.na(sample_type_col) | is.na(qc_label)),
-  
-
   # #### IMPUTE ####
   # # impute missing values
-  tar_target(imputed, impute(filtered_experiment, "RF")),
-  # tar_target(mean_imputed, impute_mean(batch_corrected)),
-  # tar_target(median_imputed, impute_median(batch_corrected)),
-  # tar_target(RF_imputed, impute_RF(batch_corrected)),
-  # tar_target(QRILC_imputed, impute_QRILC(batch_corrected)),
-  # tar_target(knn_imputed, impute_kNN(batch_corrected, 5)),
-  # tar_target(svd_imputed, impute_SVD(batch_corrected, k = 5)),
-  # tar_target(bpca_imputed, impute_bpca(batch_corrected, nPCs = 5)),
-  # tar_target(ppca_imputed, impute_ppca(batch_corrected, nPCs = 5))
-  
+  impute(imputed, filtered, method = "RF", 5),
   
   
   #### NORMALIZATION ####
-  tar_target(normalized, normalize(imputed, group_col, sample_id_col = sample_id_col, rowNorm, transNorm, scaleNorm, ref = ref))
-  # tar_target(normalized_pqn, normalize_pqn(filtered_experiment, qc_label, sample_type_col)),
-  # tar_target(normalized_pq, normalize_pq(filtered_experiment, qc_label, sample_type_col)),
-  # tar_target(normalized_vln, normalize_vln(filtered_experiment)),
-  # tar_target(normalized_csn, normalize_csn(filtered_experiment, scaling_factor = 1)),
-  # 
-  # 
-  # 
+  normalize(normalized, imputed, 
+            factor_col = group_col, sample_id_col = sample_id_col, 
+            rowNorm = rowNorm, transNorm = transNorm, scaleNorm = scaleNorm, ref = ref)
+
 
   # Remove outliers
   # somehow
@@ -175,17 +146,4 @@ list(
   
   
   
-
-
-  
-  
-  
-  
-  # The report summary
-  # tar_quarto(
-  #   processing_report,
-  #   path = "processing_report.qmd",
-  #   quiet = FALSE,
-  #   packages = c("targets", "tidyverse")
-  # )
 )

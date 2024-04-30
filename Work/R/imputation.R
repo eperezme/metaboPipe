@@ -1,15 +1,15 @@
 
 # WARPER
-impute <- function(dataset_experiment, method, ...) {
+impute_warper <- function(dataset_experiment, method, k = 5) {
   switch(method,
          "mean"    = impute_mean(dataset_experiment),
          "median"  = impute_median(dataset_experiment),
-         "RF"      = impute_RF(dataset_experiment),
+         'RF'      = impute_RF(dataset_experiment),
          "QRILC"   = impute_QRILC(dataset_experiment),
-         "kNN"     = impute_kNN(dataset_experiment, ...),
-         "SVD"     = impute_SVD(dataset_experiment, ...),
-         "bpca"    = impute_bpca(dataset_experiment, ...),
-         "ppca"    = impute_ppca(dataset_experiment, ...)
+         "kNN"     = impute_kNN(dataset_experiment, k = k),
+         "SVD"     = impute_SVD(dataset_experiment, nPCs = k),
+         "bpca"    = impute_bpca(dataset_experiment, nPCs = k),
+         "ppca"    = impute_ppca(dataset_experiment, nPCs = k)
   )
 }
 
@@ -93,7 +93,7 @@ impute_QRILC <- function(dataset_experiment) {
 
 
 #### kNN ####
-impute_kNN <- function(dataset_experiment, k = 5) {
+impute_kNN <- function(dataset_experiment, k = k) {
   # Create a copy of the DatasetExperiment object
   DE_imp <- dataset_experiment
 
@@ -101,7 +101,7 @@ impute_kNN <- function(dataset_experiment, k = 5) {
   data_matrix <- SummarizedExperiment::assay(dataset_experiment)
 
   # Impute missing values
-  imputed_data <- impute::impute.knn(as.matrix(data_matrix), k = k)
+  imputed_data <- impute::impute.knn(as.matrix(data_matrix), K = k)
 
   # Replace missing values with imputed values
   SummarizedExperiment::assay(DE_imp, withDimnames = FALSE) <- imputed_data$data
@@ -114,7 +114,7 @@ impute_kNN <- function(dataset_experiment, k = 5) {
 #### SVD ####
 
 
-impute_SVD <- function(dataset_experiment, K = 5, center = TRUE, ...) {
+impute_SVD <- function(dataset_experiment, nPCs = k, center = TRUE, ...) {
   # Create a copy of the DatasetExperiment object
   DE_imp <- dataset_experiment
 
@@ -122,7 +122,7 @@ impute_SVD <- function(dataset_experiment, K = 5, center = TRUE, ...) {
   data_matrix <- SummarizedExperiment::assay(dataset_experiment)
 
   # Call wrapper function to impute missing values
-  impute_results <- pcaMethods::pca(data_matrix, method = "svdImpute", nPcs = K, center = center, ...)
+  impute_results <- pcaMethods::pca(data_matrix, method = "svdImpute", nPcs = nPCs, center = center, ...)
   plotPcs(impute_results, type = "scores")
   imputed_data <- pcaMethods::completeObs(impute_results)
 
@@ -133,7 +133,7 @@ impute_SVD <- function(dataset_experiment, K = 5, center = TRUE, ...) {
 }
 
 #### BPCA ####
-impute_bpca <- function(dataset_experiment, nPCs = 5, ...) {
+impute_bpca <- function(dataset_experiment, nPCs = k, ...) {
   # Create a copy of the DatasetExperiment object
   DE_imp <- dataset_experiment
 
@@ -156,7 +156,7 @@ impute_bpca <- function(dataset_experiment, nPCs = 5, ...) {
 
 
 #### PPCA ####
-impute_ppca <- function(dataset_experiment, nPCs = 5, ...) {
+impute_ppca <- function(dataset_experiment, nPCs = k, ...) {
   # Create a copy of the DatasetExperiment object
   DE_imp <- dataset_experiment
 

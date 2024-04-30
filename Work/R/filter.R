@@ -25,9 +25,9 @@ filter_MV <- function(dataset_exp, threshold = 0.8) {
   
   
   M <- mv_sample_filter(mv_threshold = threshold*100) + mv_feature_filter(threshold = threshold*100, method = "across", factor_name = 'sample_type')
-  C <- mv_sample_filter_hist()
+  # C <- mv_sample_filter_hist()
   M = model_apply(M, dataset_exp)
-  chart_plot(C, M)
+  # chart_plot(C, M[2])
   
   filtered_experiment <- predicted(M)
   
@@ -134,3 +134,5 @@ filter_blanks <- function(dataset_experiment, fold_change = 20, blank_label = 'b
 #                  batch_col = "biol.batch", 
 #                  qc_col = "sample_type", 
 #                  qc_label = 'QC')
+
+
