@@ -9,21 +9,20 @@
 # Returns:
 #   Corrected experiment dataset
 warper_batch_correction <- function(dataset_exp, order_col, batch_col, qc_col, qc_label) {
-  
   # Perform signal drift and batch correction using the sb_corr function
   M <- sb_corr(
     order_col = order_col,
     batch_col = batch_col,
     qc_col = qc_col,
     qc_label = qc_label,
-    use_log = TRUE,  # Use logarithm for transformation
-    spar_lim = c(-1.5, 1.5),  # Limit for signal drift correction
-    min_qc = 4  # Minimum number of quality controls
+    use_log = TRUE, # Use logarithm for transformation
+    spar_lim = c(-1.5, 1.5), # Limit for signal drift correction
+    min_qc = 4 # Minimum number of quality controls
   )
-  
+
   # Apply the correction model to the experiment dataset
   M <- model_apply(M, dataset_exp)
-  
+
   # Return the corrected experiment dataset
   return(predicted(M))
 }
@@ -40,13 +39,13 @@ warper_factor_sample_col <- function(dataset_exp, col) {
   # Convert specified columns to factors using lapply
   mod_dataset <- dataset_exp$sample_meta
   mod_dataset[, col] <- lapply(mod_dataset[, col], factor)
-  
+
   dataset_exp$sample_meta <- mod_dataset
-  
+
   # # Create a new instance of the S4 class object with modified data
   # new_dataset_exp <- dataset_exp
   # new_dataset_exp$sample_meta <- mod_dataset
-  
+
   return(dataset_exp)
 }
 
@@ -129,23 +128,21 @@ toMetaboAnalyst <- function(dataset_exp, class_col = "sample_type", sample_id = 
   # Extract data matrix
   dataMatrix_extracted <- SummarizedExperiment::assay(dataset_exp)
   sampleMetadata_extracted <- sample.data.extract(dataset_exp)
-  
+
   # Extract relevant information using dplyr
   samples_name <- dplyr::pull(sampleMetadata_extracted, {{ sample_id }})
   classes <- dplyr::pull(sampleMetadata_extracted, {{ class_col }})
-  
+
   # Create data frame for MetaboAnalyst
-  MetaboDataMatrix <- data.frame(Sample = samples_name,
-                                 Label = classes,
-                                 dataMatrix_extracted)
-  
-  # Create a directory to save the processed data
-  dir.create("Analysis", showWarnings = FALSE)
-  
+  MetaboDataMatrix <- data.frame(
+    Sample = samples_name,
+    Label = classes,
+    dataMatrix_extracted
+  )
+
   # Save the data frame as a CSV file
-  write.csv(MetaboDataMatrix, file = "Analysis/MetaboAnalystData.csv", row.names = FALSE)
+  write.csv(MetaboDataMatrix, file = "TempData/MetaboAnalystData.csv", row.names = FALSE)
   MetaboAnalyst_load_data()
-  
 }
 
 
@@ -154,66 +151,81 @@ toMetaboAnalyst <- function(dataset_exp, class_col = "sample_type", sample_id = 
 
 MetaboAnalyst_load_data <- function() {
   library(MetaboAnalystR)
-  withr::with_dir("Analysis", {
-  # Initialize MetaboAnalyst data objects
-  mSet <- InitDataObjects("conc", "stat", FALSE)
-  
-  # Read text data
-  mSet <- Read.TextData(mSet, "MetaboAnalystData.csv", "rowu", "disc")
-  
-  # Print read message
-  print(mSet$msgSet$read.msg)
-  # Perform sanity check on data
-  tryCatch({
-    mSet <- SanityCheckData(mSet)
-  }, error = function(e) {
-    cat("Error occurred during data processing:", conditionMessage(e), "\n")
+  withr::with_dir("TempData", {
+    # Initialize MetaboAnalyst data objects
+    mSet <- InitDataObjects("conc", "stat", FALSE)
+
+    # Read text data
+    mSet <- Read.TextData(mSet, "MetaboAnalystData.csv", "rowu", "disc")
+
+    # Print read message
+    print(mSet$msgSet$read.msg)
+    # Perform sanity check on data
+    tryCatch(
+      {
+        mSet <- SanityCheckData(mSet)
+      },
+      error = function(e) {
+        cat("Error occurred during data processing:", conditionMessage(e), "\n")
+      }
+    )
+
+    # Reset working directory
   })
-  
-  # Reset working directory
-})
   return(mSet)
 }
-  
 
 
-metaboNorm <- function(mSet, rowNorm = "NULL", transNorm = "NULL", scaleNorm = "NULL", ref=NULL, ratio=FALSE, ratioNum=20 ) {
-  withr::with_dir("Analysis", {
+
+metaboNorm <- function(mSet, rowNorm = "NULL", transNorm = "NULL", scaleNorm = "NULL", ref = NULL, ratio = FALSE, ratioNum = 20, out_dir) {
+  withr::with_dir("TempData", {
     # file.copy("data_orig.qs", "data_proc.qs", overwrite = TRUE)
     mSet <- ReplaceMin(mSet)
-  # Perform data normalization
-    mSet<-PreparePrenormData(mSet);
-    mSet<-Normalization(mSet, rowNorm, transNorm, scaleNorm, ref, ratio, ratioNum);
-  
+    # Perform data normalization
+    mSet <- PreparePrenormData(mSet)
+    mSet <- Normalization(mSet, rowNorm, transNorm, scaleNorm, ref, ratio, ratioNum)
+
+    # Save plots
     # View feature normalization
-    tryCatch({
-      dir.create("Plots", showWarnings = FALSE)
-      mSet<-PlotNormSummary(mSet, "Plots/Normalization_features", format="png", dpi=300, width=NA)
-    
-    # View sample normalization
-      mSet<-PlotSampleNormSummary(mSet, "Plots/Normalization_samples", format="png", dpi=300, width=NA)
-    }, error = function(e) {
-      cat("Error occurred during plot:", conditionMessage(e), "\n")
-    })
+    tryCatch(
+      {
+        dir.create("Plots", showWarnings = FALSE)
+        mSet <- PlotNormSummary(mSet, paste0(out_dir, "/Plots/Normalization_features"), format = "png", dpi = 300, width = NA)
+
+        # View sample normalization
+        mSet <- PlotSampleNormSummary(mSet, paste0(out_dir, "Plots/Normalization_samples"), format = "png", dpi = 300, width = NA)
+      },
+      error = function(e) {
+        cat("Error occurred during plot:", conditionMessage(e), "\n")
+      }
+    )
   })
-  
+
   return(mSet)
 }
-  
+
 save_metabo <- function(mSet) {
-  withr::with_dir("Analysis", {
-  SaveTransformedData(mSet)
+  withr::with_dir("TempData", {
+    SaveTransformedData(mSet)
   })
 }
 
-save_plot <- function(data, name){
-  withr::with_dir("Analysis", {
+
+save_plot <- function(plt, output_dir, output_name) {
+  withr::with_dir(output_dir, {
     dir.create("Plots", showWarnings = FALSE)
-    png(filename=paste0("Plots/", name, ".png"), width=1080, height=450, res=100)
-    VIM::aggr(SummarizedExperiment::assay(data), plot = TRUE, numbers = TRUE)
-    dev.off()
-    svg(filename=paste0("Plots/", name, ".svg"), width=12)
-    VIM::aggr(SummarizedExperiment::assay(data), plot = TRUE, numbers = TRUE)
-    dev.off()
+    withr::with_dir("Plots", {
+      # Save PNG
+      png_name <- paste0(output_name, ".png")
+      png(filename = png_name, width = 1080, height = 450, res = 100)
+      plot(plt)
+      dev.off()
+
+      # Save SVG
+      svg_name <- paste0(output_name, ".svg")
+      svg(filename = svg_name, width = 12)
+      plot(plt)
+      dev.off()
+    })
   })
 }

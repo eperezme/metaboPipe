@@ -17,11 +17,14 @@ tar_option_set(
   packages = c(
     "structToolbox", "SummarizedExperiment",
     "VIM", "impute", "imputeLCMD", "missForest", "caret", "pcaMethods", "tidyverse", "MetaboAnalystR", "tinytex", 
-    "HotellingEllipse", "ggforce"
+    "HotellingEllipse", "ggforce", "tools", "cowplot"
   )
 )
-
 # #### GLOBAL VARIABLES ####
+out_dir <- "Out"
+
+
+
 # # MTBLS79 DATASET
 # dataMatrixPath <- "data/MTBLS79/data.csv"
 # sampleMetadataPath <- "data/MTBLS79/sample_meta.csv"
@@ -109,7 +112,15 @@ scaleNorm <- "AutoNorm"
 # )
 # tar_option_set(controller = controller)
 
-# Make sure the names are valid.
+
+#############################################################################################################################################
+#############################################################################################################################################
+#############################################################################################################################################
+#############################################################################################################################################
+
+
+out_dir <- tools::file_path_as_absolute(out_dir)
+dir.create(out_dir, showWarnings = FALSE)
 
 
 # Define the pipeline.
@@ -128,23 +139,24 @@ list(
   
   #### FILTERING ####
   # Filter missing values
-  filter(filtered, factorized, threshold = na_threshold, filter_outliers = TRUE, conf.limit = "0.95"),
+  filter_step(filtered, factorized, threshold = na_threshold, filter_outliers = TRUE, conf.limit = "0.95", out_dir = out_dir),
   
   # #### IMPUTE ####
   # # impute missing values
-  impute(imputed, filtered, method = "RF", 5),
+  impute(imputed, filtered, method = "RF", 5), #out_dir = out_dir),
   
   
   #### NORMALIZATION ####
   normalize(normalized, imputed, 
             factor_col = group_col, sample_id_col = sample_id_col, 
-            rowNorm = rowNorm, transNorm = transNorm, scaleNorm = scaleNorm, ref = ref)
+            rowNorm = rowNorm, transNorm = transNorm, scaleNorm = scaleNorm, ref = ref, out_dir = out_dir),
 
 
   # Remove outliers
   # somehow
   
-  
-  
-  
+  #### Cleaning ####
+  tar_target(clean, withr::with_dir(out_dir, unlink("TempData",recursive=TRUE)))
 )
+
+
