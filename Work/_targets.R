@@ -16,7 +16,8 @@ invisible(sapply(file.sources, source, .GlobalEnv))
 tar_option_set(
   packages = c(
     "structToolbox", "SummarizedExperiment",
-    "VIM", "impute", "imputeLCMD", "missForest", "caret", "pcaMethods", "tidyverse", "MetaboAnalystR", "tinytex"
+    "VIM", "impute", "imputeLCMD", "missForest", "caret", "pcaMethods", "tidyverse", "MetaboAnalystR", "tinytex", 
+    "HotellingEllipse", "ggforce"
   )
 )
 
@@ -127,7 +128,7 @@ list(
   
   #### FILTERING ####
   # Filter missing values
-  filter(filtered, factorized, threshold = na_threshold),
+  filter(filtered, factorized, threshold = na_threshold, filter_outliers = TRUE, conf.limit = "0.95"),
   
   # #### IMPUTE ####
   # # impute missing values

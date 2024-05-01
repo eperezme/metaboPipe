@@ -3,8 +3,8 @@
 filter_MV <- function(dataset_exp, threshold = 0.8) {
   # IDEA
   # Filter SAMPLES by Blank
-  # and filter Features by 
-  
+  # and filter Features by
+
   # Check if threshold is specified and valid
   if (missing(threshold)) {
     threshold <- 0.8 # Default threshold
@@ -20,63 +20,33 @@ filter_MV <- function(dataset_exp, threshold = 0.8) {
     }
     cat(paste0("Threshold value: ", threshold, "\n"))
   }
-  
+
   ncols <- ncol(SummarizedExperiment::assay(dataset_exp))
-  
-  
-  M <- mv_sample_filter(mv_threshold = threshold*100) + mv_feature_filter(threshold = threshold*100, method = "across", factor_name = 'sample_type')
+
+
+  M <- mv_sample_filter(mv_threshold = threshold * 100) + mv_feature_filter(threshold = threshold * 100, method = "across", factor_name = "sample_type")
   # C <- mv_sample_filter_hist()
-  M = model_apply(M, dataset_exp)
+  M <- model_apply(M, dataset_exp)
   # chart_plot(C, M[2])
-  
+
   filtered_experiment <- predicted(M)
-  
+
   # Calculate the number of rows and columns removed
   removed_rows <- nrow(SummarizedExperiment::assay(dataset_exp)) - nrow(SummarizedExperiment::assay(filtered_experiment))
   removed_cols <- ncol(SummarizedExperiment::assay(dataset_exp)) - ncol(SummarizedExperiment::assay(filtered_experiment))
-  
+
   # Print information about removed rows and columns
   if (removed_rows == 0) {
     cat("No rows removed\n")
   } else {
     cat(paste0("Number of rows removed: ", removed_rows, "\n"))
   }
-  
+
   if (removed_cols == 0) {
     cat("No columns removed\n")
   } else {
     cat(paste0("Number of columns removed: ", removed_cols, "\n"))
   }
-  
-  # 
-  # # Plot before filtering
-  # plot_before <- VIM::aggr(SummarizedExperiment::assay(dataset_exp), plot = plot)
-
-  # # Calculate the threshold values based on the modified 80% rule
-  # row_threshold <- ncols * threshold
-  # col_threshold <- nrows * threshold
-  # 
-  # # Filter rows based on the modified 80% rule
-  # row_counts <- rowSums(!is.na(SummarizedExperiment::assay(dataset_exp)))
-  # dataset_exp <- dataset_exp[row_counts >= row_threshold, ]
-  # 
-  # # Filter columns based on the modified 80% rule
-  # col_counts <- colSums(!is.na(SummarizedExperiment::assay(dataset_exp)))
-  # dataset_exp <- dataset_exp[, col_counts >= col_threshold]
-  # 
-  # 
-  # # Genereate after plot
-  # plot_after <- VIM::aggr(SummarizedExperiment::assay(dataset_exp), plot = plot)
-  # 
-  # # Plot before and after
-  # 
-  # 
-
-  # 
-  # # par(mfrow=c(2,2))
-  # # plot(plot_before)
-  # # plot(plot_after)
-  # # par(mfrow=c(1,1))
 
   return(filtered_experiment)
 }
@@ -91,7 +61,7 @@ zero_to_na <- function(dataset_exp) {
 }
 
 
-filter_blanks <- function(dataset_experiment, fold_change = 20, blank_label = 'blank', qc_label = 'QC', factor_name = 'sample_type', fraction_in_blank = 0) {
+filter_blanks <- function(dataset_experiment, fold_change = 20, blank_label = "blank", qc_label = "QC", factor_name = "sample_type", fraction_in_blank = 0) {
   M <- blank_filter(
     fold_change = fold_change,
     blank_label = blank_label,
@@ -101,27 +71,64 @@ filter_blanks <- function(dataset_experiment, fold_change = 20, blank_label = 'b
   )
   M <- model_apply(M, dataset_experiment)
   filtered_experiment <- predicted(M)
-  
+
   return(filtered_experiment)
 }
 
-#
-#
-# # HOW MANY FOLD CHANGES? DEPENDS ON SAMPLES? ON METABOLITES? ON PPM AND PEAK?
-# M = blank_filter(
-#   fold_change = 1,
-#   blank_label = "Blank",
-#   qc_label = "QC",
-#   factor_name = "sample_type",
-#   fraction_in_blank = 0)
-#
-# M = model_apply(M,filtered_experiment)
-#
-# test <- predicted(M)
-#
-# test
-#
-# blank_filter_hist(M)
+filter_outliers <- function(dataset_experiment, nPCs = 5, conf.limit = c("0.95", "0.99")) {
+  # Check if dataset_experiment is a dataset_experiment object
+  if (!inherits(dataset_experiment, "DatasetExperiment")) {
+    stop("dataset_experiment must be a DatasetExperiment object")
+  }
+  # Check if nPCs is numeric
+  if (!is.numeric(nPCs)) {
+    stop("nPCs must be a numeric value")
+  }
+  # Check if conf.limit is either 0.95 or 0.99
+  if (!conf.limit %in% c("0.95", "0.99")) {
+    stop("conf.limit must be either 0.95 or 0.99")
+  }
+  
+  # Perform PCA
+  M <- structToolbox::knn_impute() + structToolbox::mean_centre() + structToolbox::PCA(number_components = nPCs)
+  M <- structToolbox::model_apply(M, dataset_experiment)
+  
+  # Extract pca_scores
+  pca_scores <- M[3]$scores$data %>% as_tibble()
+  
+  # Calculate Hotelling's T2 ellipse params
+  res_PCs <- HotellingEllipse::ellipseParam(data = pca_scores, k = 2, pcx = 1, pcy = 2)
+  # Extract Hotelling's T2 values
+  T2 <- purrr::pluck(res_PCs, "Tsquare", "value")
+  
+  # Extract cutoff values for Hotelling's T2
+  cutoff_99 <- purrr::pluck(res_PCs, "cutoff.99pct")
+  cutoff_95 <- purrr::pluck(res_PCs, "cutoff.95pct")
+  
+  # Select Observations that are above the 99% confidence interval
+  outliers_99 <- pca_scores %>%
+    mutate(obs = rownames(pca_scores)) %>%
+    filter(T2 > cutoff_99)
+  
+  # Select Observations that are above the 99% confidence interval
+  outliers_95 <- pca_scores %>%
+    mutate(obs = rownames(pca_scores)) %>%
+    filter(T2 > cutoff_95)
+  
+  
+  # Remove outliers from experiment
+  if (conf.limit == "0.95") {
+    FT <- structToolbox::filter_by_name(mode = "exclude", dimension = "sample", outliers_95$obs)
+    Filtered <- structToolbox::model_apply(FT, dataset_experiment)
+  }
+  if (conf.limit == "0.99") {
+    FT <- structToolbox::filter_by_name(mode = "exclude", dimension = "sample", outliers_99$obs)
+    Filtered <- structToolbox::model_apply(FT, dataset_experiment)
+  }
+  
+  return(predicted(Filtered))
+}
+
 
 # DE
 # A <- rsd_filter(rsd_threshold = 20, qc_label= "QC", factor_name = "condition")
@@ -129,10 +136,8 @@ filter_blanks <- function(dataset_experiment, fold_change = 20, blank_label = 'b
 #
 # filtered <- predicted(A)
 # filtered
-# sb_corrected<- batch_correction(blank_filtered, 
-#                  order_col = "order", 
-#                  batch_col = "biol.batch", 
-#                  qc_col = "sample_type", 
+# sb_corrected<- batch_correction(blank_filtered,
+#                  order_col = "order",
+#                  batch_col = "biol.batch",
+#                  qc_col = "sample_type",
 #                  qc_label = 'QC')
-
-

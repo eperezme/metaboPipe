@@ -1,65 +1,53 @@
-# --------------------------------------------------------------------------------------------
-# Filtering of samples
-# --------------------------------------------------------------------------------------------
-outdqs.met           <- outdqs %>% dplyr::select(all_of(namesMetOK))
-if (excludeOutofRange) 
-{
-  indSampletoFilter    <- which(rowSums(matrix(as.matrix(outdqs.met) %in% c(codesmissing, codesOutofRange), nrow = nrow(outdqs.met))) > threshold_ind * nrow(outdqs.met))
-}else
-{
-  indSampletoFilter    <- which(rowSums(matrix(as.matrix(outdqs.met) %in% codesmissing, nrow = nrow(outdqs.met))) > threshold_ind * nrow(outdqs.met))
-}
-
-IdsFiltered <- NULL
-if (length(indSampletoFilter)>0) 
-{
-  IdsFiltered  <- data.metabo[indSampletoFilter,] %>% dplyr::select(Idepic, Study)
-  data.metabo  <- data.metabo[-indSampletoFilter,]
-  outdqs       <- outdqs[-indSampletoFilter,]
-  # context      <- context[-indSampletoFilter,]
-  others       <- others[-indSampletoFilter,]
-}
-
-OutlierToEliminate <- NULL
-
-if (filter.outlier) {
-  
-  
-  unzero <- Vectorize(function(x) {ifelse(x==0, 1e-5, x)})
-  
-  data.metabomod <- data.metabo  %>% mutate_if(is.numeric, function(x){unzero(x)}) %>%
-    mutate_if(is.numeric, function(x){log(x)}) %>%
-    mutate_if(is.numeric, function(x){x - min(x, na.rm=T) + 0.5}) %>% dplyr::select(-all_of(forIdentifier))
-  
-  tempdata  <- data.metabomod 
-  peakTable <- data.frame(t(tempdata[, -1]))
-  peakTable <- cbind(1:nrow(peakTable), peakTable)
-  AllObs    <- tempdata %>% dplyr::select(IdentifierPipeline) %>% pull
-  colnames(peakTable) <- c("EIC", AllObs)
-  # peakTable <- zeroFill(peakTable, obsNames = AllObs)
-  NbBatch   <- length(levels(data.metabo$Batch))
-  for (kb in levels(data.metabo$Batch))
-  {
-    ObsBatchk <- AllObs[which(grepl(kb, AllObs))]
-    peakTablek <- zeroFill(peakTable[, c(1, which(grepl(kb, colnames(peakTable))))], obsNames = ObsBatchk)
-    pcaOutResults_sampleskb <- pcaOutId(peakTablek, ObsBatchk, alfa = (1-.05/NbBatch), outTol=outTol,  
-                                        center=T, scale='pareto')
-    
-    OutlierToEliminate <- c(OutlierToEliminate, ObsBatchk[! (ObsBatchk %in% colnames(pcaOutResults_sampleskb[[1]])) ])
-    
+outliers <- function(dataset_experiment, nPCs = 5, conf.limit = c("0.95", "0.99")) {
+  # Check if dataset_experiment is a dataset_experiment object
+  if (!inherits(dataset_experiment, "DatasetExperiment")) {
+    stop("dataset_experiment must be a DatasetExperiment object")
   }
-  
-  data.metabo <- data.metabo %>% filter(!IdentifierPipeline %in%  OutlierToEliminate) %>% arrange(IdentifierPipeline) %>% dplyr::select(-IdentifierPipeline)
-  outdqs      <- outdqs %>% filter(!IdentifierPipeline %in%  OutlierToEliminate) %>% arrange(IdentifierPipeline)  %>% dplyr::select(-IdentifierPipeline)
-  others      <- others %>% filter(!IdentifierPipeline %in%  OutlierToEliminate) %>% arrange(IdentifierPipeline) %>% dplyr::select(-IdentifierPipeline)
-  
+  # Check if nPCs is numeric
+  if (!is.numeric(nPCs)) {
+    stop("nPCs must be a numeric value")
+  }
+  # Check if conf.limit is either 0.95 or 0.99
+  if (!conf.limit %in% c("0.95", "0.99")) {
+    stop("conf.limit must be either 0.95 or 0.99")
+  }
+
+  # Perform PCA
+  M <- structToolbox::knn_impute() + structToolbox::mean_centre() + structToolbox::PCA(number_components = nPCs)
+  M <- structToolbox::model_apply(M, dataset_experiment)
+
+  # Extract pca_scores
+  pca_scores <- M[3]$scores$data %>% as_tibble()
+
+  # Calculate Hotelling's T2 ellipse params
+  res_PCs <- HotellingEllipse::ellipseParam(data = pca_scores, k = 2, pcx = 1, pcy = 2)
+  # Extract Hotelling's T2 values
+  T2 <- purr::pluck(res_PCs, "Tsquare", "value")
+
+  # Extract cutoff values for Hotelling's T2
+  cutoff_99 <- purr::pluck(res_PCs, "cutoff.99pct")
+  cutoff_95 <- purr::pluck(res_PCs, "cutoff.95pct")
+
+  # Select Observations that are avove the 99% confidence interval
+  outliers_99 <- pca_scores %>%
+    mutate(obs = rownames(pca_scores)) %>%
+    filter(T2 > cutoff_99)
+
+  # Select Observations that are avove the 99% confidence interval
+  outliers_95 <- pca_scores %>%
+    mutate(obs = rownames(pca_scores)) %>%
+    filter(T2 > cutoff_95)
+
+
+  # Remove outliers from experiment
+  if (conf.limit == "0.95") {
+    FT <- structToolbox::filter_by_name(mode = "exclude", dimension = "sample", outliers_95$obs)
+    Filtered <- structToolbox::model_apply(FT, dataset_experiment)
+  }
+  if (conf.limit == "0.99") {
+    FT <- structToolbox::filter_by_name(mode = "exclude", dimension = "sample", outliers_99$obs)
+    Filtered <- structToolbox::model_apply(FT, dataset_experiment)
+  }
+
+  return(predicted(Filtered))
 }
-
-
-
-return(list(data.metabo = data.metabo, outdqs = outdqs, others = others, aux = aux, SHOULDBENA = SHOULDBENA, MetsExcluded = MetsExcluded, IdsFiltered=IdsFiltered, 
-            Outliers =  OutlierToEliminate))
-}
-
-
-
