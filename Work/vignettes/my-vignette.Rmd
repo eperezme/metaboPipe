@@ -1,0 +1,76 @@
+---
+title: "Data Processing of metabolomics datasets using metaboPipe"
+author: "Perez Mendez, Eduard"
+date: "`r Sys.Date()`"
+output: 
+  BiocStyle::html_document:
+      toc: true
+      toc_float: true
+      toc_depth: 2
+vignette: >
+  %\VignetteIndexEntry{Data Processing of metabolomics datasets using metaboPipe}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+```
+
+
+# Introduction
+
+Metabolomics, the study of small molecules in biological systems, plays a crucial role in understanding various physiological processes and disease mechanisms. As the volume and complexity of metabolomics data continue to grow, there is an increasing demand for robust and efficient data analysis pipelines.
+
+MetaboPipe is a comprehensive R package designed to streamline metabolomics analysis workflows. Built with the aim of simplifying data preprocessing, statistical analysis, and visualization tasks, MetaboPipe offers a suite of tools tailored specifically for metabolomics researchers.
+
+In this vignette, we will explore the key functionalities of MetaboPipe and demonstrate how it can be used to perform common metabolomics analysis tasks. From data imputation and normalization to multivariate statistical analysis and pathway enrichment analysis, MetaboPipe provides a unified framework for conducting rigorous and reproducible metabolomics research.
+
+Whether you are a novice researcher or an experienced bioinformatician, MetaboPipe offers a user-friendly interface and extensive documentation to facilitate seamless integration into your metabolomics workflow. Let's dive in and discover how MetaboPipe can empower your metabolomics studies.
+
+
+## Installation
+
+Clone the MetaboPipe repository from GitHub and install the package using the following commands:
+```{r installation, eval=FALSE}
+# Clone the MetaboPipe repository
+
+
+# Install the package
+devtools::install("path/to/metaboPipe")
+
+```
+
+## Figures
+
+The figure sizes have been customised so that you can easily put two images side-by-side. 
+
+```{r, fig.show='hold'}
+plot(1:10)
+plot(10:1)
+```
+
+You can enable figure captions by `fig_caption: yes` in YAML:
+
+    output:
+      rmarkdown::html_vignette:
+        fig_caption: yes
+
+Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+
+## More Examples
+
+You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+
+```{r, echo=FALSE, results='asis'}
+knitr::kable(head(mtcars, 10))
+```
+
+Also a quote using `>`:
+
+> "He who gives up [code] safety for [code] speed deserves neither."
+([via](https://twitter.com/hadleywickham/status/504368538874703872))

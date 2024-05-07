@@ -1,10 +1,17 @@
-# Filter Missing values
-
+#' Filter Missing values
+#' 
+#' Filter the missing values in a dataset experiment.
+#' 
+#' @param dataset_exp The dataset experiment object to filter missing values from.
+#' @param threshold The threshold for filtering missing values (default is 0.8).
+#' 
+#' @return A dataset experiment object with missing values filtered out.
+#' 
+#' @export
+#' 
+#' @examples
+#' filtered_data <- filter_MV(dataset_exp, threshold = 0.8)
 filter_MV <- function(dataset_exp, threshold = 0.8) {
-  # IDEA
-  # Filter SAMPLES by Blank
-  # and filter Features by
-
   # Check if threshold is specified and valid
   if (missing(threshold)) {
     threshold <- 0.8 # Default threshold
@@ -20,37 +27,46 @@ filter_MV <- function(dataset_exp, threshold = 0.8) {
     }
     cat(paste0("Threshold value: ", threshold, "\n"))
   }
-
+  
   ncols <- ncol(SummarizedExperiment::assay(dataset_exp))
-
-
+  
   M <- mv_sample_filter(mv_threshold = threshold * 100) + mv_feature_filter(threshold = threshold * 100, method = "across", factor_name = "sample_type")
-  # C <- mv_sample_filter_hist()
   M <- model_apply(M, dataset_exp)
-  # chart_plot(C, M[2])
-
+  
   filtered_experiment <- predicted(M)
-
+  
   # Calculate the number of rows and columns removed
   removed_rows <- nrow(SummarizedExperiment::assay(dataset_exp)) - nrow(SummarizedExperiment::assay(filtered_experiment))
   removed_cols <- ncol(SummarizedExperiment::assay(dataset_exp)) - ncol(SummarizedExperiment::assay(filtered_experiment))
-
+  
   # Print information about removed rows and columns
   if (removed_rows == 0) {
     cat("No rows removed\n")
   } else {
     cat(paste0("Number of rows removed: ", removed_rows, "\n"))
   }
-
+  
   if (removed_cols == 0) {
     cat("No columns removed\n")
   } else {
     cat(paste0("Number of columns removed: ", removed_cols, "\n"))
   }
-
+  
   return(filtered_experiment)
 }
-# Make 0 as NA
+
+#' Make 0 as NA
+#' 
+#' Replace 0 values with NA in a dataset experiment.
+#' 
+#' @param dataset_exp The dataset experiment object.
+#' 
+#' @return A dataset experiment object with 0 values replaced by NA.
+#' 
+#' @export
+#' 
+#' @examples
+#' modified_dataset <- zero_to_na(dataset_exp)
 zero_to_na <- function(dataset_exp) {
   modified_de <- dataset_exp
   df <- SummarizedExperiment::assay(dataset_exp)
@@ -60,7 +76,23 @@ zero_to_na <- function(dataset_exp) {
   return(modified_de)
 }
 
-
+#' Filter Blanks
+#' 
+#' Filter blanks from the dataset experiment.
+#' 
+#' @param dataset_experiment The dataset experiment object.
+#' @param fold_change The fold change threshold for blank filtering.
+#' @param blank_label The label for blanks.
+#' @param qc_label The label for quality control samples.
+#' @param factor_name The factor column name.
+#' @param fraction_in_blank The fraction of values in blank (default is 0).
+#' 
+#' @return A dataset experiment object with blanks filtered out.
+#' 
+#' @export
+#' 
+#' @examples
+#' filtered_data <- filter_blanks(dataset_experiment, fold_change = 20, blank_label = "blank", qc_label = "QC", factor_name = "sample_type", fraction_in_blank = 0)
 filter_blanks <- function(dataset_experiment, fold_change = 20, blank_label = "blank", qc_label = "QC", factor_name = "sample_type", fraction_in_blank = 0) {
   M <- blank_filter(
     fold_change = fold_change,
@@ -71,10 +103,24 @@ filter_blanks <- function(dataset_experiment, fold_change = 20, blank_label = "b
   )
   M <- model_apply(M, dataset_experiment)
   filtered_experiment <- predicted(M)
-
+  
   return(filtered_experiment)
 }
 
+#' Filter Outliers
+#' 
+#' Filter outliers from the dataset experiment.
+#' 
+#' @param dataset_experiment The dataset experiment object.
+#' @param nPCs The number of principal components for PCA.
+#' @param conf.limit The confidence limit for outlier detection.
+#' 
+#' @return A dataset experiment object with outliers filtered out.
+#' 
+#' @export
+#' 
+#' @examples
+#' filtered_data <- filter_outliers(dataset_experiment, nPCs = 5, conf.limit = "0.95")
 filter_outliers <- function(dataset_experiment, nPCs = 5, conf.limit = c("0.95", "0.99")) {
   # Check if dataset_experiment is a dataset_experiment object
   if (!inherits(dataset_experiment, "DatasetExperiment")) {
@@ -128,16 +174,3 @@ filter_outliers <- function(dataset_experiment, nPCs = 5, conf.limit = c("0.95",
   
   return(predicted(Filtered))
 }
-
-
-# DE
-# A <- rsd_filter(rsd_threshold = 20, qc_label= "QC", factor_name = "condition")
-# A <- model_apply(A,DE)
-#
-# filtered <- predicted(A)
-# filtered
-# sb_corrected<- batch_correction(blank_filtered,
-#                  order_col = "order",
-#                  batch_col = "biol.batch",
-#                  qc_col = "sample_type",
-#                  qc_label = 'QC')
