@@ -29,6 +29,8 @@ Imports:
     ggforce,
     tools,
     cowplot,
-    fst
+    targets,
+    tarchetypes,
+    crew
 Remotes:  
     xia-lab/MetaboAnalystR
