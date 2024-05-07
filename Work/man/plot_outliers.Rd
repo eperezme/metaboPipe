@@ -2,25 +2,22 @@
 % Please edit documentation in R/Plots.R
 \name{plot_outliers}
 \alias{plot_outliers}
-\title{Plot Outliers}
+\title{Generate an outliers plot}
 \usage{
 plot_outliers(dataset_experiment, nPCs = 5, out_dir, out_name)
 }
 \arguments{
-\item{dataset_experiment}{The dataset experiment object.}
+\item{dataset_experiment}{The dataset for which the outliers plot will be generated.}
 
-\item{nPCs}{The number of principal components for PCA.}
+\item{nPCs}{The number of principal components to include in the analysis.}
 
-\item{out_dir}{The output directory for saving the plot.}
+\item{out_dir}{The directory where the plot will be saved.}
 
-\item{out_name}{The output name for saving the plot.}
-}
-\value{
-Outlier plots saved in the specified directory with the specified name.
+\item{out_name}{The filename for the saved plot.}
 }
 \description{
-Plot outliers for the dataset experiment.
+This function generates a plot showing outliers detected using Hotelling's T-squared statistic in PCA.
 }
 \examples{
-plot_outliers(dataset_experiment, nPCs = 5, out_dir, out_name)
+plot_outliers(dataset_experiment = my_dataset, nPCs = 5, out_dir = "output", out_name = "outliers_plot.png")
 }

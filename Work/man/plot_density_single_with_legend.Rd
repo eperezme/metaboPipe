@@ -2,21 +2,21 @@
 % Please edit documentation in R/Plots.R
 \name{plot_density_single_with_legend}
 \alias{plot_density_single_with_legend}
-\title{Plot Density Comparison}
+\title{Plot density plots for one variable with a legend}
 \usage{
 plot_density_single_with_legend(original_var, imputed_var)
 }
 \arguments{
-\item{original_var}{The original variable for density plot comparison.}
+\item{original_var}{The original variable data.}
 
-\item{imputed_var}{The imputed variable for density plot comparison.}
+\item{imputed_var}{The imputed variable data.}
 }
 \value{
-A density plot comparing the original and imputed variables with a legend.
+A ggplot object displaying the density plots.
 }
 \description{
-Plot the density comparison of two variables with a legend.
+This function generates density plots for one variable, comparing the original and imputed data, with a legend indicating the data source.
 }
 \examples{
-plot_density_single_with_legend(original_var, imputed_var)
+plot_density_single_with_legend(original_var = data$original_var, imputed_var = data$imputed_var)
 }

@@ -2,23 +2,23 @@
 % Please edit documentation in R/Plots.R
 \name{plot_hotelling_obs}
 \alias{plot_hotelling_obs}
-\title{Plot Hotelling's T-squared vs. Observations}
+\title{Generate a PCA Hotelling's T-squared observations plot}
 \usage{
 plot_hotelling_obs(dataset_experiment, nPCs = 5, nPCs_to_plot = 2)
 }
 \arguments{
-\item{dataset_experiment}{The dataset experiment object.}
+\item{dataset_experiment}{The dataset for which the plot will be generated.}
 
-\item{nPCs}{The number of principal components for PCA.}
+\item{nPCs}{The number of principal components to include in the analysis.}
 
-\item{nPCs_to_plot}{The number of principal components to plot.}
+\item{nPCs_to_plot}{The number of principal components to plot the ellipses for.}
 }
 \value{
-A plot of Hotelling's T-squared vs. Observations.
+A ggplot object displaying the PCA Hotelling's T-squared observations plot.
 }
 \description{
-Plot Hotelling's T-squared vs. Observations for the dataset experiment.
+This function generates a PCA Hotelling's T-squared observations plot showing the T-squared values for each observation.
 }
 \examples{
-plot_hotelling_obs(dataset_experiment, nPCs = 5, nPCs_to_plot = 2)
+plot_hotelling_obs(dataset_experiment = my_dataset, nPCs = 5, nPCs_to_plot = 2)
 }

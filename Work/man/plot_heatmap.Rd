@@ -2,21 +2,21 @@
 % Please edit documentation in R/Plots.R
 \name{plot_heatmap}
 \alias{plot_heatmap}
-\title{Plot Heatmap}
+\title{Plot a heatmap of the data}
 \usage{
 plot_heatmap(dataset_experiment, na_colour = "#FF00E4")
 }
 \arguments{
-\item{dataset_experiment}{The dataset experiment object.}
+\item{dataset_experiment}{The dataset for which the heatmap will be generated.}
 
-\item{na_colour}{The color for missing values.}
+\item{na_colour}{The color to represent missing values in the heatmap.}
 }
 \value{
-A heatmap plot for the dataset experiment.
+A ggplot object displaying the heatmap.
 }
 \description{
-Plot a heatmap for the dataset experiment.
+This function generates a heatmap of the provided dataset.
 }
 \examples{
-plot_heatmap(dataset_experiment, na_colour = "#FF00E4")
+plot_heatmap(dataset_experiment = my_dataset, na_colour = "#FF00E4")
 }

@@ -64,6 +64,7 @@ plot_heatmap <- function(dataset_experiment, na_colour = "#FF00E4") {
 #' @param dataset_experiment The dataset for which the missing values plot will be generated.
 #' @param out_dir The directory where the plot will be saved.
 #' @param out_name The filename for the saved plot.
+#'
 #' @return NULL
 #' @export
 #' @examples
@@ -72,6 +73,7 @@ missing_values_plot <- function(dataset_experiment, out_dir, out_name) {
   plt <- VIM::aggr(SummarizedExperiment::assay(dataset_experiment))
   save_plot(plt, out_dir, out_name)
 }
+
 
 #' Generate a distribution boxplot
 #' 

@@ -2,23 +2,23 @@
 % Please edit documentation in R/Plots.R
 \name{plot_pca}
 \alias{plot_pca}
-\title{Plot PCA}
+\title{Generate a PCA plot}
 \usage{
 plot_pca(dataset_experiment, factor_name = "sample_type", nPCs = 5)
 }
 \arguments{
-\item{dataset_experiment}{The dataset experiment object.}
+\item{dataset_experiment}{The dataset for which the PCA plot will be generated.}
 
-\item{factor_name}{The factor column name.}
+\item{factor_name}{The name of the factor variable used for coloring.}
 
-\item{nPCs}{The number of principal components for PCA.}
+\item{nPCs}{The number of principal components to include in the analysis.}
 }
 \value{
-A PCA plot for the dataset experiment.
+A ggplot object displaying the PCA plot.
 }
 \description{
-Plot a PCA plot for the dataset experiment.
+This function generates a PCA plot showing the principal component scores colored by a specified factor.
 }
 \examples{
-plot_pca(dataset_experiment, factor_name = "sample_type", nPCs = 5)
+plot_pca(dataset_experiment = my_dataset, factor_name = "sample_type", nPCs = 5)
 }

@@ -2,21 +2,21 @@
 % Please edit documentation in R/Plots.R
 \name{plot_boxplots}
 \alias{plot_boxplots}
-\title{Plot Boxplots}
+\title{Plot boxplots for multiple columns}
 \usage{
 plot_boxplots(data, title = "Boxplot of Columns")
 }
 \arguments{
-\item{data}{The dataset to plot boxplots for.}
+\item{data}{The dataset containing the columns to be plotted.}
 
-\item{title}{The title for the boxplot.}
+\item{title}{The title of the plot.}
 }
 \value{
-A boxplot for the columns of the dataset.
+A ggplot object displaying the boxplots.
 }
 \description{
-Plot boxplots for the columns of a dataset.
+This function generates vertical boxplots for multiple columns of a dataset.
 }
 \examples{
-plot_boxplots(data, title = "Boxplot of Columns")
+plot_boxplots(data = my_data, title = "Boxplot of Columns")
 }
