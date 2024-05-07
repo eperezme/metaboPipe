@@ -1,4 +1,4 @@
-Package: metabopipe
+Package: metaboPipe
 Title: Create a pipeline for metabolomics data analysis
 Version: 0.0.0.9000
 Authors@R: 
@@ -13,3 +13,19 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+Imports: 
+    caret,
+    impute,
+    imputeLCMD,
+    missForest,
+    pcaMethods,
+    structToolbox,
+    SummarizedExperiment,
+    VIM,
+    tidyverse,
+    MetaboAnalystR,
+    tinytex, 
+    HotellingEllipse,
+    ggforce,
+    tools,
+    cowplot

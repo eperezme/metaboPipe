@@ -103,6 +103,21 @@
       ],
       "Hash": "6d1689ee8b65614ba6ef4012a67b663a"
     },
+    "BiocStyle": {
+      "Package": "BiocStyle",
+      "Version": "2.30.0",
+      "Source": "Bioconductor",
+      "Requirements": [
+        "BiocManager",
+        "bookdown",
+        "knitr",
+        "rmarkdown",
+        "stats",
+        "utils",
+        "yaml"
+      ],
+      "Hash": "1e22f9ad3acac55ff3069c5292d858cd"
+    },
     "BiocVersion": {
       "Package": "BiocVersion",
       "Version": "3.18.1",
@@ -943,6 +958,23 @@
         "vctrs"
       ],
       "Hash": "40415719b5a479b87949f3aa0aee737c"
+    },
+    "bookdown": {
+      "Package": "bookdown",
+      "Version": "0.39",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "htmltools",
+        "jquerylib",
+        "knitr",
+        "rmarkdown",
+        "tinytex",
+        "xfun",
+        "yaml"
+      ],
+      "Hash": "cb4f7066855b6f936e8d25edc9a9cff9"
     },
     "boot": {
       "Package": "boot",
@@ -2348,7 +2380,7 @@
     },
     "knitr": {
       "Package": "knitr",
-      "Version": "1.45",
+      "Version": "1.46",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -2360,7 +2392,7 @@
         "xfun",
         "yaml"
       ],
-      "Hash": "1ec462871063897135c1bcbe0fc8f07d"
+      "Hash": "6e008ab1d696a5283c79765fa7b56b47"
     },
     "labeling": {
       "Package": "labeling",
@@ -4018,13 +4050,13 @@
     },
     "tinytex": {
       "Package": "tinytex",
-      "Version": "0.50",
+      "Version": "0.51",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "xfun"
       ],
-      "Hash": "be7a76845222ad20adb761f462eed3ea"
+      "Hash": "d44e2fcd2e4e076f0aac540208559d1d"
     },
     "tmvtnorm": {
       "Package": "tmvtnorm",
