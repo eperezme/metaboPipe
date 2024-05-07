@@ -23,10 +23,12 @@ Imports:
     SummarizedExperiment,
     VIM,
     tidyverse,
-    MetaboAnalystR,
-    tinytex, 
+    MetaboAnalystR (>= 4.0.0),
+    tinytex,
     HotellingEllipse,
     ggforce,
     tools,
     cowplot,
     fst
+Remotes:  
+    xia-lab/MetaboAnalystR
