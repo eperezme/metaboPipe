@@ -28,7 +28,7 @@ load_data <- function(output_name, dataMatrixFile, sampleMetadataFile, variableM
         # Target to read data matrix without header
         tar_target_raw("headDataMatrix", quote(read.csv(matrixFile, sep = separator, header = FALSE)), format = "fst_tbl", deployment = "main"),
         # Target to create variable metadata from data matrix
-        tar_target_raw(name_variable, quote(data.frame("annotation" = t(headDataMatrix))), format = "fst_tbl", deployment = "main")
+        tar_target_raw(name_variable, quote(extract_names(headDataMatrix)), format = "fst_tbl", deployment = "main")
       )
     }
   )

@@ -229,3 +229,29 @@ save_plot <- function(plt, output_dir, output_name) {
     })
   })
 }
+
+export_data <- function(dataset_exp, out_dir, out_name) {
+  dir.create(out_dir, showWarnings = FALSE)
+  withr::with_dir(out_dir, {
+    # Extract data matrix
+    dataMatrix <- data.extract(dataset_exp)
+    # Extract sample metadata
+    sampleMetadata <- sample.data.extract(dataset_exp)
+    # Extract variable metadata
+    variableMetadata <- variable.data.extract(dataset_exp)
+
+    # Write data matrix to CSV
+    write.csv(dataMatrix, file = paste0(out_name, "_data.csv"), row.names = TRUE)
+    # Write sample metadata to CSV
+    write.csv(sampleMetadata, file = paste0(out_name, "_sample_metadata.csv"), row.names = TRUE)
+    # Write variable metadata to CSV
+    write.csv(variableMetadata, file = paste0(out_name, "_variable_metadata.csv"), row.names = TRUE)
+  })
+}
+
+
+extract_names <- function(data) {
+  variableData <- t(data) %>% as_tibble() %>%  select(V1) %>% rename("annotation" = V1) %>% as.data.frame()
+  variableData$annotation <- as.character(variableData$annotation) 
+  return(variableData)
+}

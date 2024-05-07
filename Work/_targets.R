@@ -66,7 +66,7 @@ group_col <- "Groups"
 # internal_standard_col <- NA
 
 # Filter Missing values threshold
-na_threshold <- 0.99
+na_threshold <- 0.80
 
 # blank filter
 filter_blank <- TRUE
@@ -126,7 +126,7 @@ dir.create(out_dir, showWarnings = FALSE)
 # Define the pipeline.
 list(
   # LOAD THE DATA
-  load_data(data, dataMatrixPath, sampleMetadataPath, variableMetadataPath, separator = sep),
+  load_data(data, dataMatrixPath, sampleMetadataPath, separator = sep),
   
   
   
@@ -150,11 +150,16 @@ list(
   normalize(normalized, imputed, 
             factor_col = group_col, sample_id_col = sample_id_col, 
             rowNorm = rowNorm, transNorm = transNorm, scaleNorm = scaleNorm, ref = ref, out_dir = out_dir),
-
-
-  # Remove outliers
-  # somehow
   
+
+
+  #### EXTRACTION #####
+  # Extract the data
+  tar_target(extract_data, export_data(normalized, out_dir = out_dir, out_name = "Processed")),
+  
+  
+  
+  # Deletes all the files but not the folder
   #### Cleaning ####
   tar_target(clean, withr::with_dir(out_dir, unlink("TempData",recursive=TRUE)))
 )
