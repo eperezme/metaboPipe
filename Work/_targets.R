@@ -15,10 +15,9 @@ invisible(sapply(file.sources, source, .GlobalEnv))
 
 tar_option_set(
   packages = c(
-    "structToolbox", "SummarizedExperiment",
-    "VIM", "impute", "imputeLCMD", "missForest", "caret", "pcaMethods", "tidyverse", "MetaboAnalystR", "tinytex", 
-    "HotellingEllipse", "ggforce", "tools", "cowplot"
-  )
+    "structToolbox", "SummarizedExperiment","VIM", "impute", "imputeLCMD", 
+    "missForest", "caret", "pcaMethods", "tidyverse", "MetaboAnalystR", "tinytex", 
+    "HotellingEllipse", "ggforce", "tools", "cowplot", "metaboPipe")
 )
 # #### GLOBAL VARIABLES ####
 out_dir <- "Out"

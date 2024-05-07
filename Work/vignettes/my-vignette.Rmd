@@ -41,7 +41,7 @@ Clone the MetaboPipe repository from GitHub and install the package using the fo
 
 
 # Install the package
-devtools::install("path/to/metaboPipe")
+devtools::install_github("https://github.com/eperezme/metaboPipe", ref = "dev", subdir = "Work")
 
 ```
 

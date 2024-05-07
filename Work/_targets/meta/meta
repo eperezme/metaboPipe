@@ -1,14 +1,12 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
 sample.data.modify|function|3f6b26b3cf379ba3
-normalize_pqn|function|9a47332e2e0b187c
+normalize_pqn|function|39ae1d8c3e23bf82
 plot_boxplots|function|46e7bf59ce329611
 rowNorm|object|9caf6f56f41fadc1
 data.modify|function|7ab9248940cf8e61
 fold_change|object|fd0531637108ffa4
 prepare_sampleMetadata|function|7c9fad4dd2a2e42b
 data.extract|function|20d3a6d32e26e7bf
-batch_plot|function|7b4b546d3d96046e
-distribution_boxplot|function|dac2e005ce75a8f6
 normalize_vln|function|553f6d3f097b8f8b
 extract_names|function|5f0bf0fcab3ec85e
 warper_batch_correction|function|2aff09293da3346d
@@ -17,7 +15,7 @@ group_col|object|46235f862434582f
 variableMetadataPath|object|6b08d3ab25281aff
 filter_outliers|function|c13e309d18e64e3e
 zero_to_na|function|f49008e83f84e8bf
-.Random.seed|object|45794b483bced1f8
+.Random.seed|object|e19b5fbaf7ff246c
 scaleNorm|object|0465b4d8c302d603
 factorize_cols|function|d86ddea61068073e
 filter_MV|function|34c67745be2767e7
@@ -29,7 +27,6 @@ filter_step|function|b736f209c2e0a9f1
 metaboNorm|function|712bd2dde3b1db46
 createExperiment|function|a33a0b32556b1dc2
 normalize|function|2623873907825095
-ba_plot|function|cb9d5a91c878c31e
 impute_mean|function|a8ef5a47502f4cba
 sample_type_col|object|1e420b5b954781af
 plot_hotelling_obs|function|f42fd6ebba266727
@@ -43,10 +40,9 @@ file.sources|object|839e2759dfc65453
 prepare_dataMatrix|function|7951dd6fab0e7e15
 transNorm|object|dacd54183b6731e0
 impute_SVD|function|d1630d30ddc70cbd
-plot_hotelling_pca|function|55fe8d6df1a31a53
 save_plot|function|25cc28bf6e845da3
 impute|function|d2c332c930f37601
-plot_density_single_with_legend|function|13fe543fda3bfef8
+plot_density_single_with_legend|function|3b02c00d2325cda9
 separator|object|c029548aed30b115
 plot_pca|function|05e729d8cc241bc7
 impute_QRILC|function|1938a158b5f45204
@@ -59,7 +55,7 @@ warper_factor_sample_col|function|955f6a5881f37165
 filter_blanks|function|d84564d1934455cf
 prepare_variableMetadata|function|f2f4e2928a861f49
 dataMatrixPath|object|e80f2416df652d4c
-na_threshold|object|03025030818064cb
+na_threshold|object|90bfba72a0cdea44
 factor_cols|object|6e77a2c2d3252d92
 impute_bpca|function|1f9550c354200f98
 impute_ppca|function|0d78dd744a6effac
@@ -70,26 +66,10 @@ sample_id_col|object|ceca6ddf2fbe8c43
 out_dir|object|e249628b4d467d96
 toMetaboAnalyst|function|9c0c7b3a31d324b0
 export_data|function|e844ddc5b872924b
-plot_outliers|function|16abc1b1ea9b2a8a
-missing_values_plot|function|b474bad6538c4bff
+plot_outliers|function|e810b78690721d2f
 impute_warper|function|72610dafdc68f0fe
 normalize_metab|function|4db5941569a94acb
-matrixFile|stem|f389fd2332250422|03a5cebb80af9957|ef46db3751d8e999|-944313673|data/ST000284/dataMatrix.csv|t19842.5197824229s|a35b4bdd7a312130|191608|file|local|vector|||9.031||
-clean|stem|4f1d68532b49b44a|edafeeb1956a34e1|c5734c2e2e71fdf2|-82818548||t19849.657374318s|44989414465ff33d|49|rds|local|vector|||0||
+matrixFile|stem|f389fd2332250422|03a5cebb80af9957|ef46db3751d8e999|-944313673|data/ST000284/dataMatrix.csv|t19842.5197824229s|a35b4bdd7a312130|191608|file|local|vector|||0||
+clean|stem|4f1d68532b49b44a|edafeeb1956a34e1|c5734c2e2e71fdf2|-82818548||t19850.5000196469s|44989414465ff33d|49|rds|local|vector|||0||
 sampleFile|stem|6d6bd55ebd3dd724|eaf35a8e03c92a8c|ef46db3751d8e999|-82004099|data/ST000284/sampleMetadata.csv|t19842.6325644099s|faf1e1714bdc53e8|16515|file|local|vector|||0||
-headDataMatrix|stem|ffe7b2e70be1de49|c89a29dadf382d18|800502a32426f14c|-1580594009||t19849.657375508s|72eb7b451e491c23|222638|fst_tbl|local|vector|||0.016||
-data_data|stem|579abebc95464836|60fd48a540c5cad0|800502a32426f14c|420809943||t19849.6573759895s|de1ca5b323337744|88293|fst_tbl|local|vector|||0.031||
-data_sample|stem|9d8bf4bc9e6b0d83|f32445c832c0fe7b|b9f3b98f35b0a837|-859795648||t19849.6573762096s|1e73025651326e53|14078|fst_tbl|local|vector|||0||
-data_variable|stem|4137f25c078de09f|bfb7917a343d4387|a5e0640efa38de7c|-1296658056||t19849.6573777462s|e96b76c2f6a50c73|3646|fst_tbl|local|vector|||0.125|The x argument of as_tibble.matrix must have unique column names if.name_repair is omitted as of tibble 2.0.0.ℹ Using compatibility .name_repair.|
-experiment|stem|04a2ff7243daafb6|3b915d1de3e58689|b214a16133609323|1275671355||t19849.6573799874s|56a143da834690b5|92683|qs|local|vector|||0.187||
-factorized|stem|c96139ee947e4595|a70f8c1c9a373014|7873c0d5d4cec931|-74664148||t19849.6573804999s|51c9f3df9cc3a95c|92535|qs|local|vector|||0.031||
-factorized_na|stem|c96139ee947e4595|0782f7a8484d4483|b62569a51b23e5b7|1407919217||t19849.6573812655s|51c9f3df9cc3a95c|92535|qs|local|vector|||0.046||
-before_filtered_plot|stem|21689d43186613ae|e34fae3ade03d77e|a4dbf821af2a17a4|1547061814||t19849.6573848191s|a96c250e4b19e03e|54|qs|local|vector|||0.297||
-filtered_missingval|stem|a4de032423e4399f|982a3243ecb4e04e|f7438bdadb747ce0|-1608057501||t19849.6573878283s|119d869b142c1e85|90221|qs|local|vector|||0.25||
-filtered|stem|11df2edfed9252cd|573062ffae404fc5|4b5783a6465d1d56|-292250703||t19849.6573945598s|8bb17bd6469e93ce|84629|qs|local|vector|||0.562||
-filtered_outliers_plot|stem|21689d43186613ae|27cde48c2651dc1a|cab41969b5121026|850874404||t19849.6574281044s|a96c250e4b19e03e|54|qs|local|vector|||2.875||
-after_filtered_plot|stem|21689d43186613ae|670a19a4657919f7|0165f38e1d71a9cc|1716753662||t19849.6574301122s|a96c250e4b19e03e|54|qs|local|vector|||0.172||
-imputed|stem|869baaae4bc6e871|4947b9a2c4090ed9|19ee3fd06a1a00a2|-1750145120||t19849.6575900826s|ce56d0409707e488|84645|qs|local|vector|||13.797||
-normalized|stem|99b2e82ce093ec56|cd358735d636d810|7e31cdf7ab85e034|-651487341||t19849.657613514s|70b12f68ea0cc934|149589|qs|local|vector|||2|CairoFonts has no effect on Windows. Please use parfamily... to specify the desired font  see par.. CairoFonts has no effect on Windows. Please use parfamily... to specify the desired font  see par.|
-Clean_normalization|stem|ef51edf7cc7db0f9|93ffba6710e69859|7f574ed65ddbd939|1317299431||t19849.6576136881s|506f9f6b3747f807|42|qs|local|vector|||0||
-extract_data|stem|67e3bcd8537f6d6b|0665a5f2db79a283|59b4c9833c989d0d|797498723||t19849.6576143217s|a1c456b03adbfbf8|44|rds|local|vector|||0.047||
+headDataMatrix|stem||c89a29dadf382d18|800502a32426f14c|-1580594009||t19850.5000199522s||0|fst_tbl|local|vector|||||_store_ there is no package called fst

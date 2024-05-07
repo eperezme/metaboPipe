@@ -28,4 +28,5 @@ Imports:
     HotellingEllipse,
     ggforce,
     tools,
-    cowplot
+    cowplot,
+    fst
