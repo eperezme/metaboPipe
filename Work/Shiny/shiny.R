@@ -49,7 +49,7 @@ ui <- navbarPage(
                               selected = ",")
                ),
                # Add a button to load data
-               actionButton("loadData", "Load Data")
+               actionButton("loadData", "Load Data", style = "color: #fff; background-color: #28a745; border-color: #28a745;")
              ),
              
              # Main panel for displaying outputs
