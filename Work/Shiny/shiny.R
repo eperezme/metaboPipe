@@ -47,14 +47,6 @@ ui <- navbarPage(
                                           Semicolon = ";"),
                               selected = ",")
                ),
-               
-               # # Multiple select for factor_cols
-               # conditionalPanel(
-               #   condition = "input.dataset == 'Upload data'",
-               #   selectizeInput("factorCols", "Select columns as factor variables:",
-               #                  choices = NULL,
-               #                  multiple = TRUE)
-               # )
              ),
              
              # Main panel for displaying outputs
@@ -82,6 +74,9 @@ ui <- navbarPage(
   )
 )
 
+
+
+
 # Define server logic
 server <- function(input, output, session) {
   
@@ -104,7 +99,6 @@ server <- function(input, output, session) {
     ref = NULL,
     transNorm = NULL,
     scaleNorm = NULL
-    
   )
   
   
@@ -133,10 +127,10 @@ server <- function(input, output, session) {
   })
   
   # Update factor_cols based on user selection
-  observeEvent(input$sampleMetadata, {
-    req(input$sampleMetadata)
-    df <- read.csv(input$sampleMetadata$datapath, sep = data$separator, strip.white = TRUE)  # Strip leading/trailing spaces
-    updateSelectizeInput(session, "factorCols", choices = colnames(df))
+  observeEvent(data$sampleMetadataPath, {
+    req(data$sampleMetadataPath)
+    df <- read.csv(data$sampleMetadataPath, sep = data$separator, strip.white = TRUE)  # Strip leading/trailing spaces
+    updateSelectizeInput(session, "factorCols", choices = colnames(df), server = TRUE)
   })
   
   # Store selected factor columns
