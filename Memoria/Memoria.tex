@@ -24,82 +24,88 @@
     pdftitle={Memoria},
     pdfpagemode=FullScreen,
     }
-\usepackage[backend=biber, style=nature]{biblatex}
-\addbibresource{library.bib}
-% \bibliography{library.bib}
-\urlstyle{same}
+    \usepackage[backend=biber, style=nature]{biblatex}
+    \addbibresource{library.bib}
+    % \bibliography{library.bib}
+    \urlstyle{same}
+    \usepackage[toc, acronym, xindy]{glossaries}
+    \makeglossaries
+    \loadglsentries[main]{glossary.tex}
+    \usepackage[xindy]{imakeidx}
+    \makeindex
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%---------------------------- PREAMBLE ----------------------------%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%Introducción de datos del trabajo
-\title{A Modular Pipeline for Metabolomic Data Preprocessing}
-\titcrt{Título muy corto} %Título corto que aparecerá a la cabecera
-\author{Eduard Pérez Méndez}
-\date{\today}
-
-
-\nomPDC{Alexandre Sánchez Pla}
-\nomPRA{Carles Ventura Royo}
-\titulac{Master's degree in Bioinformatics \newline and Biostatistics}
-\area{Statistical Bioinformatics and \newline Machine Learning}
-\idioma{English}
-\credits{15}
-\parcla{targeted metabolomics, preprocessing, pipeline}
-
-\licenc{ccByNcSa}
-%Posibles licencias
-%ccByNcNd
-%ccByNcSa
-%ccByNc
-%ccByNd
-%ccBySa
-%ccBy
-%GNU
-%copyright
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%---------------------------- ABSTRACT ----------------------------%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% \abstractidioma{
-% Máximo 250 palabras, con la finalidad, contexto de aplicación, metodología, resultados y conclusiones del trabajo.
-% }
-
-% Resumen en inglés.
-\abstractenglish{
-A maximum of 250 words, detailing the purpose, contexto of application, methodology, results and conclusiones of the work.
-}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%---------------------------- BEGINDOC ----------------------------%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{document}
-
-\estructura
-
-%%%%%%%%%%%%%%%%
-%--- THANKS ---%
-%%%%%%%%%%%%%%%%
-\newpage\null\thispagestyle{empty}
-
-\vspace*{0.4\textheight} 
-
-\noindent\enquote{\itshape BIG MOTIVATIONAL QUOTE
-}\bigbreak 
-
-\hfill AUTHOR NAME
-
-\newpage
-
-
-% --- TABLE OF CONTENTS --- %
-\tableofcontents
-
-% --- LIST OF FIGURES --- %
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%---------------------------- PREAMBLE ----------------------------%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
+    %Introducción de datos del trabajo
+    \title{A Modular Pipeline for Metabolomic Data Preprocessing}
+    \titcrt{Título muy corto} %Título corto que aparecerá a la cabecera
+    \author{Eduard Pérez Méndez}
+    \date{\today}
+    
+    
+    \nomPDC{Alexandre Sánchez Pla}
+    \nomPRA{Carles Ventura Royo}
+    \titulac{Master's degree in Bioinformatics \newline and Biostatistics}
+    \area{Statistical Bioinformatics and \newline Machine Learning}
+    \idioma{English}
+    \credits{15}
+    \parcla{targeted metabolomics, preprocessing, pipeline}
+    
+    \licenc{ccByNcSa}
+    %Posibles licencias
+    %ccByNcNd
+    %ccByNcSa
+    %ccByNc
+    %ccByNd
+    %ccBySa
+    %ccBy
+    %GNU
+    %copyright
+    
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%---------------------------- ABSTRACT ----------------------------%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
+    % \abstractidioma{
+        % Máximo 250 palabras, con la finalidad, contexto de aplicación, metodología, resultados y conclusiones del trabajo.
+        % }
+        
+        % Resumen en inglés.
+        \abstractenglish{
+            A maximum of 250 words, detailing the purpose, contexto of application, methodology, results and conclusiones of the work.
+            }
+            
+            
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            %%---------------------------- BEGINDOC ----------------------------%%
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            \begin{document}
+            
+            \estructura
+            
+            %%%%%%%%%%%%%%%%
+            %--- THANKS ---%
+            %%%%%%%%%%%%%%%%
+            \newpage\null\thispagestyle{empty}
+            
+            \vspace*{0.4\textheight} 
+            
+            \noindent\enquote{\itshape BIG MOTIVATIONAL QUOTE
+            }\bigbreak 
+            
+            \hfill AUTHOR NAME
+            
+            \newpage
+            
+            
+            % --- TABLE OF CONTENTS --- %
+            \tableofcontents
+            
+            % --- LIST OF FIGURES --- %
 \listoffigures
 
 % --- LIST OF TABLES --- %
@@ -118,38 +124,38 @@ Metabolomics, a powerful and evolving field within the realm of systems biology,
 
 \section{Context and justification}
 
-Metabolomics is a rapidly evolving field within biology that focuses on the comprehensive study of the metabolite composition of cell types, tissues, organs, or organisms \cite{pattiMetabolomicsApogeeOmics2012,zhangSerumMetabolomicsNovel2012,chenGuideMetabolomicsAnalysis2022a}. It aims to measure, identify and (semi-)quantify those metabolites. Metabolites are chemical compounds that undergo analysis through conventional chemical assessment methods like mass spectrometry (MS) and nuclear magnetic resonance (NMR) spectrometry. MS approaches are commonly integrated with gas chromatography (GS) and liquid chromatography (LC), leading to the development of two advanced techniques known as gas chromatography-MS (GC-MS) and liquid chromatography-MS (LC-MS). All of these analytical platforms and methodologies generate large amounts of high-dimensional and complex experimental raw data.
+Metabolomics is a rapidly evolving field within biology that focuses on the comprehensive study of the metabolite composition of cell types, tissues, organs, or organisms \cite{pattiMetabolomicsApogeeOmics2012,zhangSerumMetabolomicsNovel2012,chenGuideMetabolomicsAnalysis2022a}. It aims to measure, identify and (semi-)quantify those metabolites. Metabolites are chemical compounds that undergo analysis through conventional chemical assessment methods like \acrfull{ms} and \acrfull{nmr} spectrometry. \acrshort{ms} approaches are commonly integrated with \acrfull{gc} and \acrfull{lc}, leading to the development of two advanced techniques known as \acrfull{gcms} and \acrfull{lcms}. All of these analytical platforms and methodologies generate large amounts of high-dimensional and complex experimental raw data.
 
 However, the statistical analysis of metabolomics data presents significant challenges, attributable not only to the inherent complexity of metabolomics as a research discipline but also to the intricate nature of the data itself. Notwithstanding that numerous studies have explored various methodologies for metabolomic data management, the field still lacks an accepted standard for preprocessing and pretreatment of such data.
 
-One of the obstacles the field encounters is the lack of well defined terminology, as the terms “data preprocessing” and “data pretreatment” have not been used consistently in metabolomics literature [4].
+One of the obstacles the field encounters is the lack of well defined terminology, as the terms “data preprocessing” and “data pretreatment” have not been used consistently in metabolomics literature \cite{sunPretreatingNormalizingMetabolomics2024}.
 
-The objectives of data preprocessing/pretreatment encompass two primary aims: firstly, to rectify or mitigate instrumental artifacts and extraneous biological variance, thereby amplifying the signal-to-noise ratio (SNR); and secondly, to effectively transform the data into interpretable spectral profiles through processes such as centering, scaling, and dimensionality reduction [4,5]. The choice of preprocessing and pretreatment methods can significantly impact the downstream analysis and interpretation of metabolomic data [6] so the steps should be carefully selected based on the specific characteristics of the data and the research.
+The objectives of data preprocessing/pretreatment encompass two primary aims: firstly, to rectify or mitigate instrumental artifacts and extraneous biological variance, thereby amplifying the \acrfull{snr}; and secondly, to effectively transform the data into interpretable spectral profiles through processes such as centering, scaling, and dimensionality reduction \cite{sunPretreatingNormalizingMetabolomics2024,martinPepsNMR1HNMR2018}. The choice of preprocessing and pretreatment methods can significantly impact the downstream analysis and interpretation of metabolomic data \cite{karamanPreprocessingPretreatmentMetabolomics2017} so the steps should be carefully selected based on the specific characteristics of the data and the research.
 
-By establishing a standardized approach to preprocessing and pretreatment of metabolomic data, the field can improve the quality, comparability, and reproducibility of metabolomic studies. This would facilitate data integration, enable the development of robust statistical models, and enhance our understanding of the complex metabolic processes underlying health and disease.
+By establishing a standardized approach to preprocess and pretreat metabolomic data, the field can improve the quality, comparability, and reproducibility of metabolomic studies. This would facilitate data integration, enable the development of robust statistical models, and enhance our understanding of the complex metabolic processes underlying health and disease.
 
 
 \subsection{Preprocessing of data}
 
-Given the inherent dissimilarities in data acquisition techniques, unique preprocessing procedures are imperative before embarking on statistical analyses in metabolomics investigations. NMR spectra, for instance, often exhibit signal shifts along the axis due to factors like pH fluctuations [7]. Thus, meticulous preprocessing is indispensable to ensure robust statistical analyses and facilitate inter-spectral signal comparisons. This involves techniques such as binning, peak fitting with spectral databases, and exclusion of unstable or non-informative spectral regions (e.g., water peaks) [3,4,8]. By refining the dataset to a subset of relevant metabolites, statistical methods can effectively discern variations in signal intensity among sample groups [9].
+Given the inherent dissimilarities in data acquisition techniques, unique preprocessing procedures are imperative before embarking on statistical analyses in metabolomics investigations. \acrshort{nmr} spectra, for instance, often exhibit signal shifts along the axis due to factors like pH fluctuations \cite{bhinderwalaChemicalShiftVariations2022}. Thus, meticulous preprocessing is indispensable to ensure robust statistical analyses and facilitate inter-spectral signal comparisons. This involves techniques such as binning, peak fitting with spectral databases, and exclusion of unstable or non-informative spectral regions (e.g., water peaks) \cite{chenGuideMetabolomicsAnalysis2022a,sunPretreatingNormalizingMetabolomics2024,stanstrupMetaRbolomicsToolboxBioconductor2019}. By refining the dataset to a subset of relevant metabolites, statistical methods can effectively discern variations in signal intensity among sample groups \cite{qiuSmallMoleculeMetabolites2023}.
 
 
-The preprocessing workflows diverge between MS-based and NMR-based metabolomic analyses. In MS-based profiling, data are presented as three-dimensional (3D) tables, in contrast to the two-dimensional (2D) tables derived from GC-MS data preprocessing [4,8]. GC-MS preprocessing entails deconvolution and peak integration to generate intensity profiles for each sample feature corresponding to {RT/m/z} pairs. Notably, metabolite identification strategies differ between GC-MS and LC-MS methodologies. While GC-MS relies on reproducible mass spectra and extensive databases for metabolite identification based on characteristic fragment ions, MS-based methods prioritize automation, accuracy, peak identification, integration, and annotation [10,11].
+The preprocessing workflows diverge between \acrshort{ms}-based and \acrshort{nmr}-based metabolomic analyses. In \acrshort{ms}-based profiling, data are presented as three-dimensional (3D) tables, in contrast to the two-dimensional (2D) tables derived from GC-MS data preprocessing \cite{sunPretreatingNormalizingMetabolomics2024,stanstrupMetaRbolomicsToolboxBioconductor2019}. \acrshort{gcms} preprocessing entails deconvolution and peak integration to generate intensity profiles for each sample feature corresponding to {RT/m/z} pairs. Notably, metabolite identification strategies differ between \acrshort{gcms} and \acrshort{lcms} methodologies. While \acrshort{gcms} relies on reproducible mass spectra and extensive databases for metabolite identification based on characteristic fragment ions, \acrshort{ms}-based methods prioritize automation, accuracy, peak identification, integration, and annotation \cite{xiaoMetaboliteIdentificationQuantitation2012,kiselevaDefiningBloodPlasma2021}.
 
 
-While the primary objective of preprocessing is to render data comparable across samples despite instrumental discrepancies, the strategies employed in MS-based methodologies differ from those in NMR-based approaches. Moreover, variations exist between preprocessing methodologies utilized in GC-MS and LC-MS metabolomic analyses, underscoring the intricate nature of metabolomics data preprocessing.
+While the primary objective of preprocessing is to render data comparable across samples despite instrumental discrepancies, the strategies employed in \acrshort{ms}-based methodologies differ from those in \acrshort{nmr}-based approaches. Moreover, variations exist between preprocessing methodologies utilized in \acrshort{gcms} and \acrshort{lcms} metabolomic analyses, underscoring the intricate nature of metabolomics data preprocessing.
 
 
 \subsubsection{MS-based data preprocessing}
 
-MS-based analysis involves the measurement of mass-to-charge ratios (m/z). When combined with either LC or GC, the resulting raw GC/LC-MS data encompass three measured variables: m/z, chromatographic retention time (RT), and intensity count, thereby constituting a three-dimensional (3D) data structure.
+\acrshort{ms}-based analysis involves the measurement of \acrfull{mz}. When combined with either \acrshort{lc} or \acrshort{gc}, the resulting raw GC/LC-MS data encompass three measured variables: \acrshort{mz}, chromatographic \acrfull{rt}, and intensity count, thereby constituting a three-dimensional (3D) data structure.
 To streamline the data and eliminate spectral noise and irrelevant biological variability, a two-dimensional (2D) features table is generated through peak picking. This table encompasses all quantified metabolic features from the analyzed samples, with rows corresponding to samples and columns representing variables such as peak areas or intensities, characterized by m/z and retention time in minutes or scan number (m/z-RT pairs).
-The preprocessing of MS data involves several steps: 1) denoising and baseline correction; 2) alignment across all samples; 3) peak picking; 4) merging the peaks; and 5) creating a data matrix [3,4,10,12–17].
+The preprocessing of \acrshort{ms} data involves several steps: 1) denoising and baseline correction; 2) alignment across all samples; 3) peak picking; 4) merging the peaks; and 5) creating a data matrix \cite{chenGuideMetabolomicsAnalysis2022a,sunPretreatingNormalizingMetabolomics2024,xiaoMetaboliteIdentificationQuantitation2012, defernezChapterElevenStrategies2013,troisiChapterDataAnalysis2022,burtonInstrumentalExperimentalEffects2008,trygg01BackgroundEstimation2009,alonsoAnalyticalMethodsUntargeted2015,bloembergWarpingMethodsSpectroscopic2013}.
 
 
 \subsubsection{NMR-based data preprocessing}
-Similar to MS-based analysis, NMR-based analysis generates a 2D structure of feature data matrix with the samples in the rows and the spectral data points in the columns. Also similar to MS-based analysis, the NMR-based analysis (e.g., 1H NMR analysis) requires data preprocessing to mitigate non-biologically relevant effects. The following data preprocessing steps could be performed: 1) baseline correction; 2) peak binning; 3) peak alignment; 4) quality control; 5) create a data matrix [4,5,15–20].
-Preprocessing by either MS or NMR constructs a data matrix containing the relative abundances of a set of mass spectra for a group of samples or subjects under different conditions. The metabolomics data matrix are typically constructed in such a way that each row of the data matrix represents a subject and each column represents the mass spectra (metabolite intensities or metabolite relative abundances, peak or peak intensities).
+Similar to \acrshort{ms}-based analysis, \acrshort{nmr}-based analysis generates a 2D structure of feature data matrix with the samples in the rows and the spectral data points in the columns. Also similar to \acrshort{ms}-based analysis, the \acrshort{nmr}-based analysis (e.g., 1H NMR analysis) requires data preprocessing to mitigate non-biologically relevant effects. The following data preprocessing steps could be performed: 1) baseline correction; 2) peak binning; 3) peak alignment; 4) quality control; 5) create a data matrix \cite{sunPretreatingNormalizingMetabolomics2024,martinPepsNMR1HNMR2018,trygg01BackgroundEstimation2009,alonsoAnalyticalMethodsUntargeted2015,bloembergWarpingMethodsSpectroscopic2013,borkChromatographicPeakAlignment2013,veselkovRecursiveSegmentwisePeak2009,sawallMultiobjectiveOptimizationAutomated2018}.
+Preprocessing by either \acrshort{ms} or \acrshort{nmr} constructs a data matrix containing the relative abundances of a set of mass spectra for a group of samples or subjects under different conditions. The metabolomics data matrix are typically constructed in such a way that each row of the data matrix represents a subject and each column represents the mass spectra (metabolite intensities or metabolite relative abundances, peak or peak intensities).
 
 
 \subsection{Pretreatment of Data}
@@ -163,7 +169,7 @@ Within datasets, missing values or zeros can arise due to a variety of factors, 
     considered spectral artifacts or noise, and subsequently transformed to zero.
 \end{enumerate}
 
-Identifying the origins of these zeros poses a challenge, and their prevalence presents a significant obstacle for statistical analyses [4,21]. Hence, practical approaches for managing zeros include:
+Identifying the origins of these zeros poses a challenge, and their prevalence presents a significant obstacle for statistical analyses \cite{sunPretreatingNormalizingMetabolomics2024,martin-fernandezDealingZeros2011}. Hence, practical approaches for managing zeros include:
 \begin{enumerate}
     \item \textbf{Filtering} based on a threshold, such as the 80\% rule.
     \item \textbf{Imputation} techniques, which can involve substituting zeros with the mean, minimum (or half of the minimum) of non-missing values, or simply zero.
@@ -172,13 +178,44 @@ Identifying the origins of these zeros poses a challenge, and their prevalence p
 
 However, it's crucial to recognize that valuable biological insights may be embedded within peaks containing missing values.
 
-% TODO Managing Outliers
+\subsubsection{Managing Outliers}
+Various methods exist for addressing outliers, including:
+
+\begin{enumerate}
+    \item Assessing metabolite peak areas and comparing the ratio of mean to median, with the median often considered more robust in the presence of outliers. 
+    \item Employing \acrfull{pca} to identify outliers, followed by techniques such as \acrfull{pcpr2} and \acrfull{anova}.
+    \item Recent advancements have introduced specialized algorithms for outlier identification in metabolomic data, such as cellwise outlier diagnostics using robust pairwise log ratios (cell-rPLR) and a kernel weight function-based biomarker identification technique.
+\end{enumerate}
+
+
+\subsubsection{Normalization}
+Normalization is a crucial step in data preprocessing that seeks to eliminate unwanted variations between samples. By doing so, it ensures that samples can be directly compared to each other by eliminating or reducing systematic errors, biases, and experimental variance \cite{zachariasStatisticalAnalysisNMR2018}. 
+
+Normalization of data within metabolomic workflows can occur either during sample analysis (preanalytical normalization) or during postanalytical data processing. Normalization of samples is essential due to variations in composition influenced by factors like time of day, health status, and dietary intake. 
+
+For instance, blood samples may not require normalization due to the body's control over blood volume and composition. However, urine samples may necessitate normalization due to potential concentration variations \cite{ulaszewskaNutrimetabolomicsIntegrativeAction2019a}.
+
+
+\subsubsection{Centering and Scaling}
+
+ Centering aims to shift metabolite concentrations to fluctuate around zero, while scaling adjusts for fold-change differences between metabolites. Both steps are crucial in data preprocessing.
+
+\subsubsection[Transf]{Transformation}
+
+Transformation becomes necessary to address data variance after scaling, aiming to correct for heteroscedasticity, convert multiplicative relations into additive ones, and normalize skewed distributions.
+
 \section{State of the art}
+
+Metabolomic data preprocessing involves denoising, baseline correction, peak picking, and alignment. For \acrshort{ms}-based analysis, tools like XCMS and MZmine facilitate preprocessing, while for \acrshort{nmr} data, packages like BATMAN and RAMSY offer robust preprocessing capabilities. Pretreatment techniques include handling missing values, outlier detection, and normalization using methods like imputation, robust statistical measures, and scaling techniques.
+
+
 
 Punto de partida del trabajo (¿Cuál es la necesidad a cubrir? ¿Por qué es un tema relevante? ¿Cómo se resuelve el problema de momento?) y aportación realizada (¿Qué resultado se quiere obtener?).
 
 Es importante tener en cuenta que el trabajo final tiene que ser comprensible para cualquier persona que conozca el área de conocimiento, pero no tiene porque ser experta en el tema del que versa el trabajo.
 
+
+%%%%% OBJECTIVES %%%%%%
 \chapter{Objectives}
 
 Listado de los objetivos del trabajo.
@@ -191,11 +228,27 @@ Listado de los objetivos del trabajo.
 \chapter{Sustainable development goals}
 \label{s:etic}
 
-Esta sección tendría que identificar los impactos positivos y/o negativos del trabajo final en las tres dimensiones de la competencia transversal UOC “Compromiso ético y global”.
+ Our project aligns with multiple crucial Sustainable Development Goals (SDGs) set by the United Nations, fostering global sustainability and development. The primary objectives of our project focus on developing a pipeline to modulate the pretreatment of metabolomics data and creating an R implementation. This solution holds significant potential to support the following SDGs:  
  
-La Guía transversal sobre la Competencia Ética y Global os ayudará a redactar estos apartados.
+\subsubsection{SDG 3: Good Health and Well-being} 
+ 
+The use of our pipeline has the potential to reduce the time required for metabolomic data research, accelerating the investigation of rare diseases, cancer, and other medical conditions. By expediting research processes, our project contributes to advancing medical science, improving healthcare outcomes, and ultimately enhancing global health and well-being.
+ 
+\subsubsection{SDG 9: Industry, Innovation, and Infrastructure:} 
+ 
+Our focus on developing an open-source, well-documented, and user-friendly pipeline fosters innovation and infrastructure development. By opening access to metabolomics research tools, our project empowers individuals from diverse backgrounds to engage in scientific inquiry and innovation, thus promoting inclusive economic growth and technological progress.
+ 
+\subsubsection{SDG 10: Reduced Inequalities:} 
 
+Through our implementation, we prioritize inclusivity and accessibility, ensuring that individuals regardless of sex, gender, race, wealth, or ability can utilize, learn from, and contribute to our pipeline. By reducing barriers to entry and promoting equal opportunities for participation in scientific endeavors, our project contributes to reducing inequalities and promoting social inclusion. 
+
+\vspace{18pt}
+
+While our project aims to bring about positive change, it is essential to consider potential negative impacts and ethical considerations. These may include concerns about data privacy and security, particularly in handling sensitive information. Additionally, there may be unintended consequences such as exacerbating existing inequalities in access to technology or inadvertently reinforcing biases in data analysis. Therefore, it is imperative to approach the development and implementation of our pipeline with careful consideration of ethical principles, transparency, and accountability to mitigate potential risks and maximize societal benefits.
+
+% APPROACH AND METHODOLOGY
 \chapter{Approach and methodology}
+
 Mención de cuáles son las posibles estrategias para llevar a cabo el trabajo y cuál es la estrategia elegida (desarrollar un producto nuevo, adaptar un producto existente...). Hay que incluir una valoración de por qué esta es la estrategia más apropiada para conseguir los objetivos.   	
 
 \section{Methodology}
@@ -296,24 +349,17 @@ Este capítulo tiene que incluir:
 %    \item Ha habido que introducir cambios para garantizar el éxito del trabajo? ¿Por qué? 
 %\end{itemize}
 
-\chapter{Glossary}
+\chapter{Glossar}
+Lets try the glossary with \gls{latex} and \Gls{glossary}.
 
-Definición de los \cite{ulaszewskaNutrimetabolomicsIntegrativeAction2019a} términos y acrónimos más relevantes utilizados dentro de la Memoria.
+\setglossarystyle{list}
+\printindex
+\printglossary[title=Glossary, toctitle=Glossary]
+\printglossary[type=\acronymtype, title=Acronyms, toctitle=Acronyms]
+
 
 
 \printbibliography[heading=bibintoc]
-
-Lista numerada de las referencias bibliográficas utilizadas dentro de la memoria. En cada lugar donde se utilice una referencia dentro del texto, se tiene que indicar citando el número de la referencia, por ejemplo: [7].
-
-Es muy importante incluir todas las referencias utilizadas y citarlas apropiadamente, es decir, incluyendo toda la información necesaria para identificar la referencia. La información mínima que se tiene que incluir según el tipo de referencia es:
-
-\begin{itemize}
-\item Libro: Autores, Título, Edición (si procede) Editorial, Ciudad, Año.
-\item  Artículo de revista: Autores, Título, Nombre de la Revista, Número de Página inicial y final, Número de la revista / Volumen, Año.
-\item  Web: URL y fecha en que se ha visitado.
-\end{itemize}
-
-Información de como citar documentos: \url{http://biblioteca.uoc.edu/es/recursos/citacion-bibliografica}.
 
 
 \newpage
