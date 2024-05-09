@@ -1,5 +1,6 @@
 # Define UI
 ui <- navbarPage(
+  id = "Data Initializer",
   # Navbar title
   title = "MetaboPipe Data Initializer",
   
@@ -47,6 +48,8 @@ ui <- navbarPage(
                                           Semicolon = ";"),
                               selected = ",")
                ),
+               # Add a button to load data
+               actionButton("loadData", "Load Data")
              ),
              
              # Main panel for displaying outputs
@@ -54,24 +57,46 @@ ui <- navbarPage(
            )
   ),
   tabPanel("DataConfig",
-          sidebarLayout(
-            sidebarPanel(
-              # Input: Select factor column ----
-              selectizeInput("factorCols", "Select columns as factor variables:",
-                          choices = NULL,
-                          multiple = TRUE)
-            ),
-            mainPanel(
-              tabsetPanel(
-                tabPanel("Data Summary", DT::dataTableOutput("dataMatrixTable")),
-                tabPanel("Sample Metadata Summary", DT::dataTableOutput("sampleMetadataTable")),
-                tabPanel("Variable Metadata Summary", DT::dataTableOutput("variableMetadataTable"))
-              )
-              # Placeholder for displaying outputs
-              # Add outputs here based on user input
-            )
-          )
-  )
+           sidebarLayout(
+             sidebarPanel(
+               # Input: Select factor column ----
+               selectizeInput("factorCols", "Select columns as factor variables:",
+                              choices = NULL,
+                              multiple = TRUE),
+               selectizeInput("sampleIdCol", "Select sample ID column:",
+                              choices = NULL),
+               selectizeInput("sampleTypeCol", "Select sample Type column (if its QC, Blank or Sample):",
+                              choices = NULL),
+               selectizeInput("groupCol", "Select the Group column (the study variable):",
+                              choices = NULL),
+               selectizeInput("orderCol", "Select the Order column (the injection order):",
+                              choices = NULL),
+               selectizeInput("batchCol", "Select the batch column:",
+                              choices = NULL),
+             ),
+             mainPanel(
+               tabsetPanel(
+                 tabPanel("Data Summary", DT::dataTableOutput("dataMatrixTable")),
+                 tabPanel("Sample Metadata Summary", DT::dataTableOutput("sampleMetadataTable")),
+                 tabPanel("Variable Metadata Summary", DT::dataTableOutput("variableMetadataTable"))
+               )
+               # Placeholder for displaying outputs
+               # Add outputs here based on user input
+             )
+           )
+  ),
+  tabPanel("Process Selector",
+           sidebarLayout(
+             sidebarPanel(
+               # Placeholder for user inputs
+               # Add inputs here
+             ),
+             mainPanel(
+               # Placeholder for displaying outputs
+               # Add outputs here based on user input
+             )
+           )
+  ),
 )
 
 
@@ -103,7 +128,7 @@ server <- function(input, output, session) {
   
   
   # Update data paths, separator, and factor_cols based on user input
-  observeEvent(input$dataset, {
+  observeEvent(input$loadData, {
     if (input$dataset == "Upload data") {
       data$dataMatrixPath <- input$dataMatrix$datapath
       data$sampleMetadataPath <- input$sampleMetadata$datapath
@@ -118,6 +143,7 @@ server <- function(input, output, session) {
       data$variableMetadataPath <- switch(input$dataset,
                                           "MTBLS79" = "data/MTBLS79/variable_meta.csv",
                                           "ST000284" = "data/ST000284/variableMetadata.csv")
+      
     }
   })
   
@@ -126,17 +152,31 @@ server <- function(input, output, session) {
     data$separator <- input$dataSep
   })
   
-  # Update factor_cols based on user selection
+  # Update factor_cols, sample_id_col, sample_type_col, and group_col based on user selection
   observeEvent(data$sampleMetadataPath, {
     req(data$sampleMetadataPath)
     df <- read.csv(data$sampleMetadataPath, sep = data$separator, strip.white = TRUE)  # Strip leading/trailing spaces
     updateSelectizeInput(session, "factorCols", choices = colnames(df), server = TRUE)
+    updateSelectizeInput(session, "sampleIdCol", choices = colnames(df), server = TRUE)
+    updateSelectizeInput(session, "sampleTypeCol", choices = colnames(df), server = TRUE)
+    updateSelectizeInput(session, "groupCol", choices = colnames(df), server = TRUE)
+    updateSelectizeInput(session, "orderCol", choices = colnames(df), server = TRUE)
+    updateSelectizeInput(session, "batchCol", choices = colnames(df), server = TRUE)
   })
   
-  # Store selected factor columns
+  # Store selected factor columns, sample_id_col, sample_type_col, and group_col
   observeEvent(input$factorCols, {
     data$factor_cols <- input$factorCols
+    data$sample_id_col <- input$sampleIdCol
+    data$sample_type_col <- input$sampleTypeCol
+    data$group_col <- input$groupCol
+    data$order_col <- input$orderCol
+    data$batch_col <- input$batchCol
   })
+  
+  # Proceed to the next panel after loading the data
+
+  
   
   # Render data tables based on user input
   output$dataMatrixTable <- DT::renderDataTable({
