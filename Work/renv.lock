@@ -3063,6 +3063,28 @@
       ],
       "Hash": "6b8177fd19982f0020743fadbfdbd933"
     },
+    "pmp": {
+      "Package": "pmp",
+      "Version": "1.14.1",
+      "Source": "Bioconductor",
+      "Repository": "Bioconductor 3.18",
+      "Requirements": [
+        "R",
+        "S4Vectors",
+        "SummarizedExperiment",
+        "ggplot2",
+        "grDevices",
+        "impute",
+        "matrixStats",
+        "methods",
+        "missForest",
+        "pcaMethods",
+        "reshape2",
+        "stats",
+        "utils"
+      ],
+      "Hash": "fc0c5def7420c08cd4e3cd639fa2603c"
+    },
     "polyclip": {
       "Package": "polyclip",
       "Version": "1.10-6",

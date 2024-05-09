@@ -1,12 +1,12 @@
 # Fdb version 4
-["biber Memoria"] 0 "Memoria.bcf" "Memoria.bbl" "Memoria" 1713179861.22613 -1
+["biber Memoria"] 1714410313.1844 "Memoria.bcf" "Memoria.bbl" "Memoria" 1714410356.50336 2
   "Memoria.bcf" 1713179860.90748 107575 6de35235c3080f7069745e595493e5a0 "pdflatex"
-  "library.bib" 1712848378.76379 143152 a79f8063c9af25242bfa9812a73cb9fc ""
+  "library.bib" 1714410311.28115 233230 8ddc469ba5ab43bbf0b2ee569baac2d6 ""
   (generated)
   "Memoria.bbl"
   "Memoria.blg"
   (rewritten before read)
-["pdflatex"] 1713179858.15322 "/Users/eduardperezmendez/Desktop/TFM/Memoria/Memoria.tex" "Memoria.pdf" "Memoria" 1713179861.2274 0
+["pdflatex"] 1713179858.15322 "/Users/eduardperezmendez/Desktop/TFM/Memoria/Memoria.tex" "Memoria.pdf" "Memoria" 1714410356.50352 0
   "/Users/eduardperezmendez/Desktop/TFM/Memoria/Memoria.tex" 1713179859.22308 20514 9b0643209591e0ab3a75cbee1c5dfc44 ""
   "/usr/local/texlive/2023basic/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2023basic/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -138,7 +138,7 @@
   "/usr/local/texlive/2023basic/texmf-var/web2c/pdftex/pdflatex.fmt" 1708714999 8220829 d467a7e363a938b2216a2600d7f15b38 ""
   "/usr/local/texlive/2023basic/texmf.cnf" 1678817979 628 bde3cc671e29677eea4172140533535c ""
   "Memoria.aux" 1713179860.89922 10455 bd8d803840426589eac97fc4d81dac9f "pdflatex"
-  "Memoria.bbl" 1713179604.22914 22087 1a5438d9129cd198823dce1c17f2b929 "biber Memoria"
+  "Memoria.bbl" 1714410356.49188 22087 1a5438d9129cd198823dce1c17f2b929 "biber Memoria"
   "Memoria.lof" 1713179860.90904 323 e7c4d6355777a98996b0eab49f8da8c0 "pdflatex"
   "Memoria.lot" 1713179860.90914 190 84e9851f92b610fc7b63f18d7621c1e0 "pdflatex"
   "Memoria.run.xml" 1713179860.90882 2424 a601a87b52db0a996237e0137b9d99f8 "pdflatex"
