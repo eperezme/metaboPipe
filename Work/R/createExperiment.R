@@ -54,9 +54,6 @@ warper_createExperiment <- function(dataMatrix, sampleMetadata, variableMetadata
   dataMatrix$sample_id <- NULL
 
 
-  # Create new annotation col for variableMetadata == colnames of dataMatrix
-  variableMetadata$annotation <- colnames(dataMatrix)
-
   # Make metabolites underscore for compatibility
   colnames(dataMatrix) <- gsub("-", "_", colnames(dataMatrix))
 
@@ -76,6 +73,9 @@ warper_createExperiment <- function(dataMatrix, sampleMetadata, variableMetadata
     name = experiment_name,
     description = experiment_description
   )
+  
+  # Make the metabolite names correct
+  DE@colData@listData$annotation <- variableMetadata$annotation
 
   return(DE)
 }

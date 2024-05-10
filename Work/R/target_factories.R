@@ -12,7 +12,7 @@
 #' 
 #' @examples
 #' load_data(data_loaded, "Data/data.csv", "Data/metadata.csv", "Data/variable_metadata.csv", separator = ",")
-load_data <- function(output_name, dataMatrixFile, sampleMetadataFile, variableMetadataFile = NULL, separator = ",") {
+load_data <- function(output_name, dataMatrixFile, sampleMetadataFile, variableMetadataFile = NULL, dataSep = ",", sampleSep = ",", variableSep = ",") {
   target_name <- deparse(substitute(output_name)) # Get the name of the output target
   name_data <- paste0(target_name, "_data") # Generate the name for the data target
   name_sample <- paste0(target_name, "_sample") # Generate the name for the sample target
@@ -23,23 +23,23 @@ load_data <- function(output_name, dataMatrixFile, sampleMetadataFile, variableM
     # Target to load data matrix file
     tar_target_raw("matrixFile", dataMatrixFile, format = "file", deployment = "main"),
     # Target to read data matrix
-    tar_target_raw(name_data, quote(read.csv(matrixFile, sep = separator, header = TRUE)), format = "fst_tbl", deployment = "main"),
+    tar_target_raw(name_data, quote(read.csv(matrixFile, sep = dataSep, header = TRUE)), format = "fst_tbl", deployment = "main"),
     # Target to load sample metadata file
     tar_target_raw("sampleFile", sampleMetadataFile, format = "file", deployment = "main"),
     # Target to read sample metadata
-    tar_target_raw(name_sample, quote(read.csv(sampleFile, sep = separator)), format = "fst_tbl", deployment = "main"),
+    tar_target_raw(name_sample, quote(read.csv(sampleFile, sep = sampleSep)), format = "fst_tbl", deployment = "main"),
     # If variable metadata file is provided
     if (!is.null(variableMetadataFile)) {
       list(
         # Target to load variable metadata file
         tar_target_raw("variableFile", variableMetadataFile, format = "file", deployment = "main"),
         # Target to read variable metadata
-        tar_target_raw(name_variable, quote(read.csv(variableFile, sep = separator)), format = "fst_tbl", deployment = "main")
+        tar_target_raw(name_variable, quote(read.csv(variableFile, sep = variableSep)), format = "fst_tbl", deployment = "main")
       )
     } else { # If variable metadata file is not provided
       list(
         # Target to read data matrix without header
-        tar_target_raw("headDataMatrix", quote(read.csv(matrixFile, sep = separator, header = FALSE)), format = "fst_tbl", deployment = "main"),
+        tar_target_raw("headDataMatrix", quote(read.csv(matrixFile, sep = dataSep, header = FALSE)), format = "fst_tbl", deployment = "main"),
         # Target to create variable metadata from data matrix
         tar_target_raw(name_variable, quote(extract_names(headDataMatrix)), format = "fst_tbl", deployment = "main")
       )

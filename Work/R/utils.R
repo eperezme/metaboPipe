@@ -346,7 +346,7 @@ export_data <- function(dataset_exp, out_dir, out_name) {
 #' @examples
 #' extract_names(data)
 extract_names <- function(data) {
-  variableData <- t(data) %>% as_tibble() %>%  select(V1) %>% rename("annotation" = V1) %>% as.data.frame()
+  suppressMessages(variableData <- t(data) %>% dplyr::as_tibble(.name_repair = "unique") %>%  dplyr::select(...1) %>% dplyr::rename("annotation" = ...1) %>% as.data.frame())
   variableData$annotation <- as.character(variableData$annotation) 
   return(variableData)
-}
+} 
