@@ -1,18 +1,13 @@
 ;; This logfile was generated automatically by `xindy'
-;; at 09.05.2024  16:09:32
-;; Indexstyle: "C:\\Users\\eduar\\Desktop\\TFM\\Memoria\\cmCfulmu_k", Rawindex: "C:\\Users\\eduar\\Desktop\\TFM\\Memoria\\W_pr1t3VQD", Output: "Memoria.gls"
+;; at 12.05.2024  16:56:13
+;; Indexstyle: "C:\\Users\\eduar\\Desktop\\TFM\\Memoria\\oqMEywkA0U", Rawindex: "C:\\Users\\eduar\\Desktop\\TFM\\Memoria\\CiWNZxxhlA", Output: "Memoria.gls"
 
 
 Building indexentry-tree:
 Hierdepth of index is :TREE
 
 sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
-sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
 
 Forming letter-groups:
-Letter-group: "´€Ú—ë" -> "L"
-Letter-group: "´ÃÐÐ€Ëí" -> "G"
-sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
-Letter-group: "´ÃÐÐ€Ëí" -> "G"
 sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
 Letter-group: "´€Ú—ë" -> "L"

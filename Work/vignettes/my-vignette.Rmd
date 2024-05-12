@@ -18,7 +18,6 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-
 ```
 
 
@@ -38,39 +37,195 @@ Whether you are a novice researcher or an experienced bioinformatician, MetaboPi
 Clone the MetaboPipe repository from GitHub and install the package using the following commands:
 ```{r installation, eval=FALSE}
 # Clone the MetaboPipe repository
-
+system("git clone https://github.com/eperezme/metaboPipe.git")
 
 # Install the package
-devtools::install_github("https://github.com/eperezme/metaboPipe", ref = "dev", subdir = "Work")
-
+install.packages("devtools")
+devtools::install_github("https://github.com/eperezme/metaboPipe", subdir = "Work")
 ```
 
-## Figures
+## Introduction to MetaboPipe and its functionalities
+For our example we will load the ST000284 dataset. `EXPLAIN THE DATASET`
 
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
+```{r}
+DE <- metaboPipe::ST000284
+DE
 ```
 
-You can enable figure captions by `fig_caption: yes` in YAML:
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
+`metaboPipe` uses the `DatasetExperiment` object from the `structToolbox` package as the main data structure for storing and manipulating metabolomics data. The `DatasetExperiment` object is a list of data frames that contains the following components: 
 
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
 
-## More Examples
+- `data`: This encapsulates a data frame housing the measured data pertaining to each sample.
+- `sample_meta`: This comprises a data frame furnishing supplementary sample-related information, such as group labels, often referred to as phenoData.
+- `variable_meta`: This includes a data frame presenting additional details concerning variables (features), such as annotations.
 
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+Similar to all `struct` entities, it encompasses `name` and `description` fields, referred to as "slots" within the R language.
 
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
+A notable distinction between `DatasetExperiment` and `SummarizedExperiment` structures lies in the data orientation. In `DatasetExperiment` instances, **samples are arranged in rows** while **features occupy columns**, contrasting with the arrangement in `SummarizedExperiment` structures.
+
+All slots are accessible using dollar notation.
+
+```{r }
+head(DE$data[, 1:4])
+head(DE$sample_meta[, 1:4])
+head(DE$variable_meta)
 ```
 
-Also a quote using `>`:
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+
+## Creating a pipeline 
+
+`metaboPipe` uses the `targets` package to define and execute data processing pipelines. The pipeline is defined as a list of targets, each representing a step in the data processing workflow. Each target is a function call that takes input data and produces output data. The `targets` package ensures that each target is executed only when its dependencies are met, allowing for efficient and reproducible data processing.
+
+The `metaboPipe` pipeline functions consists of several functions that create targets to execute specific processing steps, including data loading, filtering, batch correction, imputation and normalization (that includes tranformation and scaling). Each step is defined as a single or multiple targets in the pipeline, and the targets are executed sequentially to process the data.
+
+In order to use the pipeline functions in `metaboPipe`, we need to create a targets file.
+```{r}
+library(targets)
+use_targets()
+```
+
+An example `_targets.R` file is created and saved in the working directory. The `_targets.R` file contains some example code, which we will modify to define the pipeline for our data processing workflow.
+First of all we will load the required packages for `metaboPipe` and set the target options in the `_targets.R` file.
+
+```{r, eval=FALSE}
+# Load packages required to define the pipeline:
+library(targets)
+library(tarchetypes)
+library(metaboPipe)
+
+tar_option_set(
+  packages = c(
+    "structToolbox", "SummarizedExperiment", "VIM", "impute", "imputeLCMD",
+    "missForest", "caret", "pcaMethods", "tidyverse", "MetaboAnalystR", "tinytex",
+    "HotellingEllipse", "ggforce", "tools", "cowplot"
+  )
+)
+```
+
+Now that the packages for our pipeline are set up, we can define the pipeline workflow. The pipeline consists of several steps, including data loading, filtering, batch correction, imputation, and normalization. Each step is defined as a function in the script but those functions create multiple targets, and the targets are executed sequentially to process the data.
+
+The targets should be defined inside a `list()` function. 
+We can load the data using the `tar_target()` function, which defines a target that loads the data from the specified file path.
+We first will load the data using the `tar_target()` function, which defines a target that reads the data from the specified file path. And with the 3 dataframes loaded we can create another target to merge them into a `DatasetExperiment` object.
+
+The first variable on the `tar_target()` function is the name of the target, that will be used for refering the objects on subsequent targets and the second variable is the code that will be executed to generate the target.
+```{r, eval=FALSE}
+list(
+  tar_target(dataMatrix, read.csv("data/ST000284/dataMatrix.csv")),
+  tar_target(sampleMeta, read.csv("data/ST000284/sampleMetadata.csv")),
+  tar_target(variableMetadata, read.csv("data/ST000284/variableMetadata.csv")),
+  tar_target(experiment, warper_createExperiment(dataMatrix, sampleMeta, variableMetadata, experiment_name = "ST000284", experiment_description = "Example metabolomics dataset ST000284"))
+)
+```
+
+If then we execute `tar_make()` the pipeline will be executed and the data will be loaded and merged into a `DatasetExperiment` object. To load the object into the R environment we can use the `tar_load()` function.
+
+```{r, eval=FALSE}
+tar_load(experiment)
+```
+
+
+Even though the pipeline is correctly defined, `metaboPipe` provides a set of functions to make the pipeline definition easier.
+
+## Using metaboPipe functions to define the pipeline
+### Loading the data
+
+Instead of writing 3 targets to load the 3 dataframes we can define the paths to the files before the targets list and then use the `load_data()` function to load the 3 dataframes. And then we can use the `createExperiment()` function to merge the 3 dataframes into a `DatasetExperiment` object.
+
+The `load_data()` function takes the paths to the data files as arguments and returns a list with the loaded dataframes. The `createExperiment()` function takes the loaded dataframes as arguments and returns a `DatasetExperiment` object.
+
+Same as before, the first variable on the functions is the name of the target.
+```{r, eval=FALSE}
+dataMatrixPath <- "data/ST000284/dataMatrix.csv"
+sampleMetadataPath <- "data/ST000284/sampleMetadata.csv"
+variableMetadataPath <- "data/ST000284/variableMetadata.csv"
+
+list(
+  load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath),
+  createExperiment(experiment, data_loaded, experiment_name = "ST000284", experiment_description = "Example metabolomics dataset ST000284")
+)
+```
+
+Now if we run `tar_make()` the pipeline will be executed and the data will be loaded and merged into a `DatasetExperiment` object. As before to load the object into the R environment we can use the `tar_load()` function.
+```{r, eval=FALSE}
+tar_load(experiment)
+```
+
+By default, `load_data()` uses the "," as the separator for the data files. If the data files use a different separator, we can define for each file the separator:
+```{r, eval=FALSE}
+# Load the Data
+dataMatrixPath <- "data/ST000284/dataMatrix.csv"
+sampleMetadataPath <- "data/ST000284/sampleMetadata.csv"
+variableMetadataPath <- "data/ST000284/variableMetadata.csv"
+dataSep <- ","
+sampleSep <- ","
+variableSep <- ","
+
+# Create the experiment
+name <- "ST000284"
+description <- "Example metabolomics dataset ST000284"
+
+list(
+  load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath, dataSep, sampleSep, variableSep),
+  createExperiment(experiment, data_loaded, experiment_name = name, experiment_description = description)
+)
+```
+
+### Factorizing the columns of the experiment
+There are functions that assume that specific columns are factors, such as the `normalize()` function. To factorize the columns of the experiment we can use the `factorize_cols()` function. This function takes the `DatasetExperiment` object, and a vector of column names as an argument and returns the object with the columns factorized.
+```{r}
+# Load the Data
+dataMatrixPath <- "data/ST000284/dataMatrix.csv"
+sampleMetadataPath <- "data/ST000284/sampleMetadata.csv"
+variableMetadataPath <- "data/ST000284/variableMetadata.csv"
+dataSep <- ","
+sampleSep <- ","
+variableSep <- ","
+
+# Create the experiment
+name <- "ST000284"
+description <- "Example metabolomics dataset ST000284"
+
+# Setting up the columns
+columns <- c("Groups", "Age", "Gender", "Smoking", "Alcohol")
+
+
+list(
+  load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath, dataSep, sampleSep, variableSep),
+  createExperiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
+  factorize_cols(factorized_experiment, experiment, columns)
+)
+```
+
+### Filtering the data
+After the setup of the experiment, we can start the data manipulation steps. The first step we will perform is to filter the data. The `filter_step()` function encompases 2 filtering steps: 1) filtering by % of missing values and 2) filtering the outliers. The threshold is defined as the minimum percentage of data explained. By default the `threshold` is `0.8`, meaning that each row and collumn must have at least 80% of the values or get removed. The `filter_outliers` argument is a boolean that defines if the outliers should be removed or not and the `conf.limit` argument specify the confidence interval (either `'0.95'` or `'0.99'`) to discriminate the observation as an outlier or not. 
+
+```{r}
+# Load the Data
+dataMatrixPath <- "data/ST000284/dataMatrix.csv"
+sampleMetadataPath <- "data/ST000284/sampleMetadata.csv"
+variableMetadataPath <- "data/ST000284/variableMetadata.csv"
+dataSep <- ","
+sampleSep <- ","
+variableSep <- ","
+
+# Create the experiment
+name <- "ST000284"
+description <- "Example metabolomics dataset ST000284"
+
+# Setting up the columns
+columns <- c("Groups", "Age", "Gender", "Smoking", "Alcohol")
+
+
+list(
+  load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath, dataSep, sampleSep, variableSep),
+  createExperiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
+  factorize_cols(factorized_experiment, experiment, columns),
+  filter_step(filtered_experiment, factorized_experiment, threshold = 0.8, filter_outliers = TRUE, conf.limit = "0.95", out_dir = "results")
+)
+```
+
+
+

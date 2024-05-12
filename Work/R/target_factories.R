@@ -4,7 +4,9 @@
 #' @param dataMatrixFile Path to the data matrix file.
 #' @param sampleMetadataFile Path to the sample metadata file.
 #' @param variableMetadataFile Path to the variable metadata file (optional).
-#' @param separator The separator used in the files (default is ",").
+#' @param dataSep The separator used in the dataMatrixfile (default is ",").
+#' @param sampleSep The separator used in the sampleMetadataFile (default is ",").
+#' @param variableSep The separator used in the variableMetadataFile (default is ",").
 #' 
 #' @return A list of targets to load and read data matrix and sample metadata.
 #' 

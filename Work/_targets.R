@@ -2,10 +2,11 @@
 library(targets)
 library(tarchetypes)
 library(crew)
+library(metaboPipe)
 # library(doParallel)
 # Load all R scripts in the R/ directory.
-file.sources <- list.files("R", pattern = "*.R", full.names = TRUE)
-invisible(sapply(file.sources, source, .GlobalEnv))
+# file.sources <- list.files("R", pattern = "*.R", full.names = TRUE)
+# invisible(sapply(file.sources, source, .GlobalEnv))
 
 # Declare libraries
 # These are the libraries that the pipeline depends on.
@@ -17,9 +18,11 @@ tar_option_set(
   packages = c(
     "structToolbox", "SummarizedExperiment", "VIM", "impute", "imputeLCMD",
     "missForest", "caret", "pcaMethods", "tidyverse", "MetaboAnalystR", "tinytex",
-    "HotellingEllipse", "ggforce", "tools", "cowplot", "metaboPipe"
+    "HotellingEllipse", "ggforce", "tools", "cowplot"
   )
 )
+
+# tar_source()
 # Declare controller
 # Create a controller with 5 workers and a 3-second idle time.
 # controller <- crew::crew_controller_local(
