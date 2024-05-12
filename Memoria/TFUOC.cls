@@ -360,7 +360,7 @@ Reservats tots els drets. Està prohibit la reproducció total o parcial d'aques
 \newcommand{\ccByNcNd}{
 This work is under the license Attribution-NonCommercial-NoDerivatives \\ \url{https://creativecommons.org/licenses/by-nc/3.0}}
 \newcommand{\ccByNcSa}{
-This work is under the license Attribution-NonCommercial-ShareAlike \\ \url{https://creativecommons.org/licenses/by-nc/3.0}}
+Except where otherwise noted, this work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike \\ \url{https://creativecommons.org/licenses/by-nc/4.0}}
 \newcommand{\ccByNc}{
 This work is under the license Attribution-NonCommercial \\ \url{https://creativecommons.org/licenses/by-nc/3.0}}
 \newcommand{\ccByNd}{
@@ -457,7 +457,7 @@ All rights reserved. Reproduction in whole or in part of this work by any means 
 	  \ifthenelse{\equal{\@licenc}{ccByNcSa}}
 	  {% True case
 	  	
-	   \newcommand{\llicencia}{\includegraphics[scale=1]{./Template/licenc/ccbyncsa.png}\\
+	   \newcommand{\llicencia}{\includegraphics[scale=1]{./Template/licenc/ccbyncsa2.png}\\
 	   \ccByNcSa}%
 	  }
 	  {
