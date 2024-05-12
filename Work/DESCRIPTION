@@ -32,6 +32,10 @@ Imports:
     targets,
     tarchetypes,
     crew,
-    pmp
+    pmp,
+    fst
 Remotes: 
     xia-lab/MetaboAnalystR
+Depends: 
+    R (>= 2.10)
+LazyData: true
