@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.2.28)  13 MAY 2024 15:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2024.2.28)  13 MAY 2024 16:43
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1854,11 +1854,14 @@ File: Template/eimt.png Graphic file (type png)
 Package pdftex.def Info: Template/eimt.png  used on input line 182.
 (pdftex.def)             Requested size: 73.03314pt x 9.95863pt.
 [10]
+
+Package todonotes Warning: Trying to put a shadow below a todonote,but the loadshadowlibrary option was not given when loadingthe todonotes package on input line 214.
+
+Package hyperref Info: bookmark level for unknown todo defaults to 0 on input line 214.
 File: Template/noulogo.png Graphic file (type png)
 <use Template/noulogo.png>
-Package pdftex.def Info: Template/noulogo.png  used on input line 215.
+Package pdftex.def Info: Template/noulogo.png  used on input line 216.
 (pdftex.def)             Requested size: 165.26283pt x 42.67912pt.
-
 
 Package fancyhdr Warning: \headheight is too small (35.0pt): 
 (fancyhdr)                Make it at least 42.67912pt, for example:
@@ -1868,16 +1871,25 @@ Package fancyhdr Warning: \headheight is too small (35.0pt):
 
 File: Template/eimt.png Graphic file (type png)
 <use Template/eimt.png>
-Package pdftex.def Info: Template/eimt.png  used on input line 215.
+Package pdftex.def Info: Template/eimt.png  used on input line 216.
 (pdftex.def)             Requested size: 73.03314pt x 9.95863pt.
 [11]
-Overfull \hbox (8.3184pt too wide) in paragraph at lines 223--224
-[]\OT1/ppl/m/n/12 Es im-por-tante tener en cuenta que el tra-bajo fi-nal tiene que ser com-pren-si-ble para cualquier
+
+Package todonotes Warning: Trying to put a shadow below a todonote,but the loadshadowlibrary option was not given when loadingthe todonotes package on input line 224.
+
+
+Overfull \hbox (140.44287pt too wide) in paragraph at lines 224--224
+[][][] 
+ []
+
+
+Overfull \hbox (140.44287pt too wide) in paragraph at lines 224--224
+[][][] 
  []
 
 File: Template/noulogo.png Graphic file (type png)
 <use Template/noulogo.png>
-Package pdftex.def Info: Template/noulogo.png  used on input line 227.
+Package pdftex.def Info: Template/noulogo.png  used on input line 231.
 (pdftex.def)             Requested size: 165.26283pt x 42.67912pt.
 
 Package fancyhdr Warning: \headheight is too small (35.0pt): 
@@ -1888,20 +1900,32 @@ Package fancyhdr Warning: \headheight is too small (35.0pt):
 
 File: Template/eimt.png Graphic file (type png)
 <use Template/eimt.png>
-Package pdftex.def Info: Template/eimt.png  used on input line 227.
+Package pdftex.def Info: Template/eimt.png  used on input line 231.
 (pdftex.def)             Requested size: 73.03314pt x 9.95863pt.
 [12]
 Chapter 2.
 
-Package todonotes Warning: Trying to put a shadow below a todonote,but the loadshadowlibrary option was not given when loadingthe todonotes package on input line 245.
+Package todonotes Warning: Trying to put a shadow below a todonote,but the loadshadowlibrary option was not given when loadingthe todonotes package on input line 231.
 
-Package hyperref Info: bookmark level for unknown todo defaults to 0 on input line 245.
+
+Overfull \hbox (140.44287pt too wide) in paragraph at lines 231--231
+[][][] 
+ []
+
+
+Overfull \hbox (140.44287pt too wide) in paragraph at lines 231--231
+[][][] 
+ []
+
 
 Package todonotes Warning: Trying to put a shadow below a todonote,but the loadshadowlibrary option was not given when loadingthe todonotes package on input line 249.
 
+
+Package todonotes Warning: Trying to put a shadow below a todonote,but the loadshadowlibrary option was not given when loadingthe todonotes package on input line 253.
+
 File: Template/noulogo.png Graphic file (type png)
 <use Template/noulogo.png>
-Package pdftex.def Info: Template/noulogo.png  used on input line 251.
+Package pdftex.def Info: Template/noulogo.png  used on input line 255.
 (pdftex.def)             Requested size: 165.26283pt x 42.67912pt.
 
 Package fancyhdr Warning: \headheight is too small (35.0pt): 
@@ -1912,7 +1936,7 @@ Package fancyhdr Warning: \headheight is too small (35.0pt):
 
 File: Template/eimt.png Graphic file (type png)
 <use Template/eimt.png>
-Package pdftex.def Info: Template/eimt.png  used on input line 251.
+Package pdftex.def Info: Template/eimt.png  used on input line 255.
 (pdftex.def)             Requested size: 73.03314pt x 9.95863pt.
 [13
 
@@ -1920,7 +1944,7 @@ Package pdftex.def Info: Template/eimt.png  used on input line 251.
 Chapter 3.
 File: Template/noulogo.png Graphic file (type png)
 <use Template/noulogo.png>
-Package pdftex.def Info: Template/noulogo.png  used on input line 273.
+Package pdftex.def Info: Template/noulogo.png  used on input line 277.
 (pdftex.def)             Requested size: 165.26283pt x 42.67912pt.
 
 Package fancyhdr Warning: \headheight is too small (35.0pt): 
@@ -1931,15 +1955,45 @@ Package fancyhdr Warning: \headheight is too small (35.0pt):
 
 File: Template/eimt.png Graphic file (type png)
 <use Template/eimt.png>
-Package pdftex.def Info: Template/eimt.png  used on input line 273.
+Package pdftex.def Info: Template/eimt.png  used on input line 277.
 (pdftex.def)             Requested size: 73.03314pt x 9.95863pt.
 [14
 
 ]
 Chapter 4.
+
+Package todonotes Warning: Trying to put a shadow below a todonote,but the loadshadowlibrary option was not given when loadingthe todonotes package on input line 294.
+
+
+Overfull \hbox (140.44287pt too wide) in paragraph at lines 294--294
+[][][] 
+ []
+
+
+Overfull \hbox (140.44287pt too wide) in paragraph at lines 294--294
+[][][] 
+ []
+
+LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 296.
+(e:/texlive/2023/texmf-dist/tex/latex/psnfss/ts1ppl.fd
+File: ts1ppl.fd 2001/06/04 font definitions for TS1/ppl.
+)
+
+Package todonotes Warning: Trying to put a shadow below a todonote,but the loadshadowlibrary option was not given when loadingthe todonotes package on input line 303.
+
+
+Overfull \hbox (140.44287pt too wide) in paragraph at lines 303--303
+[][][] 
+ []
+
+
+Overfull \hbox (140.44287pt too wide) in paragraph at lines 303--303
+[][][] 
+ []
+
 File: Template/noulogo.png Graphic file (type png)
 <use Template/noulogo.png>
-Package pdftex.def Info: Template/noulogo.png  used on input line 298.
+Package pdftex.def Info: Template/noulogo.png  used on input line 311.
 (pdftex.def)             Requested size: 165.26283pt x 42.67912pt.
 
 Package fancyhdr Warning: \headheight is too small (35.0pt): 
@@ -1950,24 +2004,66 @@ Package fancyhdr Warning: \headheight is too small (35.0pt):
 
 File: Template/eimt.png Graphic file (type png)
 <use Template/eimt.png>
-Package pdftex.def Info: Template/eimt.png  used on input line 298.
+Package pdftex.def Info: Template/eimt.png  used on input line 311.
 (pdftex.def)             Requested size: 73.03314pt x 9.95863pt.
 [15
 
 ]
 Chapter 5.
 
-Package todonotes Warning: Trying to put a shadow below a todonote,but the loadshadowlibrary option was not given when loadingthe todonotes package on input line 299.
+Package todonotes Warning: Trying to put a shadow below a todonote,but the loadshadowlibrary option was not given when loadingthe todonotes package on input line 312.
 
 
-Package todonotes Warning: Trying to put a shadow below a todonote,but the loadshadowlibrary option was not given when loadingthe todonotes package on input line 300.
+Package todonotes Warning: Trying to put a shadow below a todonote,but the loadshadowlibrary option was not given when loadingthe todonotes package on input line 313.
 
 
-Package todonotes Warning: Trying to put a shadow below a todonote,but the loadshadowlibrary option was not given when loadingthe todonotes package on input line 301.
+Package todonotes Warning: Trying to put a shadow below a todonote,but the loadshadowlibrary option was not given when loadingthe todonotes package on input line 314.
+
+
+Package todonotes Warning: Trying to put a shadow below a todonote,but the loadshadowlibrary option was not given when loadingthe todonotes package on input line 320.
+
+
+Overfull \hbox (140.44287pt too wide) in paragraph at lines 320--320
+[][][] 
+ []
+
+
+Overfull \hbox (140.44287pt too wide) in paragraph at lines 320--320
+[][][] 
+ []
+
+
+Package todonotes Warning: Trying to put a shadow below a todonote,but the loadshadowlibrary option was not given when loadingthe todonotes package on input line 323.
+
+
+Overfull \hbox (140.44287pt too wide) in paragraph at lines 323--323
+[][][] 
+ []
+
+
+Overfull \hbox (140.44287pt too wide) in paragraph at lines 323--323
+[][][] 
+ []
+
+
+Package todonotes Warning: Trying to put a shadow below a todonote,but the loadshadowlibrary option was not given when loadingthe todonotes package on input line 324.
+
+
+Overfull \hbox (140.44287pt too wide) in paragraph at lines 324--324
+[][][] 
+ []
+
+
+Overfull \hbox (140.44287pt too wide) in paragraph at lines 324--324
+[][][] 
+ []
+
+
+LaTeX Warning: Marginpar on page 16 moved.
 
 File: Template/noulogo.png Graphic file (type png)
 <use Template/noulogo.png>
-Package pdftex.def Info: Template/noulogo.png  used on input line 314.
+Package pdftex.def Info: Template/noulogo.png  used on input line 332.
 (pdftex.def)             Requested size: 165.26283pt x 42.67912pt.
 
 Package fancyhdr Warning: \headheight is too small (35.0pt): 
@@ -1978,20 +2074,20 @@ Package fancyhdr Warning: \headheight is too small (35.0pt):
 
 File: Template/eimt.png Graphic file (type png)
 <use Template/eimt.png>
-Package pdftex.def Info: Template/eimt.png  used on input line 314.
+Package pdftex.def Info: Template/eimt.png  used on input line 332.
 (pdftex.def)             Requested size: 73.03314pt x 9.95863pt.
 [16
 
 ]
 Chapter 6.
-<Template/Rplotmanh.png, id=278, 474.77374pt x 501.875pt>
+<Template/Rplotmanh.png, id=292, 474.77374pt x 501.875pt>
 File: Template/Rplotmanh.png Graphic file (type png)
 <use Template/Rplotmanh.png>
-Package pdftex.def Info: Template/Rplotmanh.png  used on input line 322.
+Package pdftex.def Info: Template/Rplotmanh.png  used on input line 340.
 (pdftex.def)             Requested size: 199.16928pt x 210.541pt.
 File: Template/noulogo.png Graphic file (type png)
 <use Template/noulogo.png>
-Package pdftex.def Info: Template/noulogo.png  used on input line 335.
+Package pdftex.def Info: Template/noulogo.png  used on input line 353.
 (pdftex.def)             Requested size: 165.26283pt x 42.67912pt.
 
 Package fancyhdr Warning: \headheight is too small (35.0pt): 
@@ -2002,16 +2098,13 @@ Package fancyhdr Warning: \headheight is too small (35.0pt):
 
 File: Template/eimt.png Graphic file (type png)
 <use Template/eimt.png>
-Package pdftex.def Info: Template/eimt.png  used on input line 335.
+Package pdftex.def Info: Template/eimt.png  used on input line 353.
 (pdftex.def)             Requested size: 73.03314pt x 9.95863pt.
 [17
 
  <./Template/Rplotmanh.png>]
 Chapter 7.
-LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 340.
-(e:/texlive/2023/texmf-dist/tex/latex/psnfss/ts1ppl.fd
-File: ts1ppl.fd 2001/06/04 font definitions for TS1/ppl.
-) (./Memoria.gls
+(./Memoria.gls
 File: Template/noulogo.png Graphic file (type png)
 <use Template/noulogo.png>
 Package pdftex.def Info: Template/noulogo.png  used on input line 1.
@@ -2053,7 +2146,7 @@ Package pdftex.def Info: Template/eimt.png  used on input line 1.
 ])
 File: Template/noulogo.png Graphic file (type png)
 <use Template/noulogo.png>
-Package pdftex.def Info: Template/noulogo.png  used on input line 383.
+Package pdftex.def Info: Template/noulogo.png  used on input line 401.
 (pdftex.def)             Requested size: 165.26283pt x 42.67912pt.
 
 
@@ -2065,7 +2158,7 @@ Package fancyhdr Warning: \headheight is too small (35.0pt):
 
 File: Template/eimt.png Graphic file (type png)
 <use Template/eimt.png>
-Package pdftex.def Info: Template/eimt.png  used on input line 383.
+Package pdftex.def Info: Template/eimt.png  used on input line 401.
 (pdftex.def)             Requested size: 73.03314pt x 9.95863pt.
 [20
 
@@ -2073,7 +2166,7 @@ Package pdftex.def Info: Template/eimt.png  used on input line 383.
 ]
 File: Template/noulogo.png Graphic file (type png)
 <use Template/noulogo.png>
-Package pdftex.def Info: Template/noulogo.png  used on input line 383.
+Package pdftex.def Info: Template/noulogo.png  used on input line 401.
 (pdftex.def)             Requested size: 165.26283pt x 42.67912pt.
 
 
@@ -2085,23 +2178,23 @@ Package fancyhdr Warning: \headheight is too small (35.0pt):
 
 File: Template/eimt.png Graphic file (type png)
 <use Template/eimt.png>
-Package pdftex.def Info: Template/eimt.png  used on input line 383.
+Package pdftex.def Info: Template/eimt.png  used on input line 401.
 (pdftex.def)             Requested size: 73.03314pt x 9.95863pt.
 [21
 
 ]
-Overfull \hbox (1.75156pt too wide) in paragraph at lines 383--383
+Overfull \hbox (1.75156pt too wide) in paragraph at lines 401--401
 \OT1/ppl/m/n/12 Us-ing Deriva-tive Dy-namic Time Warp-ing. \OT1/ppl/m/it/12 Biotech-nol-ogy Progress \OT1/ppl/b/n/12 29, \OT1/ppl/m/n/12 394{402. \OT1/ppl/m/sc/12 issn\OT1/ppl/m/n/12 : 1520-
  []
 
 
-Overfull \hbox (1.93459pt too wide) in paragraph at lines 383--383
+Overfull \hbox (1.93459pt too wide) in paragraph at lines 401--401
 \OT1/ppl/m/n/12 Anal-y-ses in Hu-man Nu-tri-tional Stud-ies. \OT1/ppl/m/it/12 Molec-u-lar Nu-tri-tion & Food Re-search \OT1/ppl/b/n/12 63, \OT1/ppl/m/n/12 1800384.
  []
 
 File: Template/noulogo.png Graphic file (type png)
 <use Template/noulogo.png>
-Package pdftex.def Info: Template/noulogo.png  used on input line 386.
+Package pdftex.def Info: Template/noulogo.png  used on input line 404.
 (pdftex.def)             Requested size: 165.26283pt x 42.67912pt.
 
 Package fancyhdr Warning: \headheight is too small (35.0pt): 
@@ -2112,12 +2205,12 @@ Package fancyhdr Warning: \headheight is too small (35.0pt):
 
 File: Template/eimt.png Graphic file (type png)
 <use Template/eimt.png>
-Package pdftex.def Info: Template/eimt.png  used on input line 386.
+Package pdftex.def Info: Template/eimt.png  used on input line 404.
 (pdftex.def)             Requested size: 73.03314pt x 9.95863pt.
 [22]
 File: Template/noulogo.png Graphic file (type png)
 <use Template/noulogo.png>
-Package pdftex.def Info: Template/noulogo.png  used on input line 392.
+Package pdftex.def Info: Template/noulogo.png  used on input line 410.
 (pdftex.def)             Requested size: 165.26283pt x 42.67912pt.
 
 
@@ -2129,7 +2222,7 @@ Package fancyhdr Warning: \headheight is too small (35.0pt):
 
 File: Template/eimt.png Graphic file (type png)
 <use Template/eimt.png>
-Package pdftex.def Info: Template/eimt.png  used on input line 392.
+Package pdftex.def Info: Template/eimt.png  used on input line 410.
 (pdftex.def)             Requested size: 73.03314pt x 9.95863pt.
 [23] (./Memoria.aux)
  ***********
@@ -2141,18 +2234,18 @@ Package logreq Info: Writing requests to 'Memoria.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 38398 strings out of 474137
- 729978 string characters out of 5748517
- 1941190 words of memory out of 5000000
- 59987 multiletter control sequences out of 15000+600000
+ 38507 strings out of 474137
+ 732128 string characters out of 5748517
+ 1950190 words of memory out of 5000000
+ 60084 multiletter control sequences out of 15000+600000
  574477 words of font info for 73 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,21n,101p,2380b,1836s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,22n,101p,2380b,1836s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <e:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><e:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb><e:/texlive/2023/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on Memoria.pdf (24 pages, 343359 bytes).
+Output written on Memoria.pdf (24 pages, 346009 bytes).
 PDF statistics:
- 471 PDF objects out of 1000 (max. 8388607)
- 425 compressed objects within 5 object streams
- 121 named destinations out of 1000 (max. 500000)
- 246 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 493 PDF objects out of 1000 (max. 8388607)
+ 447 compressed objects within 5 object streams
+ 133 named destinations out of 1000 (max. 500000)
+ 262 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -16,12 +16,15 @@
 \contentsline {section}{\numberline {2.1}Main objective}{13}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Specific objectives}{13}{section.2.2}%
 \contentsline {chapter}{\numberline {3}Sustainable development goals}{14}{chapter.3}%
-\contentsline {subsubsection}{SDG 3: Good Health and Well-being}{14}{subsubsection*.13}%
-\contentsline {subsubsection}{SDG 9: Industry, Innovation, and Infrastructure:}{14}{subsubsection*.14}%
-\contentsline {subsubsection}{SDG 10: Reduced Inequalities:}{14}{subsubsection*.15}%
+\contentsline {subsubsection}{SDG 3: Good Health and Well-being}{14}{subsubsection*.16}%
+\contentsline {subsubsection}{SDG 9: Industry, Innovation, and Infrastructure:}{14}{subsubsection*.17}%
+\contentsline {subsubsection}{SDG 10: Reduced Inequalities:}{14}{subsubsection*.18}%
 \contentsline {chapter}{\numberline {4}Approach and methodology}{15}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Methodology}{15}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Planning and calendar}{15}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Tasks}{15}{subsection.4.2.1}%
+\contentsline {subsubsection}{Main Tasks and prioritization}{15}{subsubsection*.19}%
+\contentsline {subsubsection}{Extra tasks}{15}{subsubsection*.20}%
 \contentsline {section}{\numberline {4.3}Risk analysis}{15}{section.4.3}%
 \contentsline {section}{\numberline {4.4}Final products}{15}{section.4.4}%
 \contentsline {section}{\numberline {4.5}Chapters structure}{15}{section.4.5}%
@@ -29,9 +32,10 @@
 \contentsline {section}{\numberline {5.1}Datasets}{16}{section.5.1}%
 \contentsline {section}{\numberline {5.2}Packages}{16}{section.5.2}%
 \contentsline {section}{\numberline {5.3}Modules}{16}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Shiny app}{16}{section.5.4}%
+\contentsline {section}{\numberline {5.4}Documentation}{16}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Shiny app}{16}{section.5.5}%
 \contentsline {chapter}{\numberline {6}Results}{17}{chapter.6}%
 \contentsline {chapter}{\numberline {7}Conclusion and future vision}{18}{chapter.7}%
-\contentsline {chapter}{Glossary}{19}{section*.19}%
-\contentsline {chapter}{Acronyms}{20}{section*.21}%
-\contentsline {chapter}{Bibliography}{21}{chapter*.23}%
+\contentsline {chapter}{Glossary}{19}{section*.29}%
+\contentsline {chapter}{Acronyms}{20}{section*.31}%
+\contentsline {chapter}{Bibliography}{21}{chapter*.33}%
