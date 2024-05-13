@@ -1,0 +1,37 @@
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{\numberline {1}Introduction}{8}{chapter.1}%
+\contentsline {section}{\numberline {1.1}General description}{8}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Context and justification}{8}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}Preprocessing of data}{9}{subsection.1.2.1}%
+\contentsline {subsubsection}{MS-based data preprocessing}{9}{subsubsection*.4}%
+\contentsline {subsubsection}{NMR-based data preprocessing}{10}{subsubsection*.5}%
+\contentsline {subsection}{\numberline {1.2.2}Pretreatment of Data}{10}{subsection.1.2.2}%
+\contentsline {subsubsection}{Handling Missing Values}{10}{subsubsection*.6}%
+\contentsline {subsubsection}{Managing Outliers}{11}{subsubsection*.7}%
+\contentsline {subsubsection}{Normalization}{11}{subsubsection*.8}%
+\contentsline {subsubsection}{Centering and Scaling}{11}{subsubsection*.9}%
+\contentsline {subsubsection}{Transf}{11}{subsubsection*.10}%
+\contentsline {section}{\numberline {1.3}State of the art}{12}{section.1.3}%
+\contentsline {chapter}{\numberline {2}Objectives}{13}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Main objective}{13}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Specific objectives}{13}{section.2.2}%
+\contentsline {chapter}{\numberline {3}Sustainable development goals}{14}{chapter.3}%
+\contentsline {subsubsection}{SDG 3: Good Health and Well-being}{14}{subsubsection*.13}%
+\contentsline {subsubsection}{SDG 9: Industry, Innovation, and Infrastructure:}{14}{subsubsection*.14}%
+\contentsline {subsubsection}{SDG 10: Reduced Inequalities:}{14}{subsubsection*.15}%
+\contentsline {chapter}{\numberline {4}Approach and methodology}{15}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Methodology}{15}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Planning and calendar}{15}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Risk analysis}{15}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Final products}{15}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Chapters structure}{15}{section.4.5}%
+\contentsline {chapter}{\numberline {5}Materials and methods}{16}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Datasets}{16}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Packages}{16}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Modules}{16}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Shiny app}{16}{section.5.4}%
+\contentsline {chapter}{\numberline {6}Results}{17}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Conclusion and future vision}{18}{chapter.7}%
+\contentsline {chapter}{Glossary}{19}{section*.19}%
+\contentsline {chapter}{Acronyms}{20}{section*.21}%
+\contentsline {chapter}{Bibliography}{21}{chapter*.23}%

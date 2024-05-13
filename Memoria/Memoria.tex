@@ -31,8 +31,13 @@
     \usepackage[toc, acronym, xindy]{glossaries}
     \makeglossaries
     \loadglsentries[main]{glossary.tex}
-    \usepackage[xindy]{imakeidx}
-    \makeindex
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%-------------- TEMP DOCUMENT SETTINGS FOR COMMENTS ---------------%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[colorinlistoftodos, textwidth=65mm, shadow]{todonotes}
+
 
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -210,6 +215,9 @@ Metabolomic data preprocessing involves denoising, baseline correction, peak pic
 
 
 
+El "State of the art" està bé, però en algun lloc és important emfasitzar que descfartem la metabolòmica no dirigida.
+
+
 Punto de partida del trabajo (¿Cuál es la necesidad a cubrir? ¿Por qué es un tema relevante? ¿Cómo se resuelve el problema de momento?) y aportación realizada (¿Qué resultado se quiere obtener?).
 
 Es importante tener en cuenta que el trabajo final tiene que ser comprensible para cualquier persona que conozca el área de conocimiento, pero no tiene porque ser experta en el tema del que versa el trabajo.
@@ -218,12 +226,27 @@ Es importante tener en cuenta que el trabajo final tiene que ser comprensible pa
 %%%%% OBJECTIVES %%%%%%
 \chapter{Objectives}
 
-Listado de los objetivos del trabajo.
-
 \section{Main objective}
+\begin{enumerate}
+    \item Desenvolupar un nou pipeline per al preprocés de dades de metabolòmica dirigida amb l'objectiu de millorar la eficiència i la modularitat respecte als pipelines existents. Aquest nou pipeline s'implementarà en R.
+\end{enumerate}
 
 \section{Specific objectives}
 
+\begin{enumerate}
+    \item Implementar el pipeline de preprocés de dades de metabolòmica dirigida utilitzant el paquet "targets" per a garantir la replicabilitat i la gestió eficient dels recursos computacionals.
+    \item Seleccionar diversos conjunts de dades de metabolòmica dirigida per validar i optimitzar el rendiment del nou pipeline, analitzant-ne la qualitat i la consistència.
+    \item Facilitar l'ús de l'eina desenvolupada a la comunitat científica, mitjançant la creació d'una documentació detallada i la publicació del codi en un repositori públic.
+\end{enumerate}
+
+% TODO 
+\todo[inline]{En els objectius específics és on hauries de parlar de la forma en que ho faras (per exemple, fent servir el paquet "targets") i també introduir la selecció i anàlisi d'alguns datasets ilustratius. En aquest camp sovint els datasets ho son tot.
+Ja he vist que després parles deL "approach taken to achieve this objective", però es que això és el que haurien de ser les tasques i la metodologia.
+}
+
+\todo[inline]{
+Resumint, valdria la pena incloure lo del targets i els datasets en les tasques i deliverables i sobretot tenir en compte que caldrà agafar que ja estigui fet o que caldria fer, i per això serà bo que en la revisió de la literatura" hi incloguis, no només, treballs de metabolòmica sino paquets de R que ja estan implementant moltes d'aquestes coses.
+}
 
 \chapter{Sustainable development goals}
 \label{s:etic}
@@ -273,18 +296,19 @@ Breve explicación de los contenidos de cada capítulo y su relación con el pro
 %Estado del arte del tema en cuestión. Tendría que acabar mostrando por qué el trabajo es importante y aporta algo, y con las hipótesis del trabajo.
 
 \chapter{Materials and methods}
-En estos apartados, hay que describir:
-\begin{itemize}
-    \item Los aspectos más relevante del diseño y desarrollo del trabajo.
-    \item La metodología elegida para hacer este desarrollo, describiendo las alternativas posibles, las decisiones tomadas, y los criterios utilizados para tomar estas decisiones.
-    \item Los productos obtenidos.
-\end{itemize}
+\todo[inline]{Los aspectos más relevante del diseño y desarrollo del trabajo.}
+\todo[inline]{La metodología elegida para hacer este desarrollo, describiendo las alternativas posibles, las decisiones tomadas, y los criterios utilizados para tomar estas decisiones.}
+\todo[inline]{Los productos obtenidos}
 
- 
-\textbf{La estructuración de los capítulos puede variar según el tipo de trabajo.}  
- 
-En caso de que se proceda, se incluirá un apartado de “Valoración económica del trabajo”. Este apartado indicará los gastos asociados al desarrollo y mantenimiento del trabajo, así como los beneficios económicos obtenidos y un análisis final sobre la viabilidad del producto.
+\section{Datasets}
+The datasets employed for the purpose of this study were obtained from the Metabolomics Workbench database, a public repository for metabolomics data. 
 
+\section{Packages}
+\section{Modules}
+
+
+\section{Shiny app}
+ 
 
 
 \chapter{Results}
@@ -351,7 +375,6 @@ Este capítulo tiene que incluir:
 %\end{itemize}
 
 \setglossarystyle{list}
-\printindex
 \printglossary[title=Glossary, toctitle=Glossary]
 \printglossary[type=\acronymtype, title=Acronyms, toctitle=Acronyms]
 

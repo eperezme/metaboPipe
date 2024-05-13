@@ -1,6 +1,6 @@
 ;; This logfile was generated automatically by `xindy'
-;; at 12.05.2024  16:56:12
-;; Indexstyle: "C:\\Users\\eduar\\Desktop\\TFM\\Memoria\\49dOMmOqO8", Rawindex: "C:\\Users\\eduar\\Desktop\\TFM\\Memoria\\jnlCxHmjuB", Output: "Memoria.acr"
+;; at 13.05.2024  15:54:10
+;; Indexstyle: "C:\\Users\\eduar\\Desktop\\TFM\\Memoria\\BQwX_pAQ5q", Rawindex: "C:\\Users\\eduar\\Desktop\\TFM\\Memoria\\xbJOvfIiCm", Output: "Memoria.acr"
 
 
 Building indexentry-tree:
