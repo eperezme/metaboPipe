@@ -1,0 +1,33 @@
+name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
+.Random.seed|object|1dc32b10f0607212|||||||||||||||
+after_filtered_experiment_plot|stem|21689d43186613ae|e42a40bce0bdb27f|922782cda2ab1ed2|-2050561666||t19857.4771955104s|a96c250e4b19e03e|54|qs|local|vector|||0.218||
+before_filtered_experiment_plot|stem|21689d43186613ae|1bf9f36dc9e566a0|0d1b6632549c182e|1237888784||t19857.4771698863s|a96c250e4b19e03e|54|qs|local|vector|||0.61||
+columns|object|d87ca235fc064cf3|||||||||||||||
+data_loaded_data|stem|579abebc95464836|022e1983eea91314|768132e60ce10a3d|-1111640196||t19857.4759228907s|de1ca5b323337744|88293|fst_tbl|local|vector|||0.016||
+data_loaded_matrixFile|stem|f389fd2332250422|03a5cebb80af9957|ef46db3751d8e999|1033549046|data/ST000284/dataMatrix.csv|t19857.3847386364s|a35b4bdd7a312130|191608|file|local|vector|||0||
+data_loaded_sample|stem|9d8bf4bc9e6b0d83|0550f35f6fe56771|32ef5357f2f8812b|-1949599237||t19857.4759224506s|1e73025651326e53|14078|fst_tbl|local|vector|||0||
+data_loaded_sampleFile|stem|6d6bd55ebd3dd724|eaf35a8e03c92a8c|ef46db3751d8e999|126446551|data/ST000284/sampleMetadata.csv|t19857.3847386364s|faf1e1714bdc53e8|16515|file|local|vector|||5.344|package struct was built under R version 4.3.2. package S4Vectors was built under R version 4.3.2. package GenomeInfoDb was built under R version 4.3.3. package VIM was built under R version 4.3.3. package colorspace was built under R version 4.3.3. package imputeLCMD was built under R version 4.3.3. package tmvtnorm was built under R version 4.3.3. package mvtnorm was built under R version 4.3.3. package Matrix was built under R version 4.3.3. package gmm was built under R version 4.3.3. package sandwich was built under R version 4.3.3. package missForest was built under R version 4.3.3. package caret was built under R version 4.3.3. package lattice was built under R version 4.3.3. package tidyverse was built under R version 4.3.3. package tibble was built under R version 4.3.3. package tidyr was built under R version 4.3.3. package readr was built under R version 4.3.3. package purrr was built under R version 4.3.3. package dplyr was built under R version 4.3.3. package stringr was built under R version 4.3.3. package forcats was built under R version 4.3.3. package lubridate was built under R version 4.3.3. package tinytex was built under R version 4.3.3. package HotellingEllipse was built under R version 4.3.3. package ggforce was built under R version 4.3.3. package cowplot was built under R version 4.3.3|
+data_loaded_variable|stem|4137f25c078de09f|202708073ca66f42|c26e085eb1453c38|1386089475||t19857.4759226121s|e96b76c2f6a50c73|3646|fst_tbl|local|vector|||0||
+data_loaded_variableFile|stem|4461097e13737c98|ec654d6f29523349|ef46db3751d8e999|781067609|data/ST000284/variableMetadata.csv|t19857.3847386364s|a55889fd9c7c534a|3294|file|local|vector|||0||
+dataMatrixPath|object|e80f2416df652d4c|||||||||||||||
+dataSep|object|c029548aed30b115|||||||||||||||
+description|object|8d1a77900b379118|||||||||||||||
+experiment|stem|b7c8c3876c0afdda|19d2a86409011ad5|8d51dce3b75848a0|1275671355||t19857.4759281489s|bda6b9dbf294721f|93710|qs|local|vector|||0.453||
+export|stem|6dd71d12008128c1|856aa6e5909b4935|125be8789a3aa637|-2123215358||t19857.4772501801s|de1c6d017cb4e8a8|38|qs|local|vector|||0.031||
+factor_col|object|46235f862434582f|||||||||||||||
+factorized_experiment|stem|3f90f93e4540d6d5|dba76e4e83b56517|43dcabe3c2ddc4c8|1643039527||t19857.4759285455s|2d43937bb442cfd1|93647|qs|local|vector|||0.032||
+factorized_experiment_na|stem|3f90f93e4540d6d5|c83be3b19e0b0e92|0d1b6632549c182e|23927424||t19857.475929148s|2d43937bb442cfd1|93647|qs|local|vector|||0.032||
+filtered_experiment|stem|50c41ab3d28b2721|15787e59f38279bd|b37e26d50fa03219|1541397327||t19857.4759368521s|25b6054e74aaf7eb|87882|qs|local|vector|||0.218||
+filtered_experiment_missingval|stem|1f99c203664eb848|c464ba8f85801fb2|b927c6aeceff23be|146942080||t19857.4759341941s|7de6f22e2433a70b|93644|qs|local|vector|||0.172||
+filtered_experiment_outliers_plot|stem|21689d43186613ae|c0be70cb82a30064|b37e26d50fa03219|-477936551||t19857.4771926487s|a96c250e4b19e03e|54|qs|local|vector|||1.937||
+imputed_experiment|stem|371c4c6b3dfd2eb6|2683bf88cbcbf73a|922782cda2ab1ed2|784899677||t19857.476166742s|f83495b5e1cc9deb|88241|qs|local|vector|||18||
+name|object|16a4d1c671b92efe|||||||||||||||
+normalized_experiment|stem|5299f5c148de3253|4f0ae7ea58fd1e62|7602f188bdaa145c|-692973237||t19857.4772157343s|859caa10983e0735|134043|qs|local|vector|||1.735|package Rserve was built under R version 4.3.2. CairoFonts has no effect on Windows. Please use parfamily... to specify the desired font  see par.. CairoFonts has no effect on Windows. Please use parfamily... to specify the desired font  see par.|
+outdir|object|00d05dbfb39de90f|||||||||||||||
+sample_id_col|object|ceca6ddf2fbe8c43|||||||||||||||
+sampleMetadataPath|object|fa37337c4bbf2ef2|||||||||||||||
+sampleSep|object|c029548aed30b115|||||||||||||||
+scaled_experiment|stem|3d9a8fe7a1573958|878fdbb3d5edce18|b66fe02fe50d1ab9|1081344223||t19857.4772497041s|5f14c8147173aef3|153635|qs|local|vector|||1.468|CairoFonts has no effect on Windows. Please use parfamily... to specify the desired font  see par.. CairoFonts has no effect on Windows. Please use parfamily... to specify the desired font  see par.|
+transformed_experiment|stem|0651803fcb7eb0b2|c59d779073950b8d|fd4d16157300ee46|-420343395||t19857.4772323764s|72c7dfa59dd38a9d|122359|qs|local|vector|||1.438|CairoFonts has no effect on Windows. Please use parfamily... to specify the desired font  see par.. CairoFonts has no effect on Windows. Please use parfamily... to specify the desired font  see par.|
+variableMetadataPath|object|6b08d3ab25281aff|||||||||||||||
+variableSep|object|c029548aed30b115|||||||||||||||

@@ -31,8 +31,13 @@
     \usepackage[toc, acronym, xindy]{glossaries}
     \makeglossaries
     \loadglsentries[main]{glossary.tex}
-    \usepackage[xindy]{imakeidx}
-    \makeindex
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%-------------- TEMP DOCUMENT SETTINGS FOR COMMENTS ---------------%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[colorinlistoftodos, textwidth=65mm, shadow]{todonotes}
+
 
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -206,24 +211,46 @@ Transformation becomes necessary to address data variance after scaling, aiming 
 
 \section{State of the art}
 
+\todo[inline]{Punto de partida del trabajo (¿Cuál es la necesidad a cubrir? ¿Por qué es un tema relevante? ¿Cómo se resuelve el problema de momento?) y aportación realizada (¿Qué resultado se quiere obtener?).}
+
 Metabolomic data preprocessing involves denoising, baseline correction, peak picking, and alignment. For \acrshort{ms}-based analysis, tools like XCMS and MZmine facilitate preprocessing, while for \acrshort{nmr} data, packages like BATMAN and RAMSY offer robust preprocessing capabilities. Pretreatment techniques include handling missing values, outlier detection, and normalization using methods like imputation, robust statistical measures, and scaling techniques.
 
+Nevertheless the field lacks a standardized approach to metabolomic data preprocessing, with inconsistencies in terminology and methodologies. 
+\citeauthor{stanstrupMetaRbolomicsToolboxBioconductor2019} in their \citetitle{stanstrupMetaRbolomicsToolboxBioconductor2019} made an extensive revision of both the scientific literature and the R landscape for packages relevant for metabolomic research.
 
 
-Punto de partida del trabajo (¿Cuál es la necesidad a cubrir? ¿Por qué es un tema relevante? ¿Cómo se resuelve el problema de momento?) y aportación realizada (¿Qué resultado se quiere obtener?).
 
-Es importante tener en cuenta que el trabajo final tiene que ser comprensible para cualquier persona que conozca el área de conocimiento, pero no tiene porque ser experta en el tema del que versa el trabajo.
+
+\todo{En algun lloc és important emfasitzar que descfartem la metabolòmica no dirigida.}
+
+
+
 
 
 %%%%% OBJECTIVES %%%%%%
-\chapter{Objectives}
-
-Listado de los objetivos del trabajo.
+\chapter{Objectives} \todo{Escriure-ho en angles}
 
 \section{Main objective}
+\begin{enumerate}
+    \item Desenvolupar un nou pipeline per al preprocés de dades de metabolòmica dirigida amb l'objectiu de millorar la eficiència i la modularitat respecte als pipelines existents. Aquest nou pipeline s'implementarà en R. 
+\end{enumerate}
 
 \section{Specific objectives}
 
+\begin{enumerate}
+    \item Implementar el pipeline de preprocés de dades de metabolòmica dirigida utilitzant el paquet "targets" per a garantir la replicabilitat i la gestió eficient dels recursos computacionals.
+    \item Seleccionar diversos conjunts de dades de metabolòmica dirigida per validar i optimitzar el rendiment del nou pipeline, analitzant-ne la qualitat i la consistència.
+    \item Facilitar l'ús de l'eina desenvolupada a la comunitat científica, mitjançant la creació d'una documentació detallada i la publicació del codi en un repositori públic.
+\end{enumerate}
+
+% TODO 
+\todo[inline]{En els objectius específics és on hauries de parlar de la forma en que ho faras (per exemple, fent servir el paquet "targets") i també introduir la selecció i anàlisi d'alguns datasets ilustratius. En aquest camp sovint els datasets ho son tot.
+Ja he vist que després parles deL "approach taken to achieve this objective", però es que això és el que haurien de ser les tasques i la metodologia.
+}
+
+\todo[inline]{
+Resumint, valdria la pena incloure lo del targets i els datasets en les tasques i deliverables i sobretot tenir en compte que caldrà agafar que ja estigui fet o que caldria fer, i per això serà bo que en la revisió de la literatura" hi incloguis, no només, treballs de metabolòmica sino paquets de R que ja estan implementant moltes d'aquestes coses.
+}
 
 \chapter{Sustainable development goals}
 \label{s:etic}
@@ -255,16 +282,25 @@ Mención de cuáles son las posibles estrategias para llevar a cabo el trabajo y
 
 \section{Planning and calendar}
 
-Descripción de los recursos and necesarios para hacer el trabajo, las tareas a realizar y una planificación temporal de cada tarea mediante un diagrama de Gantt o similar. Esta planificación tendría que marcar cuáles son los hitos parciales de cada una de las PEC.
+\subsection{Tasks}
+\subsubsection{Main Tasks and prioritization}
 
-Identificación de los posibles riesgos que pueden hacer que esta planificación no se cumpla y descripción de los planes de mitigación o alternativos en caso de que estos riesgos sean un problema.
+
+\subsubsection{Extra tasks}
+
 
 \section{Risk analysis}
 
-\section{Final products}
-No hay que entrar en detalle: la descripción detallada se hará en el resto de capítulos.
+\section{Final products} \todo{Expand on every item}
+\begin{itemize}
+    \item A pipeline for targeted metabolomic data preprocessing.
+    \item A package for the modular implementation of that pipeline in R.
+    \item A detailed documentation of the pipeline.
+    \item A Shiny app for the accessibility of the pipeline.
+    \item A public repository with the code and documentation.
+\end{itemize}
 
-\section{Chapters structure}
+\section{Chapters structure} \todo{Dejar para el final}
 Breve explicación de los contenidos de cada capítulo y su relación con el proyecto global.
 
 
@@ -273,18 +309,24 @@ Breve explicación de los contenidos de cada capítulo y su relación con el pro
 %Estado del arte del tema en cuestión. Tendría que acabar mostrando por qué el trabajo es importante y aporta algo, y con las hipótesis del trabajo.
 
 \chapter{Materials and methods}
-En estos apartados, hay que describir:
-\begin{itemize}
-    \item Los aspectos más relevante del diseño y desarrollo del trabajo.
-    \item La metodología elegida para hacer este desarrollo, describiendo las alternativas posibles, las decisiones tomadas, y los criterios utilizados para tomar estas decisiones.
-    \item Los productos obtenidos.
-\end{itemize}
+\todo[inline]{Los aspectos más relevante del diseño y desarrollo del trabajo.}
+\todo[inline]{La metodología elegida para hacer este desarrollo, describiendo las alternativas posibles, las decisiones tomadas, y los criterios utilizados para tomar estas decisiones.}
+\todo[inline]{Los productos obtenidos}
 
- 
-\textbf{La estructuración de los capítulos puede variar según el tipo de trabajo.}  
- 
-En caso de que se proceda, se incluirá un apartado de “Valoración económica del trabajo”. Este apartado indicará los gastos asociados al desarrollo y mantenimiento del trabajo, así como los beneficios económicos obtenidos y un análisis final sobre la viabilidad del producto.
+\section{Datasets}
+The datasets employed for the purpose of this study were obtained from the Metabolomics Workbench database, a public repository for metabolomics data. 
 
+\section{Packages}
+The pipeline was developed using the R programming language and various packages \todo{Table of packages used in the project}.
+
+
+\section{Modules} \todo{add a summary of 1: Number of functions and 2: Number of lines of code}
+\todo{Describir los módulos que forman parte del pipeline, la idea es que cada modulo representa una etapa del preprocesamiento de datos. (e.g., filtering, imputation, normalization, scaling, etc.)}
+
+\section{Documentation}
+
+\section{Shiny app}
+ 
 
 
 \chapter{Results}
@@ -351,7 +393,6 @@ Este capítulo tiene que incluir:
 %\end{itemize}
 
 \setglossarystyle{list}
-\printindex
 \printglossary[title=Glossary, toctitle=Glossary]
 \printglossary[type=\acronymtype, title=Acronyms, toctitle=Acronyms]
 

@@ -241,16 +241,25 @@ metaboNorm <- function(mSet, rowNorm = "NULL", transNorm = "NULL", scaleNorm = "
     # Perform data normalization
     mSet <- PreparePrenormData(mSet)
     mSet <- Normalization(mSet, rowNorm, transNorm, scaleNorm, ref, ratio, ratioNum)
-    
+    plot_name <- ""
+    if(rowNorm != "NULL"){
+      plot_name <- paste0(plot_name, "_", rowNorm, "normalization")
+    }
+    if(transNorm  != "NULL"){
+      plot_name <- paste0(plot_name, "_", transNorm, "transformation")
+    }
+    if(scaleNorm != "NULL"){
+      plot_name <- paste0(plot_name, "_", scaleNorm, "scaling")
+    }
     # Save plots
     # View feature normalization
     tryCatch(
       {
         dir.create("Plots", showWarnings = FALSE)
-        mSet <- PlotNormSummary(mSet, paste0(out_dir, "/Plots/Normalization_features"), format = "png", dpi = 300, width = NA)
+        mSet <- PlotNormSummary(mSet, paste0(out_dir, "/Plots/", plot_name, "_features"), format = "png", dpi = 300, width = NA)
         
         # View sample normalization
-        mSet <- PlotSampleNormSummary(mSet, paste0(out_dir, "Plots/Normalization_samples"), format = "png", dpi = 300, width = NA)
+        mSet <- PlotSampleNormSummary(mSet, paste0(out_dir, "/Plots/", plot_name, "_samples"), format = "png", dpi = 300, width = NA)
       },
       error = function(e) {
         cat("Error occurred during plot:", conditionMessage(e), "\n")

@@ -80,7 +80,7 @@ normalize_csn <- function(dataset_experiment, scaling_factor = 1) {
 #' 
 #' @examples
 #' normalize_metab(dataset_experiment, factor_col, sample_id_col, rowNorm = NULL, transNorm = NULL, scaleNorm = NULL, ref = NULL, ratio = FALSE, ratioNum = 20, out_dir)
-normalize_metab <- function(dataset_experiment, factor_col, sample_id_col, rowNorm = NULL, transNorm = NULL, scaleNorm = NULL, ref = NULL, ratio = FALSE, ratioNum = 20, out_dir) {
+normalize_metab <- function(dataset_experiment, factor_col, sample_id_col, rowNorm = "NULL", transNorm = "NULL", scaleNorm = "NULL", ref = NULL, ratio = FALSE, ratioNum = 20, out_dir) {
   # Check if the rowNorm argument is valid
   if (!is.null(rowNorm) && !rowNorm %in% c("QuantileNorm", "CompNorm", "SumNorm", "MedianNorm", "SpecNorm", "NULL")) {
     stop("Invalid rowNorm argument. Must be one of 'QuantileNorm', 'CompNorm', 'SumNorm', 'MedianNorm', 'SpecNorm', or NULL.")
