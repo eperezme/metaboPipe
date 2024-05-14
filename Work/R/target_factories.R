@@ -274,3 +274,27 @@ normalize <- function(output_name, input_name, factor_col, sample_id_col, rowNor
                    format = "qs", deployment = "main", cue = tar_cue(mode = "always"), deps = target_name)
   )
 }
+
+
+#' Export Data
+#'
+#' Exports a dataset to a specified directory with a given name.
+#'
+#' @param output_name The name of the exported dataset.
+#' @param input_name The name of the input dataset to be exported.
+#' @param out_dir The directory where the exported dataset will be saved.
+#'
+#' @return A list containing the target for exporting the dataset.
+#' @export
+#'
+#' @examples
+#' exportData("exported_dataset.csv", my_dataset, "output_directory/")
+exportData <- function(output_name, input_name, out_dir, out_name = "Processed_Data") {
+  target_name <- deparse(substitute(output_name))
+  data <- deparse(substitute(input_name))
+  command <- substitute(export_data(dataset_exp=data, out_dir=out_dir, out_name = out_name), env = list(data = as.name(data), out_dir = out_dir, out_name = out_name))
+  list(
+    tar_target_raw(target_name, command, format = "qs", deployment = "main")
+  )
+}
+

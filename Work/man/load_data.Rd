@@ -9,7 +9,9 @@ load_data(
   dataMatrixFile,
   sampleMetadataFile,
   variableMetadataFile = NULL,
-  separator = ","
+  dataSep = ",",
+  sampleSep = ",",
+  variableSep = ","
 )
 }
 \arguments{
@@ -21,7 +23,11 @@ load_data(
 
 \item{variableMetadataFile}{Path to the variable metadata file (optional).}
 
-\item{separator}{The separator used in the files (default is ",").}
+\item{dataSep}{The separator used in the dataMatrixfile (default is ",").}
+
+\item{sampleSep}{The separator used in the sampleMetadataFile (default is ",").}
+
+\item{variableSep}{The separator used in the variableMetadataFile (default is ",").}
 }
 \value{
 A list of targets to load and read data matrix and sample metadata.

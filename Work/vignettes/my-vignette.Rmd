@@ -39,6 +39,9 @@ Clone the MetaboPipe repository from GitHub and install the package using the fo
 # Clone the MetaboPipe repository
 system("git clone https://github.com/eperezme/metaboPipe.git")
 
+# Install metaboAnalystR
+devtools::install_github("xia-lab/MetaboAnalystR", build = TRUE, build_vignettes = FALSE)
+
 # Install the package
 install.packages("devtools")
 devtools::install_github("https://github.com/eperezme/metaboPipe", subdir = "Work")
@@ -66,7 +69,7 @@ A notable distinction between `DatasetExperiment` and `SummarizedExperiment` str
 
 All slots are accessible using dollar notation.
 
-```{r }
+```{r, eval=FALSE}
 head(DE$data[, 1:4])
 head(DE$sample_meta[, 1:4])
 head(DE$variable_meta)
@@ -81,9 +84,8 @@ head(DE$variable_meta)
 The `metaboPipe` pipeline functions consists of several functions that create targets to execute specific processing steps, including data loading, filtering, batch correction, imputation and normalization (that includes tranformation and scaling). Each step is defined as a single or multiple targets in the pipeline, and the targets are executed sequentially to process the data.
 
 In order to use the pipeline functions in `metaboPipe`, we need to create a targets file.
-```{r}
-library(targets)
-use_targets()
+```{r, eval=FALSE}
+targets::use_targets()
 ```
 
 An example `_targets.R` file is created and saved in the working directory. The `_targets.R` file contains some example code, which we will modify to define the pipeline for our data processing workflow.
@@ -137,7 +139,7 @@ Instead of writing 3 targets to load the 3 dataframes we can define the paths to
 The `load_data()` function takes the paths to the data files as arguments and returns a list with the loaded dataframes. The `createExperiment()` function takes the loaded dataframes as arguments and returns a `DatasetExperiment` object.
 
 Same as before, the first variable on the functions is the name of the target.
-```{r, eval=FALSE}
+```{r load_data_exp, eval=FALSE}
 dataMatrixPath <- "data/ST000284/dataMatrix.csv"
 sampleMetadataPath <- "data/ST000284/sampleMetadata.csv"
 variableMetadataPath <- "data/ST000284/variableMetadata.csv"
@@ -149,12 +151,12 @@ list(
 ```
 
 Now if we run `tar_make()` the pipeline will be executed and the data will be loaded and merged into a `DatasetExperiment` object. As before to load the object into the R environment we can use the `tar_load()` function.
-```{r, eval=FALSE}
+```{r load, eval=FALSE}
 tar_load(experiment)
 ```
 
 By default, `load_data()` uses the "," as the separator for the data files. If the data files use a different separator, we can define for each file the separator:
-```{r, eval=FALSE}
+```{r load_separators, eval=FALSE}
 # Load the Data
 dataMatrixPath <- "data/ST000284/dataMatrix.csv"
 sampleMetadataPath <- "data/ST000284/sampleMetadata.csv"
@@ -175,7 +177,7 @@ list(
 
 ### Factorizing the columns of the experiment
 There are functions that assume that specific columns are factors, such as the `normalize()` function. To factorize the columns of the experiment we can use the `factorize_cols()` function. This function takes the `DatasetExperiment` object, and a vector of column names as an argument and returns the object with the columns factorized.
-```{r}
+```{r factorize, eval=FALSE}
 # Load the Data
 dataMatrixPath <- "data/ST000284/dataMatrix.csv"
 sampleMetadataPath <- "data/ST000284/sampleMetadata.csv"
@@ -202,7 +204,7 @@ list(
 ### Filtering the data
 After the setup of the experiment, we can start the data manipulation steps. The first step we will perform is to filter the data. The `filter_step()` function encompases 2 filtering steps: 1) filtering by % of missing values and 2) filtering the outliers. The threshold is defined as the minimum percentage of data explained. By default the `threshold` is `0.8`, meaning that each row and collumn must have at least 80% of the values or get removed. The `filter_outliers` argument is a boolean that defines if the outliers should be removed or not and the `conf.limit` argument specify the confidence interval (either `'0.95'` or `'0.99'`) to discriminate the observation as an outlier or not. 
 
-```{r}
+```{r filter, eval=FALSE}
 # Load the Data
 dataMatrixPath <- "data/ST000284/dataMatrix.csv"
 sampleMetadataPath <- "data/ST000284/sampleMetadata.csv"
@@ -226,6 +228,201 @@ list(
   filter_step(filtered_experiment, factorized_experiment, threshold = 0.8, filter_outliers = TRUE, conf.limit = "0.95", out_dir = "results")
 )
 ```
+
+The `out_dir` option is where the plots will be exported under the path: `out_dir/plots`, in this case: `results/plots`.
+
+### Imputing
+The next step is to impute the missing values that remain after the filter step. To perform that we use the `impute()` function specifying the impute method we want to use and if it needs a special parameter like knn we specify it using `k`. In this example we will use a `Random forest` approach.
+```{r impute, eval=FALSE}
+# General config
+outdir = "results"
+dir.create(out_dir, showWarnings = FALSE) # We create the outdir in case there its not created yet
+out_dir <- tools::file_path_as_absolute(out_dir) # We get the absolute path of the dir for compatibility
+
+# Load the Data
+dataMatrixPath <- "data/ST000284/dataMatrix.csv"
+sampleMetadataPath <- "data/ST000284/sampleMetadata.csv"
+variableMetadataPath <- "data/ST000284/variableMetadata.csv"
+dataSep <- ","
+sampleSep <- ","
+variableSep <- ","
+
+# Create the experiment
+name <- "ST000284"
+description <- "Example metabolomics dataset ST000284"
+
+# Setting up the columns
+columns <- c("Groups", "Age", "Gender", "Smoking", "Alcohol")
+
+
+list(
+  load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath, dataSep, sampleSep, variableSep),
+  createExperiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
+  factorize_cols(factorized_experiment, experiment, columns),
+  filter_step(filtered_experiment, factorized_experiment, threshold = 0.8, filter_outliers = TRUE, conf.limit = "0.95", out_dir = outdir),
+  impute(imputed_experiment, filtered_experiment, method = 'RF', k = 5) # Impute using Random forest
+)
+```
+
+
+### Normalizing
+Next step is to normalize the data. To do so we use the `normalize()` function, that uses MetaboAnalystR to normalize the data. To normalize the data we need to specify the factor study column and the column with the sample id using `factor_col`  and the `sample_id_col` arguments. Also the method of normalization (by rows) with the `rowNorm` wich in this case is by internal compound `CompNorm`. We specify the internal compound name with `ref`. 
+
+```{r normalize, eval=FALSE}
+# General config
+outdir = "results"
+dir.create(out_dir, showWarnings = FALSE) # We create the outdir in case there its not created yet
+out_dir <- tools::file_path_as_absolute(out_dir) # We get the absolute path of the dir for compatibility
+
+# Load the Data
+dataMatrixPath <- "data/ST000284/dataMatrix.csv"
+sampleMetadataPath <- "data/ST000284/sampleMetadata.csv"
+variableMetadataPath <- "data/ST000284/variableMetadata.csv"
+dataSep <- ","
+sampleSep <- ","
+variableSep <- ","
+
+# Create the experiment
+name <- "ST000284"
+description <- "Example metabolomics dataset ST000284"
+
+# Setting up the columns
+columns <- c("Groups", "Age", "Gender", "Smoking", "Alcohol")
+
+
+list(
+  load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath, dataSep, sampleSep, variableSep),
+  createExperiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
+  factorize_cols(factorized_experiment, experiment, columns),
+  filter_step(filtered_experiment, factorized_experiment, threshold = 0.8, filter_outliers = TRUE, conf.limit = "0.95", out_dir = outdir),
+  impute(imputed_experiment, filtered_experiment, method = 'RF', k = 5),
+  normalize(normalized_experiment, imputed_experiment, factor_col = "Groups", sample_id_col = "sample_id", rowNorm = 'CompNorm', ref = 'Creatine..132.1...90.0.', out_dir = outdir)
+)
+
+```
+
+
+### Scaling
+Scaling is also applied using the `normalize()` function. But to do that, instead of the `rowNorm` we specify it using the `scaleNorm` argument. We defined in the preamble the factor_col and sample_id_col for simplicity.
+
+```{r scaling, eval=FALSE}
+# General config
+outdir = "results"
+dir.create(out_dir, showWarnings = FALSE) # We create the outdir in case there its not created yet
+out_dir <- tools::file_path_as_absolute(out_dir) # We get the absolute path of the dir for compatibility
+
+# Load the Data
+dataMatrixPath <- "data/ST000284/dataMatrix.csv"
+sampleMetadataPath <- "data/ST000284/sampleMetadata.csv"
+variableMetadataPath <- "data/ST000284/variableMetadata.csv"
+dataSep <- ","
+sampleSep <- ","
+variableSep <- ","
+
+# Create the experiment
+name <- "ST000284"
+description <- "Example metabolomics dataset ST000284"
+
+# Setting up the columns
+columns <- c("Groups", "Age", "Gender", "Smoking", "Alcohol")
+factor_col = "Groups"
+sample_id_col = "sample_id"
+
+
+list(
+  load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath, dataSep, sampleSep, variableSep),
+  createExperiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
+  factorize_cols(factorized_experiment, experiment, columns),
+  filter_step(filtered_experiment, factorized_experiment, threshold = 0.8, filter_outliers = TRUE, conf.limit = "0.95", out_dir = outdir),
+  impute(imputed_experiment, filtered_experiment, method = 'RF', k = 5),
+  normalize(normalized_experiment, imputed_experiment, factor_col = factor_col, sample_id_col = sample_id_col, rowNorm = 'CompNorm', ref = 'Creatine..132.1...90.0.', out_dir = outdir),
+  normalize(scaled_experiment, normalized_experiment,factor_col = factor_col, sample_id_col = sample_id_col, scaleNorm = "AutoNorm", out_dir = outdir)
+)
+```
+
+### Transformation
+Transforming the data is also made with the `normalize()` function under the argument `transNorm`.
+
+```{r transform, eval=FALSE}
+# General config
+outdir = "results"
+dir.create(out_dir, showWarnings = FALSE) # We create the outdir in case there its not created yet
+out_dir <- tools::file_path_as_absolute(out_dir) # We get the absolute path of the dir for compatibility
+
+# Load the Data
+dataMatrixPath <- "data/ST000284/dataMatrix.csv"
+sampleMetadataPath <- "data/ST000284/sampleMetadata.csv"
+variableMetadataPath <- "data/ST000284/variableMetadata.csv"
+dataSep <- ","
+sampleSep <- ","
+variableSep <- ","
+
+# Create the experiment
+name <- "ST000284"
+description <- "Example metabolomics dataset ST000284"
+
+# Setting up the columns
+columns <- c("Groups", "Age", "Gender", "Smoking", "Alcohol")
+factor_col = "Groups"
+sample_id_col = "sample_id"
+
+
+list(
+  load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath, dataSep, sampleSep, variableSep),
+  createExperiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
+  factorize_cols(factorized_experiment, experiment, columns),
+  filter_step(filtered_experiment, factorized_experiment, threshold = 0.8, filter_outliers = TRUE, conf.limit = "0.95", out_dir = outdir),
+  impute(imputed_experiment, filtered_experiment, method = 'RF', k = 5),
+  normalize(normalized_experiment, imputed_experiment, factor_col = factor_col, sample_id_col = sample_id_col, rowNorm = 'CompNorm', ref = 'Creatine (132.1 / 90.0)', out_dir = outdir),
+  normalize(scaled_experiment, normalized_experiment,factor_col = factor_col, sample_id_col = sample_id_col, scaleNorm = "AutoNorm", out_dir = outdir),
+  normalize(transformed_experiment, scaled_experiment, factor_col = factor_col, sample_id_col = sample_id_col, transNorm = "LogNorm", out_dir= outdir)
+)
+```
+
+### Extracting the data
+Now that we have defined all the steps that we want the pipeline to perform we should tell them to extract the data processed. This can be achieved using the `export_data()` function:
+
+```{r export, eval=FALSE}
+# General config
+outdir = "results"
+dir.create(out_dir, showWarnings = FALSE) # We create the outdir in case there its not created yet
+out_dir <- tools::file_path_as_absolute(out_dir) # We get the absolute path of the dir for compatibility
+
+# Load the Data
+dataMatrixPath <- "data/ST000284/dataMatrix.csv"
+sampleMetadataPath <- "data/ST000284/sampleMetadata.csv"
+variableMetadataPath <- "data/ST000284/variableMetadata.csv"
+dataSep <- ","
+sampleSep <- ","
+variableSep <- ","
+
+# Create the experiment
+name <- "ST000284"
+description <- "Example metabolomics dataset ST000284"
+
+# Setting up the columns
+columns <- c("Groups", "Age", "Gender", "Smoking", "Alcohol")
+factor_col = "Groups"
+sample_id_col = "sample_id"
+
+
+list(
+  load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath, dataSep, sampleSep, variableSep),
+  createExperiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
+  factorize_cols(factorized_experiment, experiment, columns),
+  filter_step(filtered_experiment, factorized_experiment, threshold = 0.8, filter_outliers = TRUE, conf.limit = "0.95", out_dir = outdir),
+  impute(imputed_experiment, filtered_experiment, method = 'RF', k = 5),
+  normalize(normalized_experiment, imputed_experiment, factor_col = factor_col, sample_id_col = sample_id_col, rowNorm = 'CompNorm', ref = 'Creatine (132.1 / 90.0)', out_dir = outdir),
+  normalize(scaled_experiment, normalized_experiment,factor_col = factor_col, sample_id_col = sample_id_col, scaleNorm = "AutoNorm", out_dir = outdir),
+  normalize(transformed_experiment, scaled_experiment, factor_col = factor_col, sample_id_col = sample_id_col, transNorm = "LogNorm", out_dir= outdir),
+  exportData(export, transformed_experiment, out_dir= outdir)
+)
+```
+
+
+
+
+
 
 
 
