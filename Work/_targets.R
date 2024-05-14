@@ -32,44 +32,38 @@ tar_option_set(
 # )
 # tar_option_set(controller = controller)
 #### Global variables #####
-out_dir <- './Output'
-dataMatrixPath <- 'data/ST000284/dataMatrix.csv'
-sampleMetadataPath <- 'data/ST000284/sampleMetadata.csv'
-variableMetadataPath <- 'data/ST000284/variableMetadata.csv'
-dataSep <- ','
-sampleSep <- ','
-variableSep <- ','
+# General config
+outdir = "results"
+dir.create(outdir, showWarnings = FALSE) # We create the outdir in case there its not created yet
+outdir <- tools::file_path_as_absolute(outdir) # We get the absolute path of the dir for compatibility
 
-# Columns settings
-factor_cols <- c('Groups', 'Age', 'Gender', 'Smoking', 'Alcohol')
-sample_id_col <- 'sample_id'
-sample_type_col <- 'sample_type'
-group_col <- 'Groups'
+# Load the Data
+dataMatrixPath <- "data/ST000284/dataMatrix.csv"
+sampleMetadataPath <- "data/ST000284/sampleMetadata.csv"
+variableMetadataPath <- "data/ST000284/variableMetadata.csv"
+dataSep <- ","
+sampleSep <- ","
+variableSep <- ","
+
+# Create the experiment
+name <- "ST000284"
+description <- "Example metabolomics dataset ST000284"
+
+# Setting up the columns
+columns <- c("Groups", "Age", "Gender", "Smoking", "Alcohol")
+factor_col = "Groups"
+sample_id_col = "sample_id"
 
 
-dir.create(out_dir, showWarnings = FALSE)
-out_dir <- tools::file_path_as_absolute(out_dir)
-##### DEFINE THE PIPELINE ######
 list(
-# LOAD THE DATA
-load_data(data, dataMatrixPath, sampleMetadataPath, dataSep = dataSep, sampleSep = sampleSep, variableSep = variableSep),
-
-# Create a DatasetExperiment object
-createExperiment(experiment, data),
-
-# Factorize the cols
-factorize_cols(factorized, experiment, factor_cols),
-
-#SHINY STEPS
-
-filter_step(filtered_1, factorized, threshold = 0.8, filter_outliers = TRUE, conf.limit = '0.95', out_dir = out_dir),
-impute(imputed_2, filtered_1, method = 'RF', k = 5),
-normalize(normalized_3, imputed_2, factor_col = group_col, sample_id_col = sample_id_col, rowNorm = 'CompNorm', transNorm = 'LogNorm', scaleNorm = 'AutoNorm', ref = 'Creatine..132.1...90.0.', out_dir = out_dir),
-#### EXTRACTION ####
-# Extract the data
-tar_target(extract_data, export_data(normalized_3, out_dir = out_dir, out_name = 'Processed')),
-
-
-#### Cleaning ####
-tar_target(clean, withr::with_dir(out_dir, unlink('TempData', recursive = TRUE)))
+  load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath, dataSep, sampleSep, variableSep),
+  createExperiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
+  factorize_cols(factorized_experiment, experiment, columns),
+  filter_step(filtered_experiment, factorized_experiment, threshold = 0.8, filter_outliers = TRUE, conf.limit = "0.95", out_dir = outdir),
+  impute(imputed_experiment, filtered_experiment, method = 'RF', k = 5),
+  normalize(normalized_experiment, imputed_experiment, factor_col = factor_col, sample_id_col = sample_id_col, rowNorm = 'CompNorm', ref = 'Creatine (132.1 / 90.0)', out_dir = outdir),
+  normalize(scaled_experiment, normalized_experiment,factor_col = factor_col, sample_id_col = sample_id_col, scaleNorm = "AutoNorm", out_dir = outdir),
+  normalize(transformed_experiment, scaled_experiment, factor_col = factor_col, sample_id_col = sample_id_col, transNorm = "LogNorm", out_dir= outdir),
+  exportData(export, transformed_experiment, out_dir= outdir)
 )
+

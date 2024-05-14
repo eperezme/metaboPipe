@@ -19,31 +19,39 @@ load_data <- function(output_name, dataMatrixFile, sampleMetadataFile, variableM
   name_data <- paste0(target_name, "_data") # Generate the name for the data target
   name_sample <- paste0(target_name, "_sample") # Generate the name for the sample target
   name_variable <- paste0(target_name, "_variable") # Generate the name for the variable target
+  name_head <- paste0(target_name, "_headDataMatrix")
+  name_matrixFile <- paste0(target_name, "_matrixFile")
+  name_sampleFile <- paste0(target_name, "_sampleFile")
+  name_variableFile <- paste0(target_name, "_variableFile")
+  read_matrix_command <- substitute(read.csv(name_matrixFile, sep = dataSep, header = TRUE), env = list(name_matrixFile = as.name(name_matrixFile), dataSep = dataSep))
+  read_sample_command <- substitute(read.csv(name_matrixFile, sep = dataSep, header = TRUE), env = list(name_matrixFile = as.name(name_matrixFile), dataSep = dataSep))
+  read_variable_command <- substitute(read.csv(name_matrixFile, sep = dataSep, header = TRUE), env = list(name_matrixFile = as.name(name_matrixFile), dataSep = dataSep))
+  
   
   # Define targets to load and read data matrix and sample metadata
   list(
     # Target to load data matrix file
-    tar_target_raw("matrixFile", dataMatrixFile, format = "file", deployment = "main"),
+    tar_target_raw(name_matrixFile, dataMatrixFile, format = "file", deployment = "main"),
     # Target to read data matrix
-    tar_target_raw(name_data, quote(read.csv(matrixFile, sep = dataSep, header = TRUE)), format = "fst_tbl", deployment = "main"),
+    tar_target_raw(name_data, quote(read.csv(name_matrixFile, sep = dataSep, header = TRUE)), format = "fst_tbl", deployment = "main"),
     # Target to load sample metadata file
-    tar_target_raw("sampleFile", sampleMetadataFile, format = "file", deployment = "main"),
+    tar_target_raw(name_sampleFile, sampleMetadataFile, format = "file", deployment = "main"),
     # Target to read sample metadata
-    tar_target_raw(name_sample, quote(read.csv(sampleFile, sep = sampleSep)), format = "fst_tbl", deployment = "main"),
+    tar_target_raw(name_sample, quote(read.csv(name_sampleFile, sep = sampleSep)), format = "fst_tbl", deployment = "main"),
     # If variable metadata file is provided
     if (!is.null(variableMetadataFile)) {
       list(
         # Target to load variable metadata file
-        tar_target_raw("variableFile", variableMetadataFile, format = "file", deployment = "main"),
+        tar_target_raw(name_variableFile, variableMetadataFile, format = "file", deployment = "main"),
         # Target to read variable metadata
-        tar_target_raw(name_variable, quote(read.csv(variableFile, sep = variableSep)), format = "fst_tbl", deployment = "main")
+        tar_target_raw(name_variable, quote(read.csv(name_variableFile, sep = variableSep)), format = "fst_tbl", deployment = "main")
       )
     } else { # If variable metadata file is not provided
       list(
         # Target to read data matrix without header
-        tar_target_raw("headDataMatrix", quote(read.csv(matrixFile, sep = dataSep, header = FALSE)), format = "fst_tbl", deployment = "main"),
+        tar_target_raw(name_head, quote(read.csv(matrixFile, sep = dataSep, header = FALSE)), format = "fst_tbl", deployment = "main"),
         # Target to create variable metadata from data matrix
-        tar_target_raw(name_variable, quote(extract_names(headDataMatrix)), format = "fst_tbl", deployment = "main")
+        tar_target_raw(name_variable, quote(extract_names(name_head)), format = "fst_tbl", deployment = "main")
       )
     }
   )
@@ -259,6 +267,7 @@ impute <- function(output_name, input_name, method, k = 5) {
 normalize <- function(output_name, input_name, factor_col, sample_id_col, rowNorm = NULL, transNorm = NULL, scaleNorm = NULL, ref = NULL, out_dir) {
   target_name <- deparse(substitute(output_name)) # Get the name of the output target
   data <- deparse(substitute(input_name)) # Get the name of the input data
+  clean_name <- paste0(target_name, "_cleaning_step")
   # Define target to normalize data
   command <- substitute(normalize_metab(data, factor_col, sample_id_col = sample_id_col,
                                         rowNorm, transNorm, scaleNorm, ref = ref, out_dir = out_dir),
@@ -269,7 +278,7 @@ normalize <- function(output_name, input_name, factor_col, sample_id_col, rowNor
   list(
     tar_target_raw(target_name, command, format = "qs", deployment = "main"),
     
-    tar_target_raw("Clean_normalization", substitute(withr::with_dir(out_dir, unlink("TempData",recursive=TRUE)), 
+    tar_target_raw(clean_name, substitute(withr::with_dir(out_dir, unlink("TempData",recursive=TRUE)), 
                                                      env = list(out_dir = out_dir)), 
                    format = "qs", deployment = "main", cue = tar_cue(mode = "always"), deps = target_name)
   )

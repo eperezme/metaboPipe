@@ -236,8 +236,8 @@ The next step is to impute the missing values that remain after the filter step.
 ```{r impute, eval=FALSE}
 # General config
 outdir = "results"
-dir.create(out_dir, showWarnings = FALSE) # We create the outdir in case there its not created yet
-out_dir <- tools::file_path_as_absolute(out_dir) # We get the absolute path of the dir for compatibility
+dir.create(outdir, showWarnings = FALSE) # We create the outdir in case there its not created yet
+outdir <- tools::file_path_as_absolute(outdir) # We get the absolute path of the dir for compatibility
 
 # Load the Data
 dataMatrixPath <- "data/ST000284/dataMatrix.csv"
@@ -271,8 +271,8 @@ Next step is to normalize the data. To do so we use the `normalize()` function, 
 ```{r normalize, eval=FALSE}
 # General config
 outdir = "results"
-dir.create(out_dir, showWarnings = FALSE) # We create the outdir in case there its not created yet
-out_dir <- tools::file_path_as_absolute(out_dir) # We get the absolute path of the dir for compatibility
+dir.create(outdir, showWarnings = FALSE) # We create the outdir in case there its not created yet
+outdir <- tools::file_path_as_absolute(outdir) # We get the absolute path of the dir for compatibility
 
 # Load the Data
 dataMatrixPath <- "data/ST000284/dataMatrix.csv"
@@ -308,8 +308,8 @@ Scaling is also applied using the `normalize()` function. But to do that, instea
 ```{r scaling, eval=FALSE}
 # General config
 outdir = "results"
-dir.create(out_dir, showWarnings = FALSE) # We create the outdir in case there its not created yet
-out_dir <- tools::file_path_as_absolute(out_dir) # We get the absolute path of the dir for compatibility
+dir.create(outdir, showWarnings = FALSE) # We create the outdir in case there its not created yet
+outdir <- tools::file_path_as_absolute(outdir) # We get the absolute path of the dir for compatibility
 
 # Load the Data
 dataMatrixPath <- "data/ST000284/dataMatrix.csv"
@@ -346,8 +346,8 @@ Transforming the data is also made with the `normalize()` function under the arg
 ```{r transform, eval=FALSE}
 # General config
 outdir = "results"
-dir.create(out_dir, showWarnings = FALSE) # We create the outdir in case there its not created yet
-out_dir <- tools::file_path_as_absolute(out_dir) # We get the absolute path of the dir for compatibility
+dir.create(outdir, showWarnings = FALSE) # We create the outdir in case there its not created yet
+outdir <- tools::file_path_as_absolute(outdir) # We get the absolute path of the dir for compatibility
 
 # Load the Data
 dataMatrixPath <- "data/ST000284/dataMatrix.csv"
@@ -385,8 +385,8 @@ Now that we have defined all the steps that we want the pipeline to perform we s
 ```{r export, eval=FALSE}
 # General config
 outdir = "results"
-dir.create(out_dir, showWarnings = FALSE) # We create the outdir in case there its not created yet
-out_dir <- tools::file_path_as_absolute(out_dir) # We get the absolute path of the dir for compatibility
+dir.create(outdir, showWarnings = FALSE) # We create the outdir in case there its not created yet
+outdir <- tools::file_path_as_absolute(outdir) # We get the absolute path of the dir for compatibility
 
 # Load the Data
 dataMatrixPath <- "data/ST000284/dataMatrix.csv"
@@ -419,10 +419,14 @@ list(
 )
 ```
 
+### Running the pipeline
 
-
-
-
+Now we are ready to run the pipeline. We can view a node map of the steps if we use the `tar_visnetwork()` function of the `targets` package. And we can view a full list of the steps with the function using `tar_manifest()`.
+```{r tar_check, eval=FALSE, paged.print=FALSE}
+targets::tar_visnetwork()
+targets::tar_manifest()
+tar_make()
+```
 
 
 
