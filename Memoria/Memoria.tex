@@ -16,6 +16,8 @@
 \usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
 \usepackage{hyperref}
 \usepackage{bookmark}
+\usepackage{booktabs}
+\usepackage[table,xcdraw]{xcolor}
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
@@ -290,6 +292,39 @@ Mención de cuáles son las posibles estrategias para llevar a cabo el trabajo y
 
 
 \section{Risk analysis}
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{|c|c|c|p{6cm}|}
+    \hline
+    \rowcolor[HTML]{999999} 
+    {\color[HTML]{FFFFFF} \textbf{Risk}} &
+      {\color[HTML]{FFFFFF} \textbf{Severity}} &
+      {\color[HTML]{FFFFFF} \textbf{Likelihood}} &
+      \multicolumn{1}{c|}{\cellcolor[HTML]{999999}{\color[HTML]{FFFFFF} \textbf{Mitigation}}} \\ \hline
+    \textbf{Resource constraints} &
+      \cellcolor[HTML]{FFE599}Moderate &
+      \cellcolor[HTML]{FFE599}Moderate &
+      Develop a clear project timeline, incorporating milestones and allocating adequate time for each phase. Ensure contingency measures are in place to address unforeseen challenges or changes. \\ \hline
+    \textbf{Technical challenges} &
+      \cellcolor[HTML]{FFE599}Moderate &
+      \cellcolor[HTML]{EA9999}High &
+      Perform proper exploration of packages and software and seek guidance and mentorship from professors or experts in relevant fields. \\ \hline
+    \textbf{User adoption and awareness} &
+      \cellcolor[HTML]{EA9999}High &
+      \cellcolor[HTML]{FFE599}Moderate &
+      Be sure to incorporate appropriate cautions regarding the correct application of the chosen modules and data. \\ \hline
+    \textbf{Pipeline branching} &
+      \cellcolor[HTML]{B6D7A8}Low &
+      \cellcolor[HTML]{FFE599}Moderate &
+      Adopt new methods to interactively select the branching \\ \hline
+    \end{tabular}
+    \caption{Risk analysis. This table presents various risks associated with the project, along with
+    their severity, likelihood, and potential mitigation measures.}
+    \label{tab:risk-analysis}
+\end{table}
+
+
 
 \section{Final products} \todo{Expand on every item}
 \begin{itemize}
