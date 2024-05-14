@@ -1,32 +1,55 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|c9d07f98cb089b98|||||||||||||||
+.Random.seed|object|32f76bd828f9fbf8|||||||||||||||
 after_filtered_1_plot|stem|21689d43186613ae|094f7b21f40e136f|7af6cc8c9861be87|1994346630||t19855.5563229008s|a96c250e4b19e03e|54|qs|local|vector|||0.234||
+after_filtered_experiment_plot|stem|21689d43186613ae|595d28bb135fdb8b|922782cda2ab1ed2|-2050561666||t19857.4623089731s|a96c250e4b19e03e|54|qs|local|vector|||0.203||
 before_filtered_1_plot|stem|21689d43186613ae|8962e96518f2a6fd|41c83d973dd8a277|621591982||t19855.5559477624s|a96c250e4b19e03e|54|qs|local|vector|||0.266||
+before_filtered_experiment_plot|stem|21689d43186613ae|ddbfb2800a55fa0a|0d1b6632549c182e|1237888784||t19857.4620675166s|a96c250e4b19e03e|54|qs|local|vector|||0.266||
 clean|stem|4f1d68532b49b44a|edafeeb1956a34e1|d3132be540eec0ac|-82818548||t19855.5546552486s|44989414465ff33d|49|rds|local|vector|||0||
 Clean_normalization|stem|ef51edf7cc7db0f9|0540eaf746079dea|22e78084c621c5dd|1317299431||t19855.5563424099s|506f9f6b3747f807|42|qs|local|vector|||0||
+columns|object|d87ca235fc064cf3|||||||||||||||
 data_data|stem|579abebc95464836|7e3d19179e9a4783|c4895a23768f6508|420809943||t19855.5546561574s|de1ca5b323337744|88293|fst_tbl|local|vector|||0.015||
+data_loaded_data|stem|579abebc95464836|022e1983eea91314|768132e60ce10a3d|-1111640196||t19857.4620624406s|de1ca5b323337744|88293|fst_tbl|local|vector|||0.015||
+data_loaded_matrixFile|stem|f389fd2332250422|03a5cebb80af9957|ef46db3751d8e999|1033549046|data/ST000284/dataMatrix.csv|t19857.3847386364s|a35b4bdd7a312130|191608|file|local|vector|||0||
+data_loaded_sample|stem|9d8bf4bc9e6b0d83|0550f35f6fe56771|32ef5357f2f8812b|-1949599237||t19857.4620619805s|1e73025651326e53|14078|fst_tbl|local|vector|||0||
+data_loaded_sampleFile|stem|6d6bd55ebd3dd724|eaf35a8e03c92a8c|ef46db3751d8e999|126446551|data/ST000284/sampleMetadata.csv|t19857.3847386364s|faf1e1714bdc53e8|16515|file|local|vector|||5.75|package struct was built under R version 4.3.2. package S4Vectors was built under R version 4.3.2. package GenomeInfoDb was built under R version 4.3.3. package VIM was built under R version 4.3.3. package colorspace was built under R version 4.3.3. package imputeLCMD was built under R version 4.3.3. package tmvtnorm was built under R version 4.3.3. package mvtnorm was built under R version 4.3.3. package Matrix was built under R version 4.3.3. package gmm was built under R version 4.3.3. package sandwich was built under R version 4.3.3. package missForest was built under R version 4.3.3. package caret was built under R version 4.3.3. package lattice was built under R version 4.3.3. package tidyverse was built under R version 4.3.3. package tibble was built under R version 4.3.3. package tidyr was built under R version 4.3.3. package readr was built under R version 4.3.3. package purrr was built under R version 4.3.3. package dplyr was built under R version 4.3.3. package stringr was built under R version 4.3.3. package forcats was built under R version 4.3.3. package lubridate was built under R version 4.3.3. package tinytex was built under R version 4.3.3. package HotellingEllipse was built under R version 4.3.3. package ggforce was built under R version 4.3.3. package cowplot was built under R version 4.3.3|
+data_loaded_variable|stem|4137f25c078de09f|202708073ca66f42|c26e085eb1453c38|1386089475||t19857.4620620981s|e96b76c2f6a50c73|3646|fst_tbl|local|vector|||0||
+data_loaded_variableFile|stem|4461097e13737c98|ec654d6f29523349|ef46db3751d8e999|781067609|data/ST000284/variableMetadata.csv|t19857.3847386364s|a55889fd9c7c534a|3294|file|local|vector|||0||
 data_sample|stem|9d8bf4bc9e6b0d83|f25706cb11a2ccc5|c2adaadc7125c19e|-859795648||t19855.5546562731s|1e73025651326e53|14078|fst_tbl|local|vector|||0||
 data_variable|stem|4137f25c078de09f|bfb7917a343d4387|81ede88bcd3f942e|-1296658056||t19855.5551742692s|e96b76c2f6a50c73|3646|fst_tbl|local|vector|||1.563||
 dataMatrixPath|object|e80f2416df652d4c|||||||||||||||
 dataSep|object|c029548aed30b115|||||||||||||||
-experiment|stem|2f12b2f7b3a47123|3b915d1de3e58689|a0b67c81683fb186|1275671355||t19855.5559441213s|d31a0bbd7b9b5be7|93705|qs|local|vector|||0.063||
+description|object|8d1a77900b379118|||||||||||||||
+experiment|stem|b7c8c3876c0afdda|19d2a86409011ad5|8d51dce3b75848a0|1275671355||t19857.4620633821s|bda6b9dbf294721f|93710|qs|local|vector|||0.063||
+export|stem|6dd71d12008128c1|c1ad03871f2527bd|4659ddce99dfe551|-2123215358||t19857.462353625s|de1c6d017cb4e8a8|38|qs|local|vector|||0.032||
 extract_data|stem|67e3bcd8537f6d6b|a063b523c6a625a2|b91bde278d87be62|797498723||t19855.5563430525s|a1c456b03adbfbf8|44|rds|local|vector|||0.047||
+factor_col|object|46235f862434582f|||||||||||||||
 factor_cols|object|d87ca235fc064cf3|||||||||||||||
 factorized|stem|b160c591a7744f73|dba76e4e83b56517|d80c8b52a094cd02|-74664148||t19855.5559445327s|f2d6cd2f041b6769|93640|qs|local|vector|||0.031||
+factorized_experiment|stem|3f90f93e4540d6d5|dba76e4e83b56517|43dcabe3c2ddc4c8|1643039527||t19857.4620637663s|2d43937bb442cfd1|93647|qs|local|vector|||0.016||
+factorized_experiment_na|stem|3f90f93e4540d6d5|c83be3b19e0b0e92|0d1b6632549c182e|23927424||t19857.4620643939s|2d43937bb442cfd1|93647|qs|local|vector|||0.062||
 factorized_na|stem|b160c591a7744f73|0782f7a8484d4483|41c83d973dd8a277|1407919217||t19855.5559549009s|f2d6cd2f041b6769|93640|qs|local|vector|||0.609||
 filtered_1|stem|bf119e51aaa5c6c1|df68deb8c5f9a79b|d450bf2a2e5d4720|-1972152224||t19855.5559602179s|affce0f0e94fcd50|87872|qs|local|vector|||0.25||
 filtered_1_missingval|stem|7b454484753e6e66|ea746c420f09b86d|5803889197e168f1|1806868124||t19855.5559571415s|3d55da67b8f38d62|93639|qs|local|vector|||0.188||
 filtered_1_outliers_plot|stem|21689d43186613ae|938d355c1ec9e657|d450bf2a2e5d4720|-2044497684||t19855.5559894331s|a96c250e4b19e03e|54|qs|local|vector|||2.515||
+filtered_experiment|stem|50c41ab3d28b2721|15787e59f38279bd|b37e26d50fa03219|1541397327||t19857.4620718709s|25b6054e74aaf7eb|87882|qs|local|vector|||0.188||
+filtered_experiment_missingval|stem|1f99c203664eb848|c464ba8f85801fb2|b927c6aeceff23be|146942080||t19857.4620695627s|7de6f22e2433a70b|93644|qs|local|vector|||0.156||
+filtered_experiment_outliers_plot|stem|21689d43186613ae|3ca305571d1b3b95|b37e26d50fa03219|-477936551||t19857.4620938005s|a96c250e4b19e03e|54|qs|local|vector|||1.891||
 group_col|object|46235f862434582f|||||||||||||||
 headDataMatrix|stem|ffe7b2e70be1de49|1fdfb05ee75fd328|c4895a23768f6508|-1580594009||t19855.5546557754s|72eb7b451e491c23|222638|fst_tbl|local|vector|||0.015||
 imputed_2|stem|41c0d2975b42f9ac|c2442e5562fc266e|7af6cc8c9861be87|-388779927||t19855.5563200927s|46e8ba22bfa97bb7|88224|qs|local|vector|||28.563||
+imputed_experiment|stem|371c4c6b3dfd2eb6|2683bf88cbcbf73a|922782cda2ab1ed2|784899677||t19857.462306514s|f83495b5e1cc9deb|88241|qs|local|vector|||18.375||
 matrixFile|stem|f389fd2332250422|03a5cebb80af9957|ef46db3751d8e999|-944313673|data/ST000284/dataMatrix.csv|t19842.5197824229s|a35b4bdd7a312130|191608|file|local|vector|||0||
+name|object|16a4d1c671b92efe|||||||||||||||
 normalized_3|stem|d6d7d381365e7aec|ef62fa1b02194f21|531519d5e534884f|1397526225||t19855.5563422594s|4b3c135d8f35093d|153899|qs|local|vector|||1.656|CairoFonts has no effect on Windows. Please use parfamily... to specify the desired font  see par.. CairoFonts has no effect on Windows. Please use parfamily... to specify the desired font  see par.|
+normalized_experiment|stem|5299f5c148de3253|fd06ced9884cfaef|7602f188bdaa145c|-692973237||t19857.4623240906s|859caa10983e0735|134043|qs|local|vector|||1.297|package Rserve was built under R version 4.3.2. CairoFonts has no effect on Windows. Please use parfamily... to specify the desired font  see par.. CairoFonts has no effect on Windows. Please use parfamily... to specify the desired font  see par.|
 out_dir|object|f1b43bf71ea56bae|||||||||||||||
+outdir|object|7cafdafb27332d52|||||||||||||||
 sample_id_col|object|ceca6ddf2fbe8c43|||||||||||||||
 sample_type_col|object|1e420b5b954781af|||||||||||||||
 sampleFile|stem|6d6bd55ebd3dd724|eaf35a8e03c92a8c|ef46db3751d8e999|-82004099|data/ST000284/sampleMetadata.csv|t19842.6325644099s|faf1e1714bdc53e8|16515|file|local|vector|||0||
 sampleMetadataPath|object|fa37337c4bbf2ef2|||||||||||||||
 sampleSep|object|c029548aed30b115|||||||||||||||
+scaled_experiment|stem|8921eb29f6bd659b|204d83f559eaf9f2|fd4d16157300ee46|1081344223||t19857.4623386018s|6d62795ff6336ad3|152663|qs|local|vector|||1.25|CairoFonts has no effect on Windows. Please use parfamily... to specify the desired font  see par.. CairoFonts has no effect on Windows. Please use parfamily... to specify the desired font  see par.|
+transformed_experiment|stem|43f5d2ca7f7d9f56|29b0b735e24d2f35|8046855d4a6a6f39|-420343395||t19857.4623530279s|6a189b38628c094e|141511|qs|local|vector|||1.235|CairoFonts has no effect on Windows. Please use parfamily... to specify the desired font  see par.. CairoFonts has no effect on Windows. Please use parfamily... to specify the desired font  see par.|
 variableMetadataPath|object|6b08d3ab25281aff|||||||||||||||
 variableSep|object|c029548aed30b115|||||||||||||||

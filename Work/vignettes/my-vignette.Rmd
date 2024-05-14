@@ -425,8 +425,34 @@ Now we are ready to run the pipeline. We can view a node map of the steps if we 
 ```{r tar_check, eval=FALSE, paged.print=FALSE}
 targets::tar_visnetwork()
 targets::tar_manifest()
+```
+
+
+An now, to run the pipeline we just have to:
+```{r run_pipeline}
 tar_make()
 ```
+
+
+```{r}
+tar_load(transformed_experiment)
+```
+
+```{r}
+a <- tar_visnetwork()
+
+# ggsave("pipeline_network.png", a)
+```
+
+
+
+
+
+
+
+
+
+
 
 
 
