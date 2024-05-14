@@ -16,7 +16,9 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  tidy.opts = list(width.cutoff = 60), 
+  tidy = TRUE
 )
 ```
 
@@ -422,26 +424,26 @@ list(
 ### Running the pipeline
 
 Now we are ready to run the pipeline. We can view a node map of the steps if we use the `tar_visnetwork()` function of the `targets` package. And we can view a full list of the steps with the function using `tar_manifest()`.
-```{r tar_check, eval=FALSE, paged.print=FALSE}
-targets::tar_visnetwork()
+```{r tar_check, paged.print=FALSE}
+targets::tar_visnetwork(targets_only = TRUE)
 targets::tar_manifest()
 ```
 
 
 An now, to run the pipeline we just have to:
 ```{r run_pipeline}
-tar_make()
+targets::tar_make()
 ```
 
 
-```{r}
+```{r, eval=FALSE}
 tar_load(transformed_experiment)
 ```
 
-```{r}
-a <- tar_visnetwork()
+```{r, eval=FALSE}
+network <- tar_visnetwork()
+network %>% visSave(file = 'pipeline_network.html')
 
-# ggsave("pipeline_network.png", a)
 ```
 
 

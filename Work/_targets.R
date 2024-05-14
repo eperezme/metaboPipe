@@ -66,4 +66,3 @@ list(
   normalize(transformed_experiment, scaled_experiment, factor_col = factor_col, sample_id_col = sample_id_col, transNorm = "LogNorm", out_dir= outdir),
   exportData(export, transformed_experiment, out_dir= outdir)
 )
-
