@@ -2,7 +2,7 @@ Package: metaboPipe
 Title: Create a pipeline for metabolomics data analysis
 Version: 0.0.0.9000
 Authors@R: 
-    person("Eduard", "Perez Mendez", , "eduardperezmendez@gmail.com", role = c("aut", "cre"),
+    person("Eduard", "Perez Mendez", , "eperezme@eperezme.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-6473-591X"))
 Description: The package provides a pipeline for metabolomics data analysis. It includes functions for data pre-processing like filtering of missing values and outliers, normalization, missing value imputation and batch correction. The pipeline is implemented using the 'targets' package.
 License: CC BY NC SA 4.0
@@ -33,7 +33,8 @@ Imports:
     tarchetypes,
     crew,
     pmp,
-    fst
+    fst,
+    shiny
 Remotes: 
     xia-lab/MetaboAnalystR
 Depends: 

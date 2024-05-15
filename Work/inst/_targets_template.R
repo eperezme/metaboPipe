@@ -2,10 +2,11 @@
 library(targets)
 library(tarchetypes)
 library(crew)
+library(metaboPipe)
 # library(doParallel)
 # Load all R scripts in the R/ directory.
-file.sources <- list.files("R", pattern = "*.R", full.names = TRUE)
-invisible(sapply(file.sources, source, .GlobalEnv))
+# file.sources <- list.files("R", pattern = "*.R", full.names = TRUE)
+# invisible(sapply(file.sources, source, .GlobalEnv))
 
 # Declare libraries
 # These are the libraries that the pipeline depends on.

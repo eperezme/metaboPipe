@@ -27,11 +27,9 @@ knitr::opts_chunk$set(
 
 Metabolomics, the study of small molecules in biological systems, plays a crucial role in understanding various physiological processes and disease mechanisms. As the volume and complexity of metabolomics data continue to grow, there is an increasing demand for robust and efficient data analysis pipelines.
 
-`metaboPipe` is a comprehensive R package designed to streamline metabolomics analysis workflows. Built with the aim of simplifying data preprocessing, statistical analysis, and visualization tasks, `metaboPipe` offers a suite of tools tailored specifically for metabolomics researchers.
+`metaboPipe` is a comprehensive R package designed to streamline metabolomics analysis workflows. Built with the aim of simplifying data preprocessing tasks. `metaboPipe` offers a suite of tools tailored specifically for metabolomics researchers.
 
-In this vignette, we will explore the key functionalities of `metaboPipe` and demonstrate how it can be used to perform common metabolomics analysis tasks. From data imputation and normalization to multivariate statistical analysis and pathway enrichment analysis, `metaboPipe` provides a unified framework for conducting rigorous and reproducible metabolomics research.
-
-Whether you are a novice researcher or an experienced bioinformatician, `metaboPipe` offers a user-friendly interface and extensive documentation to facilitate seamless integration into your metabolomics workflow. Let's dive in and discover how `metaboPipe` can empower your metabolomics studies.
+In this vignette, we will explore the key functionalities of `metaboPipe` and demonstrate how it can be used to perform common metabolomics preprocessing tasks. From loading the data, filtering, imputing, normalizing, and scaling, to extracting the processed data, `metaboPipe` provides a user-friendly interface to facilitate seamless integration into your metabolomics workflow.
 
 
 ## Installation
@@ -85,9 +83,9 @@ head(DE$variable_meta)
 
 The `metaboPipe` pipeline functions consists of several functions that create targets to execute specific processing steps, including data loading, filtering, batch correction, imputation and normalization (that includes tranformation and scaling). Each step is defined as a single or multiple targets in the pipeline, and the targets are executed sequentially to process the data.
 
-In order to use the pipeline functions in `metaboPipe`, we need to create a targets file.
+In order to use the pipeline functions in `metaboPipe`, we need to create a targets file. You can use the `use_targets()` function to create a new `_targets.R` file in the working directory or use the `metaboPipe` template:
 ```{r, eval=FALSE}
-targets::use_targets()
+create_pipeline()
 ```
 
 An example `_targets.R` file is created and saved in the working directory. The `_targets.R` file contains some example code, which we will modify to define the pipeline for our data processing workflow.
@@ -103,7 +101,7 @@ tar_option_set(
   packages = c(
     "structToolbox", "SummarizedExperiment", "VIM", "impute", "imputeLCMD",
     "missForest", "caret", "pcaMethods", "tidyverse", "MetaboAnalystR", "tinytex",
-    "HotellingEllipse", "ggforce", "tools", "cowplot"
+    "HotellingEllipse", "ggforce", "tools", "cowplot", "metaboPipe"
   )
 )
 ```
@@ -436,15 +434,15 @@ targets::tar_make()
 ```
 
 
-```{r, eval=FALSE}
-tar_load(transformed_experiment)
+## Shiny app
+Now that you know the core functions of `metaboPipe`, you can initialize and create the pipeline using the Shiny app for easiness.
+In order to call the app:
+```{r shiny, eval=FALSE}
+metaboPipe::pipePilers()
 ```
 
-```{r, eval=FALSE}
-network <- tar_visnetwork()
-network %>% visSave(file = 'pipeline_network.html')
 
-```
+
 
 
 

@@ -384,14 +384,14 @@ create_pipeline <- function() {
     packages = c(
       'structToolbox', 'SummarizedExperiment', 'VIM', 'impute', 'imputeLCMD',
       'missForest', 'caret', 'pcaMethods', 'tidyverse', 'MetaboAnalystR', 'tinytex',
-      'HotellingEllipse', 'ggforce', 'tools', 'cowplot'
+      'HotellingEllipse', 'ggforce', 'tools', 'cowplot', 'metaboPipe'
     )
   )
   
   
   #### Global variables #####
   # General config
-  outdir = 'results'
+  outdir = 'Results'
   dir.create(outdir, showWarnings = FALSE) # We create the outdir in case there its not created yet
   outdir <- tools::file_path_as_absolute(outdir) # We get the absolute path of the dir for compatibility
   
@@ -419,13 +419,18 @@ create_pipeline <- function() {
 #'
 #' @export
 #' @examples
-#' run_shiny_app()
-pipePlay <- function() {
-  # Define the directory containing the Shiny app files
-  app_dir <- system.file("Shiny", package = "metaboPipe")
-  
-  # Launch the Shiny app
-  shiny::shinyAppDir(appDir = app_dir)
+#' pipePilers()
+pipePilers <- function() {
+  # shinyenv <- new.env()
+  wd <- getwd()
+  # assign("wd", wd, envir = shinyenv)
+  appDir <- system.file("shiny", package = "metaboPipe", mustWork = TRUE)
+  if (appDir == "") {
+    stop("Could not find Shiny app directory. Please re-install the package.")
+  }
+  # shiny::loadSupport(appDir = appDir)
+  shinyOptions(wd = wd)
+  shiny::shinyAppDir(appDir)
 }
 
 

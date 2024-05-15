@@ -148,10 +148,10 @@ ui <- navbarPage(
             selected = "NULL"
           ),
           selectizeInput("orderCol", "Select the Order column (the injection order):",
-                         choices = NULL
+            choices = NULL
           ),
           selectizeInput("batchCol", "Select the batch column:",
-                         choices = NULL
+            choices = NULL
           ),
         ),
         actionButton("removeStep", "Remove Step", style = "color: #fff; background-color: #dc3545; border-color: #dc3545;"),
@@ -160,8 +160,7 @@ ui <- navbarPage(
       mainPanel(
         h3("Added Steps"),
         verbatimTextOutput("addedSteps"),
-        
-        shinyDirButton("outDir", "Output Directory", "Select a directory", "Choose", icon = icon("folder", class = "solid", lib="font-awesome")),
+        shinyDirButton("outDir", "Output Directory", "Select a directory", "Choose", icon = icon("folder", class = "solid", lib = "font-awesome")),
         actionButton("writeSteps", "Write Steps", style = "color: #fff; background-color: #28a745; border-color: #28a745;"),
         actionButton("runPipeline", "Run Pipeline", style = "color: #fff; background-color: #007bff; border-color: #007bff;")
       )
@@ -171,6 +170,8 @@ ui <- navbarPage(
 
 # Define server logic
 server <- function(input, output, session) {
+  
+  
   data <- reactiveValues(
     dataMatrixPath = NULL,
     sampleMetadataPath = NULL,
@@ -346,10 +347,10 @@ server <- function(input, output, session) {
   observeEvent(input$writeSteps, {
     # Transform the outDir to a valid path
     out_dir <- parseDirPath(directories, input$outDir)
-    
+
     # Print out the variables being concatenated
 
-        # Write lines to file
+    # Write lines to file
     targets_file <- "_targets_template.R"
     template_lines <- readLines(targets_file)
     # Add the lines to the beginning of the file
@@ -407,11 +408,11 @@ server <- function(input, output, session) {
   })
 
   volumes <- getVolumes()()
-  directories <- c(wd=".", dirUp="..", volumes)
+  directories <- c(wd = ".", dirUp = "..", volumes)
   # Function to choose output directory
   shinyDirChoose(input, "outDir", roots = directories, filetypes = c("", "txt"))
 
-  
+
   observeEvent(input$runPipeline, {
     validate(
       need(data$dataMatrixPath != "", "Please upload the data matrix file."),
@@ -421,24 +422,25 @@ server <- function(input, output, session) {
       need(data$sampleIdCol != "", "Please select the sample ID column."),
       need(data$sampleTypeCol != "", "Please select the sample type column."),
       need(data$groupCol != "", "Please select the group column.")
-      
     )
     # Run the pipeline with error handling
-    tryCatch({
-      library(targets)
-      tar_make()
-    }, error = function(e) {
-      # Print the error message
-      print(paste("Error:", e$message))
-      # Display a notification or message to the user
-      showModal(modalDialog(
-        title = "Error",
-        "An error occurred. Please check your inputs and try again.",
-        easyClose = TRUE
-      ))
-    })
+    tryCatch(
+      {
+        library(targets)
+        tar_make()
+      },
+      error = function(e) {
+        # Print the error message
+        print(paste("Error:", e$message))
+        # Display a notification or message to the user
+        showModal(modalDialog(
+          title = "Error",
+          "An error occurred. Please check your inputs and try again.",
+          easyClose = TRUE
+        ))
+      }
+    )
   })
-  
 }
 # Run the application
 shinyApp(ui = ui, server = server)
