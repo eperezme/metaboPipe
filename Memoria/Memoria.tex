@@ -16,6 +16,9 @@
 \usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
 \usepackage{hyperref}
 \usepackage{bookmark}
+\usepackage{booktabs}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{pgfgantt}
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
@@ -24,18 +27,19 @@
     pdftitle={Memoria},
     pdfpagemode=FullScreen,
     }
-    \usepackage[backend=biber, style=nature]{biblatex}
-    \addbibresource{library.bib}
-    % \bibliography{library.bib}
-    \urlstyle{same}
-    \usepackage[toc, acronym, xindy]{glossaries}
-    \makeglossaries
-    \loadglsentries[main]{glossary.tex}
+\usepackage[backend=biber, style=nature]{biblatex}
+\addbibresource{library.bib}
+% \bibliography{library.bib}
+\urlstyle{same}
+\usepackage[toc, acronym, xindy]{glossaries}
+\makeglossaries
+\loadglsentries[main]{glossary.tex}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%-------------- TEMP DOCUMENT SETTINGS FOR COMMENTS ---------------%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{lscape}
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%-------------- TEMP DOCUMENT SETTINGS FOR COMMENTS ---------------%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[colorinlistoftodos, textwidth=65mm, shadow]{todonotes}
 
 
@@ -102,6 +106,12 @@
             \noindent\enquote{\itshape BIG MOTIVATIONAL QUOTE
             }\bigbreak 
             
+            % People think of education as something they can finish - Isaac Asimov
+            
+            % Self-education is, I firmly believe, the only kind of education there is. - Isaac Asimov
+            
+            % Never let your sense of morality stop you from doing the right thing. - Isaac Asimov
+
             \hfill AUTHOR NAME
             
             \newpage
@@ -280,7 +290,71 @@ Mención de cuáles son las posibles estrategias para llevar a cabo el trabajo y
 
 \section{Methodology}
 
+% \newgeometry{top=1cm, bottom=-4cm} % Adjust margins to remove headers and footers
+% \newpage
 \section{Planning and calendar}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{Images/gantt.png}
+    \caption{Gantt chart showing the project timeline and milestones.}
+    \label{fig:gantt}
+\end{figure}
+
+% \definecolor{gblue}{RGB}{66,133,244}
+% \definecolor{gred}{RGB}{234,67,53}
+% \definecolor{gyellow}{RGB}{251,188,4}
+% \definecolor{ggreen}{RGB}{52,168,83}
+% \definecolor{ggrey}{RGB}{154,160,166}
+% \definecolor{gblack}{RGB}{32,33,36}
+% \definecolor{gorange}{RGB}{227,116,0}
+
+% \begin{landscape}
+% \begin{ganttchart}[
+%     % expand chart=\textwidth,
+%     inline,
+%     x unit = 10mm,
+%     y unit title=0.5cm,
+%     y unit chart=0.5cm,
+%     time slot format=isodate-yearmonth,
+%     time slot unit=day,
+%     % calendar week text={W\currentweek},
+%     title/.append style={shape=rectangle, fill=ggrey},
+%     title height=1,
+%     bar/.append style={fill=gyellow},
+%     bar height=.6,
+%     bar label font=\normalsize\color{gblack},
+%     group top shift=.6,
+%     group height=.3,
+%     group peaks height=.2,
+%     bar incomplete/.append style={fill=ggreen}
+% ]{2024-03-05}{2024-07-15}
+% \gantttitlecalendar{year, month, day} \\
+% \ganttgroup{Literature Review}{2024-03-07}{2024-03-26} \\
+%     \ganttbar{Review different pipelines and common tools}{2024-03-07}{2024-03-26}  \\
+%     \ganttbar{Replicate 3 data preprocessing from literature}{2024-03-15}   {2024-03-26} \\
+%     \ganttmilestone{CAA1}{2024-03-19}{2024-03-19} \\
+% \ganttset{bar/.append style={fill=gblue}}
+% \ganttgroup{Pipeline design}{2024-03-25}{2024-05-15} \\
+%     \ganttbar{Define inputs and outputs}{2024-03-25}{2024-03-29} \\
+%     \ganttbar{Define the modules}{2024-03-28}{2024-04-03} \\
+%     \ganttbar{Define module options}{2024-04-01}{2024-04-05} \\
+%     \ganttbar{Code modules}{2024-04-03}{2024-04-26} \\
+%     \ganttbar{Code report}{2024-04-29}{2024-05-06} \\
+%     \ganttmilestone{CAA2}{2024-04-23}{2024-04-23} \\
+%     \ganttbar{Write documentation}{2024-05-06}{2024-05-15} \\
+%     \ganttmilestone{CAA3}{2024-05-28}{2024-05-28} \\
+
+% \ganttset{bar/.append style={fill=gred}}
+% \ganttgroup{Benchmarking}{2024-05-13}{2024-05-20} \\
+%     \ganttbar{Replicate the 3 data analysis with new pipeline}{2024-05-13}  {2024-05-14} \\
+%     \ganttbar{Analyze Results}{2024-05-15}{2024-05-20} \\
+%     \ganttmilestone{CAA4}{2024-06-18}{2024-06-18} \\
+%     \ganttbar{Finish report and presentation}{2024-05-20}{2024-06-17} \\
+%     \ganttmilestone{CAA5}{2024-07-05}{2024-07-05} \\
+% \end{ganttchart}
+% \end{landscape}
+% \restoregeometry
 
 \subsection{Tasks}
 \subsubsection{Main Tasks and prioritization}
@@ -290,6 +364,39 @@ Mención de cuáles son las posibles estrategias para llevar a cabo el trabajo y
 
 
 \section{Risk analysis}
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{|c|c|c|p{6cm}|}
+    \hline
+    \rowcolor[HTML]{999999} 
+    {\color[HTML]{FFFFFF} \textbf{Risk}} &
+      {\color[HTML]{FFFFFF} \textbf{Severity}} &
+      {\color[HTML]{FFFFFF} \textbf{Likelihood}} &
+      \multicolumn{1}{c|}{\cellcolor[HTML]{999999}{\color[HTML]{FFFFFF} \textbf{Mitigation}}} \\ \hline
+    \textbf{Resource constraints} &
+      \cellcolor[HTML]{FFE599}Moderate &
+      \cellcolor[HTML]{FFE599}Moderate &
+      Develop a clear project timeline, incorporating milestones and allocating adequate time for each phase. Ensure contingency measures are in place to address unforeseen challenges or changes. \\ \hline
+    \textbf{Technical challenges} &
+      \cellcolor[HTML]{FFE599}Moderate &
+      \cellcolor[HTML]{EA9999}High &
+      Perform proper exploration of packages and software and seek guidance and mentorship from professors or experts in relevant fields. \\ \hline
+    \textbf{User adoption and awareness} &
+      \cellcolor[HTML]{EA9999}High &
+      \cellcolor[HTML]{FFE599}Moderate &
+      Be sure to incorporate appropriate cautions regarding the correct application of the chosen modules and data. \\ \hline
+    \textbf{Pipeline branching} &
+      \cellcolor[HTML]{B6D7A8}Low &
+      \cellcolor[HTML]{FFE599}Moderate &
+      Adopt new methods to interactively select the branching \\ \hline
+    \end{tabular}
+    \caption{Risk analysis. This table presents various risks associated with the project, along with
+    their severity, likelihood, and potential mitigation measures.}
+    \label{tab:risk-analysis}
+\end{table}
+
+
 
 \section{Final products} \todo{Expand on every item}
 \begin{itemize}

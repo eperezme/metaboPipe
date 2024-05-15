@@ -16,8 +16,13 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  tidy.opts = list(width.cutoff = 60), 
+  tidy = TRUE,
+  dpi=96,fig.width=5,fig.height=5.5,fig.retina = 1,fig.small = TRUE
 )
+
+set.seed(57475)
 ```
 
 
@@ -25,29 +30,21 @@ knitr::opts_chunk$set(
 
 Metabolomics, the study of small molecules in biological systems, plays a crucial role in understanding various physiological processes and disease mechanisms. As the volume and complexity of metabolomics data continue to grow, there is an increasing demand for robust and efficient data analysis pipelines.
 
-MetaboPipe is a comprehensive R package designed to streamline metabolomics analysis workflows. Built with the aim of simplifying data preprocessing, statistical analysis, and visualization tasks, MetaboPipe offers a suite of tools tailored specifically for metabolomics researchers.
+`metaboPipe` is a comprehensive R package designed to streamline metabolomics analysis workflows. Built with the aim of simplifying data preprocessing tasks. `metaboPipe` offers a suite of tools tailored specifically for metabolomics researchers.
 
-In this vignette, we will explore the key functionalities of MetaboPipe and demonstrate how it can be used to perform common metabolomics analysis tasks. From data imputation and normalization to multivariate statistical analysis and pathway enrichment analysis, MetaboPipe provides a unified framework for conducting rigorous and reproducible metabolomics research.
-
-Whether you are a novice researcher or an experienced bioinformatician, MetaboPipe offers a user-friendly interface and extensive documentation to facilitate seamless integration into your metabolomics workflow. Let's dive in and discover how MetaboPipe can empower your metabolomics studies.
+In this vignette, we will explore the key functionalities of `metaboPipe` and demonstrate how it can be used to perform common metabolomics preprocessing tasks. From loading the data, filtering, imputing, normalizing, and scaling, to extracting the processed data, `metaboPipe` provides a user-friendly interface to facilitate seamless integration into your metabolomics workflow.
 
 
 ## Installation
 
-Clone the MetaboPipe repository from GitHub and install the package using the following commands:
+Clone the `metaboPipe` repository from GitHub and install the package using the following commands:
 ```{r installation, eval=FALSE}
-# Clone the MetaboPipe repository
-system("git clone https://github.com/eperezme/metaboPipe.git")
-
-# Install metaboAnalystR
-devtools::install_github("xia-lab/MetaboAnalystR", build = TRUE, build_vignettes = FALSE)
-
 # Install the package
 install.packages("devtools")
 devtools::install_github("https://github.com/eperezme/metaboPipe", subdir = "Work")
 ```
 
-## Introduction to MetaboPipe and its functionalities
+## Introduction to `metaboPipe` and its functionalities
 For our example we will load the ST000284 dataset. `EXPLAIN THE DATASET`
 
 ```{r}
@@ -56,11 +53,11 @@ DE
 ```
 
 
-`metaboPipe` uses the `DatasetExperiment` object from the `structToolbox` package as the main data structure for storing and manipulating metabolomics data. The `DatasetExperiment` object is a list of data frames that contains the following components: 
+`metaboPipe` uses the `DatasetExperiment` object from the `structToolbox` package as the main **data structure** for storing and manipulating metabolomics data. The `DatasetExperiment` object is a list of data frames that contains the following components: 
 
 
 - `data`: This encapsulates a data frame housing the measured data pertaining to each sample.
-- `sample_meta`: This comprises a data frame furnishing supplementary sample-related information, such as group labels, often referred to as phenoData.
+- `sample_meta`: This comprises a data frame furnishing supplementary sample-related information, such as group labels, often referred to as *phenoData.*
 - `variable_meta`: This includes a data frame presenting additional details concerning variables (features), such as annotations.
 
 Similar to all `struct` entities, it encompasses `name` and `description` fields, referred to as "slots" within the R language.
@@ -77,15 +74,15 @@ head(DE$variable_meta)
 
 
 
-## Creating a pipeline 
+# Creating a pipeline 
 
 `metaboPipe` uses the `targets` package to define and execute data processing pipelines. The pipeline is defined as a list of targets, each representing a step in the data processing workflow. Each target is a function call that takes input data and produces output data. The `targets` package ensures that each target is executed only when its dependencies are met, allowing for efficient and reproducible data processing.
 
 The `metaboPipe` pipeline functions consists of several functions that create targets to execute specific processing steps, including data loading, filtering, batch correction, imputation and normalization (that includes tranformation and scaling). Each step is defined as a single or multiple targets in the pipeline, and the targets are executed sequentially to process the data.
 
-In order to use the pipeline functions in `metaboPipe`, we need to create a targets file.
+In order to use the pipeline functions in `metaboPipe`, we need to create a targets file. You can use the `use_targets()` function to create a new `_targets.R` file in the working directory or use the `metaboPipe` template:
 ```{r, eval=FALSE}
-targets::use_targets()
+create_pipeline()
 ```
 
 An example `_targets.R` file is created and saved in the working directory. The `_targets.R` file contains some example code, which we will modify to define the pipeline for our data processing workflow.
@@ -101,7 +98,7 @@ tar_option_set(
   packages = c(
     "structToolbox", "SummarizedExperiment", "VIM", "impute", "imputeLCMD",
     "missForest", "caret", "pcaMethods", "tidyverse", "MetaboAnalystR", "tinytex",
-    "HotellingEllipse", "ggforce", "tools", "cowplot"
+    "HotellingEllipse", "ggforce", "tools", "cowplot", "metaboPipe"
   )
 )
 ```
@@ -175,7 +172,7 @@ list(
 )
 ```
 
-### Factorizing the columns of the experiment
+## Factorizing the columns of the experiment
 There are functions that assume that specific columns are factors, such as the `normalize()` function. To factorize the columns of the experiment we can use the `factorize_cols()` function. This function takes the `DatasetExperiment` object, and a vector of column names as an argument and returns the object with the columns factorized.
 ```{r factorize, eval=FALSE}
 # Load the Data
@@ -201,7 +198,7 @@ list(
 )
 ```
 
-### Filtering the data
+## Filtering the data
 After the setup of the experiment, we can start the data manipulation steps. The first step we will perform is to filter the data. The `filter_step()` function encompases 2 filtering steps: 1) filtering by % of missing values and 2) filtering the outliers. The threshold is defined as the minimum percentage of data explained. By default the `threshold` is `0.8`, meaning that each row and collumn must have at least 80% of the values or get removed. The `filter_outliers` argument is a boolean that defines if the outliers should be removed or not and the `conf.limit` argument specify the confidence interval (either `'0.95'` or `'0.99'`) to discriminate the observation as an outlier or not. 
 
 ```{r filter, eval=FALSE}
@@ -231,7 +228,7 @@ list(
 
 The `out_dir` option is where the plots will be exported under the path: `out_dir/plots`, in this case: `results/plots`.
 
-### Imputing
+## Imputing
 The next step is to impute the missing values that remain after the filter step. To perform that we use the `impute()` function specifying the impute method we want to use and if it needs a special parameter like knn we specify it using `k`. In this example we will use a `Random forest` approach.
 ```{r impute, eval=FALSE}
 # General config
@@ -265,7 +262,7 @@ list(
 ```
 
 
-### Normalizing
+## Normalizing
 Next step is to normalize the data. To do so we use the `normalize()` function, that uses MetaboAnalystR to normalize the data. To normalize the data we need to specify the factor study column and the column with the sample id using `factor_col`  and the `sample_id_col` arguments. Also the method of normalization (by rows) with the `rowNorm` wich in this case is by internal compound `CompNorm`. We specify the internal compound name with `ref`. 
 
 ```{r normalize, eval=FALSE}
@@ -302,7 +299,7 @@ list(
 ```
 
 
-### Scaling
+## Scaling
 Scaling is also applied using the `normalize()` function. But to do that, instead of the `rowNorm` we specify it using the `scaleNorm` argument. We defined in the preamble the factor_col and sample_id_col for simplicity.
 
 ```{r scaling, eval=FALSE}
@@ -340,7 +337,7 @@ list(
 )
 ```
 
-### Transformation
+## Transformation
 Transforming the data is also made with the `normalize()` function under the argument `transNorm`.
 
 ```{r transform, eval=FALSE}
@@ -379,7 +376,7 @@ list(
 )
 ```
 
-### Extracting the data
+## Extracting the data
 Now that we have defined all the steps that we want the pipeline to perform we should tell them to extract the data processed. This can be achieved using the `export_data()` function:
 
 ```{r export, eval=FALSE}
@@ -419,33 +416,37 @@ list(
 )
 ```
 
-### Running the pipeline
+## Running the pipeline
 
 Now we are ready to run the pipeline. We can view a node map of the steps if we use the `tar_visnetwork()` function of the `targets` package. And we can view a full list of the steps with the function using `tar_manifest()`.
-```{r tar_check, eval=FALSE, paged.print=FALSE}
-targets::tar_visnetwork()
+```{r tar_check, paged.print=FALSE}
+targets::tar_visnetwork(targets_only = TRUE)
 targets::tar_manifest()
 ```
 
 
 An now, to run the pipeline we just have to:
 ```{r run_pipeline}
-tar_make()
-```
-
-
-```{r}
-tar_load(transformed_experiment)
-```
-
-```{r}
-a <- tar_visnetwork()
-
-# ggsave("pipeline_network.png", a)
+targets::tar_make()
 ```
 
 
 
+# Using the Pilers 
+
+Now that you know the core functions of `metaboPipe`, you can initialize and create the pipeline using the Shiny app for easiness.
+In order to call the app:
+```{r shiny, eval=FALSE}
+metaboPipe::pipePilers()
+```
+
+
+
+
+# Session Info
+```{r sessionInfo,}
+sessionInfo()
+```
 
 
 

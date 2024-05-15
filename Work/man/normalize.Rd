@@ -9,9 +9,9 @@ normalize(
   input_name,
   factor_col,
   sample_id_col,
-  rowNorm = NULL,
-  transNorm = NULL,
-  scaleNorm = NULL,
+  rowNorm = "NULL",
+  transNorm = "NULL",
+  scaleNorm = "NULL",
   ref = NULL,
   out_dir
 )

@@ -1,2 +1,4 @@
-*.html
-*.R
+_targets/
+results
+
+Rplots.pdf
