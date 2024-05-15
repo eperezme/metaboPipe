@@ -18,8 +18,11 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   tidy.opts = list(width.cutoff = 60), 
-  tidy = TRUE
+  tidy = TRUE,
+  dpi=96,fig.width=5,fig.height=5.5,fig.retina = 1,fig.small = TRUE
 )
+
+set.seed(57475)
 ```
 
 
@@ -71,7 +74,7 @@ head(DE$variable_meta)
 
 
 
-## Creating a pipeline 
+# Creating a pipeline 
 
 `metaboPipe` uses the `targets` package to define and execute data processing pipelines. The pipeline is defined as a list of targets, each representing a step in the data processing workflow. Each target is a function call that takes input data and produces output data. The `targets` package ensures that each target is executed only when its dependencies are met, allowing for efficient and reproducible data processing.
 
@@ -169,7 +172,7 @@ list(
 )
 ```
 
-### Factorizing the columns of the experiment
+## Factorizing the columns of the experiment
 There are functions that assume that specific columns are factors, such as the `normalize()` function. To factorize the columns of the experiment we can use the `factorize_cols()` function. This function takes the `DatasetExperiment` object, and a vector of column names as an argument and returns the object with the columns factorized.
 ```{r factorize, eval=FALSE}
 # Load the Data
@@ -195,7 +198,7 @@ list(
 )
 ```
 
-### Filtering the data
+## Filtering the data
 After the setup of the experiment, we can start the data manipulation steps. The first step we will perform is to filter the data. The `filter_step()` function encompases 2 filtering steps: 1) filtering by % of missing values and 2) filtering the outliers. The threshold is defined as the minimum percentage of data explained. By default the `threshold` is `0.8`, meaning that each row and collumn must have at least 80% of the values or get removed. The `filter_outliers` argument is a boolean that defines if the outliers should be removed or not and the `conf.limit` argument specify the confidence interval (either `'0.95'` or `'0.99'`) to discriminate the observation as an outlier or not. 
 
 ```{r filter, eval=FALSE}
@@ -225,7 +228,7 @@ list(
 
 The `out_dir` option is where the plots will be exported under the path: `out_dir/plots`, in this case: `results/plots`.
 
-### Imputing
+## Imputing
 The next step is to impute the missing values that remain after the filter step. To perform that we use the `impute()` function specifying the impute method we want to use and if it needs a special parameter like knn we specify it using `k`. In this example we will use a `Random forest` approach.
 ```{r impute, eval=FALSE}
 # General config
@@ -259,7 +262,7 @@ list(
 ```
 
 
-### Normalizing
+## Normalizing
 Next step is to normalize the data. To do so we use the `normalize()` function, that uses MetaboAnalystR to normalize the data. To normalize the data we need to specify the factor study column and the column with the sample id using `factor_col`  and the `sample_id_col` arguments. Also the method of normalization (by rows) with the `rowNorm` wich in this case is by internal compound `CompNorm`. We specify the internal compound name with `ref`. 
 
 ```{r normalize, eval=FALSE}
@@ -296,7 +299,7 @@ list(
 ```
 
 
-### Scaling
+## Scaling
 Scaling is also applied using the `normalize()` function. But to do that, instead of the `rowNorm` we specify it using the `scaleNorm` argument. We defined in the preamble the factor_col and sample_id_col for simplicity.
 
 ```{r scaling, eval=FALSE}
@@ -334,7 +337,7 @@ list(
 )
 ```
 
-### Transformation
+## Transformation
 Transforming the data is also made with the `normalize()` function under the argument `transNorm`.
 
 ```{r transform, eval=FALSE}
@@ -373,7 +376,7 @@ list(
 )
 ```
 
-### Extracting the data
+## Extracting the data
 Now that we have defined all the steps that we want the pipeline to perform we should tell them to extract the data processed. This can be achieved using the `export_data()` function:
 
 ```{r export, eval=FALSE}
@@ -413,7 +416,7 @@ list(
 )
 ```
 
-### Running the pipeline
+## Running the pipeline
 
 Now we are ready to run the pipeline. We can view a node map of the steps if we use the `tar_visnetwork()` function of the `targets` package. And we can view a full list of the steps with the function using `tar_manifest()`.
 ```{r tar_check, paged.print=FALSE}
@@ -428,7 +431,9 @@ targets::tar_make()
 ```
 
 
-## Shiny app
+
+# Using the Pilers 
+
 Now that you know the core functions of `metaboPipe`, you can initialize and create the pipeline using the Shiny app for easiness.
 In order to call the app:
 ```{r shiny, eval=FALSE}
@@ -438,8 +443,10 @@ metaboPipe::pipePilers()
 
 
 
-
-
+# Session Info
+```{r sessionInfo,}
+sessionInfo()
+```
 
 
 
