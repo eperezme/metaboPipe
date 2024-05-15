@@ -36,12 +36,6 @@ In this vignette, we will explore the key functionalities of `metaboPipe` and de
 
 Clone the `metaboPipe` repository from GitHub and install the package using the following commands:
 ```{r installation, eval=FALSE}
-# Clone the `metaboPipe` repository
-system("git clone https://github.com/eperezme/metaboPipe.git")
-
-# Install metaboAnalystR
-devtools::install_github("xia-lab/MetaboAnalystR", build = TRUE, build_vignettes = FALSE)
-
 # Install the package
 install.packages("devtools")
 devtools::install_github("https://github.com/eperezme/metaboPipe", subdir = "Work")
@@ -56,11 +50,11 @@ DE
 ```
 
 
-`metaboPipe` uses the `DatasetExperiment` object from the `structToolbox` package as the main data structure for storing and manipulating metabolomics data. The `DatasetExperiment` object is a list of data frames that contains the following components: 
+`metaboPipe` uses the `DatasetExperiment` object from the `structToolbox` package as the main **data structure** for storing and manipulating metabolomics data. The `DatasetExperiment` object is a list of data frames that contains the following components: 
 
 
 - `data`: This encapsulates a data frame housing the measured data pertaining to each sample.
-- `sample_meta`: This comprises a data frame furnishing supplementary sample-related information, such as group labels, often referred to as phenoData.
+- `sample_meta`: This comprises a data frame furnishing supplementary sample-related information, such as group labels, often referred to as *phenoData.*
 - `variable_meta`: This includes a data frame presenting additional details concerning variables (features), such as annotations.
 
 Similar to all `struct` entities, it encompasses `name` and `description` fields, referred to as "slots" within the R language.
