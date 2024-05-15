@@ -359,3 +359,73 @@ extract_names <- function(data) {
   variableData$annotation <- as.character(variableData$annotation) 
   return(variableData)
 } 
+
+
+#' Create Pipeline Function
+#'
+#' This function generates the code for a targets pipeline in an _targets.R file and saves it to the specified directory.
+#'
+#' @return Nothing is returned. The function creates an _targets.R file in the specified directory.
+#' @export
+#'
+#' @examples
+#' create_pipeline()
+#'
+#' @importFrom targets tar_assert_package
+#' @importFrom usethis edit_file
+create_pipeline <- function() {
+  # Generate the code for the _targets.R file
+  code <- "
+  library(targets)
+  library(tarchetypes)
+  library(metaboPipe)
+
+  tar_option_set(
+    packages = c(
+      'structToolbox', 'SummarizedExperiment', 'VIM', 'impute', 'imputeLCMD',
+      'missForest', 'caret', 'pcaMethods', 'tidyverse', 'MetaboAnalystR', 'tinytex',
+      'HotellingEllipse', 'ggforce', 'tools', 'cowplot'
+    )
+  )
+  
+  
+  #### Global variables #####
+  # General config
+  outdir = 'results'
+  dir.create(outdir, showWarnings = FALSE) # We create the outdir in case there its not created yet
+  outdir <- tools::file_path_as_absolute(outdir) # We get the absolute path of the dir for compatibility
+  
+  list(
+  
+  
+  
+  
+  
+  )
+"
+  directory <- getwd()
+  writeLines(code, con = file.path(directory, '_targets.R'))
+  
+  message("Created _targets.R file in ", directory)
+  
+  targets::tar_assert_package("usethis")
+  usethis::edit_file(path = paste0(directory,"/", '_targets.R'), open = TRUE)
+}
+
+
+#' Run Shiny App
+#'
+#' This function launches the Shiny app included with the package.
+#'
+#' @export
+#' @examples
+#' run_shiny_app()
+pipePlay <- function() {
+  # Define the directory containing the Shiny app files
+  app_dir <- system.file("Shiny", package = "metaboPipe")
+  
+  # Launch the Shiny app
+  shiny::shinyAppDir(appDir = app_dir)
+}
+
+

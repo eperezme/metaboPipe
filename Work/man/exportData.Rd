@@ -4,7 +4,7 @@
 \alias{exportData}
 \title{Export Data}
 \usage{
-exportData(output_name, input_name, out_dir, out_name = "Processed_Data")
+exportData(output_name, input_name, out_dir, out_name = "Processed")
 }
 \arguments{
 \item{output_name}{The name of the exported dataset.}
