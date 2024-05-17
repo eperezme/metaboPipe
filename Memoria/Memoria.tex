@@ -29,6 +29,7 @@
     }
 \usepackage[backend=biber, style=nature]{biblatex}
 \addbibresource{library.bib}
+\addbibresource{packages.bib}
 % \bibliography{library.bib}
 \urlstyle{same}
 \usepackage[toc, acronym, xindy]{glossaries}
@@ -422,10 +423,77 @@ Breve explicación de los contenidos de cada capítulo y su relación con el pro
 \todo[inline]{Los productos obtenidos}
 
 \section{Datasets} \todo{Data sources and description}
-The datasets employed for the purpose of this study were obtained from the Metabolomics Workbench database, a public repository for metabolomics data. 
+The datasets employed for the purpose of this study were obtained from public repositories.
+The datasets were selected based on the following criteria:
+\begin{itemize}
+    \item Aim of the dataset
+    \item Availability of raw data
+    \item Targeted metabolomics data
+    \item Diverse biological samples
+\end{itemize}
 
+The datasets selected were 3:
+\begin{itemize}
+    \item MTBLS79 \cite{kirwanDirectInfusionMass2014}: This dataset represents a systematic evaluation of the reproducibility of a multi-batch direct-infusion mass spectrometry (DIMS)-based metabolomics study of cardiac tissue extracts. It comprises twenty biological samples (cow vs. sheep) that were analysed repeatedly, in 8 batches across 7 days, together with a concurrent set of quality control (QC) samples. Data are presented from each step of the data processing workflow and are available through MetaboLights.
+    \item ST000284 \cite{zhuColorectalCancerDetection2014}
+    \item Dataset 3
+
+\end{itemize}
 \section{Packages} \todo{Also a brief description of the most relevant ones}
-The pipeline was developed using the R programming language and various packages \todo{Table of packages used in the project}.
+The pipeline was developed using the R programming language \cite{R} and the packages described in \ref{tab:packages}.
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{@{}
+    >{\columncolor[HTML]{FFFFFF}}l 
+    >{\columncolor[HTML]{FFFFFF}}l 
+    >{\columncolor[HTML]{FFFFFF}}c @{}}
+    \toprule
+    \multicolumn{1}{c}{\cellcolor[HTML]{FFFFFF}\textbf{Package}} & \multicolumn{1}{c}{\cellcolor[HTML]{FFFFFF}\textbf{Version}} & \textbf{Ref}                   \\ \midrule
+    {\color[HTML]{000000} arrow}          & {\color[HTML]{000000} \textit{15.0.1}}  & \cite{R-arrow} \\
+    {\color[HTML]{000000} base}           & {\color[HTML]{000000} \textit{4.3.3}}   & \cite{R}  \\
+    {\color[HTML]{000000} BiocStyle}      & {\color[HTML]{000000} \textit{2.30.0}}  & \cite{R-BiocStyle}  \\
+    {\color[HTML]{000000} caret}          & {\color[HTML]{000000} \textit{6.0.94}}  & \cite{R-caret}  \\
+    {\color[HTML]{000000} cowplot}        & {\color[HTML]{000000} \textit{1.1.3}}   & \cite{R-cowplot}  \\
+    {\color[HTML]{000000} crew}           & {\color[HTML]{000000} \textit{0.9.2}}   & \cite{R-crew}  \\
+    {\color[HTML]{000000} datasets}       & {\color[HTML]{000000} \textit{4.3.3}}   & \cite{R}  \\
+    {\color[HTML]{000000} dplyr}          & {\color[HTML]{000000} \textit{1.1.4}}   & \cite{R-dplyr}  \\
+    {\color[HTML]{000000} DT}             & {\color[HTML]{000000} \textit{0.33}}    & \cite{R-DT}  \\
+    {\color[HTML]{000000} fst}            & {\color[HTML]{000000} \textit{0.9.8}}   & \cite{R-fst}  \\
+    {\color[HTML]{000000} ggforce}        & {\color[HTML]{000000} \textit{0.4.2}}   & \cite{R-ggforce}  \\
+    {\color[HTML]{000000} graphics}       & {\color[HTML]{000000} \textit{4.3.3}}   & \cite{R-graph}  \\
+    {\color[HTML]{000000} grDevices}      & {\color[HTML]{000000} \textit{4.3.3}}   & \cite{R}  \\
+    {\color[HTML]{000000} HotellingEllipse}                      & {\color[HTML]{000000} \textit{1.1.0}}                        & \cite{R-HotellingEllipse} \\
+    {\color[HTML]{000000} impute}         & {\color[HTML]{000000} \textit{1.76.0}}  & \cite{R-impute}  \\
+    {\color[HTML]{000000} imputeLCMD}     & {\color[HTML]{000000} \textit{2.1}}     & \cite{R-imputeLCMD}  \\
+    {\color[HTML]{000000} knitr}          & {\color[HTML]{000000} \textit{1.46}}    & \cite{R-knitr}  \\
+    {\color[HTML]{000000} MetaboAnalystR} & {\color[HTML]{000000} \textit{4.0.0}}   & \cite{R-MetaboAnalystR}  \\
+    {\color[HTML]{000000} methods}        & {\color[HTML]{000000} \textit{4.3.3}}   & \cite{R}  \\
+    {\color[HTML]{000000} missForest}     & {\color[HTML]{000000} \textit{1.5}}     & \cite{R-missForest}  \\
+    {\color[HTML]{000000} pcaMethods}     & {\color[HTML]{000000} \textit{1.94.0}}  & \cite{R-pcaMethods}  \\
+    {\color[HTML]{000000} pmp}            & {\color[HTML]{000000} \textit{1.14.1}}  & \cite{R-pmp}  \\
+    {\color[HTML]{000000} purrr}          & {\color[HTML]{000000} \textit{1.0.2}}   & \cite{R-purrr}  \\
+    {\color[HTML]{000000} renv}           & {\color[HTML]{000000} \textit{1.0.5}}   & \cite{R-renv}  \\
+    {\color[HTML]{000000} reshape2}       & {\color[HTML]{000000} \textit{1.4.4}}   & \cite{R-reshape2}  \\
+    {\color[HTML]{000000} rmarkdown}      & {\color[HTML]{000000} \textit{2.26}}    & \cite{R-rmarkdown}  \\
+    {\color[HTML]{000000} shiny}          & {\color[HTML]{000000} \textit{1.8.1.1}} & \cite{R-shiny}  \\
+    {\color[HTML]{000000} shinyFiles}     & {\color[HTML]{000000} \textit{0.9.3}}   & \cite{R-shinyFiles}  \\
+    {\color[HTML]{000000} stats}          & {\color[HTML]{000000} \textit{4.3.3}}   & \cite{R}  \\
+    {\color[HTML]{000000} structToolbox}  & {\color[HTML]{000000} \textit{1.14.0}}  & \cite{R-structToolbox}  \\
+    {\color[HTML]{000000} SummarizedExperiment}                  & {\color[HTML]{000000} \textit{1.32.0}}                       & \cite{R-SummarizedExperiment} \\
+    {\color[HTML]{000000} tarchetypes}    & {\color[HTML]{000000} \textit{0.9.0}}   & \cite{R-tarchetypes}  \\
+    {\color[HTML]{000000} targets}        & {\color[HTML]{000000} \textit{1.6.0}}   & \cite{R-targets}  \\
+    {\color[HTML]{000000} tidyverse}      & {\color[HTML]{000000} \textit{2.0.0}}   & \cite{R-tidyverse}  \\
+    {\color[HTML]{000000} tinytex}        & {\color[HTML]{000000} \textit{0.51}}    & \cite{R-tinytex}  \\
+    {\color[HTML]{000000} tools}          & {\color[HTML]{000000} \textit{4.3.3}}   & \cite{R}  \\
+    {\color[HTML]{000000} usethis}        & {\color[HTML]{000000} \textit{2.2.3}}   & \cite{R-usethis}  \\
+    {\color[HTML]{000000} utils}          & {\color[HTML]{000000} \textit{4.3.3}}   & \cite{R}  \\
+    {\color[HTML]{000000} VIM}            & {\color[HTML]{000000} \textit{6.2.2}}   & \cite{R-VIM}  \\
+    {\color[HTML]{000000} withr}          & {\color[HTML]{000000} \textit{3.0.0}}   & \cite{R-withr}  \\ \bottomrule
+    \end{tabular}
+    \caption{List of R packages with their versions used to develop \texttt{metaboPipe}}
+    \label{tab:packages}
+    \end{table}
 
 
 \todo{add a summary of 1: Number of functions and 2: Number of lines of code}
