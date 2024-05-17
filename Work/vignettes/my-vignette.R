@@ -3,16 +3,13 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   tidy.opts = list(width.cutoff = 60), 
-  tidy = TRUE
+  tidy = TRUE,
+  dpi=96,fig.width=5,fig.height=5.5,fig.retina = 1,fig.small = TRUE
 )
 
+set.seed(57475)
+
 ## ----installation, eval=FALSE-------------------------------------------------
-#  # Clone the `metaboPipe` repository
-#  system("git clone https://github.com/eperezme/metaboPipe.git")
-#  
-#  # Install metaboAnalystR
-#  devtools::install_github("xia-lab/MetaboAnalystR", build = TRUE, build_vignettes = FALSE)
-#  
 #  # Install the package
 #  install.packages("devtools")
 #  devtools::install_github("https://github.com/eperezme/metaboPipe", subdir = "Work")
@@ -308,4 +305,7 @@ targets::tar_make()
 
 ## ----shiny, eval=FALSE--------------------------------------------------------
 #  metaboPipe::pipePilers()
+
+## ----sessionInfo--------------------------------------------------------------
+sessionInfo()
 
