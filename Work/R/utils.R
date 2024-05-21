@@ -429,7 +429,7 @@ pipePliers <- function() {
     stop("Could not find Shiny app directory. Please re-install the package.")
   }
   # shiny::loadSupport(appDir = appDir)
-  shinyOptions(wd = wd)
+  shiny::shinyOptions(wd = wd)
   shiny::shinyAppDir(appDir)
 }
 
