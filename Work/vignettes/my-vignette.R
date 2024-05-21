@@ -304,7 +304,7 @@ targets::tar_manifest()
 targets::tar_make()
 
 ## ----shiny, eval=FALSE--------------------------------------------------------
-#  metaboPipe::pipePilers()
+#  metaboPipe::pipePliers()
 
 ## ----sessionInfo--------------------------------------------------------------
 sessionInfo()

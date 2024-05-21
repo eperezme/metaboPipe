@@ -419,8 +419,8 @@ create_pipeline <- function() {
 #'
 #' @export
 #' @examples
-#' pipePilers()
-pipePilers <- function() {
+#' pipePliers()
+pipePliers <- function() {
   # shinyenv <- new.env()
   wd <- getwd()
   # assign("wd", wd, envir = shinyenv)

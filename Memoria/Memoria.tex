@@ -104,8 +104,7 @@
             
             \vspace*{0.4\textheight} 
             
-            \noindent\enquote{\itshape BIG MOTIVATIONAL QUOTE
-            }\bigbreak 
+            \noindent\enquote{\itshape Never let your sense of morality stop you from doing the right thing}\bigbreak 
             
             % People think of education as something they can finish - Isaac Asimov
             
@@ -113,7 +112,7 @@
             
             % Never let your sense of morality stop you from doing the right thing. - Isaac Asimov
 
-            \hfill AUTHOR NAME
+            \hfill Isaac Asimov
             
             \newpage
             
@@ -221,41 +220,39 @@ For instance, blood samples may not require normalization due to the body's cont
 Transformation becomes necessary to address data variance after scaling, aiming to correct for heteroscedasticity, convert multiplicative relations into additive ones, and normalize skewed distributions.
 
 \section{State of the art}
-%\chapter{Estado del arte}
 
-%Estado del arte del tema en cuestión. Tendría que acabar mostrando por qué el trabajo es importante y aporta algo, y con las hipótesis del trabajo.
 
-\todo[inline]{Punto de partida del trabajo (¿Cuál es la necesidad a cubrir? ¿Por qué es un tema relevante? ¿Cómo se resuelve el problema de momento?) y aportación realizada (¿Qué resultado se quiere obtener?).}
-
-Metabolomic data preprocessing involves denoising, baseline correction, peak picking, and alignment. For \acrshort{ms}-based analysis, tools like XCMS and MZmine facilitate preprocessing, while for \acrshort{nmr} data, packages like BATMAN and RAMSY offer robust preprocessing capabilities. Pretreatment techniques include handling missing values, outlier detection, and normalization using methods like imputation, robust statistical measures, and scaling techniques.
+Metabolomic data arrives to the researcher in different shapes and forms depending on the method, the instrument used and the company that analyses. Most of the time those companies do a preprocessing of the data, adjusting for baseline correction, peak picking, and alignment. The preprocessing of this data is a crucial step in the analysis, as it can significantly impact the results and the conclusions drawn from the data. 
+For \acrshort{ms}-based analysis, tools like XCMS \cite{R-xcms} and MZmine \cite{schmidIntegrativeAnalysisMultimodal2023} facilitate preprocessing, while for \acrshort{nmr} data, packages like BATMAN \cite{R-batman} and RAMSY \cite{guRAMSYRatioAnalysis2013} offer robust preprocessing capabilities . Pretreatment techniques include handling missing values, outlier detection, imputation and normalization.
 
 Nevertheless the field lacks a standardized approach to metabolomic data preprocessing, with inconsistencies in terminology and methodologies. 
 \citeauthor{stanstrupMetaRbolomicsToolboxBioconductor2019} in their \citetitle{stanstrupMetaRbolomicsToolboxBioconductor2019} made an extensive revision of both the scientific literature and the R landscape for packages relevant for metabolomic research.
 
+Since there is no consensus on the order those pretreatment techinques should be applied, the researcher has to decide which steps to take and in which order. This can lead to inconsistencies in the results and the conclusions drawn from the data. Furthermore, the amount of packages that there are for performing the preprocessing and pretreatment of metabolomic data can be overwhelming. And thus preparing the data for analysis, changing the order of the steps, or even changing the parameters of the steps can be a time-consuming task.
 
+The project aims to develop a modular pipeline for targeted metabolomic data pretreatment, implemented in R. The pipeline is designed to enhance efficiency and modularity compared to existing solutions. As a gift to the scientific community, this project is free and open source, with detailed documentation and code available in a public repository. It's encouraged continuous community efforts to improve and expand the package.
 
-
-\todo{En algun lloc és important emfasitzar que descfartem la metabolòmica no dirigida.}
-
+\todo{Add hypothesis}
 
 
 
 
 %%%%% OBJECTIVES %%%%%%
-\chapter{Objectives} \todo{Escriure-ho en angles}
+\chapter{Objectives}
 
-\section{Main objective}
+\section{Main Objective}
 \begin{enumerate}
-    \item Desenvolupar un nou pipeline per al preprocés de dades de metabolòmica dirigida amb l'objectiu de millorar la eficiència i la modularitat respecte als pipelines existents. Aquest nou pipeline s'implementarà en R. 
+\item Develop a new pipeline for the preprocessing of targeted metabolomic data with the aim of improving efficiency and modularity compared to existing pipelines. This new pipeline will be implemented in R.
 \end{enumerate}
 
-\section{Specific objectives}
+\section{Specific Objectives}
 
 \begin{enumerate}
-    \item Implementar el pipeline de preprocés de dades de metabolòmica dirigida utilitzant el paquet "targets" per a garantir la replicabilitat i la gestió eficient dels recursos computacionals.
-    \item Seleccionar diversos conjunts de dades de metabolòmica dirigida per validar i optimitzar el rendiment del nou pipeline, analitzant-ne la qualitat i la consistència.
-    \item Facilitar l'ús de l'eina desenvolupada a la comunitat científica, mitjançant la creació d'una documentació detallada i la publicació del codi en un repositori públic.
+\item Implement the preprocessing pipeline for targeted metabolomic data using the "targets" package to ensure replicability and efficient management of computational resources.
+\item Select various targeted metabolomic datasets to validate and optimize the performance of the new pipeline, analyzing its quality and consistency.
+\item Facilitate the use of the developed tool by the scientific community by creating detailed documentation and publishing the code in a public repository.
 \end{enumerate}
+
 
 % TODO 
 \todo[inline]{En els objectius específics és on hauries de parlar de la forma en que ho faras (per exemple, fent servir el paquet "targets") i també introduir la selecció i anàlisi d'alguns datasets ilustratius. En aquest camp sovint els datasets ho son tot.
@@ -289,10 +286,35 @@ While our project aims to bring about positive change, it is essential to consid
 
 % APPROACH AND METHODOLOGY
 \chapter{Approach and methodology}
-
-Mención de cuáles son las posibles estrategias para llevar a cabo el trabajo y cuál es la estrategia elegida (desarrollar un producto nuevo, adaptar un producto existente...). Hay que incluir una valoración de por qué esta es la estrategia más apropiada para conseguir los objetivos.   	
-
 \section{Methodology}
+\todo[inline]{Mención de cuáles son las posibles estrategias para llevar a cabo el trabajo y cuál es la estrategia elegida (desarrollar un producto nuevo, adaptar un producto existente...). Hay que incluir una valoración de por qué esta es la estrategia más apropiada para conseguir los objetivos.}
+
+In the context of enhancing the field of metabolomics and improving the efficiency and accuracy of metabolomics reports, the choice of creating a tool for targeted metabolomic data pretreatement is a strategic decision. This tool will be developed in R, a widely used programming language in the field of bioinformatics and biostatistics. The tool will be designed to streamline the pretreatement of targeted metabolomic data, ensuring that the data is ready for further analysis and interpretation. 
+
+The tool will be modular, allowing users to select and apply specific pretreatement steps according to their needs and preferences. This modularity design makes the tool flexible, adaptable and more important expandable, as new pretreatement methods can be easily added to the pipeline and thus to the package using existent methods and tools from other packages.
+
+In order to be modular, the package modules should take as inputs the same object type that outputs. Making it easier to chain the modules in any specific order. To achieve this objective, the package should use a main data structure to store the data. In omics data, the most used data structure is the \texttt{SummarizedExperiment} from the Bioconductor project \cite{R-SummarizedExperiment}. However this data structure is not the most efficient for the pretreatement of the metabolomics data, as the \texttt{SummarizedExperiment} dataframes are designed to store the data features in a row-wise manner and the samples in a column-wise manner. Though this may fit well for other omics data, is not the most intuitive way to manipulate the data in the context of metabolomics.
+
+Since targeted metabolomic data uses multiple dataframes to store the diferent types of data, the most intuitive and already developed data structure will be the \texttt{DatasetExperiment} from the \texttt{structToolbox} package \cite{structToolbox2020}. This data structure is designed to store the data features in a column-wise manner and the samples in a row-wise manner, making it more intuitive to manipulate the data in the context of metabolomics. It also incorporate multiple methods for the manipulation of the data, making it easier to develop the package. 
+
+A deployment controller will be used to manage the order of the modules and the data flow between them. This controler will be created using the \texttt{targets} package \cite{targets2021}, a pipeline toolkit for reproducible research. The \texttt{targets} package will ensure that the pipeline is reproducible, efficient and easy to manage.
+
+The \texttt{targets} package only deploys the steps needed to complete the pipeline as previous steps that do not change its output will not be re-run. This makes the pipeline more efficient and faster, as only the steps that need to be re-run will be re-run. 
+
+The integration of modularity with a deployment controler creates 2 usefull features:
+
+\begin{itemize}
+    \item The first one is that the pipeline can be run in parallel, as the steps that do not depend on each other can be run at the same time. This will make the pipeline faster and more efficient.
+    \item The second one is that it enables the pipeline to be used as a pretreatement method comparable tool. As the easy of use and order can be easily changed, the user can test different pretreatement methods and orders to compare the changes in the data.
+\end{itemize}
+
+
+In order to select the methods and tools that will be used in the pipeline, a deep review of the literature will be performed. This review will explore recent publications of metabolomics data and also comparative reviews of the most used methods and tools for the pretreatement of targeted metabolomic data to select the most used methods for metabolomic data pretreatement. This review will also explore and select datasets to validate and optimize the performance of the pipeline.
+
+
+
+
+
 
 
 % \newgeometry{top=1cm, bottom=-4cm} % Adjust margins to remove headers and footers
@@ -403,17 +425,20 @@ Mención de cuáles son las posibles estrategias para llevar a cabo el trabajo y
 
 
 
-\section{Final products} \todo{Expand on every item}
+\section{Final products}
 \begin{itemize}
-    \item A pipeline for targeted metabolomic data preprocessing.
-    \item A package for the modular implementation of that pipeline in R.
-    \item A detailed documentation of the pipeline.
-    \item A Shiny app for the accessibility of the pipeline.
-    \item A public repository with the code and documentation.
+    \item A \textbf{pipeline} for targeted metabolomic data preprocessing designed to streamline data pretreatment tasks, optimize workflows, and ensure reproducibility in metabolomic research endeavors.
+    \item A \textbf{R package} crafted to facilitate the seamless integration and modular implementation of the pipeline within the R environment, empowering researchers with flexible and efficient tools for metabolomic data analysis.
+    \item A detailed \textbf{documentation} accompanying the pipeline and R package.
+    \item A user-friendly \textbf{Shiny app} that enables researchers with varying levels of computational expertise to effortlessly pretreat targeted metabolomic data.
+    \item A public \textbf{repository} with the projects deliverables, source code of the package and the documentation. Thus encouraging transparency, collaboration, and community-driven enhancements to advance the state-of-the-art in metabolomic data preprocessing.
+    \item A \textbf{PDF report} detailing the project's processes, including investigation, development, results, conclusions, and discussions.
+    \item A \textbf{virtual presentation} providing a comprehensive overview of the project. This includes a video recording with explanatory narration to further enhance understanding.
 \end{itemize}
 
-\section{Chapters structure} \todo{Dejar para el final}
-Breve explicación de los contenidos de cada capítulo y su relación con el proyecto global.
+\section{Chapters structure} 
+
+\todo[inline]{Breve explicación de los contenidos de cada capítulo y su relación con el proyecto global.} \todo{Dejar para el final}
 
 
 
@@ -432,11 +457,10 @@ The datasets were selected based on the following criteria:
     \item Diverse biological samples
 \end{itemize}
 
-The datasets selected were 3:
+The datasets selected were 2:
 \begin{itemize}
     \item MTBLS79 \cite{kirwanDirectInfusionMass2014}: This dataset represents a systematic evaluation of the reproducibility of a multi-batch direct-infusion mass spectrometry (DIMS)-based metabolomics study of cardiac tissue extracts. It comprises twenty biological samples (cow vs. sheep) that were analysed repeatedly, in 8 batches across 7 days, together with a concurrent set of quality control (QC) samples. Data are presented from each step of the data processing workflow and are available through MetaboLights.
-    \item ST000284 \cite{zhuColorectalCancerDetection2014}
-    \item Dataset 3
+    \item ST000284 \cite{zhuColorectalCancerDetection2014} \todo{Describe Dataset}
 
 \end{itemize}
 \section{Packages} \todo{Also a brief description of the most relevant ones}
