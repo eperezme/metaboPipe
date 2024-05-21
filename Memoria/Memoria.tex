@@ -17,6 +17,7 @@
 \usepackage{hyperref}
 \usepackage{bookmark}
 \usepackage{booktabs}
+\usepackage{microtype}
 % \usepackage[table,xcdraw]{xcolor}
 \usepackage{pgfgantt}
 \hypersetup{
@@ -305,7 +306,6 @@ The integration of modularity with a deployment controler creates 2 usefull feat
 
 \begin{itemize}
     \item The first one is that the pipeline can be run in parallel, as the steps that do not depend on each other can be run at the same time. This will make the pipeline faster and more efficient.
-    \item The second one is that it enables the pipeline to be used as a pretreatement method comparable tool. As the easy of use and order can be easily changed, the user can test different pretreatement methods and orders to compare the changes in the data.
 \end{itemize}
 
 
@@ -459,8 +459,8 @@ The datasets were selected based on the following criteria:
 
 The datasets selected were 2:
 \begin{itemize}
-    \item MTBLS79 \cite{kirwanDirectInfusionMass2014}: This dataset represents a systematic evaluation of the reproducibility of a multi-batch direct-infusion mass spectrometry (DIMS)-based metabolomics study of cardiac tissue extracts. It comprises twenty biological samples (cow vs. sheep) that were analysed repeatedly, in 8 batches across 7 days, together with a concurrent set of quality control (QC) samples. Data are presented from each step of the data processing workflow and are available through MetaboLights.
-    \item ST000284 \cite{zhuColorectalCancerDetection2014} \todo{Describe Dataset}
+    \item \textbf{MTBLS79} \cite{kirwanDirectInfusionMass2014}: This dataset represents a systematic evaluation of the reproducibility of a multi-batch direct-infusion mass spectrometry (DIMS)-based metabolomics study of cardiac tissue extracts. It comprises twenty biological samples (cow vs. sheep) that were analysed repeatedly, in 8 batches across 7 days, together with a concurrent set of quality control (QC) samples. Data are presented from each step of the data processing workflow and are available through MetaboLights. 
+    \item \textbf{ST000284} \cite{zhuColorectalCancerDetection2014} \todo{Describe Dataset}
 
 \end{itemize}
 \section{Packages} \todo{Also a brief description of the most relevant ones}
@@ -527,8 +527,8 @@ In this project, an R package named \texttt{metaboPipe} was developed to preproc
 The \texttt{metaboPipe} package is designed to streamline the preprocessing of metabolomic data by creating a series of user-accessible modules that translate into interconnected steps. These steps can be easily added, modified, and rearranged. The package utilizes the \texttt{targets} package to orchestrate task deployment and dependencies, ensuring that each step is executed in the correct order. The \texttt{structToolbox} package provides the \texttt{DatasetExperiment} object, which serves as the primary data structure throughout the pipeline, along with multiple functions for data transformation.
 
 \section{Functions and Processing Steps}
-Although the \texttt{metaboPipe} package comprises over 56 functions, there are six main preprocessing functions that users will primarily engage with, each responsible for a specific data transformation step. These functions are designed to operate sequentially on a \texttt{DatasetExperiment} object, transforming it at each stage to prepare it for subsequent steps.
 
+Although the \texttt{metaboPipe} package comprises over 56 functions, there are six main preprocessing functions that users will primarily engage with, each responsible for a specific data transformation step. These functions are designed to operate sequentially on a \texttt{DatasetExperiment} object, transforming it at each stage to prepare it for subsequent steps.
 \subsection{Data Format}
 Data must be imported in \texttt{.csv} format, consisting of two types of files:
 
@@ -608,7 +608,10 @@ Las figuras tienen que estar explicadas y citadas en el texto, como la \ref{fig:
 %\chapter{Valoración económica}
 %En caso de que corresponda, se incluirá un apartado de ``Valoración económica del trabajo". Este apartado indicará los gastos asociados al desarrollo y mantenimiento del trabajo, así como los beneficios económicos obtenidos. Hay que hacer un análisis final sobre la viabilidad del producto.
 
+\chapter{Discussion}
+
 \chapter{Conclusion and future vision}
+The second one is that it enables the pipeline to be used as a pretreatement method comparable tool. As the easy of use and order can be easily changed, the user can test different pretreatement methods and orders to compare the changes in the data.
 
 %\section{Conclusiones}
 Este capítulo tiene que incluir:
