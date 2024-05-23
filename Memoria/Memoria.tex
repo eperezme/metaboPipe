@@ -4,14 +4,7 @@
 %%---------------------------- PACKAGES ----------------------------%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\usepackage{titlesec}
-\titleformat{\chapter}[hang]
-  {\bfseries\color{darkblueUOC} \Huge}
-  {\thechapter.}
-  {1em}
-  {}
 
-\titlespacing{\chapter}{0pt}{-10pt}{50pt}
 \usepackage{mathpazo} % Use the Palatino font by default
 \usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
 \usepackage{hyperref}
@@ -38,7 +31,44 @@
 \loadglsentries[main]{glossary.tex}
 
 \usepackage{lscape}
-    
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%-------------- Document Headers and font settings ---------------%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \usepackage{sectsty}
+    % \usepackage{GoSans}
+    \usepackage{titlesec}
+    \usepackage{fontspec}
+    \setmainfont{Palatino Linotype}
+    \setmonofont[Color={00052A}]{Consolas}
+
+% % Load futura font
+% \newfontface\headerfont{GoSans}
+
+\titlespacing{\chapter}{0pt}{-10pt}{50pt}
+
+\titleformat{\chapter}[hang]
+  {\bfseries\color{darkblueUOC} \Huge}
+  {\thechapter.}
+  {1em}
+  {}
+% \titleformat{\section}
+%   {\normalfont\bfseries\Large} % Font settings for \section
+%   {\thesection}{1em}{}
+
+% \titleformat{\subsection}
+%   {\normalfont\bfseries\large} % Font settings for \subsection
+%   {\thesubsection}{1em}{}
+
+% \titleformat{\subsubsection}
+%   {\normalfont\bfseries\normalsize} % Font settings for \subsubsection
+%   {\thesubsubsection}{1em}{}
+
+
+
+
+
+
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%-------------- TEMP DOCUMENT SETTINGS FOR COMMENTS ---------------%%
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -249,9 +279,10 @@ The project aims to develop a modular pipeline for targeted metabolomic data pre
 \section{Specific Objectives}
 
 \begin{enumerate}
+\item Design a new pipeline for the preprocessing of targeted metabolomic data.
 \item Implement the preprocessing pipeline for targeted metabolomic data using the "targets" package to ensure replicability and efficient management of computational resources.
 \item Select various targeted metabolomic datasets to validate and optimize the performance of the new pipeline, analyzing its quality and consistency.
-\item Facilitate the use of the developed tool by the scientific community by creating detailed documentation and publishing the code in a public repository.
+\item Make the development accessible to the scientific community by creating detailed documentation and publishing the code in a public repository.
 \end{enumerate}
 
 
@@ -385,9 +416,22 @@ In order to select the methods and tools that will be used in the pipeline, a de
 
 \subsection{Tasks}
 \subsubsection{Main Tasks and prioritization}
+    \begin{enumerate}
+        \item \textbf{Definition of the work plan:} Define the project's scope, objectives, methodology and expected outcomes. Create a project charter outlining the project's purpose and goals as well as a calendar with milestones and dates.
+        \item \textbf{Literature review:} Review multiple publications and replicate the data processing from 3 of them. Review most used methods and tools for metabolomics data processing like normalization, scaling, filtering, transformation, batch effect
+        \item \textbf{Pipeline design:} Propose and code in R a new pipeline to manage the processing of targeted metabolomics data.
+        \item \textbf{Benchmarking:} Replicate again the data processing of the 3 publications using the new pipeline and compare the results.
+    \end{enumerate}
 
+    
 
 \subsubsection{Extra tasks}
+    \begin{enumerate}
+        \item \textbf{Heavy-workload:} Optimize the pipeline to enable parallelization of the processing.
+        \item \textbf{Documentation:} Write a documentation for the package so its accessibility.
+        \item \textbf{R package implementation:} Pack the code for the pipeline in an R package to easy distribution.
+
+    \end{enumerate}
 
 
 \section{Risk analysis}
@@ -431,25 +475,23 @@ In order to select the methods and tools that will be used in the pipeline, a de
     \item A \textbf{R package} crafted to facilitate the seamless integration and modular implementation of the pipeline within the R environment, empowering researchers with flexible and efficient tools for metabolomic data analysis.
     \item A detailed \textbf{documentation} accompanying the pipeline and R package.
     \item A user-friendly \textbf{Shiny app} that enables researchers with varying levels of computational expertise to effortlessly pretreat targeted metabolomic data.
-    \item A public \textbf{repository} with the projects deliverables, source code of the package and the documentation. Thus encouraging transparency, collaboration, and community-driven enhancements to advance the state-of-the-art in metabolomic data preprocessing.
+    % \item A public \textbf{repository} with the projects deliverables, source code of the package and the documentation. Thus encouraging transparency, collaboration, and community-driven enhancements to advance the state-of-the-art in metabolomic data preprocessing.
     \item A \textbf{PDF report} detailing the project's processes, including investigation, development, results, conclusions, and discussions.
     \item A \textbf{virtual presentation} providing a comprehensive overview of the project. This includes a video recording with explanatory narration to further enhance understanding.
 \end{itemize}
 
-\section{Chapters structure} 
 
-\todo[inline]{Breve explicación de los contenidos de cada capítulo y su relación con el proyecto global.} \todo{Dejar para el final}
+\chapter{Materials and methods} \todo{Metodes: Com Desenvolupo // Materials: Amb que ho fas}
 
+\section{Literature review}
+The literature selected for the review was obtained from multiple journals. The search was conducted using the following keywords: "metabolomics", "data preprocessing", "data pretreatment", "metabolomics pipeline", "metabolomics tools", "metabolomics R packages", "targeted metabolomics", "nutrimetabolomics", "metabolomics proce". The search was limited to articles published in the last 20 years, with a focus on metabolomics data preprocessing and pretreatment methodologies. The review aimed to identify the most commonly used methods and tools for metabolomic data preprocessing and pretreatment, as well as to explore recent advancements in the field. The review also sought to identify gaps in the existing literature and to inform the development of the new pipeline.
+\todo{Incloure taula amb els articles revisats?}
 
+\section{Pipeline design}
+The methods selected to be included in the pipeline were based on the results of the literature review. The pipeline was designed to be modular, allowing users to select and apply specific pretreatment steps according to the data caracteristics and user needs and preferences.
 
-\chapter{Materials and methods}
-\todo[inline]{Los aspectos más relevante del diseño y desarrollo del trabajo.}
-\todo[inline]{La metodología elegida para hacer este desarrollo, describiendo las alternativas posibles, las decisiones tomadas, y los criterios utilizados para tomar estas decisiones.}
-\todo[inline]{Los productos obtenidos}
-
-\section{Datasets} \todo{Data sources and description}
-The datasets employed for the purpose of this study were obtained from public repositories.
-The datasets were selected based on the following criteria:
+\section{Datasets}
+The datasets employed for the purpose of this study were obtained from public repositories. The datasets were selected based on the following criteria:
 \begin{itemize}
     \item Aim of the dataset
     \item Availability of raw data
@@ -459,10 +501,12 @@ The datasets were selected based on the following criteria:
 
 The datasets selected were 2:
 \begin{itemize}
-    \item \textbf{MTBLS79} \cite{kirwanDirectInfusionMass2014}: This dataset represents a systematic evaluation of the reproducibility of a multi-batch direct-infusion mass spectrometry (DIMS)-based metabolomics study of cardiac tissue extracts. It comprises twenty biological samples (cow vs. sheep) that were analysed repeatedly, in 8 batches across 7 days, together with a concurrent set of quality control (QC) samples. Data are presented from each step of the data processing workflow and are available through MetaboLights. 
-    \item \textbf{ST000284} \cite{zhuColorectalCancerDetection2014} \todo{Describe Dataset}
-
+    \item \textbf{MTBLS79:} \cite{kirwanDirectInfusionMass2014} This dataset represents a systematic evaluation of the reproducibility of a multi-batch direct-infusion mass spectrometry (DIMS)-based metabolomics study of cardiac tissue extracts. It comprises twenty biological samples (cow vs. sheep) that were analysed repeatedly, in 8 batches across 7 days, together with a concurrent set of quality control (QC) samples. Data are presented from each step of the data processing workflow and are available through MetaboLights. This dataset was selected due to its importance in the field of metabolomics and its data aviability.
+    \item \textbf{ST000284:} \cite{zhuColorectalCancerDetection2014} This dataset from MetaboWorkbench includes a study on colorectal cancer (CRC) using targeted liquid chromatography-tandem mass spectrometry. It examines 158 metabolites across 25 pathways in 234 serum samples (66 CRC patients, 76 polyp patients, 92 healthy controls). Blood samples were collected after fasting and bowel preparation. This dataset was selected due to its data aviability, its diversity (3 groups) and amount of samples.
+    
 \end{itemize}
+
+
 \section{Packages} \todo{Also a brief description of the most relevant ones}
 The pipeline was developed using the R programming language \cite{R} and the packages described in \ref{tab:packages}.
 
@@ -521,6 +565,11 @@ The pipeline was developed using the R programming language \cite{R} and the pac
 
 
 \todo{add a summary of 1: Number of functions and 2: Number of lines of code}
+
+
+
+\chapter{Results}
+
 In this project, an R package named \texttt{metaboPipe} was developed to preprocess metabolomic data efficiently and accessibly. Metabolomic data preprocessing is a crucial step in ensuring the quality and reliability of downstream analyses. The transformations applied during preprocessing are primarily intended to remove unwanted effects unrelated to the study, but these tools can inadvertently delete meaningful biological data if used without caution. The \texttt{metaboPipe} package leverages the \texttt{targets} and \texttt{structToolbox} packages to create a modular and reproducible pipeline for preprocessing. This section details the components and functionality of \texttt{metaboPipe}.
 
 \section{Package Overview}
@@ -574,7 +623,7 @@ Each preprocessing step in \texttt{metaboPipe} is implemented as a function that
 The \texttt{DatasetExperiment} object from the \texttt{structToolbox} package is used throughout the pipeline, providing a consistent and flexible data structure for all preprocessing steps.
 
 
-\section{Conclusion} 
+% CONCLUSION
 The \texttt{metaboPipe} package offers a comprehensive and modular approach to preprocessing metabolomic data. By integrating the \texttt{targets} and \texttt{structToolbox} packages, \texttt{metaboPipe} ensures that each preprocessing step is executed efficiently and reproducibly. This pipeline enhances the quality of metabolomic data, facilitating robust and reliable downstream analyses. Future work may involve extending the pipeline to include additional preprocessing steps or integrating advanced machine learning techniques for enhanced data processing.
 
 
@@ -585,28 +634,6 @@ The \texttt{metaboPipe} package offers a comprehensive and modular approach to p
 
 \section{Shiny app}
  
-
-
-\chapter{Results}
-
-Detallad en este apartado los resultados obtenidos utilizando la metodología descrita en el apartado anterior.
-
-Las figuras tienen que estar explicadas y citadas en el texto, como la \ref{fig:my_label}, en la cual se muestra el error en función de la distancia, en unidades arbitrarias. En todas las gráficas tiene que haber el título de los ejes.
-
-\begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=7truecm]{Template/Rplotmanh.png}
-    \caption{Error en función de la distancia en unidades arbitrarias.}
-    \label{fig:my_label}
-\end{figure}
-
-%\chapter{Discusión}
-%Discusión de los resultados en el contexto del proyecto. Es en este apartado donde cobran sentido y en el cual se responden las preguntas de investigación y se muestra como los resultados dan respuesta a los problemas planteados.
-
-%Esta parte puede ser que no aplique según el tipo de trabajo.
-
-%\chapter{Valoración económica}
-%En caso de que corresponda, se incluirá un apartado de ``Valoración económica del trabajo". Este apartado indicará los gastos asociados al desarrollo y mantenimiento del trabajo, así como los beneficios económicos obtenidos. Hay que hacer un análisis final sobre la viabilidad del producto.
 
 \chapter{Discussion}
 
