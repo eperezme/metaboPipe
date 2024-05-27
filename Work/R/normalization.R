@@ -98,6 +98,12 @@ normalize_metab <- function(dataset_experiment, factor_col, sample_id_col, rowNo
   }
   
   ref <- make.names(ref)
+  na_matrix <- is.na(SummarizedExperiment::assay(dataset_experiment))
+  
+  if (rowNorm == "CompNorm") {
+    # Drop the reference column from the dataset
+    na_matrix <- na_matrix[, !(colnames(na_matrix) %in% ref)]
+    }
   
   withr::with_dir(out_dir, {
     dir.create("TempData", showWarnings = FALSE)
@@ -136,9 +142,12 @@ normalize_metab <- function(dataset_experiment, factor_col, sample_id_col, rowNo
     # Make all the columns numeric
     numericData <- sortedData %>% mutate_all(as.numeric)
     
+    # Restore na if there was any
+    numericData[na_matrix] <- NA
     
     # Modify the dataset_experiment object
     dataset_experiment <- data.modify(dataset_experiment, numericData)
+    
   })
   
   return(dataset_experiment)
