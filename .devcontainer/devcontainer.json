@@ -6,7 +6,9 @@
 			"scheme": "basic",
 			"mirror": "https://mirror.ctan.org/systems/texlive/tlnet/",
 			"packages": [
-				"texlive-xetex"
+				"texlive-xetex",
+				"biber",
+				"texlive-bibtex-extra"
 			]
 		}
 	}
