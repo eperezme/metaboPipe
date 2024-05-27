@@ -45,7 +45,7 @@ devtools::install_github("https://github.com/eperezme/metaboPipe", subdir = "Wor
 ```
 
 ## Introduction to `metaboPipe` and its functionalities
-For our example we will load the ST000284 dataset. `EXPLAIN THE DATASET`
+For our example we will load the ST000284 dataset. You can view the description of the dataset by running the following command:
 
 ```{r}
 DE <- metaboPipe::ST000284
@@ -80,7 +80,7 @@ head(DE$variable_meta)
 
 The `metaboPipe` pipeline functions consists of several functions that create targets to execute specific processing steps, including data loading, filtering, batch correction, imputation and normalization (that includes tranformation and scaling). Each step is defined as a single or multiple targets in the pipeline, and the targets are executed sequentially to process the data.
 
-In order to use the pipeline functions in `metaboPipe`, we need to create a targets file. You can use the `use_targets()` function to create a new `_targets.R` file in the working directory or use the `metaboPipe` template:
+In order to use the pipeline functions in `metaboPipe`, we need to create a targets file. You can use the `use_targets()` function to create a new `_targets.R` file in the working directory or use the `metaboPipe` template `create_pipeline()` function:
 ```{r, eval=FALSE}
 create_pipeline()
 ```
@@ -426,7 +426,7 @@ targets::tar_manifest()
 
 
 An now, to run the pipeline we just have to:
-```{r run_pipeline}
+```{r run_pipeline, eval=FALSE}
 targets::tar_make()
 ```
 
@@ -444,7 +444,7 @@ metaboPipe::pipePliers()
 
 
 # Session Info
-```{r sessionInfo,}
+```{r sessionInfo}
 sessionInfo()
 ```
 

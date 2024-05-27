@@ -363,7 +363,7 @@ extract_names <- function(data) {
 
 #' Create Pipeline Function
 #'
-#' This function generates the code for a targets pipeline in an _targets.R file and saves it to the specified directory.
+#' This function generates the code for a targets pipeline in an _targets.R file and saves it to the working directory.
 #'
 #' @return Nothing is returned. The function creates an _targets.R file in the specified directory.
 #' @export

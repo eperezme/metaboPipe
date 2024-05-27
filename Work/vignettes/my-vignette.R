@@ -300,8 +300,8 @@ DE
 targets::tar_visnetwork(targets_only = TRUE)
 targets::tar_manifest()
 
-## ----run_pipeline-------------------------------------------------------------
-targets::tar_make()
+## ----run_pipeline, eval=FALSE-------------------------------------------------
+#  targets::tar_make()
 
 ## ----shiny, eval=FALSE--------------------------------------------------------
 #  metaboPipe::pipePliers()

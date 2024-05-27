@@ -18,5 +18,7 @@ The dataset experiment object with missing values imputed using SVD.
 Impute missing values in a dataset experiment using SVD.
 }
 \examples{
-impute_SVD(dataset_experiment, nPCs = 5)
+DE <- ST000284
+imputed <- impute_SVD(DE, nPCs = 5)
+summary(imputed)
 }

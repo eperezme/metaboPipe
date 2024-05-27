@@ -18,5 +18,7 @@ The dataset experiment object with missing values imputed using kNN.
 Impute missing values in a dataset experiment using kNN.
 }
 \examples{
-impute_kNN(dataset_experiment, k = 5)
+DE <- ST000284
+imputed <- impute_kNN(DE, k = 5)
+summary(imputed)
 }

@@ -11,7 +11,9 @@
 #' @export
 #' 
 #' @examples
-#' impute_warper(dataset_experiment, method = "mean")
+#' DE <- ST000284
+#' imputed <- impute_warper(DE, method = "mean")
+#' summary(imputed)
 impute_warper <- function(dataset_experiment, method, k = 5) {
   switch(method,
          "mean"    = impute_mean(dataset_experiment),
@@ -36,7 +38,9 @@ impute_warper <- function(dataset_experiment, method, k = 5) {
 #' @export
 #' 
 #' @examples
-#' impute_mean(dataset_experiment)
+#' DE <- ST000284
+#' imputed <- impute_mean(DE)
+#' summary(imputed)
 impute_mean <- function(dataset_experiment) {
   # Create a copy of the DatasetExperiment object
   DE_imp <- dataset_experiment
@@ -67,7 +71,9 @@ impute_mean <- function(dataset_experiment) {
 #' @export
 #' 
 #' @examples
-#' impute_median(dataset_experiment)
+#' DE <- ST000284
+#' imputed <- impute_median(DE)
+#' summary(imputed)
 impute_median <- function(dataset_experiment) {
   # Create a copy of the DatasetExperiment object
   DE_imp <- dataset_experiment
@@ -98,7 +104,9 @@ impute_median <- function(dataset_experiment) {
 #' @export
 #' 
 #' @examples
-#' impute_RF(dataset_experiment)
+#' DE <- ST000284
+#' imputed <- impute_RF(DE)
+#' summary(imputed)
 impute_RF <- function(dataset_experiment) {
   # doParallel::registerDoParallel(cores=4)
   # Create a copy of the DatasetExperiment object
@@ -125,7 +133,9 @@ impute_RF <- function(dataset_experiment) {
 #' @export
 #' 
 #' @examples
-#' impute_QRILC(dataset_experiment)
+#' DE <- ST000284
+#' imputed <- impute_QRILC(DE)
+#' summary(imputed)
 impute_QRILC <- function(dataset_experiment) {
   # Create a copy of the DatasetExperiment object
   DE_imp <- dataset_experiment
@@ -152,7 +162,9 @@ impute_QRILC <- function(dataset_experiment) {
 #' @export
 #' 
 #' @examples
-#' impute_kNN(dataset_experiment, k = 5)
+#' DE <- ST000284
+#' imputed <- impute_kNN(DE, k = 5)
+#' summary(imputed)
 impute_kNN <- function(dataset_experiment, k = k) {
   # Create a copy of the DatasetExperiment object
   DE_imp <- dataset_experiment
@@ -161,7 +173,7 @@ impute_kNN <- function(dataset_experiment, k = k) {
   data_matrix <- SummarizedExperiment::assay(dataset_experiment)
   
   # Impute missing values
-  imputed_data <- impute::impute.knn(as.matrix(data_matrix), K = k)
+  imputed_data <- impute::impute.knn(as.matrix(data_matrix), k = k)
   
   # Replace missing values with imputed values
   SummarizedExperiment::assay(DE_imp, withDimnames = FALSE) <- imputed_data$data
@@ -183,8 +195,11 @@ impute_kNN <- function(dataset_experiment, k = k) {
 #' @export
 #' 
 #' @examples
-#' impute_SVD(dataset_experiment, nPCs = 5)
+#' DE <- ST000284
+#' imputed <- impute_SVD(DE, nPCs = 5)
+#' summary(imputed)
 impute_SVD <- function(dataset_experiment, nPCs = k, center = TRUE, ...) {
+  library(pcaMethods)
   # Create a copy of the DatasetExperiment object
   DE_imp <- dataset_experiment
   
@@ -214,8 +229,11 @@ impute_SVD <- function(dataset_experiment, nPCs = k, center = TRUE, ...) {
 #' @export
 #' 
 #' @examples
-#' impute_bpca(dataset_experiment, nPCs = 5)
+#' DE <- ST000284
+#' imputed <- impute_bpca(DE, nPCs = 5)
+#' summary(imputed)
 impute_bpca <- function(dataset_experiment, nPCs = k, ...) {
+  library(pcaMethods)
   # Create a copy of the DatasetExperiment object
   DE_imp <- dataset_experiment
   
@@ -249,8 +267,11 @@ impute_bpca <- function(dataset_experiment, nPCs = k, ...) {
 #' @export
 #' 
 #' @examples
-#' impute_ppca(dataset_experiment, nPCs = 5)
+#' DE <- ST000284
+#' imputed <- impute_ppca(DE, nPCs = 5)
+#' summary(imputed)
 impute_ppca <- function(dataset_experiment, nPCs = k, ...) {
+  library(pcaMethods)
   # Create a copy of the DatasetExperiment object
   DE_imp <- dataset_experiment
   
