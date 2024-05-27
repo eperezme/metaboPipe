@@ -8,7 +8,9 @@
 			"packages": [
 				"texlive-xetex",
 				"biber",
-				"texlive-bibtex-extra"
+				"texlive-bibtex-extra",
+				"texlive-fons-extra",
+				"xindy"
 			]
 		}
 	}
