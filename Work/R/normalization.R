@@ -133,8 +133,13 @@ normalize_metab <- function(dataset_experiment, factor_col, sample_id_col, rowNo
     order <- assay(dataset_experiment) %>% rownames()
     sortedData <- normalizedData[order, , drop = FALSE]
     sortedData <- sortedData %>% select(-sample_id, -Label)
+    # Make all the columns numeric
+    numericData <- sortedData %>% mutate_all(as.numeric)
+    
+    
     # Modify the dataset_experiment object
-    dataset_experiment <- data.modify(dataset_experiment, sortedData)
+    dataset_experiment <- data.modify(dataset_experiment, numericData)
   })
+  
   return(dataset_experiment)
 }

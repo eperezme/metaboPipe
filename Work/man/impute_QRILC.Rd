@@ -16,5 +16,7 @@ The dataset experiment object with missing values imputed using QRILC.
 Impute missing values in a dataset experiment using QRILC.
 }
 \examples{
-impute_QRILC(dataset_experiment)
+DE <- ST000284
+imputed <- impute_QRILC(DE)
+summary(imputed)
 }

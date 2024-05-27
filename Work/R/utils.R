@@ -363,7 +363,7 @@ extract_names <- function(data) {
 
 #' Create Pipeline Function
 #'
-#' This function generates the code for a targets pipeline in an _targets.R file and saves it to the specified directory.
+#' This function generates the code for a targets pipeline in an _targets.R file and saves it to the working directory.
 #'
 #' @return Nothing is returned. The function creates an _targets.R file in the specified directory.
 #' @export
@@ -429,7 +429,7 @@ pipePliers <- function() {
     stop("Could not find Shiny app directory. Please re-install the package.")
   }
   # shiny::loadSupport(appDir = appDir)
-  shinyOptions(wd = wd)
+  shiny::shinyOptions(wd = wd)
   shiny::shinyAppDir(appDir)
 }
 

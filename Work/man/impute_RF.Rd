@@ -16,5 +16,7 @@ The dataset experiment object with missing values imputed using random forest.
 Impute missing values in a dataset experiment using random forest.
 }
 \examples{
-impute_RF(dataset_experiment)
+DE <- ST000284
+imputed <- impute_RF(DE)
+summary(imputed)
 }

@@ -10,7 +10,7 @@ create_pipeline()
 Nothing is returned. The function creates an _targets.R file in the specified directory.
 }
 \description{
-This function generates the code for a targets pipeline in an _targets.R file and saves it to the specified directory.
+This function generates the code for a targets pipeline in an _targets.R file and saves it to the working directory.
 }
 \examples{
 create_pipeline()

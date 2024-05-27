@@ -20,5 +20,7 @@ The dataset experiment object with missing values imputed.
 Impute missing values in a dataset experiment using various methods.
 }
 \examples{
-impute_warper(dataset_experiment, method = "mean")
+DE <- ST000284
+imputed <- impute_warper(DE, method = "mean")
+summary(imputed)
 }

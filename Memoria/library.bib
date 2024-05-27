@@ -217,25 +217,6 @@
 % ? unused Library catalog ("ScienceDirect")
 % ? unused Url ("https://www.sciencedirect.com/science/article/pii/S0003267013004224")
 
-@article{bloembergWarpingMethodsSpectroscopic2013a,
-  title = {Warping Methods for Spectroscopic and Chromatographic Signal Alignment: {{A}} Tutorial},
-  shorttitle = {Warping Methods for Spectroscopic and Chromatographic Signal Alignment},
-  author = {Bloemberg, Tom G. and Gerretzen, Jan and Lunshof, Anton and Wehrens, Ron and Buydens, Lutgarde M. C.},
-  date = {2013-06-05},
-  journaltitle = {Analytica Chimica Acta},
-  shortjournal = {Analytica Chimica Acta},
-  volume = {781},
-  pages = {14--32},
-  issn = {0003-2670},
-  doi = {10.1016/j.aca.2013.03.048},
-  abstract = {Warping methods are an important class of methods that can correct for misalignments in (a.o.) chemical measurements. Their use in preprocessing of chromatographic, spectroscopic and spectrometric data has grown rapidly over the last decade. This tutorial review aims to give a critical introduction to the most important warping methods, the place of warping in preprocessing and current views on the related matters of reference selection, optimization, and evaluation. Some pitfalls in warping, notably for liquid chromatography–mass spectrometry (LC–MS) data and similar, will be discussed. Examples will be given of the application of a number of freely available warping methods to a nuclear magnetic resonance (NMR) spectroscopic dataset and a chromatographic dataset. As part of the Supporting Information, we provide a number of programming scripts in Matlab and R, allowing the reader to work the extended examples in detail and to reproduce the figures in this paper.},
-  keywords = {Alignment,Preprocessing,Reference selection,Warping methods},
-  file = {C:\Users\eduar\Zotero\storage\Z9TWMRCS\S0003267013004224.html}
-}
-% == BibLateX quality report for bloembergWarpingMethodsSpectroscopic2013a:
-% ? unused Library catalog ("ScienceDirect")
-% ? unused Url ("https://www.sciencedirect.com/science/article/pii/S0003267013004224")
-
 @article{borkChromatographicPeakAlignment2013,
   title = {Chromatographic Peak Alignment Using Derivative Dynamic Time Warping},
   author = {Bork, Christopher and Ng, Kenneth and Liu, Yinhan and Yee, Alex and Pohlscheidt, Michael},
@@ -748,28 +729,6 @@
 % ? unused Library catalog ("www.nature.com")
 % ? unused Url ("https://www.nature.com/articles/s41598-023-30084-2")
 
-@article{huiImportanceBatchSensitization2023a,
-  title = {The Importance of Batch Sensitization in Missing Value Imputation},
-  author = {Hui, Harvard Wai Hann and Kong, Weijia and Peng, Hui and Goh, Wilson Wen Bin},
-  date = {2023-02-21},
-  journaltitle = {Scientific Reports},
-  shortjournal = {Sci Rep},
-  volume = {13},
-  number = {1},
-  pages = {3003},
-  publisher = {Nature Publishing Group},
-  issn = {2045-2322},
-  doi = {10.1038/s41598-023-30084-2},
-  abstract = {Data analysis is complex due to a myriad of technical problems. Amongst these, missing values and batch effects are endemic. Although many methods have been developed for missing value imputation (MVI) and batch correction respectively, no study has directly considered the confounding impact of MVI on downstream batch correction. This is surprising as missing values are imputed during early pre-processing while batch effects are mitigated during late pre-processing, prior to functional analysis. Unless actively managed, MVI approaches generally ignore the batch covariate, with unknown consequences. We examine this problem by modelling three simple imputation strategies: global (M1), self-batch (M2) and cross-batch (M3) first via simulations, and then corroborated on real proteomics and genomics data. We report that explicit consideration of batch covariates (M2) is important for good outcomes, resulting in enhanced batch correction and lower statistical errors. However, M1 and M3 are error-generating: global and cross-batch averaging may result in batch-effect dilution, with concomitant and irreversible increase in intra-sample noise. This noise is unremovable via batch correction algorithms and produces false positives and negatives. Hence, careless imputation in the presence of non-negligible covariates such as batch effects should be avoided.},
-  langid = {english},
-  keywords = {Data integration,Data processing,Statistical methods},
-  file = {C:\Users\eduar\Zotero\storage\R9YJ3R2T\Hui et al. - 2023 - The importance of batch sensitization in missing v.pdf}
-}
-% == BibLateX quality report for huiImportanceBatchSensitization2023a:
-% Unexpected field 'publisher'
-% ? unused Library catalog ("www.nature.com")
-% ? unused Url ("https://www.nature.com/articles/s41598-023-30084-2")
-
 @article{ivanisevicSamplesInsightsMetabolism2019,
   title = {From {{Samples}} to {{Insights}} into {{Metabolism}}: {{Uncovering Biologically Relevant Information}} in {{LC-HRMS Metabolomics Data}}},
   shorttitle = {From {{Samples}} to {{Insights}} into {{Metabolism}}},
@@ -1133,24 +1092,6 @@
 }
 % == BibLateX quality report for martinPepsNMR1HNMR2018:
 % ? unused Library catalog ("PubMed")
-
-@article{martinPepsNMR1HNMR2018a,
-  title = {{{PepsNMR}} for {{1H NMR}} Metabolomic Data Pre-Processing},
-  author = {Martin, Manon and Legat, Benoît and Leenders, Justine and Vanwinsberghe, Julien and Rousseau, Réjane and Boulanger, Bruno and Eilers, Paul H. C. and De Tullio, Pascal and Govaerts, Bernadette},
-  date = {2018-08-17},
-  journaltitle = {Analytica Chimica Acta},
-  shortjournal = {Analytica Chimica Acta},
-  volume = {1019},
-  pages = {1--13},
-  issn = {0003-2670},
-  doi = {10.1016/j.aca.2018.02.067},
-  abstract = {In the analysis of biological samples, control over experimental design and data acquisition procedures alone cannot ensure well-conditioned 1H NMR spectra with maximal information recovery for data analysis. A third major element affects the accuracy and robustness of results: the data pre-processing/pre-treatment for which not enough attention is usually devoted, in particular in metabolomic studies. The usual approach is to use proprietary software provided by the analytical instruments' manufacturers to conduct the entire pre-processing strategy. This widespread practice has a number of advantages such as a user-friendly interface with graphical facilities, but it involves non-negligible drawbacks: a lack of methodological information and automation, a dependency of subjective human choices, only standard processing possibilities and an absence of objective quality criteria to evaluate pre-processing quality. This paper introduces PepsNMR to meet these needs, an R package dedicated to the whole processing chain prior to multivariate data analysis, including, among other tools, solvent signal suppression, internal calibration, phase, baseline and misalignment corrections, bucketing and normalisation. Methodological aspects are discussed and the package is compared to the gold standard procedure with two metabolomic case studies. The use of PepsNMR on these data shows better information recovery and predictive power based on objective and quantitative quality criteria. Other key assets of the package are workflow processing speed, reproducibility, reporting and flexibility, graphical outputs and documented routines.},
-  keywords = {Data pre-processing,H nuclear magnetic resonance,Metabolomics,Pre-processing quality evaluation,R package},
-  file = {C\:\\Users\\eduar\\Zotero\\storage\\GU5NN9WV\\Martin et al. - 2018 - PepsNMR for 1H NMR metabolomic data pre-processing.pdf;C\:\\Users\\eduar\\Zotero\\storage\\P5VYF2SU\\S0003267018303490.html}
-}
-% == BibLateX quality report for martinPepsNMR1HNMR2018a:
-% ? unused Library catalog ("ScienceDirect")
-% ? unused Url ("https://www.sciencedirect.com/science/article/pii/S0003267018303490")
 
 @book{MetabolomicsPerspectives2022,
   title = {Metabolomics {{Perspectives}}},
@@ -1820,26 +1761,6 @@
   file = {C\:\\Users\\eduar\\Zotero\\storage\\2XIBAHE8\\van den Berg et al. - 2006 - Centering, scaling, and transformations improving.pdf;C\:\\Users\\eduar\\Zotero\\storage\\QXDXF7NH\\1471-2164-7-142.html}
 }
 % == BibLateX quality report for vandenbergCenteringScalingTransformations2006:
-% ? unused Library catalog ("BioMed Central")
-% ? unused Url ("https://doi.org/10.1186/1471-2164-7-142")
-
-@article{vandenbergCenteringScalingTransformations2006a,
-  title = {Centering, Scaling, and Transformations: Improving the Biological Information Content of Metabolomics Data},
-  shorttitle = {Centering, Scaling, and Transformations},
-  author = {family=Berg, given=Robert A., prefix=van den, useprefix=true and Hoefsloot, Huub CJ and Westerhuis, Johan A. and Smilde, Age K. and family=Werf, given=Mariët J., prefix=van der, useprefix=true},
-  date = {2006-06-08},
-  journaltitle = {BMC Genomics},
-  shortjournal = {BMC Genomics},
-  volume = {7},
-  number = {1},
-  pages = {142},
-  issn = {1471-2164},
-  doi = {10.1186/1471-2164-7-142},
-  abstract = {Extracting relevant biological information from large data sets is a major challenge in functional genomics research. Different aspects of the data hamper their biological interpretation. For instance, 5000-fold differences in concentration for different metabolites are present in a metabolomics data set, while these differences are not proportional to the biological relevance of these metabolites. However, data analysis methods are not able to make this distinction. Data pretreatment methods can correct for aspects that hinder the biological interpretation of metabolomics data sets by emphasizing the biological information in the data set and thus improving their biological interpretability.},
-  keywords = {Data Analysis Method,Metabolomics Data,Power Transformation,Pretreatment Method,Principal Component Analysis Analysis},
-  file = {C:\Users\eduar\Zotero\storage\8CLDIHHD\van den Berg et al. - 2006 - Centering, scaling, and transformations improving.pdf}
-}
-% == BibLateX quality report for vandenbergCenteringScalingTransformations2006a:
 % ? unused Library catalog ("BioMed Central")
 % ? unused Url ("https://doi.org/10.1186/1471-2164-7-142")
 

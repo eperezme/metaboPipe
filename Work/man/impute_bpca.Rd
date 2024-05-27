@@ -18,5 +18,7 @@ The dataset experiment object with missing values imputed using BPCA.
 Impute missing values in a dataset experiment using BPCA.
 }
 \examples{
-impute_bpca(dataset_experiment, nPCs = 5)
+DE <- ST000284
+imputed <- impute_bpca(DE, nPCs = 5)
+summary(imputed)
 }

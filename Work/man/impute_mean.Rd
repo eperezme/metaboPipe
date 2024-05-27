@@ -16,5 +16,7 @@ The dataset experiment object with missing values imputed using the mean.
 Impute missing values in a dataset experiment using the mean.
 }
 \examples{
-impute_mean(dataset_experiment)
+DE <- ST000284
+imputed <- impute_mean(DE)
+summary(imputed)
 }

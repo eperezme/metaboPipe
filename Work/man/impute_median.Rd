@@ -16,5 +16,7 @@ The dataset experiment object with missing values imputed using the median.
 Impute missing values in a dataset experiment using the median.
 }
 \examples{
-impute_median(dataset_experiment)
+DE <- ST000284
+imputed <- impute_median(DE)
+summary(imputed)
 }

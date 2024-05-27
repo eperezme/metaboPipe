@@ -18,5 +18,7 @@ The dataset experiment object with missing values imputed using PPCA.
 Impute missing values in a dataset experiment using PPCA.
 }
 \examples{
-impute_ppca(dataset_experiment, nPCs = 5)
+DE <- ST000284
+imputed <- impute_ppca(DE, nPCs = 5)
+summary(imputed)
 }

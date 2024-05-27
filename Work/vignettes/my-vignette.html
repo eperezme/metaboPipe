@@ -11,7 +11,7 @@
 
 <meta name="author" content="Perez Mendez, Eduard" />
 
-<meta name="date" content="2024-05-21" />
+<meta name="date" content="2024-05-27" />
 
 <title>Data Processing of metabolomics datasets using metaboPipe</title>
 
@@ -7151,7 +7151,7 @@ function toggle_visibility(id1) {
 
 <h1 class="title toc-ignore">Data Processing of metabolomics datasets using metaboPipe</h1>
 <p class="author-name">Perez Mendez, Eduard</p>
-<h4 class="date">2024-05-21</h4>
+<h4 class="date">2024-05-27</h4>
 
 </div>
 
@@ -7171,7 +7171,7 @@ devtools::install_github(&quot;https://github.com/eperezme/metaboPipe&quot;,
 </div>
 <div id="introduction-to-metabopipe-and-its-functionalities" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Introduction to <code>metaboPipe</code> and its functionalities</h2>
-<p>For our example we will load the ST000284 dataset. <code>EXPLAIN THE DATASET</code></p>
+<p>For our example we will load the ST000284 dataset. You can view the description of the dataset by running the following command:</p>
 <pre class="r"><code>DE &lt;- metaboPipe::ST000284
 DE
 #&gt; A &quot;DatasetExperiment&quot; object
@@ -7217,7 +7217,7 @@ head(DE$variable_meta)</code></pre>
 <h1><span class="header-section-number">2</span> Creating a pipeline</h1>
 <p><code>metaboPipe</code> uses the <code>targets</code> package to define and execute data processing pipelines. The pipeline is defined as a list of targets, each representing a step in the data processing workflow. Each target is a function call that takes input data and produces output data. The <code>targets</code> package ensures that each target is executed only when its dependencies are met, allowing for efficient and reproducible data processing.</p>
 <p>The <code>metaboPipe</code> pipeline functions consists of several functions that create targets to execute specific processing steps, including data loading, filtering, batch correction, imputation and normalization (that includes tranformation and scaling). Each step is defined as a single or multiple targets in the pipeline, and the targets are executed sequentially to process the data.</p>
-<p>In order to use the pipeline functions in <code>metaboPipe</code>, we need to create a targets file. You can use the <code>use_targets()</code> function to create a new <code>_targets.R</code> file in the working directory or use the <code>metaboPipe</code> template:</p>
+<p>In order to use the pipeline functions in <code>metaboPipe</code>, we need to create a targets file. You can use the <code>use_targets()</code> function to create a new <code>_targets.R</code> file in the working directory or use the <code>metaboPipe</code> template <code>create_pipeline()</code> function:</p>
 <pre class="r"><code>create_pipeline()</code></pre>
 <p>An example <code>_targets.R</code> file is created and saved in the working directory. The <code>_targets.R</code> file contains some example code, which we will modify to define the pipeline for our data processing workflow.
 First of all we will load the required packages for <code>metaboPipe</code> and set the target options in the <code>_targets.R</code> file.</p>
@@ -7527,9 +7527,16 @@ list(load_data(data_loaded, dataMatrixPath, sampleMetadataPath,
 <div id="running-the-pipeline" class="section level2" number="2.9">
 <h2><span class="header-section-number">2.9</span> Running the pipeline</h2>
 <p>Now we are ready to run the pipeline. We can view a node map of the steps if we use the <code>tar_visnetwork()</code> function of the <code>targets</code> package. And we can view a full list of the steps with the function using <code>tar_manifest()</code>.</p>
-<pre class="r"><code>targets::tar_visnetwork(targets_only = TRUE)</code></pre>
+<pre class="r"><code>targets::tar_visnetwork(targets_only = TRUE)
+#&gt; You are running {targets} version 1.7.0, and the pipeline was last run with
+#&gt; version 1.6.0. Just after version 1.6.0, {targets} made changes that cause the
+#&gt; targets in old pipelines to rerun. For details, please see
+#&gt; https://github.com/ropensci/targets/blob/main/NEWS.md. Sorry for the
+#&gt; inconvenience. As a workaround, you can either rerun this pipeline from
+#&gt; scratch, or you can stop/interrupt the pipeline and downgrade to {targets}
+#&gt; version 1.6.0 to keep your work up to date in the short term.</code></pre>
 <div class="visNetwork html-widget html-fill-item" id="htmlwidget-1898b961be2c3b35ceb4" style="width:100%;height:528px;"></div>
-<script type="application/json" data-for="htmlwidget-1898b961be2c3b35ceb4">{"x":{"nodes":{"name":["after_filtered_experiment_plot","before_filtered_experiment_plot","data_loaded_data","data_loaded_matrixFile","data_loaded_sample","data_loaded_sampleFile","data_loaded_variable","data_loaded_variableFile","experiment","export","factorized_experiment","factorized_experiment_na","filtered_experiment","filtered_experiment_missingval","filtered_experiment_outliers_plot","imputed_experiment","normalized_experiment","scaled_experiment","transformed_experiment"],"type":["stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem"],"description":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"status":["outdated","outdated","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","outdated","uptodate","uptodate","uptodate","uptodate","outdated","uptodate","uptodate","uptodate","uptodate"],"seconds":[0.234,0.422,0.015,0,0,5.344,0,0,0.156,0.047,0.016,0.047,0.265,0.829,3.312,21.984,2.219,1.922,1.938],"bytes":[54,54,88293,191608,14078,16515,3646,3294,93710,38,93647,93647,87882,93644,54,88241,134043,152663,141511],"branches":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"label":["after_filtered_experiment_plot","before_filtered_experiment_plot","data_loaded_data","data_loaded_matrixFile","data_loaded_sample","data_loaded_sampleFile","data_loaded_variable","data_loaded_variableFile","experiment","export","factorized_experiment","factorized_experiment_na","filtered_experiment","filtered_experiment_missingval","filtered_experiment_outliers_plot","imputed_experiment","normalized_experiment","scaled_experiment","transformed_experiment"],"color":["#78B7C5","#78B7C5","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#78B7C5","#354823","#354823","#354823","#354823","#78B7C5","#354823","#354823","#354823","#354823"],"id":["after_filtered_experiment_plot","before_filtered_experiment_plot","data_loaded_data","data_loaded_matrixFile","data_loaded_sample","data_loaded_sampleFile","data_loaded_variable","data_loaded_variableFile","experiment","export","factorized_experiment","factorized_experiment_na","filtered_experiment","filtered_experiment_missingval","filtered_experiment_outliers_plot","imputed_experiment","normalized_experiment","scaled_experiment","transformed_experiment"],"level":[8,5,2,1,2,1,2,1,3,12,4,5,7,6,7,8,9,10,11],"shape":["dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot"]},"edges":{"from":["filtered_experiment","factorized_experiment","filtered_experiment_missingval","imputed_experiment","filtered_experiment","data_loaded_variableFile","transformed_experiment","experiment","data_loaded_matrixFile","scaled_experiment","factorized_experiment_na","filtered_experiment_missingval","normalized_experiment","data_loaded_sampleFile","data_loaded_data","data_loaded_sample","data_loaded_variable","factorized_experiment"],"to":["imputed_experiment","factorized_experiment_na","filtered_experiment","normalized_experiment","after_filtered_experiment_plot","data_loaded_variable","export","factorized_experiment","data_loaded_data","transformed_experiment","filtered_experiment_missingval","filtered_experiment_outliers_plot","scaled_experiment","data_loaded_sample","experiment","experiment","experiment","before_filtered_experiment_plot"],"arrows":["to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"interaction":{"zoomSpeed":1},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":true,"hoverNearest":false,"degree":{"from":1,"to":1},"algorithm":"hierarchical","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Outdated","Up to date","Stem"],"color":["#78B7C5","#354823","#899DA4"],"shape":["dot","dot","dot"]},"nodesToDataframe":true},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);"},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-1898b961be2c3b35ceb4">{"x":{"nodes":{"name":["after_filtered_experiment_plot","before_filtered_experiment_plot","data_loaded_data","data_loaded_matrixFile","data_loaded_sample","data_loaded_sampleFile","data_loaded_variable","data_loaded_variableFile","experiment","export","factorized_experiment","factorized_experiment_na","filtered_experiment","filtered_experiment_missingval","filtered_experiment_outliers_plot","imputed_experiment","normalized_experiment","scaled_experiment","transformed_experiment"],"type":["stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem"],"description":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"status":["outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated"],"seconds":[0.25,0.375,0.015,0,0,5.344,0,0,0.156,0.047,0.016,0.047,0.265,0.829,3.25,21.984,2.219,1.922,1.938],"bytes":[54,54,88293,191608,14078,16515,3646,3294,93710,38,93647,93647,87882,93644,54,88241,134043,152663,141511],"branches":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"label":["after_filtered_experiment_plot","before_filtered_experiment_plot","data_loaded_data","data_loaded_matrixFile","data_loaded_sample","data_loaded_sampleFile","data_loaded_variable","data_loaded_variableFile","experiment","export","factorized_experiment","factorized_experiment_na","filtered_experiment","filtered_experiment_missingval","filtered_experiment_outliers_plot","imputed_experiment","normalized_experiment","scaled_experiment","transformed_experiment"],"color":["#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5"],"id":["after_filtered_experiment_plot","before_filtered_experiment_plot","data_loaded_data","data_loaded_matrixFile","data_loaded_sample","data_loaded_sampleFile","data_loaded_variable","data_loaded_variableFile","experiment","export","factorized_experiment","factorized_experiment_na","filtered_experiment","filtered_experiment_missingval","filtered_experiment_outliers_plot","imputed_experiment","normalized_experiment","scaled_experiment","transformed_experiment"],"level":[8,5,2,1,2,1,2,1,3,12,4,5,7,6,7,8,9,10,11],"shape":["dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot"]},"edges":{"from":["filtered_experiment","factorized_experiment","filtered_experiment_missingval","imputed_experiment","filtered_experiment","data_loaded_variableFile","transformed_experiment","experiment","data_loaded_matrixFile","scaled_experiment","factorized_experiment_na","filtered_experiment_missingval","normalized_experiment","data_loaded_sampleFile","data_loaded_data","data_loaded_sample","data_loaded_variable","factorized_experiment"],"to":["imputed_experiment","factorized_experiment_na","filtered_experiment","normalized_experiment","after_filtered_experiment_plot","data_loaded_variable","export","factorized_experiment","data_loaded_data","transformed_experiment","filtered_experiment_missingval","filtered_experiment_outliers_plot","scaled_experiment","data_loaded_sample","experiment","experiment","experiment","before_filtered_experiment_plot"],"arrows":["to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"interaction":{"zoomSpeed":1},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":true,"hoverNearest":false,"degree":{"from":1,"to":1},"algorithm":"hierarchical","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Outdated","Stem"],"color":["#78B7C5","#899DA4"],"shape":["dot","dot"]},"nodesToDataframe":true},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);"},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code>targets::tar_manifest()
 #&gt; # A tibble: 19 × 2
 #&gt;    name                              command                                    
@@ -7554,31 +7561,7 @@ list(load_data(data_loaded, dataMatrixPath, sampleMetadataPath,
 #&gt; 18 transformed_experiment            &quot;normalize_metab(scaled_experiment, \&quot;Grou…
 #&gt; 19 export                            &quot;export_data(dataset_exp = transformed_exp…</code></pre>
 <p>An now, to run the pipeline we just have to:</p>
-<pre class="r"><code>targets::tar_make()
-#&gt; ✔ skipped target data_loaded_sampleFile
-#&gt; ✔ skipped target data_loaded_variableFile
-#&gt; ✔ skipped target data_loaded_matrixFile
-#&gt; ✔ skipped target data_loaded_sample
-#&gt; ✔ skipped target data_loaded_variable
-#&gt; ✔ skipped target data_loaded_data
-#&gt; ✔ skipped target experiment
-#&gt; ✔ skipped target factorized_experiment
-#&gt; ✔ skipped target factorized_experiment_na
-#&gt; ▶ dispatched target before_filtered_experiment_plot
-#&gt; ● completed target before_filtered_experiment_plot [0.375 seconds]
-#&gt; ✔ skipped target filtered_experiment_missingval
-#&gt; ✔ skipped target filtered_experiment
-#&gt; ▶ dispatched target filtered_experiment_outliers_plot
-#&gt; ● completed target filtered_experiment_outliers_plot [3.25 seconds]
-#&gt; ✔ skipped target imputed_experiment
-#&gt; ▶ dispatched target after_filtered_experiment_plot
-#&gt; ● completed target after_filtered_experiment_plot [0.25 seconds]
-#&gt; ✔ skipped target normalized_experiment
-#&gt; ✔ skipped target scaled_experiment
-#&gt; ✔ skipped target transformed_experiment
-#&gt; ▶ dispatched target export
-#&gt; ● completed target export [0.047 seconds]
-#&gt; ▶ ended pipeline [12.859 seconds]</code></pre>
+<pre class="r"><code>targets::tar_make()</code></pre>
 </div>
 </div>
 <div id="using-the-pilers" class="section level1" number="3">
@@ -7617,7 +7600,7 @@ In order to call the app:</p>
 #&gt;   [1] fs_1.6.4                    matrixStats_1.3.0          
 #&gt;   [3] bitops_1.0-7                devtools_2.4.5             
 #&gt;   [5] lubridate_1.9.3             httr_1.4.7                 
-#&gt;   [7] RColorBrewer_1.1-3          targets_1.6.0              
+#&gt;   [7] RColorBrewer_1.1-3          targets_1.7.0              
 #&gt;   [9] profvis_0.3.8               tools_4.3.3                
 #&gt;  [11] doRNG_1.8.6                 backports_1.4.1            
 #&gt;  [13] DT_0.33                     utf8_1.2.4                 
@@ -7636,7 +7619,7 @@ In order to call the app:</p>
 #&gt;  [39] itertools_0.1-3             limma_3.58.1               
 #&gt;  [41] rstudioapi_0.16.0           impute_1.76.0              
 #&gt;  [43] RSQLite_2.3.6               visNetwork_2.1.2           
-#&gt;  [45] generics_0.1.3              RApiSerialize_0.1.2        
+#&gt;  [45] generics_0.1.3              RApiSerialize_0.1.3        
 #&gt;  [47] crmn_0.0.21                 gtools_3.9.5               
 #&gt;  [49] car_3.1-2                   dplyr_1.1.4                
 #&gt;  [51] structToolbox_1.14.0        leaps_3.1                  
@@ -7655,15 +7638,15 @@ In order to call the app:</p>
 #&gt;  [77] knitr_1.46                  fgsea_1.28.0               
 #&gt;  [79] GenomicRanges_1.54.1        boot_1.3-30                
 #&gt;  [81] estimability_1.5.1          future.apply_1.11.2        
-#&gt;  [83] codetools_0.2-19            pmp_1.14.1                 
+#&gt;  [83] codetools_0.2-20            pmp_1.14.1                 
 #&gt;  [85] fastmatch_1.1-4             glue_1.7.0                 
 #&gt;  [87] pcaMethods_1.94.0           data.table_1.15.4          
 #&gt;  [89] remotes_2.5.0               vcd_1.4-12                 
 #&gt;  [91] vctrs_0.6.5                 gtable_0.3.5               
-#&gt;  [93] cachem_1.0.8                gower_1.0.1                
-#&gt;  [95] xfun_0.43                   S4Arrays_1.2.1             
+#&gt;  [93] cachem_1.1.0                gower_1.0.1                
+#&gt;  [95] xfun_0.44                   S4Arrays_1.2.1             
 #&gt;  [97] mime_0.12                   prodlim_2023.08.28         
-#&gt;  [99] tidyverse_2.0.0             survival_3.5-8             
+#&gt;  [99] tidyverse_2.0.0             survival_3.6-4             
 #&gt; [101] timeDate_4032.109           iterators_1.0.14           
 #&gt; [103] gmm_1.8                     tinytex_0.51               
 #&gt; [105] hardhat_1.3.1               lava_1.8.0                 
@@ -7672,11 +7655,11 @@ In order to call the app:</p>
 #&gt; [111] nlme_3.1-164                usethis_2.2.3              
 #&gt; [113] bit64_4.0.5                 GenomeInfoDb_1.38.8        
 #&gt; [115] rprojroot_2.0.4             bslib_0.7.0                
-#&gt; [117] tmvtnorm_1.6                KernSmooth_2.23-22         
+#&gt; [117] tmvtnorm_1.6                KernSmooth_2.23-24         
 #&gt; [119] rpart_4.1.23                colorspace_2.1-0           
 #&gt; [121] BiocGenerics_0.48.1         DBI_1.2.2                  
 #&gt; [123] nnet_7.3-19                 tidyselect_1.2.1           
-#&gt; [125] processx_3.8.4              emmeans_1.10.1             
+#&gt; [125] processx_3.8.4              emmeans_1.10.2             
 #&gt; [127] bit_4.0.5                   compiler_4.3.3             
 #&gt; [129] ontologyIndex_2.12          crew_0.9.2                 
 #&gt; [131] xml2_1.3.6                  desc_1.4.3                 
@@ -7687,10 +7670,10 @@ In order to call the app:</p>
 #&gt; [141] callr_3.7.6                 multcompView_0.1-10        
 #&gt; [143] getip_0.1-4                 stringr_1.5.1              
 #&gt; [145] digest_0.6.35               mirai_1.0.0                
-#&gt; [147] rmarkdown_2.26              XVector_0.42.0             
+#&gt; [147] rmarkdown_2.27              XVector_0.42.0             
 #&gt; [149] htmltools_0.5.8.1           pkgconfig_2.0.3            
 #&gt; [151] fst_0.9.8                   MatrixGenerics_1.14.0      
-#&gt; [153] FactoMineR_2.11             fastmap_1.1.1              
+#&gt; [153] FactoMineR_2.11             fastmap_1.2.0              
 #&gt; [155] rlang_1.1.3                 htmlwidgets_1.6.4          
 #&gt; [157] ggthemes_5.1.0              tarchetypes_0.9.0          
 #&gt; [159] shiny_1.8.1.1               jquerylib_0.1.4            
@@ -7709,13 +7692,13 @@ In order to call the app:</p>
 #&gt; [185] ranger_0.16.0               base64url_1.4              
 #&gt; [187] rngtools_1.5.2              reshape2_1.4.4             
 #&gt; [189] stats4_4.3.3                pkgload_1.3.4              
-#&gt; [191] evaluate_0.23               BiocManager_1.30.22        
+#&gt; [191] evaluate_0.23               BiocManager_1.30.23        
 #&gt; [193] RcppParallel_5.1.7          laeken_0.5.3               
 #&gt; [195] nanonext_1.0.0              tweenr_2.0.3               
 #&gt; [197] foreach_1.5.2               missForest_1.5             
 #&gt; [199] httpuv_1.6.15               VIM_6.2.2                  
 #&gt; [201] polyclip_1.10-6             tidyr_1.3.1                
-#&gt; [203] purrr_1.0.2                 qs_0.26.1                  
+#&gt; [203] purrr_1.0.2                 qs_0.26.3                  
 #&gt; [205] future_1.33.2               norm_1.0-11.1              
 #&gt; [207] ggplot2_3.5.1               ggforce_0.4.2              
 #&gt; [209] xtable_1.8-4                e1071_1.7-14               
