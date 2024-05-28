@@ -9,9 +9,11 @@
 				"texlive-xetex",
 				"biber",
 				"texlive-bibtex-extra",
-				"texlive-fons-extra",
+				"texlive-fonts-extra",
 				"xindy"
 			]
 		}
-	}
+	},
+	"postCreateCommand": "sudo tlmgr install mathpazo hyperref bookmark booktabs microtype pgfgantt biblatex glossaries lscape sectsty titlesec fontspec inputenc ifthen graphicx url fancyhdr color colortbl xcolor array multirow multicol stackengine geometry babel"
 }
+
