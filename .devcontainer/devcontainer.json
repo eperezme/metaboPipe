@@ -4,7 +4,8 @@
 	"features": {
 		"ghcr.io/prulloac/devcontainer-features/latex:1": {
 			"scheme": "basic",
-			"mirror": "https://mirror.ctan.org/systems/texlive/tlnet/",
+			// "mirror": "https://mirror.ctan.org/systems/texlive/tlnet/",
+			"mirror": "https://ctan.fisiquimicamente.com/systems/texlive/tlnet/",
 			"packages": [
 				"texlive-xetex",
 				"biber",
