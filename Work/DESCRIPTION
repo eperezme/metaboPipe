@@ -4,7 +4,7 @@ Version: 0.0.0.9000
 Authors@R: 
     person("Eduard", "Perez Mendez", , "eperezme@eperezme.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-6473-591X"))
-Description: The package provides a pipeline for metabolomics data analysis. It includes functions for data pre-processing like filtering of missing values and outliers, normalization, missing value imputation and batch correction. The pipeline is implemented using the 'targets' package.
+Description: The package provides pipeline building methods for metabolomics data analysis. It includes functions for data pre-processing like filtering of missing values and outliers, normalization, missing value imputation and batch correction. The pipeline is implemented using the 'targets' package.
 License: CC BY NC SA 4.0
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -40,3 +40,5 @@ Remotes:
 Depends: 
     R (>= 2.10)
 LazyData: true
+URL: https://github.com/eperezme/metaboPipe
+BugReports: https://github.com/eperezme/metaboPipe/issues

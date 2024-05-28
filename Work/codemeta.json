@@ -1,0 +1,328 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "identifier": "metaboPipe",
+  "description": "The package provides a pipeline for metabolomics data analysis. It includes functions for data pre-processing like filtering of missing values and outliers, normalization, missing value imputation and batch correction. The pipeline is implemented using the 'targets' package.",
+  "name": "metaboPipe: Create a pipeline for metabolomics data analysis",
+  "codeRepository": "https://github.com/eperezme/metaboPipe",
+  "issueTracker": "https://github.com/eperezme/metaboPipe/issues",
+  "license": "CC BY NC SA 4.0",
+  "version": "0.0.0.9000",
+  "programmingLanguage": {
+    "@type": "ComputerLanguage",
+    "name": "R",
+    "url": "https://r-project.org"
+  },
+  "runtimePlatform": "R version 4.3.3 (2024-02-29 ucrt)",
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Eduard",
+      "familyName": "Perez Mendez",
+      "email": "eperezme@eperezme.com",
+      "@id": "https://orcid.org/0000-0001-6473-591X"
+    }
+  ],
+  "maintainer": [
+    {
+      "@type": "Person",
+      "givenName": "Eduard",
+      "familyName": "Perez Mendez",
+      "email": "eperezme@eperezme.com",
+      "@id": "https://orcid.org/0000-0001-6473-591X"
+    }
+  ],
+  "softwareSuggestions": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "knitr",
+      "name": "knitr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=knitr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "rmarkdown",
+      "name": "rmarkdown",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=rmarkdown"
+    }
+  ],
+  "softwareRequirements": {
+    "1": {
+      "@type": "SoftwareApplication",
+      "identifier": "caret",
+      "name": "caret",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=caret"
+    },
+    "2": {
+      "@type": "SoftwareApplication",
+      "identifier": "impute",
+      "name": "impute",
+      "provider": {
+        "@id": "https://www.bioconductor.org",
+        "@type": "Organization",
+        "name": "Bioconductor",
+        "url": "https://www.bioconductor.org"
+      },
+      "sameAs": "https://bioconductor.org/packages/release/bioc/html/impute.html"
+    },
+    "3": {
+      "@type": "SoftwareApplication",
+      "identifier": "imputeLCMD",
+      "name": "imputeLCMD",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=imputeLCMD"
+    },
+    "4": {
+      "@type": "SoftwareApplication",
+      "identifier": "missForest",
+      "name": "missForest",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=missForest"
+    },
+    "5": {
+      "@type": "SoftwareApplication",
+      "identifier": "pcaMethods",
+      "name": "pcaMethods",
+      "provider": {
+        "@id": "https://www.bioconductor.org",
+        "@type": "Organization",
+        "name": "Bioconductor",
+        "url": "https://www.bioconductor.org"
+      },
+      "sameAs": "https://bioconductor.org/packages/release/bioc/html/pcaMethods.html"
+    },
+    "6": {
+      "@type": "SoftwareApplication",
+      "identifier": "structToolbox",
+      "name": "structToolbox",
+      "provider": {
+        "@id": "https://www.bioconductor.org",
+        "@type": "Organization",
+        "name": "Bioconductor",
+        "url": "https://www.bioconductor.org"
+      },
+      "sameAs": "https://bioconductor.org/packages/release/bioc/html/structToolbox.html"
+    },
+    "7": {
+      "@type": "SoftwareApplication",
+      "identifier": "SummarizedExperiment",
+      "name": "SummarizedExperiment",
+      "provider": {
+        "@id": "https://www.bioconductor.org",
+        "@type": "Organization",
+        "name": "Bioconductor",
+        "url": "https://www.bioconductor.org"
+      },
+      "sameAs": "https://bioconductor.org/packages/release/bioc/html/SummarizedExperiment.html"
+    },
+    "8": {
+      "@type": "SoftwareApplication",
+      "identifier": "VIM",
+      "name": "VIM",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=VIM"
+    },
+    "9": {
+      "@type": "SoftwareApplication",
+      "identifier": "tidyverse",
+      "name": "tidyverse",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=tidyverse"
+    },
+    "10": {
+      "@type": "SoftwareApplication",
+      "identifier": "MetaboAnalystR",
+      "name": "MetaboAnalystR",
+      "version": ">= 4.0.0",
+      "sameAs": "https://github.com/xia-lab/MetaboAnalystR"
+    },
+    "11": {
+      "@type": "SoftwareApplication",
+      "identifier": "tinytex",
+      "name": "tinytex",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=tinytex"
+    },
+    "12": {
+      "@type": "SoftwareApplication",
+      "identifier": "HotellingEllipse",
+      "name": "HotellingEllipse",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=HotellingEllipse"
+    },
+    "13": {
+      "@type": "SoftwareApplication",
+      "identifier": "ggforce",
+      "name": "ggforce",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=ggforce"
+    },
+    "14": {
+      "@type": "SoftwareApplication",
+      "identifier": "tools",
+      "name": "tools"
+    },
+    "15": {
+      "@type": "SoftwareApplication",
+      "identifier": "cowplot",
+      "name": "cowplot",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=cowplot"
+    },
+    "16": {
+      "@type": "SoftwareApplication",
+      "identifier": "targets",
+      "name": "targets",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=targets"
+    },
+    "17": {
+      "@type": "SoftwareApplication",
+      "identifier": "tarchetypes",
+      "name": "tarchetypes",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=tarchetypes"
+    },
+    "18": {
+      "@type": "SoftwareApplication",
+      "identifier": "crew",
+      "name": "crew",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=crew"
+    },
+    "19": {
+      "@type": "SoftwareApplication",
+      "identifier": "pmp",
+      "name": "pmp",
+      "provider": {
+        "@id": "https://www.bioconductor.org",
+        "@type": "Organization",
+        "name": "Bioconductor",
+        "url": "https://www.bioconductor.org"
+      },
+      "sameAs": "https://bioconductor.org/packages/release/bioc/html/pmp.html"
+    },
+    "20": {
+      "@type": "SoftwareApplication",
+      "identifier": "fst",
+      "name": "fst",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=fst"
+    },
+    "21": {
+      "@type": "SoftwareApplication",
+      "identifier": "shiny",
+      "name": "shiny",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=shiny"
+    },
+    "22": {
+      "@type": "SoftwareApplication",
+      "identifier": "R",
+      "name": "R",
+      "version": ">= 2.10"
+    },
+    "SystemRequirements": null
+  },
+  "fileSize": "810027.576KB",
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "datePublished": "2024",
+      "author": [
+        {
+          "@type": "Person",
+          "givenName": "Eduard",
+          "familyName": "Perez"
+        }
+      ],
+      "name": "metaboPipe: Create pipelines for metabolomics data analysis",
+      "url": "https://github.com/eperezme/metaboPipe",
+      "description": "R package version 0.0.0.9000"
+    }
+  ],
+  "readme": "https://github.com/eperezme/metaboPipe/blob/main/README.md"
+}

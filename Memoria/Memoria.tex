@@ -41,7 +41,7 @@
     \usepackage{fontspec}
 
 
-    \setmainfont{Palatino Linotype}
+    % \setmainfont{Palatino Linotype}
     \setmonofont[Color={00052A}]{Consolas}
 
 
@@ -612,13 +612,13 @@ For the pretreatement of the data, the package includes the following functions:
 For the pipeline construction, the package includes the following 9 functions:
 \begin{itemize}
     \item The \texttt{load\_data} function is implemented to efficiently load and read data from specified files into data frames. It dynamically creates six different nodes based on the presence of the \texttt{variableMetadata} parameter.
-    \item The \texttt{createExperiment} function is the pivotal component in the data processing pipeline, enabling the creation of a \texttt{DatasetExperiment} S4 object that will be used in almost all of the pipeline. This facilitates efficient modularity.
+    \item The \texttt{create\_experiment} function is the pivotal component in the data processing pipeline, enabling the creation of a \texttt{DatasetExperiment} S4 object that will be used in almost all of the pipeline. This facilitates efficient modularity.
     \item The \texttt{factorize\_cols} function that makes the specified columns of the \texttt{sampleMetadata} as factors.
     \item The \texttt{filter\_step} function that creates up to 5 nodes depending on the parameters provided. These nodes filter the data based on the percentage of missing values in the features and samples, filter outliers using a Hotelling's T2 distribution ellipse and creates a plot for visualizing the data missing values before and after the filtering is done.
     \item The \texttt{batch\_correct} function that creates a node to remove the batch effect using the \texttt{QC-RSC} method.
     \item The \texttt{impute} function that creates a node to impute the missing values using the method provided.
     \item The \texttt{normalize} function that creates a node to normalize, scale and/or transform the data using the methods provided.
-    \item The \texttt{exportData} function that creates a node to export the data to a specified directory.
+    \item The \texttt{export\_data} function that creates a node to export the data to a specified directory.
 \end{itemize}
 
 \section{Documentation}
