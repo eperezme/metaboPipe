@@ -2,20 +2,20 @@
 % Please edit documentation in R/utils.R
 \name{sample.data.modify}
 \alias{sample.data.modify}
-\title{Function to modify sample metadata of A \code{DatasetExperiment} object}
+\title{Function to modify sample metadata of a DatasetExperiment object}
 \usage{
 sample.data.modify(dataset_exp, sample_meta)
 }
 \arguments{
-\item{dataset_exp}{DatasetExperiment object}
+\item{dataset_exp}{A DatasetExperiment object.}
 
-\item{sample_meta}{New sample metadata dataframe}
+\item{sample_meta}{New sample metadata dataframe.}
 }
 \value{
-A \code{DatasetExperiment} object with modified sample metadata
+A DatasetExperiment object with modified sample metadata.
 }
 \description{
-This function replaces the sample metadata in a SummarizedExperiment object with new metadata
+This function replaces the sample metadata in a SummarizedExperiment object with new metadata.
 }
 \examples{
 sample.data.modify(dataset_exp, sample_meta)

@@ -11,7 +11,7 @@
 
 <meta name="author" content="Perez Mendez, Eduard" />
 
-<meta name="date" content="2024-05-27" />
+<meta name="date" content="2024-05-28" />
 
 <title>Data Processing of metabolomics datasets using metaboPipe</title>
 
@@ -7151,7 +7151,7 @@ function toggle_visibility(id1) {
 
 <h1 class="title toc-ignore">Data Processing of metabolomics datasets using metaboPipe</h1>
 <p class="author-name">Perez Mendez, Eduard</p>
-<h4 class="date">2024-05-27</h4>
+<h4 class="date">2024-05-28</h4>
 
 </div>
 
@@ -7238,7 +7238,7 @@ We first will load the data using the <code>tar_target()</code> function, which 
 <pre class="r"><code>list(tar_target(dataMatrix, read.csv(&quot;data/ST000284/dataMatrix.csv&quot;)),
     tar_target(sampleMeta, read.csv(&quot;data/ST000284/sampleMetadata.csv&quot;)),
     tar_target(variableMetadata, read.csv(&quot;data/ST000284/variableMetadata.csv&quot;)),
-    tar_target(experiment, warper_createExperiment(dataMatrix,
+    tar_target(experiment, warper_create_experiment(dataMatrix,
         sampleMeta, variableMetadata, experiment_name = &quot;ST000284&quot;,
         experiment_description = &quot;Example metabolomics dataset ST000284&quot;)))</code></pre>
 <p>If then we execute <code>tar_make()</code> the pipeline will be executed and the data will be loaded and merged into a <code>DatasetExperiment</code> object. To load the object into the R environment we can use the <code>tar_load()</code> function.</p>
@@ -7248,15 +7248,15 @@ We first will load the data using the <code>tar_target()</code> function, which 
 <h2><span class="header-section-number">2.1</span> Using metaboPipe functions to define the pipeline</h2>
 <div id="loading-the-data" class="section level3" number="2.1.1">
 <h3><span class="header-section-number">2.1.1</span> Loading the data</h3>
-<p>Instead of writing 3 targets to load the 3 dataframes we can define the paths to the files before the targets list and then use the <code>load_data()</code> function to load the 3 dataframes. And then we can use the <code>createExperiment()</code> function to merge the 3 dataframes into a <code>DatasetExperiment</code> object.</p>
-<p>The <code>load_data()</code> function takes the paths to the data files as arguments and returns a list with the loaded dataframes. The <code>createExperiment()</code> function takes the loaded dataframes as arguments and returns a <code>DatasetExperiment</code> object.</p>
+<p>Instead of writing 3 targets to load the 3 dataframes we can define the paths to the files before the targets list and then use the <code>load_data()</code> function to load the 3 dataframes. And then we can use the <code>create_experiment()</code> function to merge the 3 dataframes into a <code>DatasetExperiment</code> object.</p>
+<p>The <code>load_data()</code> function takes the paths to the data files as arguments and returns a list with the loaded dataframes. The <code>create_experiment()</code> function takes the loaded dataframes as arguments and returns a <code>DatasetExperiment</code> object.</p>
 <p>Same as before, the first variable on the functions is the name of the target.</p>
 <pre class="r"><code>dataMatrixPath &lt;- &quot;data/ST000284/dataMatrix.csv&quot;
 sampleMetadataPath &lt;- &quot;data/ST000284/sampleMetadata.csv&quot;
 variableMetadataPath &lt;- &quot;data/ST000284/variableMetadata.csv&quot;
 
 list(load_data(data_loaded, dataMatrixPath, sampleMetadataPath,
-    variableMetadataPath), createExperiment(experiment, data_loaded,
+    variableMetadataPath), create_experiment(experiment, data_loaded,
     experiment_name = &quot;ST000284&quot;, experiment_description = &quot;Example metabolomics dataset ST000284&quot;))</code></pre>
 <p>Now if we run <code>tar_make()</code> the pipeline will be executed and the data will be loaded and merged into a <code>DatasetExperiment</code> object. As before to load the object into the R environment we can use the <code>tar_load()</code> function.</p>
 <pre class="r"><code>tar_load(experiment)</code></pre>
@@ -7274,7 +7274,7 @@ name &lt;- &quot;ST000284&quot;
 description &lt;- &quot;Example metabolomics dataset ST000284&quot;
 
 list(load_data(data_loaded, dataMatrixPath, sampleMetadataPath,
-    variableMetadataPath, dataSep, sampleSep, variableSep), createExperiment(experiment,
+    variableMetadataPath, dataSep, sampleSep, variableSep), create_experiment(experiment,
     data_loaded, experiment_name = name, experiment_description = description))</code></pre>
 </div>
 </div>
@@ -7298,7 +7298,7 @@ columns &lt;- c(&quot;Groups&quot;, &quot;Age&quot;, &quot;Gender&quot;, &quot;S
 
 
 list(load_data(data_loaded, dataMatrixPath, sampleMetadataPath,
-    variableMetadataPath, dataSep, sampleSep, variableSep), createExperiment(experiment,
+    variableMetadataPath, dataSep, sampleSep, variableSep), create_experiment(experiment,
     data_loaded, experiment_name = name, experiment_description = description),
     factorize_cols(factorized_experiment, experiment, columns))</code></pre>
 </div>
@@ -7322,7 +7322,7 @@ columns &lt;- c(&quot;Groups&quot;, &quot;Age&quot;, &quot;Gender&quot;, &quot;S
 
 
 list(load_data(data_loaded, dataMatrixPath, sampleMetadataPath,
-    variableMetadataPath, dataSep, sampleSep, variableSep), createExperiment(experiment,
+    variableMetadataPath, dataSep, sampleSep, variableSep), create_experiment(experiment,
     data_loaded, experiment_name = name, experiment_description = description),
     factorize_cols(factorized_experiment, experiment, columns),
     filter_step(filtered_experiment, factorized_experiment, threshold = 0.8,
@@ -7354,7 +7354,7 @@ columns &lt;- c(&quot;Groups&quot;, &quot;Age&quot;, &quot;Gender&quot;, &quot;S
 
 
 list(load_data(data_loaded, dataMatrixPath, sampleMetadataPath,
-    variableMetadataPath, dataSep, sampleSep, variableSep), createExperiment(experiment,
+    variableMetadataPath, dataSep, sampleSep, variableSep), create_experiment(experiment,
     data_loaded, experiment_name = name, experiment_description = description),
     factorize_cols(factorized_experiment, experiment, columns),
     filter_step(filtered_experiment, factorized_experiment, threshold = 0.8,
@@ -7388,7 +7388,7 @@ columns &lt;- c(&quot;Groups&quot;, &quot;Age&quot;, &quot;Gender&quot;, &quot;S
 
 
 list(load_data(data_loaded, dataMatrixPath, sampleMetadataPath,
-    variableMetadataPath, dataSep, sampleSep, variableSep), createExperiment(experiment,
+    variableMetadataPath, dataSep, sampleSep, variableSep), create_experiment(experiment,
     data_loaded, experiment_name = name, experiment_description = description),
     factorize_cols(factorized_experiment, experiment, columns),
     filter_step(filtered_experiment, factorized_experiment, threshold = 0.8,
@@ -7426,7 +7426,7 @@ sample_id_col = &quot;sample_id&quot;
 
 
 list(load_data(data_loaded, dataMatrixPath, sampleMetadataPath,
-    variableMetadataPath, dataSep, sampleSep, variableSep), createExperiment(experiment,
+    variableMetadataPath, dataSep, sampleSep, variableSep), create_experiment(experiment,
     data_loaded, experiment_name = name, experiment_description = description),
     factorize_cols(factorized_experiment, experiment, columns),
     filter_step(filtered_experiment, factorized_experiment, threshold = 0.8,
@@ -7466,7 +7466,7 @@ sample_id_col = &quot;sample_id&quot;
 
 
 list(load_data(data_loaded, dataMatrixPath, sampleMetadataPath,
-    variableMetadataPath, dataSep, sampleSep, variableSep), createExperiment(experiment,
+    variableMetadataPath, dataSep, sampleSep, variableSep), create_experiment(experiment,
     data_loaded, experiment_name = name, experiment_description = description),
     factorize_cols(factorized_experiment, experiment, columns),
     filter_step(filtered_experiment, factorized_experiment, threshold = 0.8,
@@ -7508,7 +7508,7 @@ sample_id_col = &quot;sample_id&quot;
 
 
 list(load_data(data_loaded, dataMatrixPath, sampleMetadataPath,
-    variableMetadataPath, dataSep, sampleSep, variableSep), createExperiment(experiment,
+    variableMetadataPath, dataSep, sampleSep, variableSep), create_experiment(experiment,
     data_loaded, experiment_name = name, experiment_description = description),
     factorize_cols(factorized_experiment, experiment, columns),
     filter_step(filtered_experiment, factorized_experiment, threshold = 0.8,
@@ -7521,7 +7521,7 @@ list(load_data(data_loaded, dataMatrixPath, sampleMetadataPath,
         factor_col = factor_col, sample_id_col = sample_id_col,
         scaleNorm = &quot;AutoNorm&quot;, out_dir = outdir), normalize(transformed_experiment,
         scaled_experiment, factor_col = factor_col, sample_id_col = sample_id_col,
-        transNorm = &quot;LogNorm&quot;, out_dir = outdir), exportData(export,
+        transNorm = &quot;LogNorm&quot;, out_dir = outdir), export_data(export,
         transformed_experiment, out_dir = outdir))</code></pre>
 </div>
 <div id="running-the-pipeline" class="section level2" number="2.9">

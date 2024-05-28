@@ -39,8 +39,11 @@
     % \usepackage{GoSans}
     \usepackage{titlesec}
     \usepackage{fontspec}
-    \setmainfont{Palatino Linotype}
+
+
+    % \setmainfont{Palatino Linotype}
     \setmonofont[Color={00052A}]{Consolas}
+
 
 % % Load futura font
 % \newfontface\headerfont{GoSans}
@@ -488,7 +491,7 @@ The literature selected for the review was obtained from multiple journals. The 
 \todo{Incloure taula amb els articles revisats?}
 
 \section{Pipeline design}
-The methods selected to be included in the pipeline were based on the results of the literature review. The pipeline was designed to be modular, allowing users to select and apply specific pretreatment steps according to the data caracteristics and user needs and preferences.
+The methods selected to be included in the pipeline were based on the results of the literature review. The pipeline was designed to be as modular as possible so a variety of methods are included to perform the same step, allowing users to select and apply specific pretreatment steps according to the data caracteristics and user needs and preferences.
 
 \section{Datasets}
 The datasets employed for the purpose of this study were obtained from public repositories. The datasets were selected based on the following criteria:
@@ -507,7 +510,7 @@ The datasets selected were 2:
 \end{itemize}
 
 
-\section{Packages} \todo{Also a brief description of the most relevant ones}
+\section{Packages}
 The pipeline was developed using the R programming language \cite{R} and the packages described in \ref{tab:packages}.
 
 \begin{table}[!h]
@@ -564,70 +567,59 @@ The pipeline was developed using the R programming language \cite{R} and the pac
     \end{table}
 
 
-\todo{add a summary of 1: Number of functions and 2: Number of lines of code}
+    
+    
+    
+    
+    
+\chapter{Results} \todo{add a summary of 1: Number of functions and 2: Number of lines of code}
+
+\section{Pipeline} \todo{writte the pipeline}
 
 
 
-\chapter{Results}
+
+
 
 In this project, an R package named \texttt{metaboPipe} was developed to preprocess metabolomic data efficiently and accessibly. Metabolomic data preprocessing is a crucial step in ensuring the quality and reliability of downstream analyses. The transformations applied during preprocessing are primarily intended to remove unwanted effects unrelated to the study, but these tools can inadvertently delete meaningful biological data if used without caution. The \texttt{metaboPipe} package leverages the \texttt{targets} and \texttt{structToolbox} packages to create a modular and reproducible pipeline for preprocessing. This section details the components and functionality of \texttt{metaboPipe}.
 
 \section{Package Overview}
 The \texttt{metaboPipe} package is designed to streamline the preprocessing of metabolomic data by creating a series of user-accessible modules that translate into interconnected steps. These steps can be easily added, modified, and rearranged. The package utilizes the \texttt{targets} package to orchestrate task deployment and dependencies, ensuring that each step is executed in the correct order. The \texttt{structToolbox} package provides the \texttt{DatasetExperiment} object, which serves as the primary data structure throughout the pipeline, along with multiple functions for data transformation.
 
-\section{Functions and Processing Steps}
+The package can be divided into three main categories:
+\begin{itemize}
+    \item \textbf{Data manipulation:} These functions are the core of the package, as they transform the data into the desired formats and apply the diversity of methods to perform the preprocessing steps including the visualization.
+    \item \textbf{Target factories:} They are the pipeline contruction functions for the users to interact with, as they use the targets package to create pipeline nodes that use the data manipulation functions. Each factory is intended to represent a specific pretreatement step.
+    \item \textbf{Shiny app:} This is a user-friendly interface that allows users to create and run the pipeline without the need for R programming knowledge.
+\end{itemize}
 
-Although the \texttt{metaboPipe} package comprises over 56 functions, there are six main preprocessing functions that users will primarily engage with, each responsible for a specific data transformation step. These functions are designed to operate sequentially on a \texttt{DatasetExperiment} object, transforming it at each stage to prepare it for subsequent steps.
-\subsection{Data Format}
-Data must be imported in \texttt{.csv} format, consisting of two types of files:
+\section{Data manipulation}
+For the pretreatement of the data, the package includes the following functions:
 
-\subsubsection{Matrix Data}
-The matrix data is a table where each row represents a unique sample and each column represents a metabolite. The first row must contain the metabolite names. This table has the concentration data, peak intensity tables or MS/NMR spectral bins
+\begin{itemize}    
+    \item A function to create a \texttt{DatasetExperiment} object from a list of dataframes.
+    \item A function to filter the data based on the percentage of missing values both in the features and the samples.  
+    \item A function to filter the outliers based on a Hotelling's T2 distribution ellipse.
+    \item 8 functions to impute the missing values based on the following methods: \textit{Mean, Median, Random Forest (RF), Quantile Regression Imputation of Left-Censored data (QRILC), k-Nearest Neighbors (kNN), Singular Value Decomposition (SVD), Bayesian Principal Component Analysis (BPCA) and Probabilistic Principal Component Analysis (PPCA)}.
+    \item A function to remove the batch effect using the \textit{Quality Control-Robust Spline Correction (QC-RSC)} method. 
+    \item A function to normalize, scale and transform the data based on the methods provided by the \texttt{metaboAnalystR} package.
+    \item 12 data visualization functions to create plots. 
+    \item 17 utility functions to perform different tasks. 
+\end{itemize}
+    
 
-\subsubsection{Sample Metadata}
-The sample metadata is a table where each row represents a unique sample and each column represents a variable. The samples must be in the same order as the matrix data. The first row must contain the variable names, and there must be a column named \texttt{sample\_id} specifying a unique identifier for each sample. The number of variables depends on the study and preprocessing needs.
-
-\subsubsection{Feature Metadata}
-The feature metadata is an optional table where each row represents a feature and each column information related to the feature such as the chemical formula, retention time, and mass-to-charge ratio. The first row contains the column names and the first column needs to be called \texttt{annotation} containing the feature names. This table is optional as if not provided the pipeline will create a minimum table with only the annotation column using those provided in the matrix data.
-
-
-\subsection{Data loading}
-The data loading function takes the data matrix, sample metadata and optionally a feature metadata files and creates a \texttt{DatasetExperiment} object providing a structured representation of the metabolomic dataset. Loading the data is the first step in the preprocessing pipeline, enabling the subsequent transformations to be applied to the data.
-
-\subsection{Filtering}
-Filtering is usually the first step in the pipeline. It removes irrelevant or low-quality features from the dataset based on user-defined criteria. This step is essential to reduce noise and enhance the accuracy of downstream analyses.
-The module generates target nodes that apply the filtering criteria to the
-\texttt{DatasetExperiment} object, producing a refined dataset. Those criteria are the minimum percentage of samples and metabolites with non-zero values and the removing of outliers based on the Hotelling's T2 distribution ellipse.
-
-
-
-\subsection{Imputation} 
-Following filtering, the imputation function addresses missing values in the dataset. Missing data can significantly affect the results of metabolomic analyses; hence, accurate imputation is critical. The imputation function offers various methods for estimating missing values, such as mean substitution, k-nearest neighbors, and multiple imputation, and updates the \texttt{DatasetExperiment} object accordingly. 
-
-\subsection{Batch Correction} 
-Batch effects are common in metabolomic studies and can confound results if not properly corrected. The batch correction function in \texttt{metaboPipe} identifies and adjusts for batch effects, ensuring that the data is comparable across different experimental batches. This step generates target nodes that modify the \texttt{DatasetExperiment} object to remove batch-related variability. 
-
-\subsection{Normalization} 
-Normalization is performed to account for differences in sample concentration and ensure that the metabolite intensities are comparable across samples. The normalization function offers several methods, including total area normalization, probabilistic quotient normalization, and variance stabilization. The normalized \texttt{DatasetExperiment} object is then passed to the next processing step.
-
-
-\subsection{Scaling} 
-Scaling is used to adjust the range and distribution of metabolite intensities. The scaling function in \texttt{metaboPipe} provides options such as standard scaling (z-score), min-max scaling, and Pareto scaling. This step standardizes the data, facilitating meaningful comparisons between metabolites. The scaled \texttt{DatasetExperiment} object is prepared for the final transformation step. 
-
-\subsection{Transformation} 
-The transformation function applies mathematical transformations to stabilize the variance and make the data more normally distributed. Common transformations include logarithmic, square root, and Box-Cox transformations. The transformed \texttt{DatasetExperiment} object is the final output of the preprocessing pipeline, ready for downstream analysis. 
-
-\section{Implementation Details}
-Each preprocessing step in \texttt{metaboPipe} is implemented as a function that creates target nodes using the \texttt{targets} package. These nodes encapsulate the necessary operations and dependencies, ensuring that the pipeline is both modular and reproducible. 
-
-The \texttt{DatasetExperiment} object from the \texttt{structToolbox} package is used throughout the pipeline, providing a consistent and flexible data structure for all preprocessing steps.
-
-
-% CONCLUSION
-The \texttt{metaboPipe} package offers a comprehensive and modular approach to preprocessing metabolomic data. By integrating the \texttt{targets} and \texttt{structToolbox} packages, \texttt{metaboPipe} ensures that each preprocessing step is executed efficiently and reproducibly. This pipeline enhances the quality of metabolomic data, facilitating robust and reliable downstream analyses. Future work may involve extending the pipeline to include additional preprocessing steps or integrating advanced machine learning techniques for enhanced data processing.
-
-
-
+\section{Target factories}
+For the pipeline construction, the package includes the following 9 functions:
+\begin{itemize}
+    \item The \texttt{load\_data} function is implemented to efficiently load and read data from specified files into data frames. It dynamically creates six different nodes based on the presence of the \texttt{variableMetadata} parameter.
+    \item The \texttt{create\_experiment} function is the pivotal component in the data processing pipeline, enabling the creation of a \texttt{DatasetExperiment} S4 object that will be used in almost all of the pipeline. This facilitates efficient modularity.
+    \item The \texttt{factorize\_cols} function that makes the specified columns of the \texttt{sampleMetadata} as factors.
+    \item The \texttt{filter\_step} function that creates up to 5 nodes depending on the parameters provided. These nodes filter the data based on the percentage of missing values in the features and samples, filter outliers using a Hotelling's T2 distribution ellipse and creates a plot for visualizing the data missing values before and after the filtering is done.
+    \item The \texttt{batch\_correct} function that creates a node to remove the batch effect using the \texttt{QC-RSC} method.
+    \item The \texttt{impute} function that creates a node to impute the missing values using the method provided.
+    \item The \texttt{normalize} function that creates a node to normalize, scale and/or transform the data using the methods provided.
+    \item The \texttt{export\_data} function that creates a node to export the data to a specified directory.
+\end{itemize}
 
 \section{Documentation}
 

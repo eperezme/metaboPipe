@@ -11,13 +11,13 @@ filter_outliers(dataset_experiment, nPCs = 5, conf.limit = c("0.95", "0.99"))
 
 \item{nPCs}{The number of principal components for PCA.}
 
-\item{conf.limit}{The confidence limit for outlier detection.}
+\item{conf.limit}{The confidence limit for outlier detection. Either 0.95 or 0.99.}
 }
 \value{
 A dataset experiment object with outliers filtered out.
 }
 \description{
-Filter outliers from the dataset experiment.
+Filter outliers from the dataset experiment using a Hotelling's T2 distribution ellipse.
 }
 \examples{
 filtered_data <- filter_outliers(dataset_experiment, nPCs = 5, conf.limit = "0.95")

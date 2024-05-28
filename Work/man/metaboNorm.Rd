@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{metaboNorm}
 \alias{metaboNorm}
-\title{Function to normalize MetaboAnalyst data. This function performs row-wise normalization, transformation, and scaling of the metabolomic data.}
+\title{Function to normalize MetaboAnalyst data}
 \usage{
 metaboNorm(
   mSet,
@@ -16,13 +16,13 @@ metaboNorm(
 )
 }
 \arguments{
-\item{mSet}{The MetaboAnalyst data object}
+\item{mSet}{The MetaboAnalyst data object.}
 
-\item{rowNorm}{The row normalization method}
+\item{rowNorm}{The row normalization method.}
 
-\item{transNorm}{The transformation normalization method}
+\item{transNorm}{The transformation normalization method.}
 
-\item{scaleNorm}{The scaling normalization method}
+\item{scaleNorm}{The scaling normalization method.}
 
 \item{ref}{Input the name of the reference sample or the reference feature, use " " around the name.}
 
@@ -30,13 +30,13 @@ metaboNorm(
 
 \item{ratioNum}{Relevant only for biomarker analysis.}
 
-\item{out_dir}{The output directory for the plots}
+\item{out_dir}{The output directory for the plots.}
 }
 \value{
-The normalized MetaboAnalyst data object
+The normalized MetaboAnalyst data object.
 }
 \description{
-Function to normalize MetaboAnalyst data. This function performs row-wise normalization, transformation, and scaling of the metabolomic data.
+This function performs row-wise normalization, transformation, and scaling of the metabolomic data.
 }
 \examples{
 metaboNorm(mSet, rowNorm = "NULL", transNorm = "NULL", scaleNorm = "NULL", ref = NULL, ratio = FALSE, ratioNum = 20, out_dir)

@@ -2,15 +2,15 @@
 % Please edit documentation in R/utils.R
 \name{MetaboAnalyst_load_data}
 \alias{MetaboAnalyst_load_data}
-\title{Function to load the previously saved \code{MetaboAnalystData.csv} data into MetaboAnalyst from the TempData directory}
+\title{Function to load the previously saved MetaboAnalystData.csv data into MetaboAnalyst from the TempData directory}
 \usage{
 MetaboAnalyst_load_data()
 }
 \value{
-MetaboAnalyst data object (mSet)
+MetaboAnalyst data object (mSet).
 }
 \description{
-Function to load the previously saved \code{MetaboAnalystData.csv} data into MetaboAnalyst from the TempData directory
+Function to load the previously saved MetaboAnalystData.csv data into MetaboAnalyst from the TempData directory
 }
 \examples{
 MetaboAnalyst_load_data()

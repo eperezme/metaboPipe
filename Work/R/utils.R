@@ -1,20 +1,19 @@
 #' Signal drift and batch correction function
-#' 
-#' This function performs signal drift and batch correction on the given A `DatasetExperiment` object QC-RSC method
-#' 
-#' @param dataset_exp A `DatasetExperiment` object with samples and variables
-#' @param order_col Column indicating the order of samples
-#' @param batch_col Column indicating batch information
-#' @param qc_col Column indicating quality control information
-#' @param qc_label Label for quality control
-#' 
-#' @return Corrected A `DatasetExperiment` objectExperiment object
+#'
+#' This function performs signal drift and batch correction on a given DatasetExperiment object using the QC-RSC method.
+#'
+#' @param dataset_exp A DatasetExperiment object with samples and variables.
+#' @param order_col Column indicating the order of samples.
+#' @param batch_col Column indicating batch information.
+#' @param qc_col Column indicating quality control information.
+#' @param qc_label Label for quality control.
+#'
+#' @return Corrected DatasetExperiment object.
 #' @export
-#' 
+#'
 #' @examples
 #' warper_batch_correction(dataset_exp, order_col, batch_col, qc_col, qc_label)
 warper_batch_correction <- function(dataset_exp, order_col, batch_col, qc_col, qc_label) {
-  # Perform signal drift and batch correction using the sb_corr function
   M <- sb_corr(
     order_col = order_col,
     batch_col = batch_col,
@@ -25,27 +24,27 @@ warper_batch_correction <- function(dataset_exp, order_col, batch_col, qc_col, q
     min_qc = 4 # Minimum number of quality controls
   )
   
-  # Apply the correction model to the A `DatasetExperiment` object
+  # Apply the correction model to the DatasetExperiment object
   M <- model_apply(M, dataset_exp)
   
-  # Return the corrected A `DatasetExperiment` object
+  # Return the corrected DatasetExperiment object
   return(predicted(M))
 }
 
 #' Function to convert sample columns to factors
-#' 
-#' This function converts specified columns in the sample metadata to factors
-#' 
-#' @param dataset_exp A `DatasetExperiment` object with sample metadata
-#' @param col Column(s) to be converted to factors
-#' 
-#' @return A DatasetExperiment with specified columns converted to factors
+#'
+#' This function converts specified columns in the sample metadata to factors.
+#'
+#' @param dataset_exp A DatasetExperiment object with sample metadata.
+#' @param col Column(s) to be converted to factors.
+#'
+#' @return A DatasetExperiment object with specified columns converted to factors.
 #' @export
-#' 
+#'
 #' @examples
 #' warper_factor_sample_col(dataset_exp, col)
 warper_factor_sample_col <- function(dataset_exp, col) {
-  # Convert specified columns to factors using lapply
+  # Convert specified columns to factors
   mod_dataset <- dataset_exp$sample_meta
   mod_dataset[, col] <- lapply(mod_dataset[, col], factor)
   
@@ -54,64 +53,64 @@ warper_factor_sample_col <- function(dataset_exp, col) {
   return(dataset_exp)
 }
 
-#' Function to extract data matrix from A `DatasetExperiment` object
-#' 
-#' This function extracts the data matrix from a SummarizedExperiment object
-#' 
-#' @param dataset_exp A `DatasetExperiment` object
-#' 
-#' @return Data matrix
+#' Function to extract data matrix from a DatasetExperiment object
+#'
+#' This function extracts the data matrix from a SummarizedExperiment object.
+#'
+#' @param dataset_exp A DatasetExperiment object.
+#'
+#' @return Data matrix.
 #' @export
-#' 
+#'
 #' @examples
 #' data.extract(dataset_exp)
 data.extract <- function(dataset_exp) {
   return(SummarizedExperiment::assay(dataset_exp))
 }
 
-#' Function to modify data matrix of A `DatasetExperiment` object
-#' 
-#' This function replaces the data matrix in a SummarizedExperiment object with new data
-#' 
-#' @param dataset_exp A `DatasetExperiment` object
-#' @param data New data matrix
-#' 
-#' @return A `DatasetExperiment` object with modified data matrix
+#' Function to modify data matrix of a DatasetExperiment object
+#'
+#' This function replaces the data matrix in a SummarizedExperiment object with new data.
+#'
+#' @param dataset_exp A DatasetExperiment object.
+#' @param data New data matrix.
+#'
+#' @return A DatasetExperiment object with modified data matrix.
 #' @export
-#' 
+#'
 #' @examples
 #' data.modify(dataset_exp, data)
 data.modify <- function(dataset_exp, data) {
-  # Replace data matrix in the A `DatasetExperiment` object
+  # Replace data matrix in the DatasetExperiment object
   SummarizedExperiment::assay(dataset_exp, withDimnames = FALSE) <- data
   return(dataset_exp)
 }
 
-#' Function to extract sample metadata from A `DatasetExperiment` object
-#' 
-#' This function extracts the sample metadata from a SummarizedExperiment object
-#' 
-#' @param dataset_exp A `DatasetExperiment` object
-#' 
-#' @return Sample metadata dataframe
+#' Function to extract sample metadata from a DatasetExperiment object
+#'
+#' This function extracts the sample metadata from a SummarizedExperiment object.
+#'
+#' @param dataset_exp A DatasetExperiment object.
+#'
+#' @return Sample metadata dataframe.
 #' @export
-#' 
+#'
 #' @examples
 #' sample.data.extract(dataset_exp)
 sample.data.extract <- function(dataset_exp) {
   return(dataset_exp$sample_meta)
 }
 
-#' Function to modify sample metadata of A `DatasetExperiment` object
-#' 
-#' This function replaces the sample metadata in a SummarizedExperiment object with new metadata
-#' 
-#' @param dataset_exp DatasetExperiment object
-#' @param sample_meta New sample metadata dataframe
-#' 
-#' @return A `DatasetExperiment` object with modified sample metadata
+#' Function to modify sample metadata of a DatasetExperiment object
+#'
+#' This function replaces the sample metadata in a SummarizedExperiment object with new metadata.
+#'
+#' @param dataset_exp A DatasetExperiment object.
+#' @param sample_meta New sample metadata dataframe.
+#'
+#' @return A DatasetExperiment object with modified sample metadata.
 #' @export
-#' 
+#'
 #' @examples
 #' sample.data.modify(dataset_exp, sample_meta)
 sample.data.modify <- function(dataset_exp, sample_meta) {
@@ -120,48 +119,48 @@ sample.data.modify <- function(dataset_exp, sample_meta) {
   return(dataset_exp)
 }
 
-#' Function to extract variable metadata from A `DatasetExperiment` object
-#' 
-#' This function extracts the variable metadata from a SummarizedExperiment object
-#' 
-#' @param dataset_exp A `DatasetExperiment` object
-#' 
-#' @return Variable metadata dataframe
+#' Function to extract variable metadata from a DatasetExperiment object
+#'
+#' This function extracts the variable metadata from a SummarizedExperiment object.
+#'
+#' @param dataset_exp A DatasetExperiment object.
+#'
+#' @return Variable metadata dataframe.
 #' @export
-#' 
+#'
 #' @examples
 #' variable.data.extract(dataset_exp)
 variable.data.extract <- function(dataset_exp) {
   return(dataset_exp$variable_meta)
 }
 
-#' Function to modify variable metadata of A `DatasetExperiment` object
-#' 
-#' This function replaces the variable metadata in a SummarizedExperiment object with new metadata
-#' 
-#' @param dataset_exp A `DatasetExperiment` object
-#' @param variable_meta New variable metadata
-#' 
-#' @return A `DatasetExperiment` object with modified variable metadata
+#' Function to modify variable metadata of a DatasetExperiment object
+#'
+#' This function replaces the variable metadata in a SummarizedExperiment object with new metadata.
+#'
+#' @param dataset_exp A DatasetExperiment object.
+#' @param variable_meta New variable metadata.
+#'
+#' @return A DatasetExperiment object with modified variable metadata.
 #' @export
-#' 
+#'
 #' @examples
 #' variable.data.modify(dataset_exp, variable_meta)
 variable.data.modify <- function(dataset_exp, variable_meta) {
-  # Replace variable metadata in the A `DatasetExperiment` object
+  # Replace variable metadata in the DatasetExperiment object
   dataset_exp$variable_meta <- variable_meta
   return(dataset_exp)
 }
 
-#' Function to create a dataSet for Metaboanalyst
-#' 
-#' @param dataset_exp A `DatasetExperiment` object
-#' @param class_col Column to be used as class
-#' @param sample_id Column to be used as sample ID
-#' 
-#' @return Nothing
+#' Function to create a dataSet for MetaboAnalyst
+#'
+#' @param dataset_exp A DatasetExperiment object.
+#' @param class_col Column to be used as class.
+#' @param sample_id Column to be used as sample ID.
+#'
+#' @return Nothing.
 #' @export
-#' 
+#'
 #' @examples
 #' toMetaboAnalyst(dataset_exp, class_col = "sample_type", sample_id = "sample_id")
 toMetaboAnalyst <- function(dataset_exp, class_col = "sample_type", sample_id = "sample_id") {
@@ -185,11 +184,11 @@ toMetaboAnalyst <- function(dataset_exp, class_col = "sample_type", sample_id = 
   MetaboAnalyst_load_data()
 }
 
-#' Function to load the previously saved `MetaboAnalystData.csv` data into MetaboAnalyst from the TempData directory
-#' 
-#' @return MetaboAnalyst data object (mSet)
+#' Function to load the previously saved MetaboAnalystData.csv data into MetaboAnalyst from the TempData directory
+#'
+#' @return MetaboAnalyst data object (mSet).
 #' @export
-#' 
+#'
 #' @examples
 #' MetaboAnalyst_load_data()
 MetaboAnalyst_load_data <- function() {
@@ -212,26 +211,26 @@ MetaboAnalyst_load_data <- function() {
         cat("Error occurred during data processing:", conditionMessage(e), "\n")
       }
     )
-    
-    #Reset working directory
   })
   return(mSet)
 }
 
-#' Function to normalize MetaboAnalyst data. This function performs row-wise normalization, transformation, and scaling of the metabolomic data.
-#' 
-#' @param mSet The MetaboAnalyst data object
-#' @param rowNorm The row normalization method
-#' @param transNorm The transformation normalization method
-#' @param scaleNorm The scaling normalization method
+#' Function to normalize MetaboAnalyst data
+#'
+#' This function performs row-wise normalization, transformation, and scaling of the metabolomic data.
+#'
+#' @param mSet The MetaboAnalyst data object.
+#' @param rowNorm The row normalization method.
+#' @param transNorm The transformation normalization method.
+#' @param scaleNorm The scaling normalization method.
 #' @param ref Input the name of the reference sample or the reference feature, use " " around the name.
 #' @param ratio This option is only for biomarker analysis.
 #' @param ratioNum Relevant only for biomarker analysis.
-#' @param out_dir The output directory for the plots
-#' 
-#' @return The normalized MetaboAnalyst data object
+#' @param out_dir The output directory for the plots.
+#'
+#' @return The normalized MetaboAnalyst data object.
 #' @export
-#' 
+#'
 #' @examples
 #' metaboNorm(mSet, rowNorm = "NULL", transNorm = "NULL", scaleNorm = "NULL", ref = NULL, ratio = FALSE, ratioNum = 20, out_dir)
 metaboNorm <- function(mSet, rowNorm = "NULL", transNorm = "NULL", scaleNorm = "NULL", ref = NULL, ratio = FALSE, ratioNum = 20, out_dir) {
@@ -432,5 +431,6 @@ pipePliers <- function() {
   shiny::shinyOptions(wd = wd)
   shiny::shinyAppDir(appDir)
 }
+
 
 
