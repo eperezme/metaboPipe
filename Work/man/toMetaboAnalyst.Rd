@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{toMetaboAnalyst}
 \alias{toMetaboAnalyst}
-\title{Function to create a dataSet for Metaboanalyst}
+\title{Function to create a dataSet for MetaboAnalyst}
 \usage{
 toMetaboAnalyst(
   dataset_exp,
@@ -11,17 +11,17 @@ toMetaboAnalyst(
 )
 }
 \arguments{
-\item{dataset_exp}{A \code{DatasetExperiment} object}
+\item{dataset_exp}{A DatasetExperiment object.}
 
-\item{class_col}{Column to be used as class}
+\item{class_col}{Column to be used as class.}
 
-\item{sample_id}{Column to be used as sample ID}
+\item{sample_id}{Column to be used as sample ID.}
 }
 \value{
-Nothing
+Nothing.
 }
 \description{
-Function to create a dataSet for Metaboanalyst
+Function to create a dataSet for MetaboAnalyst
 }
 \examples{
 toMetaboAnalyst(dataset_exp, class_col = "sample_type", sample_id = "sample_id")

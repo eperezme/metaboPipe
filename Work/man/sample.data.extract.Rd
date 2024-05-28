@@ -2,18 +2,18 @@
 % Please edit documentation in R/utils.R
 \name{sample.data.extract}
 \alias{sample.data.extract}
-\title{Function to extract sample metadata from A \code{DatasetExperiment} object}
+\title{Function to extract sample metadata from a DatasetExperiment object}
 \usage{
 sample.data.extract(dataset_exp)
 }
 \arguments{
-\item{dataset_exp}{A \code{DatasetExperiment} object}
+\item{dataset_exp}{A DatasetExperiment object.}
 }
 \value{
-Sample metadata dataframe
+Sample metadata dataframe.
 }
 \description{
-This function extracts the sample metadata from a SummarizedExperiment object
+This function extracts the sample metadata from a SummarizedExperiment object.
 }
 \examples{
 sample.data.extract(dataset_exp)

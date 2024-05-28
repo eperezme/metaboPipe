@@ -2,20 +2,20 @@
 % Please edit documentation in R/utils.R
 \name{data.modify}
 \alias{data.modify}
-\title{Function to modify data matrix of A \code{DatasetExperiment} object}
+\title{Function to modify data matrix of a DatasetExperiment object}
 \usage{
 data.modify(dataset_exp, data)
 }
 \arguments{
-\item{dataset_exp}{A \code{DatasetExperiment} object}
+\item{dataset_exp}{A DatasetExperiment object.}
 
-\item{data}{New data matrix}
+\item{data}{New data matrix.}
 }
 \value{
-A \code{DatasetExperiment} object with modified data matrix
+A DatasetExperiment object with modified data matrix.
 }
 \description{
-This function replaces the data matrix in a SummarizedExperiment object with new data
+This function replaces the data matrix in a SummarizedExperiment object with new data.
 }
 \examples{
 data.modify(dataset_exp, data)

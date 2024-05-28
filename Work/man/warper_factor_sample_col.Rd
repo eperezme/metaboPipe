@@ -7,15 +7,15 @@
 warper_factor_sample_col(dataset_exp, col)
 }
 \arguments{
-\item{dataset_exp}{A \code{DatasetExperiment} object with sample metadata}
+\item{dataset_exp}{A DatasetExperiment object with sample metadata.}
 
-\item{col}{Column(s) to be converted to factors}
+\item{col}{Column(s) to be converted to factors.}
 }
 \value{
-A DatasetExperiment with specified columns converted to factors
+A DatasetExperiment object with specified columns converted to factors.
 }
 \description{
-This function converts specified columns in the sample metadata to factors
+This function converts specified columns in the sample metadata to factors.
 }
 \examples{
 warper_factor_sample_col(dataset_exp, col)

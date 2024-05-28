@@ -45,7 +45,7 @@ DE
 #    tar_target(dataMatrix, read.csv("data/ST000284/dataMatrix.csv")),
 #    tar_target(sampleMeta, read.csv("data/ST000284/sampleMetadata.csv")),
 #    tar_target(variableMetadata, read.csv("data/ST000284/variableMetadata.csv")),
-#    tar_target(experiment, warper_createExperiment(dataMatrix, sampleMeta, variableMetadata, experiment_name = "ST000284", experiment_description = "Example metabolomics dataset ST000284"))
+#    tar_target(experiment, warper_create_experiment(dataMatrix, sampleMeta, variableMetadata, experiment_name = "ST000284", experiment_description = "Example metabolomics dataset ST000284"))
 #  )
 
 ## ----eval=FALSE---------------------------------------------------------------
@@ -58,7 +58,7 @@ DE
 #  
 #  list(
 #    load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath),
-#    createExperiment(experiment, data_loaded, experiment_name = "ST000284", experiment_description = "Example metabolomics dataset ST000284")
+#    create_experiment(experiment, data_loaded, experiment_name = "ST000284", experiment_description = "Example metabolomics dataset ST000284")
 #  )
 
 ## ----load, eval=FALSE---------------------------------------------------------
@@ -79,7 +79,7 @@ DE
 #  
 #  list(
 #    load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath, dataSep, sampleSep, variableSep),
-#    createExperiment(experiment, data_loaded, experiment_name = name, experiment_description = description)
+#    create_experiment(experiment, data_loaded, experiment_name = name, experiment_description = description)
 #  )
 
 ## ----factorize, eval=FALSE----------------------------------------------------
@@ -101,7 +101,7 @@ DE
 #  
 #  list(
 #    load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath, dataSep, sampleSep, variableSep),
-#    createExperiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
+#    create_experiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
 #    factorize_cols(factorized_experiment, experiment, columns)
 #  )
 
@@ -124,7 +124,7 @@ DE
 #  
 #  list(
 #    load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath, dataSep, sampleSep, variableSep),
-#    createExperiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
+#    create_experiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
 #    factorize_cols(factorized_experiment, experiment, columns),
 #    filter_step(filtered_experiment, factorized_experiment, threshold = 0.8, filter_outliers = TRUE, conf.limit = "0.95", out_dir = "results")
 #  )
@@ -153,7 +153,7 @@ DE
 #  
 #  list(
 #    load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath, dataSep, sampleSep, variableSep),
-#    createExperiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
+#    create_experiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
 #    factorize_cols(factorized_experiment, experiment, columns),
 #    filter_step(filtered_experiment, factorized_experiment, threshold = 0.8, filter_outliers = TRUE, conf.limit = "0.95", out_dir = outdir),
 #    impute(imputed_experiment, filtered_experiment, method = 'RF', k = 5) # Impute using Random forest
@@ -183,7 +183,7 @@ DE
 #  
 #  list(
 #    load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath, dataSep, sampleSep, variableSep),
-#    createExperiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
+#    create_experiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
 #    factorize_cols(factorized_experiment, experiment, columns),
 #    filter_step(filtered_experiment, factorized_experiment, threshold = 0.8, filter_outliers = TRUE, conf.limit = "0.95", out_dir = outdir),
 #    impute(imputed_experiment, filtered_experiment, method = 'RF', k = 5),
@@ -217,7 +217,7 @@ DE
 #  
 #  list(
 #    load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath, dataSep, sampleSep, variableSep),
-#    createExperiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
+#    create_experiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
 #    factorize_cols(factorized_experiment, experiment, columns),
 #    filter_step(filtered_experiment, factorized_experiment, threshold = 0.8, filter_outliers = TRUE, conf.limit = "0.95", out_dir = outdir),
 #    impute(imputed_experiment, filtered_experiment, method = 'RF', k = 5),
@@ -251,7 +251,7 @@ DE
 #  
 #  list(
 #    load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath, dataSep, sampleSep, variableSep),
-#    createExperiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
+#    create_experiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
 #    factorize_cols(factorized_experiment, experiment, columns),
 #    filter_step(filtered_experiment, factorized_experiment, threshold = 0.8, filter_outliers = TRUE, conf.limit = "0.95", out_dir = outdir),
 #    impute(imputed_experiment, filtered_experiment, method = 'RF', k = 5),
@@ -286,14 +286,14 @@ DE
 #  
 #  list(
 #    load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath, dataSep, sampleSep, variableSep),
-#    createExperiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
+#    create_experiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
 #    factorize_cols(factorized_experiment, experiment, columns),
 #    filter_step(filtered_experiment, factorized_experiment, threshold = 0.8, filter_outliers = TRUE, conf.limit = "0.95", out_dir = outdir),
 #    impute(imputed_experiment, filtered_experiment, method = 'RF', k = 5),
 #    normalize(normalized_experiment, imputed_experiment, factor_col = factor_col, sample_id_col = sample_id_col, rowNorm = 'CompNorm', ref = 'Creatine (132.1 / 90.0)', out_dir = outdir),
 #    normalize(scaled_experiment, normalized_experiment,factor_col = factor_col, sample_id_col = sample_id_col, scaleNorm = "AutoNorm", out_dir = outdir),
 #    normalize(transformed_experiment, scaled_experiment, factor_col = factor_col, sample_id_col = sample_id_col, transNorm = "LogNorm", out_dir= outdir),
-#    exportData(export, transformed_experiment, out_dir= outdir)
+#    export_data(export, transformed_experiment, out_dir= outdir)
 #  )
 
 ## ----tar_check, paged.print=FALSE---------------------------------------------

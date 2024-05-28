@@ -2,18 +2,18 @@
 % Please edit documentation in R/utils.R
 \name{data.extract}
 \alias{data.extract}
-\title{Function to extract data matrix from A \code{DatasetExperiment} object}
+\title{Function to extract data matrix from a DatasetExperiment object}
 \usage{
 data.extract(dataset_exp)
 }
 \arguments{
-\item{dataset_exp}{A \code{DatasetExperiment} object}
+\item{dataset_exp}{A DatasetExperiment object.}
 }
 \value{
-Data matrix
+Data matrix.
 }
 \description{
-This function extracts the data matrix from a SummarizedExperiment object
+This function extracts the data matrix from a SummarizedExperiment object.
 }
 \examples{
 data.extract(dataset_exp)

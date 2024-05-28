@@ -109,11 +109,11 @@ filter_blanks <- function(dataset_experiment, fold_change = 20, blank_label = "b
 
 #' Filter Outliers
 #' 
-#' Filter outliers from the dataset experiment.
+#' Filter outliers from the dataset experiment using a Hotelling's T2 distribution ellipse.
 #' 
 #' @param dataset_experiment The dataset experiment object.
 #' @param nPCs The number of principal components for PCA.
-#' @param conf.limit The confidence limit for outlier detection.
+#' @param conf.limit The confidence limit for outlier detection. Either 0.95 or 0.99.
 #' 
 #' @return A dataset experiment object with outliers filtered out.
 #' 

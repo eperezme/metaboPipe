@@ -7,21 +7,21 @@
 warper_batch_correction(dataset_exp, order_col, batch_col, qc_col, qc_label)
 }
 \arguments{
-\item{dataset_exp}{A \code{DatasetExperiment} object with samples and variables}
+\item{dataset_exp}{A DatasetExperiment object with samples and variables.}
 
-\item{order_col}{Column indicating the order of samples}
+\item{order_col}{Column indicating the order of samples.}
 
-\item{batch_col}{Column indicating batch information}
+\item{batch_col}{Column indicating batch information.}
 
-\item{qc_col}{Column indicating quality control information}
+\item{qc_col}{Column indicating quality control information.}
 
-\item{qc_label}{Label for quality control}
+\item{qc_label}{Label for quality control.}
 }
 \value{
-Corrected A \code{DatasetExperiment} objectExperiment object
+Corrected DatasetExperiment object.
 }
 \description{
-This function performs signal drift and batch correction on the given A \code{DatasetExperiment} object QC-RSC method
+This function performs signal drift and batch correction on a given DatasetExperiment object using the QC-RSC method.
 }
 \examples{
 warper_batch_correction(dataset_exp, order_col, batch_col, qc_col, qc_label)

@@ -115,7 +115,7 @@ list(
   tar_target(dataMatrix, read.csv("data/ST000284/dataMatrix.csv")),
   tar_target(sampleMeta, read.csv("data/ST000284/sampleMetadata.csv")),
   tar_target(variableMetadata, read.csv("data/ST000284/variableMetadata.csv")),
-  tar_target(experiment, warper_createExperiment(dataMatrix, sampleMeta, variableMetadata, experiment_name = "ST000284", experiment_description = "Example metabolomics dataset ST000284"))
+  tar_target(experiment, warper_create_experiment(dataMatrix, sampleMeta, variableMetadata, experiment_name = "ST000284", experiment_description = "Example metabolomics dataset ST000284"))
 )
 ```
 
@@ -131,9 +131,9 @@ Even though the pipeline is correctly defined, `metaboPipe` provides a set of fu
 ## Using metaboPipe functions to define the pipeline
 ### Loading the data
 
-Instead of writing 3 targets to load the 3 dataframes we can define the paths to the files before the targets list and then use the `load_data()` function to load the 3 dataframes. And then we can use the `createExperiment()` function to merge the 3 dataframes into a `DatasetExperiment` object.
+Instead of writing 3 targets to load the 3 dataframes we can define the paths to the files before the targets list and then use the `load_data()` function to load the 3 dataframes. And then we can use the `create_experiment()` function to merge the 3 dataframes into a `DatasetExperiment` object.
 
-The `load_data()` function takes the paths to the data files as arguments and returns a list with the loaded dataframes. The `createExperiment()` function takes the loaded dataframes as arguments and returns a `DatasetExperiment` object.
+The `load_data()` function takes the paths to the data files as arguments and returns a list with the loaded dataframes. The `create_experiment()` function takes the loaded dataframes as arguments and returns a `DatasetExperiment` object.
 
 Same as before, the first variable on the functions is the name of the target.
 ```{r load_data_exp, eval=FALSE}
@@ -143,7 +143,7 @@ variableMetadataPath <- "data/ST000284/variableMetadata.csv"
 
 list(
   load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath),
-  createExperiment(experiment, data_loaded, experiment_name = "ST000284", experiment_description = "Example metabolomics dataset ST000284")
+  create_experiment(experiment, data_loaded, experiment_name = "ST000284", experiment_description = "Example metabolomics dataset ST000284")
 )
 ```
 
@@ -168,7 +168,7 @@ description <- "Example metabolomics dataset ST000284"
 
 list(
   load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath, dataSep, sampleSep, variableSep),
-  createExperiment(experiment, data_loaded, experiment_name = name, experiment_description = description)
+  create_experiment(experiment, data_loaded, experiment_name = name, experiment_description = description)
 )
 ```
 
@@ -193,7 +193,7 @@ columns <- c("Groups", "Age", "Gender", "Smoking", "Alcohol")
 
 list(
   load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath, dataSep, sampleSep, variableSep),
-  createExperiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
+  create_experiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
   factorize_cols(factorized_experiment, experiment, columns)
 )
 ```
@@ -220,7 +220,7 @@ columns <- c("Groups", "Age", "Gender", "Smoking", "Alcohol")
 
 list(
   load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath, dataSep, sampleSep, variableSep),
-  createExperiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
+  create_experiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
   factorize_cols(factorized_experiment, experiment, columns),
   filter_step(filtered_experiment, factorized_experiment, threshold = 0.8, filter_outliers = TRUE, conf.limit = "0.95", out_dir = "results")
 )
@@ -254,7 +254,7 @@ columns <- c("Groups", "Age", "Gender", "Smoking", "Alcohol")
 
 list(
   load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath, dataSep, sampleSep, variableSep),
-  createExperiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
+  create_experiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
   factorize_cols(factorized_experiment, experiment, columns),
   filter_step(filtered_experiment, factorized_experiment, threshold = 0.8, filter_outliers = TRUE, conf.limit = "0.95", out_dir = outdir),
   impute(imputed_experiment, filtered_experiment, method = 'RF', k = 5) # Impute using Random forest
@@ -289,7 +289,7 @@ columns <- c("Groups", "Age", "Gender", "Smoking", "Alcohol")
 
 list(
   load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath, dataSep, sampleSep, variableSep),
-  createExperiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
+  create_experiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
   factorize_cols(factorized_experiment, experiment, columns),
   filter_step(filtered_experiment, factorized_experiment, threshold = 0.8, filter_outliers = TRUE, conf.limit = "0.95", out_dir = outdir),
   impute(imputed_experiment, filtered_experiment, method = 'RF', k = 5),
@@ -328,7 +328,7 @@ sample_id_col = "sample_id"
 
 list(
   load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath, dataSep, sampleSep, variableSep),
-  createExperiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
+  create_experiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
   factorize_cols(factorized_experiment, experiment, columns),
   filter_step(filtered_experiment, factorized_experiment, threshold = 0.8, filter_outliers = TRUE, conf.limit = "0.95", out_dir = outdir),
   impute(imputed_experiment, filtered_experiment, method = 'RF', k = 5),
@@ -366,7 +366,7 @@ sample_id_col = "sample_id"
 
 list(
   load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath, dataSep, sampleSep, variableSep),
-  createExperiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
+  create_experiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
   factorize_cols(factorized_experiment, experiment, columns),
   filter_step(filtered_experiment, factorized_experiment, threshold = 0.8, filter_outliers = TRUE, conf.limit = "0.95", out_dir = outdir),
   impute(imputed_experiment, filtered_experiment, method = 'RF', k = 5),
@@ -405,14 +405,14 @@ sample_id_col = "sample_id"
 
 list(
   load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath, dataSep, sampleSep, variableSep),
-  createExperiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
+  create_experiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
   factorize_cols(factorized_experiment, experiment, columns),
   filter_step(filtered_experiment, factorized_experiment, threshold = 0.8, filter_outliers = TRUE, conf.limit = "0.95", out_dir = outdir),
   impute(imputed_experiment, filtered_experiment, method = 'RF', k = 5),
   normalize(normalized_experiment, imputed_experiment, factor_col = factor_col, sample_id_col = sample_id_col, rowNorm = 'CompNorm', ref = 'Creatine (132.1 / 90.0)', out_dir = outdir),
   normalize(scaled_experiment, normalized_experiment,factor_col = factor_col, sample_id_col = sample_id_col, scaleNorm = "AutoNorm", out_dir = outdir),
   normalize(transformed_experiment, scaled_experiment, factor_col = factor_col, sample_id_col = sample_id_col, transNorm = "LogNorm", out_dir= outdir),
-  exportData(export, transformed_experiment, out_dir= outdir)
+  export_data(export, transformed_experiment, out_dir= outdir)
 )
 ```
 
