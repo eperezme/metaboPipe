@@ -3,8 +3,18 @@
 
 # metaboPipe
 
-Shield: [![CC BY-NC-SA
+<!-- badges: start -->
+
+[![CC BY-NC-SA
 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](http://creativecommons.org/licenses/by-nc-sa/4.0/)
+<!-- badges: end -->
+
+<img src="https://cms.eperezme.com/uploads/metabopipe_5fe568562b.png" alt="metaboPipe" width="300" align="right">
+
+The goal of metaboPipe is to facilitate the analysis of metabolomics
+data by the use of pipelines to preprocess the targeted metabolomics
+data. The package includes functions for data filtering, imputation,
+normalization, scaling, transformation, data visualization and more.
 
 This work is licensed under a [Creative Commons
 Attribution-NonCommercial-ShareAlike 4.0 International
@@ -12,14 +22,6 @@ License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 [![CC BY-NC-SA
 4.0](https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png)](http://creativecommons.org/licenses/by-nc-sa/4.0/)
-
-<!-- badges: start -->
-<!-- badges: end -->
-
-The goal of metaboPipe is to facilitate the analysis of metabolomics
-data by the use of pipelines to preprocess the targeted metabolomics
-data. The package includes functions for data filtering, imputation,
-normalization, scaling, transformation, data visualization and more.
 
 ## Installation
 
