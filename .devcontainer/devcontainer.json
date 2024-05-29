@@ -20,5 +20,6 @@
         "geometry", "babel"
       ]
     }
-  }
+  },
+  "postCreateCommand": "sudo apt update && sudo apt -y install textlive-xetex biber texlive-bibtex-extra texlive-fonts-extra xindy"
 }
