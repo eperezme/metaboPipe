@@ -9,8 +9,6 @@
 			"packages": [
 				"texlive-xetex",
 				"biber",
-				"texlive-bibtex-extra",
-				"texlive-fonts-extra",
 				"xindy"
 			]
 		}
