@@ -9,14 +9,11 @@
         "bookmark", "booktabs",
         "microtype", "pgfgantt",
         "biblatex", "glossaries",
-        "lscape", "sectsty",
-        "titlesec", "fontspec",
-        "inputenc", "ifthen",
-        "graphicx", "url",
-        "fancyhdr", "color",
+        "sectsty", "titlesec",
+        "fontspec", "graphicx", 
+        "url", "fancyhdr",
         "colortbl", "xcolor",
-        "array", "multirow",
-        "multicol", "stackengine",
+        "multirow", "stackengine",
         "geometry", "babel"
       ]
     }
