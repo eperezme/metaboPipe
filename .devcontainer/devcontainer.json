@@ -10,7 +10,7 @@
         "microtype", "pgfgantt",
         "biblatex", "glossaries",
         "sectsty", "titlesec",
-        "fontspec", "graphicx", 
+        "fontspec", 
         "url", "fancyhdr",
         "colortbl", "xcolor",
         "multirow", "stackengine",
