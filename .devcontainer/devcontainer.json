@@ -2,7 +2,23 @@
   "image": "mcr.microsoft.com/devcontainers/universal:2",
   "features": {
     "ghcr.io/prulloac/devcontainer-features/latex:1": {
-      "scheme": "full"
+      "scheme": "basic",
+      "mirror": "https://mirrors.mit.edu/CTAN/systems/texlive/tlnet",
+      "packages": [ 
+        "mathpazo", "hyperref", 
+        "bookmark", "booktabs",
+        "microtype", "pgfgantt",
+        "biblatex", "glossaries",
+        "lscape", "sectsty",
+        "titlesec", "fontspec",
+        "inputenc", "ifthen",
+        "graphicx", "url",
+        "fancyhdr", "color",
+        "colortbl", "xcolor",
+        "array", "multirow",
+        "multicol", "stackengine",
+        "geometry", "babel"
+      ]
     }
   }
 }
