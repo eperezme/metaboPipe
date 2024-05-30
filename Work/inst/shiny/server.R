@@ -20,6 +20,7 @@ function(input, output, session) {
         factorCols = NULL,
         sampleIdCol = NULL,
         sampleTypeCol = NULL,
+        qcLabel = NULL,
         groupCol = NULL,
         orderCol = NULL,
         batchCol = NULL,
@@ -75,10 +76,25 @@ function(input, output, session) {
         df <- read.csv(data$sampleMetadataPath, sep = data$sampleSeparator, strip.white = TRUE)
         updateSelectizeInput(session, "factorCols", choices = colnames(df), server = TRUE)
         updateSelectizeInput(session, "sampleIdCol", choices = colnames(df), server = TRUE)
-        updateSelectizeInput(session, "sampleTypeCol", choices = colnames(df), server = TRUE)
+        updateSelectizeInput(session, "sampleTypeCol", choices = c("NULL", colnames(df)), server = TRUE)
         updateSelectizeInput(session, "groupCol", choices = colnames(df), server = TRUE)
         updateSelectizeInput(session, "orderCol", choices = colnames(df), server = TRUE)
         updateSelectizeInput(session, "batchCol", choices = colnames(df), server = TRUE)
+    })
+    observeEvent(input$sampleTypeCol, {
+        if (input$sampleTypeCol != "NULL") {
+            req(data$sampleMetadataPath)
+            df <- read.csv(data$sampleMetadataPath, sep = data$sampleSeparator, strip.white = TRUE)
+
+            # Get the column specified by sampleTypeCol
+            sampleTypeColumn <- df[[input$sampleTypeCol]]
+
+            # Ensure the column is treated as a factor to get the levels
+            sampleTypeColumn <- as.factor(sampleTypeColumn)
+
+            # Update the qcLabel input with the levels of the sampleType column
+            updateSelectizeInput(session, "qcLabel", choices = levels(sampleTypeColumn), server = TRUE)
+        }
     })
 
     observeEvent(input$setSettings, {
@@ -86,6 +102,7 @@ function(input, output, session) {
         data$sampleIdCol <- input$sampleIdCol
         data$sampleTypeCol <- input$sampleTypeCol
         data$groupCol <- input$groupCol
+        data$qcLabel <- input$qcLabel
     })
 
     observeEvent(input$rowNormMethod, {
@@ -155,7 +172,7 @@ function(input, output, session) {
 
         if (input$process == "Batch Correct") {
             target_name <- paste0("batch_corrected_", step_counter$counter)
-            line_to_add <- paste0("batch_correct(", target_name, ", ", previous_target_name$name, ", method = '", input$batchCorrectMethod, "', out_dir = out_dir),")
+            line_to_add <- paste0("batch_correct(", target_name, ", ", previous_target_name$name, ", method = '", input$batchCorrectMethod, "', order_col = '", input$orderCol, "', batch_col = '", input$batchCol, "', qc_col = sample_type_col, qc_label = qc_label),")
 
             # Append line to reactiveValues
             step_lines$lines <- c(step_lines$lines, line_to_add)
@@ -210,6 +227,7 @@ function(input, output, session) {
                 paste0("sample_id_col <- '", data$sampleIdCol, "'"),
                 paste0("sample_type_col <- '", data$sampleTypeCol, "'"),
                 paste0("group_col <- '", data$groupCol, "'"),
+                paste0("qc_label <- '", data$qcLabel, "'"),
                 "",
                 "",
                 "dir.create(out_dir, showWarnings = FALSE)",

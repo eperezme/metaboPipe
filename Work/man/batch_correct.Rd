@@ -4,12 +4,22 @@
 \alias{batch_correct}
 \title{Batch correction}
 \usage{
-batch_correct(output_name, input_name, order_col, batch_col, qc_col, qc_label)
+batch_correct(
+  output_name,
+  input_name,
+  method,
+  order_col,
+  batch_col,
+  qc_col,
+  qc_label
+)
 }
 \arguments{
 \item{output_name}{The name of the output target.}
 
 \item{input_name}{The name of the input data.}
+
+\item{method}{The batch correction method to use: ComBat, QCRSC.}
 
 \item{order_col}{The order column.}
 
@@ -26,7 +36,7 @@ A target to perform batch correction.
 Batch correction
 }
 \examples{
-batch_correct(BatchCorrected_experiment, input_experiment, order_col = "Order", batch_col = "Batch", qc_col = "SampleType", qc_label = "QC")
+batch_correct(BatchCorrected_experiment, input_experiment, method = "QCRSC" order_col = "Order", batch_col = "Batch", qc_col = "SampleType", qc_label = "QC")
 }
 \seealso{
 \code{\link[=warper_batch_correction]{warper_batch_correction()}}

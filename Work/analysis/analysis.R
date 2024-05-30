@@ -1,19 +1,34 @@
-library(targets)
-library(tidyverse)
+suppressPackageStartupMessages({
+  # Bioconductor packages
+  library(structToolbox)
+  library(pmp)
+  library(ropls)
+  library(BiocFileCache)
+  
+  # CRAN libraries
+  library(ggplot2)
+  library(gridExtra)
+  library(cowplot)
+  library(openxlsx)
+  
+  #metabopipe
+  library(targets)
+  library(tidyverse)
+  library(pcaMethods)
+  library(ComplexHeatmap)
+  library(limma)
+})
 
-library(ggplot2)
-library(pcaMethods)
-library(ComplexHeatmap)
-library(limma)
-library(structToolbox)
+bfc <- BiocFileCache(ask = FALSE)
 
 # Load the data
 
-# load the data used with the example
-DE = MTBLS79
 
+
+
+### STRUCTOOLBOX EXAMPLE ####
 # the pmp SE object
-SE = MTBLS79
+SE = pmp::MTBLS79
 
 # convert to DE
 DE = as.DatasetExperiment(SE)
@@ -39,7 +54,9 @@ DE$sample_meta$Class = factor(DE$sample_meta$Class)
 DE$sample_meta$batch_qc = factor(DE$sample_meta$batch_qc)
 
 # print summary
-DE
+MTBLS79 <- DE
+
+# usethis::use_data_raw("MTBLS79")
 
 
 M = # batch correction
@@ -147,4 +164,4 @@ M7 = model_apply(M7,predicted(M6))
 
 # plot pca scores
 C = pca_scores_plot(factor_name=c('Sample_Rep','Class'),ellipse='none')
-chart_plot(C,M7[2]) + coord_fixed() +guides(colour=FALSE
+chart_plot(C,M7[2]) + coord_fixed() +guides(colour=FALSE)

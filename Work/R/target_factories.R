@@ -23,10 +23,10 @@ load_data <- function(output_name, dataMatrixFile, sampleMetadataFile, variableM
   name_matrixFile <- paste0(target_name, "_matrixFile")
   name_sampleFile <- paste0(target_name, "_sampleFile")
   name_variableFile <- paste0(target_name, "_variableFile")
-  read_matrix_command <- substitute(read.csv(name_matrixFile, sep = dataSep, header = TRUE), env = list(name_matrixFile = as.name(name_matrixFile), dataSep = dataSep))
-  read_sample_command <- substitute(read.csv(name_sampleFile, sep = dataSep, header = TRUE), env = list(name_sampleFile = as.name(name_sampleFile), dataSep = sampleSep))
-  read_variable_command <- substitute(read.csv(name_variableFile, sep = dataSep, header = TRUE), env = list(name_variableFile = as.name(name_variableFile), dataSep = variableSep))
-  read_head_command <- substitute(read.csv(name_matrixFile, sep = dataSep, header = FALSE), env = list(name_matrixFile = as.name(name_matrixFile), dataSep = dataSep))
+  read_matrix_command <- substitute(data.table::fread(name_matrixFile, sep = dataSep, header = TRUE), env = list(name_matrixFile = as.name(name_matrixFile), dataSep = dataSep))
+  read_sample_command <- substitute(data.table::fread(name_sampleFile, sep = dataSep, header = TRUE), env = list(name_sampleFile = as.name(name_sampleFile), dataSep = sampleSep))
+  read_variable_command <- substitute(data.table::fread(name_variableFile, sep = dataSep, header = TRUE), env = list(name_variableFile = as.name(name_variableFile), dataSep = variableSep))
+  read_head_command <- substitute(data.table::fread(name_matrixFile, sep = dataSep, header = FALSE), env = list(name_matrixFile = as.name(name_matrixFile), dataSep = dataSep))
   extract_names_command <- substitute(extract_names(name_head), env = list(name_head = as.name(name_head)))
 
   # Define targets to load and read data matrix and sample metadata
@@ -214,22 +214,23 @@ filter_step <- function(output_name, input_name, threshold, filter_outliers = TR
 #' @param batch_col The batch column.
 #' @param qc_col The QC column.
 #' @param qc_label The QC label.
+#' @param method The batch correction method to use: ComBat, QCRSC.
 #'
 #' @return A target to perform batch correction.
 #'
 #' @export
 #'
 #' @examples
-#' batch_correct(BatchCorrected_experiment, input_experiment, order_col = "Order", batch_col = "Batch", qc_col = "SampleType", qc_label = "QC")
+#' batch_correct(BatchCorrected_experiment, input_experiment, method = "QCRSC" order_col = "Order", batch_col = "Batch", qc_col = "SampleType", qc_label = "QC")
 #' @seealso [warper_batch_correction()]
-batch_correct <- function(output_name, input_name, order_col, batch_col, qc_col, qc_label) {
+batch_correct <- function(output_name, input_name, method, order_col, batch_col, qc_col, qc_label) {
   target_name <- deparse(substitute(output_name)) # Get the name of the output target
   data <- deparse(substitute(input_name)) # Get the name of the input data
   # Define target to perform batch correction
   command_correct <- substitute(
-    warper_batch_correction(data, order_col, batch_col, qc_col, qc_label),
+    warper_batch_correction(data, method, order_col, batch_col, qc_col, qc_label),
     env =
-      list(data = as.name(data), order_col = order_col, batch_col = batch_col, qc_col = qc_col, qc_label = qc_label)
+      list(data = as.name(data), order_col = order_col, batch_col = batch_col, qc_col = qc_col, qc_label = qc_label, method = method)
   )
   list(
     tar_target_raw(target_name, command_correct, format = "qs", deployment = "main")

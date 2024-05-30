@@ -1,36 +1,3 @@
-#' Signal drift and batch correction function
-#'
-#' This function performs signal drift and batch correction on a given DatasetExperiment object using the QC-RSC method.
-#'
-#' @param dataset_exp A DatasetExperiment object with samples and variables.
-#' @param order_col Column indicating the order of samples.
-#' @param batch_col Column indicating batch information.
-#' @param qc_col Column indicating quality control information.
-#' @param qc_label Label for quality control.
-#'
-#' @return Corrected DatasetExperiment object.
-#' @export
-#'
-#' @examples
-#' warper_batch_correction(dataset_exp, order_col, batch_col, qc_col, qc_label)
-warper_batch_correction <- function(dataset_exp, order_col, batch_col, qc_col, qc_label) {
-  M <- sb_corr(
-    order_col = order_col,
-    batch_col = batch_col,
-    qc_col = qc_col,
-    qc_label = qc_label,
-    use_log = TRUE, # Use logarithm for transformation
-    spar_lim = c(-1.5, 1.5), # Limit for signal drift correction
-    min_qc = 4 # Minimum number of quality controls
-  )
-  
-  # Apply the correction model to the DatasetExperiment object
-  M <- model_apply(M, dataset_exp)
-  
-  # Return the corrected DatasetExperiment object
-  return(predicted(M))
-}
-
 #' Function to convert sample columns to factors
 #'
 #' This function converts specified columns in the sample metadata to factors.
@@ -47,9 +14,9 @@ warper_factor_sample_col <- function(dataset_exp, col) {
   # Convert specified columns to factors
   mod_dataset <- dataset_exp$sample_meta
   mod_dataset[, col] <- lapply(mod_dataset[, col], factor)
-  
+
   dataset_exp$sample_meta <- mod_dataset
-  
+
   return(dataset_exp)
 }
 
@@ -167,18 +134,18 @@ toMetaboAnalyst <- function(dataset_exp, class_col = "sample_type", sample_id = 
   # Extract data matrix
   dataMatrix_extracted <- SummarizedExperiment::assay(dataset_exp)
   sampleMetadata_extracted <- sample.data.extract(dataset_exp)
-  
+
   # Extract relevant information using dplyr
   samples_name <- dplyr::pull(sampleMetadata_extracted, {{ sample_id }})
   classes <- dplyr::pull(sampleMetadata_extracted, {{ class_col }})
-  
+
   # Create data frame for MetaboAnalyst
   MetaboDataMatrix <- data.frame(
     Sample = samples_name,
     Label = classes,
     dataMatrix_extracted
   )
-  
+
   # Save the data frame as a CSV file
   write.csv(MetaboDataMatrix, file = "TempData/MetaboAnalystData.csv", row.names = FALSE)
   MetaboAnalyst_load_data()
@@ -196,10 +163,10 @@ MetaboAnalyst_load_data <- function() {
   withr::with_dir("TempData", {
     # Initialize MetaboAnalyst data objects
     mSet <- InitDataObjects("conc", "stat", FALSE)
-    
+
     # Read text data
     mSet <- Read.TextData(mSet, "MetaboAnalystData.csv", "rowu", "disc")
-    
+
     # Print read message
     print(mSet$msgSet$read.msg)
     # Perform sanity check on data
@@ -241,13 +208,13 @@ metaboNorm <- function(mSet, rowNorm = "NULL", transNorm = "NULL", scaleNorm = "
     mSet <- PreparePrenormData(mSet)
     mSet <- Normalization(mSet, rowNorm, transNorm, scaleNorm, ref, ratio, ratioNum)
     plot_name <- ""
-    if(rowNorm != "NULL"){
+    if (rowNorm != "NULL") {
       plot_name <- paste0(plot_name, "_", rowNorm, "normalization")
     }
-    if(transNorm  != "NULL"){
+    if (transNorm != "NULL") {
       plot_name <- paste0(plot_name, "_", transNorm, "transformation")
     }
-    if(scaleNorm != "NULL"){
+    if (scaleNorm != "NULL") {
       plot_name <- paste0(plot_name, "_", scaleNorm, "scaling")
     }
     # Save plots
@@ -256,7 +223,7 @@ metaboNorm <- function(mSet, rowNorm = "NULL", transNorm = "NULL", scaleNorm = "
       {
         dir.create("Plots", showWarnings = FALSE)
         mSet <- PlotNormSummary(mSet, paste0(out_dir, "/Plots/", plot_name, "_features"), format = "png", dpi = 300, width = NA)
-        
+
         # View sample normalization
         mSet <- PlotSampleNormSummary(mSet, paste0(out_dir, "/Plots/", plot_name, "_samples"), format = "png", dpi = 300, width = NA)
       },
@@ -265,17 +232,17 @@ metaboNorm <- function(mSet, rowNorm = "NULL", transNorm = "NULL", scaleNorm = "
       }
     )
   })
-  
+
   return(mSet)
 }
 
 #' Function to export MetaboAnalyst data
-#' 
+#'
 #' @param mSet The MetaboAnalyst data object
-#' 
+#'
 #' @return Nothing
 #' @export
-#' 
+#'
 #' @examples
 #' save_metabo(mSet)
 save_metabo <- function(mSet) {
@@ -289,10 +256,10 @@ save_metabo <- function(mSet) {
 #' @param plt The plot object
 #' @param output_dir The output directory
 #' @param output_name The output name for the plot file
-#' 
+#'
 #' @return Nothing
 #' @export
-#' 
+#'
 #' @examples
 #' save_plot(plt, output_dir, output_name)
 save_plot <- function(plt, output_dir, output_name) {
@@ -304,7 +271,7 @@ save_plot <- function(plt, output_dir, output_name) {
       png(filename = png_name, width = 1080, height = 450, res = 100)
       plot(plt)
       dev.off()
-      
+
       # Save SVG
       svg_name <- paste0(output_name, ".svg")
       svg(filename = svg_name, width = 12)
@@ -315,14 +282,14 @@ save_plot <- function(plt, output_dir, output_name) {
 }
 
 #' Function to export data
-#' 
+#'
 #' @param dataset_exp A `DatasetExperiment` object
 #' @param out_dir The output directory
 #' @param out_name The output name of the files
-#' 
+#'
 #' @return Nothing
 #' @export
-#' 
+#'
 #' @examples
 #' export_data(dataset_exp, out_dir, out_name)
 export_data <- function(dataset_exp, out_dir, out_name) {
@@ -334,7 +301,7 @@ export_data <- function(dataset_exp, out_dir, out_name) {
     sampleMetadata <- sample.data.extract(dataset_exp)
     # Extract variable metadata
     variableMetadata <- variable.data.extract(dataset_exp)
-    
+
     # Write data matrix to CSV
     write.csv(dataMatrix, file = paste0(out_name, "_data.csv"), row.names = TRUE)
     # Write sample metadata to CSV
@@ -345,19 +312,19 @@ export_data <- function(dataset_exp, out_dir, out_name) {
 }
 
 #' Function to extract names
-#' 
-#' @param data 
-#' 
+#'
+#' @param data
+#'
 #' @return The variableMetadata dataset for the DatasetExperiment object
 #' @export
-#' 
+#'
 #' @examples
 #' extract_names(data)
 extract_names <- function(data) {
-  suppressMessages(variableData <- t(data) %>% dplyr::as_tibble(.name_repair = "unique") %>%  dplyr::select(...1) %>% dplyr::rename("annotation" = ...1) %>% as.data.frame())
-  variableData$annotation <- as.character(variableData$annotation) 
+  suppressMessages(variableData <- t(data) %>% dplyr::as_tibble(.name_repair = "unique") %>% dplyr::select(...1) %>% dplyr::rename("annotation" = ...1) %>% as.data.frame())
+  variableData$annotation <- as.character(variableData$annotation)
   return(variableData)
-} 
+}
 
 
 #' Create Pipeline Function
@@ -386,29 +353,29 @@ create_pipeline <- function() {
       'HotellingEllipse', 'ggforce', 'tools', 'cowplot', 'metaboPipe'
     )
   )
-  
-  
+
+
   #### Global variables #####
   # General config
   outdir = 'Results'
   dir.create(outdir, showWarnings = FALSE) # We create the outdir in case there its not created yet
   outdir <- tools::file_path_as_absolute(outdir) # We get the absolute path of the dir for compatibility
-  
+
   list(
-  
-  
-  
-  
-  
+
+
+
+
+
   )
 "
   directory <- getwd()
-  writeLines(code, con = file.path(directory, '_targets.R'))
-  
+  writeLines(code, con = file.path(directory, "_targets.R"))
+
   message("Created _targets.R file in ", directory)
-  
+
   targets::tar_assert_package("usethis")
-  usethis::edit_file(path = paste0(directory,"/", '_targets.R'), open = TRUE)
+  usethis::edit_file(path = paste0(directory, "/", "_targets.R"), open = TRUE)
 }
 
 
@@ -431,6 +398,3 @@ pipePliers <- function() {
   shiny::shinyOptions(wd = wd)
   shiny::shinyAppDir(appDir)
 }
-
-
-
