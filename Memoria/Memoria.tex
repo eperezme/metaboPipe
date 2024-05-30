@@ -610,7 +610,7 @@ For the pretreatement of the data, the package includes the following functions:
     \item A function to filter the data based on the percentage of missing values both in the features and the samples.  
     \item A function to filter the outliers based on a Hotelling's T2 distribution ellipse.
     \item 8 functions to impute the missing values based on the following methods: \textit{Mean, Median, Random Forest (RF), Quantile Regression Imputation of Left-Censored data (QRILC), k-Nearest Neighbors (kNN), Singular Value Decomposition (SVD), Bayesian Principal Component Analysis (BPCA) and Probabilistic Principal Component Analysis (PPCA)}.
-    \item A function to remove the batch effect using the \textit{Quality Control-Robust Spline Correction (QC-RSC)} method. 
+    \item 2 functions to remove the batch effect using either the \textit{Quality Control-Robust Spline Correction (QC-RSC)} method or the \texttt{ComBat} method. \todo{add references to the methods}
     \item A function to normalize, scale and transform the data based on the methods provided by the \texttt{metaboAnalystR} package.
     \item 12 data visualization functions to create plots. 
     \item 17 utility functions to perform different tasks. 
@@ -634,9 +634,19 @@ For the pipeline construction, the package includes the following 9 functions:
 
 
 \section{Shiny app}
- 
+% https://i.imgur.com/LQB1z2B.png
+% https://i.imgur.com/1ZeEmNK.png
+% https://i.imgur.com/gGDcwui.png
+
+A shiny app was developed to allow users to interact with the pipeline without the need for R programming knowledge. The app provides 3 main tabs:
+\begin{itemize}
+    \item The \texttt{Data upload} tab allows users to either upload their data or use one of the example data provided.
+    \item The \texttt{Data Config} tab allows users to set the global parameters for the data, like the sample\_ID column, the column to be used as QC or Sample identifier, and the main study factor. It also allows users to visualize the data tables they are working with to ensure the data is correctly loaded.
+    \item The \texttt{Process Selector} tab allows users to select and configure the different steps of the pipeline. Each step is represented by a card that can be expanded to show the parameters of the step. The user can select the steps they want to include in the pipeline and configure them according to their needs. The app will then generate the \texttt{\_targets.R} file and execute the pipeline from the app.
+\end{itemize}
 
 \chapter{Discussion}
+
 
 \chapter{Conclusion and future vision}
 The second one is that it enables the pipeline to be used as a pretreatement method comparable tool. As the easy of use and order can be easily changed, the user can test different pretreatement methods and orders to compare the changes in the data.

@@ -69,7 +69,7 @@ navbarPage(
                 ),
                 conditionalPanel(
                     condition = "input.sampleTypeCol != 'NULL'",
-                    selectizeInput("qcLabel", "Select the QC level:",
+                    selectizeInput("qcLabel", "Select the QC label:",
                         choices = NULL
                     )
                 ),
