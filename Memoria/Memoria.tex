@@ -30,7 +30,15 @@
 \usepackage[toc, acronym, xindy]{glossaries}
 \makeglossaries
 \loadglsentries[main]{glossary.tex}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, fit}
 
+\tikzset{
+  block/.style = {rectangle, draw, text centered, rounded corners, minimum height=2em},
+  decision/.style = {diamond, draw, text centered, minimum height=2em, aspect=2},
+  line/.style = {draw, -{Stealth[round,sep]}, thick},
+  every label/.append style = {font=\footnotesize}
+}
 \usepackage{lscape}
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -85,7 +93,7 @@
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
     %Introducción de datos del trabajo
-    \title{metaboPipe: a Modular Pipeline for Metabolomic Data Preprocessing}
+    \title{metaboPipe: A Modular Pipeline for Metabolomic Data Preprocessing}
     \titcrt{metaboPipe} %Título corto que aparecerá a la cabecera
     \author{Eduard Pérez Méndez}
     \date{\today}
@@ -583,13 +591,46 @@ The pipeline was developed using the R programming language \cite{R} and the pac
     
 \chapter{Results} \todo{add a summary of 1: Number of functions and 2: Number of lines of code}
 
-\section{Pipeline} \todo{writte the pipeline}
+\section{Pipeline}
+The literature review provided valuable insights into the most commonly used methods and tools for metabolomic data preprocessing. Based on this information, the proposed pipeline is designed to include the following steps:
+\begin{enumerate}
+    \item Filter missing values
+    \item Filter outliers
+    \item Batch correction
+    \item Impute missing values
+    \item Data Normaliztion
+    \item Data Transformation
+    \item Data Scaling
+\end{enumerate}
 
+\begin{tikzpicture}[node distance=.75cm and .5cm]
 
-
-
-
-
+    % Subgraph: Data Filtering
+    \node[block] (A) {Filter Missing Values};
+    \node[block, below=of A] (B) {Filter Outliers};
+    
+    \node[decision, below=of B] (C) {Batch effect present?};
+    \node[block, below left=of C, xshift=-1cm] (D) {Batch Correction};
+    \node[block, below=of C] (H) {Data Imputation};
+    \node[block, below=of H] (E) {Data Normalization};
+    \node[block, below=of E] (F) {Data Transformation};
+    \node[block, below=of F] (G) {Data Scaling};
+  
+    % Arrows
+    \path [line] (A) -- (B);
+    \path [line] (B) -- (C);
+    \path [line] (C) -- node[near start, left] {YES} (D);
+    \path [line] (C) -- node[near start, right] {NO} (H);
+    \path [line] (D) -- (H);
+    \path [line] (H) -- (E);
+    \path [line] (E) -- (F);
+    \path [line] (F) -- (G);
+  
+    % Subgraph label
+    \node[draw=black, dashed, fit=(A)(B), inner sep=4pt, label={[label distance=0.5em]north:Data Filtering}] {};
+  
+  \end{tikzpicture}
+  
 In this project, an R package named \texttt{metaboPipe} was developed to preprocess metabolomic data efficiently and accessibly. Metabolomic data preprocessing is a crucial step in ensuring the quality and reliability of downstream analyses. The transformations applied during preprocessing are primarily intended to remove unwanted effects unrelated to the study, but these tools can inadvertently delete meaningful biological data if used without caution. The \texttt{metaboPipe} package leverages the \texttt{targets} and \texttt{structToolbox} packages to create a modular and reproducible pipeline for preprocessing. This section details the components and functionality of \texttt{metaboPipe}.
 
 \section{Package Overview}
