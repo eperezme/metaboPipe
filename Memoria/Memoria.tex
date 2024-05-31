@@ -593,16 +593,8 @@ The pipeline was developed using the R programming language \cite{R} and the pac
 
 \section{Pipeline}
 The literature review provided valuable insights into the most commonly used methods and tools for metabolomic data preprocessing. Based on this information, the proposed pipeline is designed to include the following steps:
-\begin{enumerate}
-    \item Filter missing values
-    \item Filter outliers
-    \item Batch correction
-    \item Impute missing values
-    \item Data Normaliztion
-    \item Data Transformation
-    \item Data Scaling
-\end{enumerate}
-
+\begin{figure}[ht]
+    \centering
 \begin{tikzpicture}[node distance=.75cm and .5cm]
 
     % Subgraph: Data Filtering
@@ -630,6 +622,9 @@ The literature review provided valuable insights into the most commonly used met
     \node[draw=black, dashed, fit=(A)(B), inner sep=4pt, label={[label distance=0.5em]north:Data Filtering}] {};
   
   \end{tikzpicture}
+  \caption{Flow diagram showing the steps of the metabolomic data preprocessing pipeline proposed.}
+  \label{fig:pipeline}
+\end{figure}
   
 In this project, an R package named \texttt{metaboPipe} was developed to preprocess metabolomic data efficiently and accessibly. Metabolomic data preprocessing is a crucial step in ensuring the quality and reliability of downstream analyses. The transformations applied during preprocessing are primarily intended to remove unwanted effects unrelated to the study, but these tools can inadvertently delete meaningful biological data if used without caution. The \texttt{metaboPipe} package leverages the \texttt{targets} and \texttt{structToolbox} packages to create a modular and reproducible pipeline for preprocessing. This section details the components and functionality of \texttt{metaboPipe}.
 
