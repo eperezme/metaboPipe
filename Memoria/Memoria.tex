@@ -689,6 +689,11 @@ A shiny app was developed to allow users to interact with the pipeline without t
 \chapter{Discussion}
 Diferents metodes per a preprocessar dades metabolomiques son necessaris per a tractar diferents tipus de dades. Aquesta diversitat de metodes es consequecia de la varietat de factors que afecten les dades metabolomiques. Aquests factors poden ser biologics, tecnics o experimentals. Cada metode te les seves aventatges i desaventatges i per tant escollir un metode per al tractament de les dades pot ser una tasca complicada ja que estará determinat per la questio biologica de l'estudi, la naturalesa de les dades i el metode analitic que es desitgi utilitzar.
 
+En aquest treball s'ha proposat un flux de treball general per al preprocesssat de dades de metabolomica dirigida. Aquest flux de treball es poc especific ja que la selecció de metodes per al preprocessat afecta al ordre d'aquests. Per exemple al utilitzar singular value decomposition (SVD) com a metode d'imputacio, es recomana escalar i centrar abans les dades, pero si imputem les dades utilitzant quantile regression imputation of left-censored data (QRILC), per a obtenir una millor precissio, és recomanat log-transform les dades abans.
+Per tant s'han de tenir en compte aquestes consideracions a l'hora de seleccionar els metodes a utilitzar, cosa que impossibilita la creació d'un pipeline general simple.
+
+Aquesta diversitat de metodes i la seva interacció ha provocat que aquest treball hagi virat cap a la creació d'una eina que permeti d'una manera sencilla crear seqüencies personalitzades de tractament de dades de manera senzilla i interactiva.  
+
 
 
 
