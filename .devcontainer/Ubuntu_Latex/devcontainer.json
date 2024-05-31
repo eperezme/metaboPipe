@@ -1,0 +1,22 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "features": {
+    "ghcr.io/prulloac/devcontainer-features/latex:1": {
+      "scheme": "basic",
+      "mirror": "https://mirrors.mit.edu/CTAN/systems/texlive/tlnet",
+      "packages": [ 
+        "mathpazo", "hyperref", 
+        "bookmark", "booktabs",
+        "microtype", "pgfgantt",
+        "biblatex", "glossaries",
+        "sectsty", "titlesec",
+        "fontspec", 
+        "url", "fancyhdr",
+        "colortbl", "xcolor",
+        "multirow", "stackengine",
+        "geometry", "babel"
+      ]
+    }
+  },
+  "postCreateCommand": "sudo apt update && sudo apt -y install textlive-xetex biber texlive-bibtex-extra texlive-fonts-extra xindy"
+}

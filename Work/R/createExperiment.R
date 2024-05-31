@@ -46,7 +46,7 @@ warper_createExperiment <- function(dataMatrix, sampleMetadata, variableMetadata
 
   # convert 0 to NA
   dataMatrix <- dataMatrix %>% mutate_if(is.character, as.numeric)
-  dataMatrix[dataMatrix == 0] <- NA
+  dataMatrix[dataMatrix <= 0] <- NA
   dataMatrix <- data.frame(lapply(dataMatrix, as.numeric), check.names = FALSE)
   
   

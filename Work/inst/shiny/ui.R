@@ -67,6 +67,12 @@ navbarPage(
                 selectizeInput("sampleTypeCol", "Select sample Type column (if its QC, Blank or Sample):",
                     choices = NULL
                 ),
+                conditionalPanel(
+                    condition = "input.sampleTypeCol != 'NULL'",
+                    selectizeInput("qcLabel", "Select the QC label:",
+                        choices = NULL
+                    )
+                ),
                 selectizeInput("groupCol", "Select the Group column (the study variable):",
                     choices = NULL
                 ),
@@ -144,11 +150,14 @@ navbarPage(
                 conditionalPanel(
                     condition = "input.process == 'Batch Correct'",
                     selectInput("batchCorrectMethod", "Select the batch correction method:",
-                        choices = c("ComBat", "SVA", "RUV", "NULL"),
+                        choices = c("ComBat", "QCRSC", "NULL"),
                         selected = "NULL"
                     ),
-                    selectizeInput("orderCol", "Select the Order column (the injection order):",
-                        choices = NULL
+                    conditionalPanel(
+                        condition = "input.batchCorrectMethod == 'QCRSC'",
+                        selectizeInput("orderCol", "Select the Order column (the injection order):",
+                            choices = NULL
+                        )
                     ),
                     selectizeInput("batchCol", "Select the batch column:",
                         choices = NULL

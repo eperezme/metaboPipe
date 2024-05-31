@@ -1,0 +1,167 @@
+suppressPackageStartupMessages({
+  # Bioconductor packages
+  library(structToolbox)
+  library(pmp)
+  library(ropls)
+  library(BiocFileCache)
+  
+  # CRAN libraries
+  library(ggplot2)
+  library(gridExtra)
+  library(cowplot)
+  library(openxlsx)
+  
+  #metabopipe
+  library(targets)
+  library(tidyverse)
+  library(pcaMethods)
+  library(ComplexHeatmap)
+  library(limma)
+})
+
+bfc <- BiocFileCache(ask = FALSE)
+
+# Load the data
+
+
+
+
+### STRUCTOOLBOX EXAMPLE ####
+# the pmp SE object
+SE = pmp::MTBLS79
+
+# convert to DE
+DE = as.DatasetExperiment(SE)
+DE$name = 'MTBLS79'
+DE$description = 'Converted from SE provided by the pmp package'
+
+# add a column indicating the order the samples were measured in
+DE$sample_meta$run_order = 1:nrow(DE)
+
+# add a column indicating if the sample is biological or a QC
+Type=as.character(DE$sample_meta$Class)
+Type[Type != 'QC'] = 'Sample'
+DE$sample_meta$Type = factor(Type)
+
+# add a column for plotting batches
+DE$sample_meta$batch_qc = DE$sample_meta$Batch
+DE$sample_meta$batch_qc[DE$sample_meta$Type=='QC']='QC'
+
+# convert to factors
+DE$sample_meta$Batch = factor(DE$sample_meta$Batch)
+DE$sample_meta$Type = factor(DE$sample_meta$Type)
+DE$sample_meta$Class = factor(DE$sample_meta$Class)
+DE$sample_meta$batch_qc = factor(DE$sample_meta$batch_qc)
+
+# print summary
+MTBLS79 <- DE
+
+# usethis::use_data_raw("MTBLS79")
+
+
+M = # batch correction
+    sb_corr(
+      order_col='run_order',
+      batch_col='Batch', 
+      qc_col='Type', 
+      qc_label='QC',
+      spar_lim = c(0.6,0.8) 
+    )
+
+M = model_apply(M,DE)
+
+C = feature_profile(
+      run_order='run_order',
+      qc_label='QC',
+      qc_column='Type',
+      colour_by='batch_qc',
+      feature_to_plot='200.03196',
+      plot_sd=FALSE
+  )
+
+# plot and modify using ggplot2 
+chart_plot(C,M,DE)+ylab('Peak area')+ggtitle('Before')
+chart_plot(C,predicted(M))+ylab('Peak area')+ggtitle('After')
+
+
+
+# BATCH FILTER
+M2 = filter_na_count(
+      threshold=3,
+      factor_name='Batch'
+    )
+M2 = model_apply(M2,predicted(M))
+
+# calculate number of features removed
+nc = ncol(DE) - ncol(predicted(M2))
+
+cat(paste0('Number of features removed: ', nc))
+
+# Feature filtering
+M3 = kw_rank_sum(
+      alpha=0.0001,
+      mtc='none',
+      factor_names='Batch',
+      predicted='significant'
+    ) +
+    filter_by_name(
+      mode='exclude',
+      dimension = 'variable',
+      seq_in = 'names', 
+      names='seq_fcn', # this is a placeholder and will be replaced by seq_fcn
+      seq_fcn=function(x){return(x[,1])}
+    )
+M3 = model_apply(M3, predicted(M2))
+
+nc = ncol(predicted(M2)) - ncol(predicted(M3))
+cat(paste0('Number of features removed: ', nc))
+
+
+
+M4 = wilcox_test(
+      alpha=1e-14,
+      factor_names='Type', 
+      mtc='none', 
+      predicted = 'significant'
+    ) +
+    filter_by_name(
+      mode='exclude',
+      dimension='variable',
+      seq_in='names', 
+      names='place_holder',
+      seq_fcn=function(x){return(x$significant)}
+    )
+M4 = model_apply(M4, predicted(M3))
+
+nc = ncol(predicted(M3)) - ncol(predicted(M4))
+cat(paste0('Number of features removed: ', nc))
+
+
+M5 = rsd_filter(
+     rsd_threshold=20,
+     factor_name='Type'
+)
+M5 = model_apply(M5,predicted(M4))
+
+nc = ncol(predicted(M4)) - ncol(predicted(M5))
+cat(paste0('Number of features removed: ', nc))
+
+
+# Normalisation, missing value imputation and scaling
+# peak matrix processing
+M6 = pqn_norm(qc_label='QC',factor_name='Type') + 
+     knn_impute(neighbours=5) +
+     glog_transform(qc_label='QC',factor_name='Type')
+M6 = model_apply(M6,predicted(M5))
+
+
+## PCA
+# PCA
+M7  = mean_centre() + PCA(number_components = 2)
+
+# apply model sequence to data
+M7 = model_apply(M7,predicted(M6))
+
+# plot pca scores
+C = pca_scores_plot(factor_name=c('Sample_Rep','Class'),ellipse='none')
+chart_plot(C,M7[2]) + coord_fixed() +guides(colour=FALSE)
