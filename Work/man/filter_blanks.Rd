@@ -14,7 +14,7 @@ filter_blanks(
 )
 }
 \arguments{
-\item{dataset_experiment}{The dataset experiment object.}
+\item{dataset_experiment}{The \code{DatasetExperiment} object.}
 
 \item{fold_change}{The fold change threshold for blank filtering.}
 
@@ -27,11 +27,12 @@ filter_blanks(
 \item{fraction_in_blank}{The fraction of values in blank (default is 0).}
 }
 \value{
-A dataset experiment object with blanks filtered out.
+A \code{DatasetExperiment} object with blanks filtered out.
 }
 \description{
-Filter blanks from the dataset experiment.
+Filter blanks from the \code{DatasetExperiment}.
 }
 \examples{
-filtered_data <- filter_blanks(dataset_experiment, fold_change = 20, blank_label = "blank", qc_label = "QC", factor_name = "sample_type", fraction_in_blank = 0)
+DE <- metaboPipe::ST000284
+filtered_data <- filter_blanks(DE, fold_change = 20, blank_label = "blank", qc_label = "QC", factor_name = "sample_type", fraction_in_blank = 0)
 }

@@ -97,7 +97,7 @@ navbarPage(
                 conditionalPanel(
                     condition = "input.process == 'Filter'",
                     numericInput("naThreshold", "Select the threshold for missing values (between 0 and 1):",
-                        min = 0, max = 1, value = 0.80, step = 0.01
+                        min = 0, max = 1, value = 0.20, step = 0.01
                     ),
                     checkboxInput("filterOutliers", "Filter Outliers"),
                     conditionalPanel(

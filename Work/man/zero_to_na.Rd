@@ -2,19 +2,20 @@
 % Please edit documentation in R/filter.R
 \name{zero_to_na}
 \alias{zero_to_na}
-\title{Make 0 as NA}
+\title{Make 0 and <0 as \code{NA}}
 \usage{
 zero_to_na(dataset_exp)
 }
 \arguments{
-\item{dataset_exp}{The dataset experiment object.}
+\item{dataset_exp}{The \code{DatasetExperiment} object.}
 }
 \value{
-A dataset experiment object with 0 values replaced by NA.
+A \code{DatasetExperiment} object with values <= 0 replaced by \code{NA}.
 }
 \description{
-Replace 0 values with NA in a dataset experiment.
+Replace 0 values with \code{NA} in a \code{DatasetExperiment}.
 }
 \examples{
-modified_dataset <- zero_to_na(dataset_exp)
+DE <- metaboPipe::ST000284
+modified_dataset <- zero_to_na(DE)
 }
