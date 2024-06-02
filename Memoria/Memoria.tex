@@ -686,9 +686,7 @@ These considerations must be factored in when selecting preprocessing methods, m
 
 Due to the diversity of methods and their interactions, this work focuses on developing a tool that facilitates the easy and interactive creation of customized data preprocessing sequences. This tool, the \texttt{metaboPipe} package, offers functions to perform common preprocessing steps and enables the creation of tailored pipelines using these steps. Additionally, the package includes a shiny app that allows users to interact with the pipeline without requiring R programming skills.
 
-To load the data, users need to import two tables in \texttt{.csv} format: \texttt{dataMatrix} and \texttt{sampleMetadata}. The \texttt{dataMatrix} table contains the relative abundance or concentration data (\Cref{tab
-}), while the \texttt{sampleMetadata} table holds the sample-related data (\Cref{tab
-}).
+To load the data, users need to import two tables in \texttt{.csv} format: \texttt{dataMatrix} and \texttt{sampleMetadata}. The \texttt{dataMatrix} table contains the relative abundance or concentration data (\Cref{tab:dataMatrix-example}), while the \texttt{sampleMetadata} table holds the sample-related data (\Cref{tab:sampleMetadata-example}). 
 
 
 % DataMatrix table
@@ -727,9 +725,7 @@ To load the data, users need to import two tables in \texttt{.csv} format: \text
   To identify and filter outliers, a Hotelling's T2 distribution ellipse is used with a default significance level of 95\%, adjustable to 99\% if desired. This method is chosen for its robustness and flexibility in detecting outliers in multivariate data, considering the covariance between variables \cite{wuUsingNontargetedLCMS2021, viallonNewPipelineNormalization2021}.
   
   Batch effects are a common issue in metabolomics studies, introducing unwanted variability into the data. To correct this effect, two methods have been implemented: the \texttt{QC-RSC} method and the \texttt{ComBat} method, which are widely used \todo{add citations}.
-  
-  
-  
+
   For normalization, scaling, and transformation of the data, it has been decided to use the methods provided by the \texttt{metaboAnalystR} package as it offers a wide variety of methods, some of which are difficult to implement manually, such as normalization to an internal standard or a physiological constant. However, several functions are implemented to normalize the data using other methods not present in \texttt{metaboAnalystR} such as Probabilistic Quotient Normalization (PQN) or Vector Length Normalization (VLN). These methods, although implemented in \texttt{metaboPipe}, are not incorporated into the shiny application interface nor the \texttt{normalize()} function.
   
   The implementation of the PC-PR2 method described by \citeauthor{viallonNewPipelineNormalization2021} is also considered. This method first identifies sources of variation using PCA combined with multiple linear regression and then corrects unwanted variations using a random effects model for each metabolite. However, due to the complexity of robustly integrating this method into the package within the available time, it is deferred to future revisions. Nevertheless, the \texttt{pcpr2()} function can be used to visualize the data and identify sources of variation, although correction is not yet possible.
