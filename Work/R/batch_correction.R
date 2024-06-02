@@ -1,9 +1,9 @@
 #' Signal drift and batch correction function
 #'
-#' This function performs signal drift and batch correction on a given DatasetExperiment object using the QC-RSC method.
+#' This function performs signal drift and batch correction on a given DatasetExperiment object using the specified method.
 #'
 #' @param dataset_exp A DatasetExperiment object with samples and variables.
-#' @param method The batch correction method to use: ComBat, SVA, RUV, QCRSC
+#' @param method The batch correction method to use: ComBat, QCRSC.
 #' @param order_col Column indicating the order of samples.
 #' @param batch_col Column indicating batch information.
 #' @param qc_col Column indicating quality control information.

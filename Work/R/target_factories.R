@@ -188,7 +188,7 @@ filter_step <- function(output_name, input_name, threshold, filter_outliers = TR
         tar_target_raw(name_mv, command_filter_mv, format = "qs", deployment = "main"),
         tar_target_raw(target_name, command_filter_outl, format = "qs", deployment = "main"),
         tar_target_raw(plot_outliers_name, command_plot_outliers1,
-          format = "qs", deployment = "main",
+          format = "qs", deployment = "worker",
           cue = tar_cue(mode = "always")
         )
       )
@@ -196,13 +196,13 @@ filter_step <- function(output_name, input_name, threshold, filter_outliers = TR
       list(
         tar_target_raw(target_name, command_filter_mv, format = "qs", deployment = "main"),
         tar_target_raw(plot_outliers_name, command_plot_outliers2,
-          format = "qs", deployment = "main",
+          format = "qs", deployment = "worker",
           cue = tar_cue(mode = "always")
         )
       )
     },
-    tar_target_raw(plot_before_name, command_plot_mv_before, format = "qs", deployment = "main", cue = tar_cue(mode = "always")),
-    tar_target_raw(plot_after_name, command_plot_mv_after, format = "qs", deployment = "main", cue = tar_cue(mode = "always"))
+    tar_target_raw(plot_before_name, command_plot_mv_before, format = "qs", deployment = "worker", cue = tar_cue(mode = "always")),
+    tar_target_raw(plot_after_name, command_plot_mv_after, format = "qs", deployment = "worker", cue = tar_cue(mode = "always"))
   )
 }
 
@@ -241,8 +241,8 @@ batch_correct <- function(output_name, input_name, method, order_col, batch_col,
 #'
 #' @param output_name The name of the output target.
 #' @param input_name The name of the input data.
-#' @param method The imputation method.
-#' @param k The number of neighbors for KNN imputation (default is 5).
+#' @param method The imputation method to use. Options are: \code{"mean", "median", "RF", "QRILC", "kNN", "SVD", "bpca", "ppca"}.
+#' @param k The parameter for some imputation methods (default: 5).
 #'
 #' @return A target to impute missing values.
 #'
@@ -328,6 +328,6 @@ export_data <- function(output_name, input_name, out_dir, out_name = "Processed"
   command <- substitute(export_data(dataset_exp = data, out_dir = out_dir, out_name = out_name), 
   env = list(data = as.name(data), out_dir = out_dir, out_name = out_name))
   list(
-    tar_target_raw(target_name, command, format = "qs", deployment = "main", cue = tar_cue(mode = "always"))
+    tar_target_raw(target_name, command, format = "qs", deployment = "worker", cue = tar_cue(mode = "always"))
   )
 }

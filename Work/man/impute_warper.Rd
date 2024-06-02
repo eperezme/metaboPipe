@@ -9,7 +9,7 @@ impute_warper(dataset_experiment, method, k = 5)
 \arguments{
 \item{dataset_experiment}{The dataset experiment object.}
 
-\item{method}{The imputation method to use.}
+\item{method}{The imputation method to use. Options are: \code{"mean", "median", "RF", "QRILC", "kNN", "SVD", "bpca", "ppca"}.}
 
 \item{k}{The parameter for some imputation methods (default: 5).}
 }

@@ -71,7 +71,7 @@ plot_heatmap <- function(dataset_experiment, na_colour = "#FF00E4") {
 #' missing_values_plot(dataset_experiment = my_dataset, out_dir = "output", out_name = "missing_plot.png")
 missing_values_plot <- function(dataset_experiment, out_dir, out_name) {
   plt <- VIM::aggr(SummarizedExperiment::assay(dataset_experiment))
-  save_plot(plt, out_dir, out_name)
+  metaboPipe::save_plot(plt, out_dir, out_name)
 }
 
 
@@ -174,7 +174,7 @@ plot_outliers <- function(dataset_experiment, nPCs = 5, out_dir, out_name) {
   plt1 <- plot_hotelling_pca(dataset_experiment, nPCs = 5)
   plt2 <- plot_hotelling_obs(dataset_experiment, nPCs = 5, nPCs_to_plot = 2)
   plt <- cowplot::plot_grid(plt1, plt2, ncol = 2)
-  save_plot(plt, out_dir, out_name)
+  metaboPipe::save_plot(plt, out_dir, out_name)
 }
 
 #' Generate a PCA Hotelling's T-squared plot

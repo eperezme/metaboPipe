@@ -11,9 +11,9 @@ impute(output_name, input_name, method, k = 5)
 
 \item{input_name}{The name of the input data.}
 
-\item{method}{The imputation method.}
+\item{method}{The imputation method to use. Options are: \code{"mean", "median", "RF", "QRILC", "kNN", "SVD", "bpca", "ppca"}.}
 
-\item{k}{The number of neighbors for KNN imputation (default is 5).}
+\item{k}{The parameter for some imputation methods (default: 5).}
 }
 \value{
 A target to impute missing values.

@@ -36,7 +36,9 @@ Imports:
     fst,
     shiny,
     sva,
-    data.table
+    data.table,
+    pcpr2,
+    struct
 Remotes: 
     xia-lab/MetaboAnalystR
 Depends: 

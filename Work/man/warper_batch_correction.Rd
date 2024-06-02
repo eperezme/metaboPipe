@@ -16,7 +16,7 @@ warper_batch_correction(
 \arguments{
 \item{dataset_exp}{A DatasetExperiment object with samples and variables.}
 
-\item{method}{The batch correction method to use: ComBat, SVA, RUV, QCRSC}
+\item{method}{The batch correction method to use: ComBat, QCRSC.}
 
 \item{order_col}{Column indicating the order of samples.}
 
@@ -30,7 +30,7 @@ warper_batch_correction(
 Corrected DatasetExperiment object.
 }
 \description{
-This function performs signal drift and batch correction on a given DatasetExperiment object using the QC-RSC method.
+This function performs signal drift and batch correction on a given DatasetExperiment object using the specified method.
 }
 \examples{
 DE <- metaboPipe::MTBLS79

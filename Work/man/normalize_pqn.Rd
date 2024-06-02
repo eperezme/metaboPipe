@@ -4,7 +4,7 @@
 \alias{normalize_pqn}
 \title{Perform Probabilistic Quotient normalization (PQN)}
 \usage{
-normalize_pqn(dataset_experiment, qc_label, factor_name)
+normalize_pqn(dataset_experiment, qc_label, factor_name, ...)
 }
 \arguments{
 \item{dataset_experiment}{A \code{DatasetExperiment} object}

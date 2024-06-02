@@ -679,14 +679,17 @@ A shiny app was developed to allow users to interact with the pipeline without t
 \end{itemize}
 
 \chapter{Discussion}
-Different methods for preprocessing metabolomic data are necessary to handle different types of data. This diversity of methods is a consequence of the variety of factors that affect metabolomic data. These factors can be biological, technical, or experimental. Each method has its advantages and disadvantages, and therefore choosing a method for data preprocessing can be a challenging task as it will be determined by the biological question of the study, the nature of the data, and the desired analytical method.
+Different methods for preprocessing metabolomic data are essential to accommodate the diverse types of data encountered in this field. This variety arises due to the numerous factors influencing metabolomic data, which can be biological, technical, or experimental. Each preprocessing method offers unique advantages and disadvantages. Therefore, choosing the appropriate method can be challenging and is guided by the specific biological question, the nature of the data, and the desired analytical outcomes.
 
-In this work, a general workflow for targeted metabolomics data preprocessing has been proposed. This workflow is not specific as the selection of preprocessing methods affects their order. For example, when using singular value decomposition (SVD) as an imputation method, it is recommended to scale and center the data beforehand, but if we impute the data using quantile regression imputation of left-censored data (QRILC), log-transforming the data beforehand is recommended for better accuracy.
-Therefore, these considerations need to be taken into account when selecting the methods to use, which makes it impossible to create a simple general pipeline.
+In this work, a general workflow for targeted metabolomics data preprocessing has been proposed. This workflow is not specific as the selection of preprocessing methods affects their order. For example, when using singular value decomposition (SVD) as an imputation method, it is recommended to scale and center the data beforehand, but if we impute the data using quantile regression imputation of left-censored data (QRILC), log-transforming the data beforehand is recommended for better accuracy \todo{38}. When normalizing Quantile normalization (QN) is not recomended for datasets with $n < 50$ samples \todo{67} and Probabilistic Quotient Normalization (PQN) is not adequate to use when the number of metabolites is $>$ than the number of samples \todo{59}.
+These considerations must be factored in when selecting preprocessing methods, making it impractical to establish a one-size-fits-all pipeline
 
-This diversity of methods and their interaction has led this work to shift towards the creation of a tool that allows for the easy and interactive creation of customized data preprocessing sequences. This tool is the \texttt{metaboPipe} package, which provides a set of functions to perform the most common data preprocessing steps and a set of functions to create a pipeline using these steps. The package also includes a shiny app that allows users to interact with the pipeline without the need for R programming knowledge.
+Due to the diversity of methods and their interactions, this work focuses on developing a tool that facilitates the easy and interactive creation of customized data preprocessing sequences. This tool, the \texttt{metaboPipe} package, offers functions to perform common preprocessing steps and enables the creation of tailored pipelines using these steps. Additionally, the package includes a shiny app that allows users to interact with the pipeline without requiring R programming skills.
 
-Per a carregar les dades s'han d'importar dues taules en format \texttt{.csv} anomenades \texttt{dataMatrix} i \texttt{sampleMetadata} que contenen les dades d'abundancia relativa o concentracio  (\Cref{tab:dataMatrix-example}) i les dades referent a les mostres respectivament (\Cref{tab:sampleMetadata-example}). 
+To load the data, users need to import two tables in \texttt{.csv} format: \texttt{dataMatrix} and \texttt{sampleMetadata}. The \texttt{dataMatrix} table contains the relative abundance or concentration data (\Cref{tab
+}), while the \texttt{sampleMetadata} table holds the sample-related data (\Cref{tab
+}).
+
 
 % DataMatrix table
 \begin{table}[htbp]
@@ -719,10 +722,18 @@ Per a carregar les dades s'han d'importar dues taules en format \texttt{.csv} an
     
   
 
-Per filtrar els valors faltants, s'ha decidit utilitzar per defecte la regla del 80\% modificada, és a dir, si una columna o filera té més del 20\% de valors faltants, aquesta columna o filera serà eliminada. L'usuari pot decidir manualment el \% de valors faltants que vol permetre.
+  For filtering missing values, the modified 80\% rule is adopted by default: if a column or row has more than 20\% missing values, that column or row is removed. Users can manually adjust the threshold for missing values.
 
-
-Per a filtrar els outliers s'ha decidit utilitzar una Hotelling's T2 distribution ellipse amb un nivell de significacio per defecte del 95\%, ajustable manualment per l'usuari al 99\% si aixi desitja. S'ha decidit utilitzar aquest mètode donat que és robust i flexible per a la detecció d'outliers en dades multivariades, pren en compte la covariància entre les variables \cite{wuUsingNontargetedLCMS2021,viallonNewPipelineNormalization2021}.
+  To identify and filter outliers, a Hotelling's T2 distribution ellipse is used with a default significance level of 95\%, adjustable to 99\% if desired. This method is chosen for its robustness and flexibility in detecting outliers in multivariate data, considering the covariance between variables \cite{wuUsingNontargetedLCMS2021, viallonNewPipelineNormalization2021}.
+  
+  Batch effects are a common issue in metabolomics studies, introducing unwanted variability into the data. To correct this effect, two methods have been implemented: the \texttt{QC-RSC} method and the \texttt{ComBat} method, which are widely used \todo{add citations}.
+  
+  
+  
+  For normalization, scaling, and transformation of the data, it has been decided to use the methods provided by the \texttt{metaboAnalystR} package as it offers a wide variety of methods, some of which are difficult to implement manually, such as normalization to an internal standard or a physiological constant. However, several functions are implemented to normalize the data using other methods not present in \texttt{metaboAnalystR} such as Probabilistic Quotient Normalization (PQN) or Vector Length Normalization (VLN). These methods, although implemented in \texttt{metaboPipe}, are not incorporated into the shiny application interface nor the \texttt{normalize()} function.
+  
+  The implementation of the PC-PR2 method described by \citeauthor{viallonNewPipelineNormalization2021} is also considered. This method first identifies sources of variation using PCA combined with multiple linear regression and then corrects unwanted variations using a random effects model for each metabolite. However, due to the complexity of robustly integrating this method into the package within the available time, it is deferred to future revisions. Nevertheless, the \texttt{pcpr2()} function can be used to visualize the data and identify sources of variation, although correction is not yet possible.
+  
 
 
 

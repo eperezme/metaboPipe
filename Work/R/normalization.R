@@ -1,21 +1,26 @@
+# Todo: Add normalization warper to include the pqn and VLN functions into the normalize target_factory function.
+
+
+
+
 ##### Probabilistic Quotient normalization (PQN) #####
 #' Perform Probabilistic Quotient normalization (PQN)
 #'
-#' @param dataset_experiment A `DatasetExperiment` object
+#' @param dataset_experiment A \code{DatasetExperiment} object
 #' @param qc_label Label for quality control samples
 #' @param factor_name Name of the factor to use for normalization
 #'
-#' @return Normalized A `DatasetExperiment` object
+#' @return Normalized A \code{DatasetExperiment} object
 #' @export
 #'
 #' @examples
 #' normalize_pqn(dataset_experiment, qc_label, factor_name)
-normalize_pqn <- function(dataset_experiment, qc_label, factor_name) {
+normalize_pqn <- function(dataset_experiment, qc_label, factor_name, ...) {
   # It is not recommended to use pqn when the number of columns is greater than the number of rows
   if (ncol(dataset_experiment) > nrow(dataset_experiment)) {
     warning("The number of columns is greater than the number of rows. It is not recommended to use pqn when the number of Metabolites is greater than the number of Samples")
   }
-  M <- pqn_norm(qc_label = qc_label, factor_name = factor_name)
+  M <- pqn_norm(qc_label = qc_label, factor_name = factor_name, ...)
 
   M <- model_apply(M, dataset_experiment)
 
@@ -26,9 +31,9 @@ normalize_pqn <- function(dataset_experiment, qc_label, factor_name) {
 ##### Vector Length Normalization (VLN) #####
 #' Perform Vector Length Normalization (VLN)
 #'
-#' @param dataset_experiment A `DatasetExperiment` object
+#' @param dataset_experiment A \code{DatasetExperiment} object
 #'
-#' @return Normalized A `DatasetExperiment` object
+#' @return Normalized A \code{DatasetExperiment} object
 #' @export
 #'
 #' @examples
@@ -44,10 +49,10 @@ normalize_vln <- function(dataset_experiment) {
 #### Constant Sum Normalization (CSN) #### (Maybe should be discontinued)
 #' Perform Constant Sum Normalization (CSN)
 #'
-#' @param dataset_experiment A `DatasetExperiment` object
+#' @param dataset_experiment A \code{DatasetExperiment} object
 #' @param scaling_factor Scaling factor for normalization
 #'
-#' @return Normalized A `DatasetExperiment` object
+#' @return Normalized A \code{DatasetExperiment} object
 #' @export
 #'
 #' @examples
@@ -62,20 +67,20 @@ normalize_csn <- function(dataset_experiment, scaling_factor = 1) {
 
 
 ##### Normalization with MetaboAnalystR
-#' Normalize A `DatasetExperiment` object using MetaboAnalystR
+#' Normalize A \code{DatasetExperiment} object using MetaboAnalystR
 #'
-#' @param dataset_experiment A `DatasetExperiment` object
+#' @param dataset_experiment A \code{DatasetExperiment} object
 #' @param factor_col Column containing factor information for normalization
 #' @param sample_id_col Column containing sample IDs
-#' @param rowNorm Type of row normalization (options: "QuantileNorm", "CompNorm", "SumNorm", "MedianNorm", "SpecNorm", or "NULL")
-#' @param transNorm Type of transformation normalization (options: "LogNorm", "CrNorm", or "NULL")
-#' @param scaleNorm Type of scaling normalization (options: "MeanCenter", "AutoNorm", "ParetoNorm", "RangeNorm", or "NULL")
-#' @param ref Reference feature for 'CompNorm' normalization
+#' @param rowNorm Type of row normalization. Options are: \code{"QuantileNorm", "CompNorm", "SumNorm", "MedianNorm", "SpecNorm", or "NULL"}
+#' @param transNorm Type of transformation normalization. Options are: \code{"LogNorm", "CrNorm", or "NULL"}.
+#' @param scaleNorm Type of scaling normalization Options are: \code{"MeanCenter", "AutoNorm", "ParetoNorm", "RangeNorm", or "NULL"}.
+#' @param ref Reference feature for \code{"CompNorm"} normalization
 #' @param ratio Boolean indicating whether to apply ratio normalization
 #' @param ratioNum Number of samples for ratio normalization
 #' @param out_dir Output directory for saving files
 #'
-#' @return Normalized A `DatasetExperiment` object
+#' @return Normalized A \code{DatasetExperiment} object
 #' @export
 #'
 #' @examples
