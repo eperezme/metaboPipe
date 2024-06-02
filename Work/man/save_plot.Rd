@@ -4,7 +4,7 @@
 \alias{save_plot}
 \title{Function to save plots}
 \usage{
-save_plot(plt, output_dir, output_name)
+save_plot(plt, output_dir, output_name, extension = "png")
 }
 \arguments{
 \item{plt}{The plot object}
@@ -12,6 +12,8 @@ save_plot(plt, output_dir, output_name)
 \item{output_dir}{The output directory}
 
 \item{output_name}{The output name for the plot file}
+
+\item{extension}{The filetype extension for the plot file. Default is 'png'.}
 }
 \value{
 Nothing

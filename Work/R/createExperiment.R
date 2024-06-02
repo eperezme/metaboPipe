@@ -1,5 +1,5 @@
 #' Sort by sample_id
-#' 
+#'
 #' @param df A dataframe with a sample_id column.
 #'
 #' @return A data frame sorted by sample_id.
@@ -28,12 +28,12 @@ sort_by_sample_id <- function(df) {
 #' @examples
 #' warper_createExperiment(dataMatrix, sampleMetadata, variableMetadata, experiment_name = "Name", experiment_description = "Description")
 warper_createExperiment <- function(dataMatrix, sampleMetadata, variableMetadata,
-                             experiment_name = "Name", experiment_description = "Description") {
+                                    experiment_name = "Name", experiment_description = "Description") {
   # Convert tibbles to data frames
   dataMatrix <- as.data.frame(dataMatrix)
   sampleMetadata <- as.data.frame(sampleMetadata)
   variableMetadata <- as.data.frame(variableMetadata)
-  
+
   # dataMatrix should have a row for each sample and a column for each feature
   # Check dimensions
   if (nrow(dataMatrix) != nrow(sampleMetadata)) {
@@ -48,14 +48,10 @@ warper_createExperiment <- function(dataMatrix, sampleMetadata, variableMetadata
   dataMatrix <- dataMatrix %>% mutate_if(is.character, as.numeric)
   dataMatrix[dataMatrix <= 0] <- NA
   dataMatrix <- data.frame(lapply(dataMatrix, as.numeric), check.names = FALSE)
-  
-  
+
+
   # Drop dataMatrix$sample_id
   dataMatrix$sample_id <- NULL
-
-
-  # Make metabolites underscore for compatibility
-  colnames(dataMatrix) <- gsub("-", "_", colnames(dataMatrix))
 
 
   # Check row/col names match
@@ -73,11 +69,9 @@ warper_createExperiment <- function(dataMatrix, sampleMetadata, variableMetadata
     name = experiment_name,
     description = experiment_description
   )
-  
+
   # Make the metabolite names correct
-  DE@colData@listData$annotation <- variableMetadata$annotation
+  # DE@colData@listData$annotation <- variableMetadata$annotation
 
   return(DE)
 }
-
-

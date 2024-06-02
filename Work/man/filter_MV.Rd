@@ -4,19 +4,20 @@
 \alias{filter_MV}
 \title{Filter Missing values}
 \usage{
-filter_MV(dataset_exp, threshold = 0.8)
+filter_MV(dataset_exp, threshold = 0.2)
 }
 \arguments{
-\item{dataset_exp}{The dataset experiment object to filter missing values from.}
+\item{dataset_exp}{The \code{DatasetExperiment} object to filter missing values from.}
 
-\item{threshold}{The threshold for filtering missing values (default is 0.8).}
+\item{threshold}{The threshold for filtering missing values (default is 0.2).}
 }
 \value{
-A dataset experiment object with missing values filtered out.
+A \code{DatasetExperiment} object with missing values filtered out.
 }
 \description{
-Filter the missing values in a dataset experiment.
+Filter the missing values in a \code{DatasetExperiment}.
 }
 \examples{
-filtered_data <- filter_MV(dataset_exp, threshold = 0.8)
+DE <- metaboPipe::ST000284
+filtered_data <- filter_MV(DE, threshold = 0.2)
 }

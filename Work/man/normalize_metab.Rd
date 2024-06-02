@@ -24,13 +24,13 @@ normalize_metab(
 
 \item{sample_id_col}{Column containing sample IDs}
 
-\item{rowNorm}{Type of row normalization (options: "QuantileNorm", "CompNorm", "SumNorm", "MedianNorm", "SpecNorm", or "NULL")}
+\item{rowNorm}{Type of row normalization. Options are: \code{"QuantileNorm", "CompNorm", "SumNorm", "MedianNorm", "SpecNorm", or "NULL"}}
 
-\item{transNorm}{Type of transformation normalization (options: "LogNorm", "CrNorm", or "NULL")}
+\item{transNorm}{Type of transformation normalization. Options are: \code{"LogNorm", "CrNorm", or "NULL"}.}
 
-\item{scaleNorm}{Type of scaling normalization (options: "MeanCenter", "AutoNorm", "ParetoNorm", "RangeNorm", or "NULL")}
+\item{scaleNorm}{Type of scaling normalization Options are: \code{"MeanCenter", "AutoNorm", "ParetoNorm", "RangeNorm", or "NULL"}.}
 
-\item{ref}{Reference feature for 'CompNorm' normalization}
+\item{ref}{Reference feature for \code{"CompNorm"} normalization}
 
 \item{ratio}{Boolean indicating whether to apply ratio normalization}
 

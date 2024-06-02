@@ -14,6 +14,8 @@
 \usepackage{microtype}
 % \usepackage[table,xcdraw]{xcolor}
 \usepackage{pgfgantt}
+\usepackage{amsmath}
+\usepackage{cleveref}
 \hypersetup{
     colorlinks=true,
     linkcolor=blue,
@@ -495,7 +497,6 @@ In order to select the methods and tools that will be used in the pipeline, a de
 
 \section{Literature review}
 The literature selected for the review was obtained from multiple journals. The search was conducted using the following keywords: "metabolomics", "data preprocessing", "data pretreatment", "metabolomics pipeline", "metabolomics tools", "metabolomics R packages", "targeted metabolomics", "nutrimetabolomics", "metabolomics proce". The search was limited to articles published in the last 20 years, with a focus on metabolomics data preprocessing and pretreatment methodologies. The review aimed to identify the most commonly used methods and tools for metabolomic data preprocessing and pretreatment, as well as to explore recent advancements in the field. The review also sought to identify gaps in the existing literature and to inform the development of the new pipeline.
-\todo{Incloure taula amb els articles revisats?}
 
 \section{Pipeline design}
 The methods selected to be included in the pipeline were based on the results of the literature review. The pipeline was designed to be as modular as possible so a variety of methods are included to perform the same step, allowing users to select and apply specific pretreatment steps according to the data caracteristics and user needs and preferences.
@@ -677,33 +678,59 @@ A shiny app was developed to allow users to interact with the pipeline without t
 \end{itemize}
 
 \chapter{Discussion}
-Different methods for preprocessing metabolomic data are necessary to handle different types of data. This diversity of methods is a consequence of the variety of factors that affect metabolomic data. These factors can be biological, technical, or experimental. Each method has its advantages and disadvantages, and therefore choosing a method for data preprocessing can be a challenging task as it will be determined by the biological question of the study, the nature of the data, and the desired analytical method.
+Different methods for preprocessing metabolomic data are essential to accommodate the diverse types of data encountered in this field. This variety arises due to the numerous factors influencing metabolomic data, which can be biological, technical, or experimental. Each preprocessing method offers unique advantages and disadvantages. Therefore, choosing the appropriate method can be challenging and is guided by the specific biological question, the nature of the data, and the desired analytical outcomes.
 
-In this work, a general workflow for targeted metabolomics data preprocessing has been proposed. This workflow is not specific as the selection of preprocessing methods affects their order. For example, when using singular value decomposition (SVD) as an imputation method, it is recommended to scale and center the data beforehand, but if we impute the data using quantile regression imputation of left-censored data (QRILC), log-transforming the data beforehand is recommended for better accuracy.
-Therefore, these considerations need to be taken into account when selecting the methods to use, which makes it impossible to create a simple general pipeline.
+In this work, a general workflow for targeted metabolomics data preprocessing has been proposed. This workflow is not specific as the selection of preprocessing methods affects their order. For example, when using singular value decomposition (SVD) as an imputation method, it is recommended to scale and center the data beforehand, but if we impute the data using quantile regression imputation of left-censored data (QRILC), log-transforming the data beforehand is recommended for better accuracy \cite{weiMissingValueImputation2018}. When normalizing Quantile normalization (QN) is not recomended for datasets with $n < 50$ samples \cite{kohlStateoftheArtData2012} and Probabilistic Quotient Normalization (PQN) is not adequate to use when the number of metabolites is $>$ than the number of samples \cite{dongGroupAggregatingNormalization2011}.
+These considerations must be factored in when selecting preprocessing methods, making it impractical to establish a one-size-fits-all pipeline
 
-This diversity of methods and their interaction has led this work to shift towards the creation of a tool that allows for the easy and interactive creation of customized data preprocessing sequences. This tool is the \texttt{metaboPipe} package, which provides a set of functions to perform the most common data preprocessing steps and a set of functions to create a pipeline using these steps. The package also includes a shiny app that allows users to interact with the pipeline without the need for R programming knowledge.
+Due to the diversity of methods and their interactions, this work focuses on developing a tool that facilitates the easy and interactive creation of customized data preprocessing sequences. This tool, the \texttt{metaboPipe} package, offers functions to perform common preprocessing steps and enables the creation of tailored pipelines using these steps. Additionally, the package includes a shiny app that allows users to interact with the pipeline without requiring R programming skills.
 
-\texttt{metaboPipe} 
-
-
+To load the data, users need to import two tables in \texttt{.csv} format: \texttt{dataMatrix} and \texttt{sampleMetadata}. The \texttt{dataMatrix} table contains the relative abundance or concentration data (\Cref{tab:dataMatrix-example}), while the \texttt{sampleMetadata} table holds the sample-related data (\Cref{tab:sampleMetadata-example}). 
 
 
-\begin{table}[]
+% DataMatrix table
+\begin{table}[htbp]
     \centering
     \caption{A data matrix generated by a metabolomics platform}
     \label{tab:dataMatrix-example}
-    \resizebox{\columnwidth}{!}{%
     \begin{tabular}{@{}lllll@{}}
-    \toprule
-    \multicolumn{1}{c}{$n \times m$}   & \multicolumn{1}{c}{$Metabolite_1$} & \multicolumn{1}{c}{$Metabolite_2$} & \multicolumn{1}{c}{$\dots$} & \multicolumn{1}{c}{$Metabolite_m$} \\ \midrule
-    $Sample_1$ &              &              &     &              \\
-    $Sample_2$ &              &              &     &              \\
-    \multicolumn{1}{c}{$\dots$} & \multicolumn{1}{c}{$\dots$} & \multicolumn{1}{c}{$\dots$} & \multicolumn{1}{c}{$\dots$} & \multicolumn{1}{c}{$\dots$} \\    
-    $Sample_n$ &              &              &     &              \\ \bottomrule
-    \end{tabular}%
-    }
-    \end{table}
+      \toprule
+      \multicolumn{1}{c}{$n \times m$} & \multicolumn{1}{c}{$Metabolite_1$} & \multicolumn{1}{c}{$Metabolite_2$} & \multicolumn{1}{c}{$\dots$} & \multicolumn{1}{c}{$Metabolite_m$} \\ \midrule
+      $Sample_1$ &  &  &  &  \\
+      $Sample_2$ &  &  &  &  \\
+      \multicolumn{1}{c}{$\dots$} & \multicolumn{1}{c}{$\dots$} & \multicolumn{1}{c}{$\dots$} & \multicolumn{1}{c}{$\dots$} & \multicolumn{1}{c}{$\dots$} \\ 
+      $Sample_n$ &  &  &  &  \\ \bottomrule
+    \end{tabular}
+  \end{table}
+% sampleMetadata table
+  \begin{table}[htbp]
+    \centering
+    \caption{The sampleMetadata matrix generated by a metabolomics platform}
+    \label{tab:sampleMetadata-example}
+    \begin{tabular}{@{}lllll@{}}
+      \toprule
+      \multicolumn{1}{c}{$n \times m$} & \multicolumn{1}{c}{$Factor_1$} & \multicolumn{1}{c}{$Factor_2$} & \multicolumn{1}{c}{$\dots$} & \multicolumn{1}{c}{$Factor_m$} \\ \midrule
+      $Sample_1$ &  &  &  &  \\
+      $Sample_2$ &  &  &  &  \\
+      \multicolumn{1}{c}{$\dots$} & \multicolumn{1}{c}{$\dots$} & \multicolumn{1}{c}{$\dots$} & \multicolumn{1}{c}{$\dots$} & \multicolumn{1}{c}{$\dots$} \\ 
+      $Sample_n$ &  &  &  &  \\ \bottomrule
+    \end{tabular}
+  \end{table}
+    
+  
+
+  For filtering missing values, the modified 80\% rule is adopted by default: if a column or row has more than 20\% missing values, that column or row is removed. Users can manually adjust the threshold for missing values.
+
+  To identify and filter outliers, a Hotelling's T2 distribution ellipse is used with a default significance level of 95\%, adjustable to 99\% if desired. This method is chosen for its robustness and flexibility in detecting outliers in multivariate data, considering the covariance between variables \cite{wuUsingNontargetedLCMS2021, viallonNewPipelineNormalization2021}.
+  
+  Batch effects are a common issue in metabolomics studies, introducing unwanted variability into the data. To correct this effect, two methods have been implemented: the \texttt{QC-RSC} method and the \texttt{ComBat} method, which are widely used \todo{add citations}.
+
+  For normalization, scaling, and transformation of the data, it has been decided to use the methods provided by the \texttt{metaboAnalystR} package as it offers a wide variety of methods, some of which are difficult to implement manually, such as normalization to an internal standard or a physiological constant. However, several functions are implemented to normalize the data using other methods not present in \texttt{metaboAnalystR} such as Probabilistic Quotient Normalization (PQN) or Vector Length Normalization (VLN). These methods, although implemented in \texttt{metaboPipe}, are not incorporated into the shiny application interface nor the \texttt{normalize()} function.
+  
+  The implementation of the PC-PR2 method described by \citeauthor{viallonNewPipelineNormalization2021} is also considered. This method first identifies sources of variation using PCA combined with multiple linear regression and then corrects unwanted variations using a random effects model for each metabolite. However, due to the complexity of robustly integrating this method into the package within the available time, it is deferred to future revisions. Nevertheless, the \texttt{pcpr2()} function can be used to visualize the data and identify sources of variation, although correction is not yet possible.
+  
+
+
 
 \chapter{Conclusion and future vision}
 The second one is that it enables the pipeline to be used as a pretreatement method comparable tool. As the easy of use and order can be easily changed, the user can test different pretreatement methods and orders to compare the changes in the data.

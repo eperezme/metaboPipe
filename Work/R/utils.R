@@ -256,27 +256,30 @@ save_metabo <- function(mSet) {
 #' @param plt The plot object
 #' @param output_dir The output directory
 #' @param output_name The output name for the plot file
+#' @param extension The filetype extension for the plot file. Default is 'png'.
 #'
 #' @return Nothing
 #' @export
 #'
 #' @examples
 #' save_plot(plt, output_dir, output_name)
-save_plot <- function(plt, output_dir, output_name) {
+save_plot <- function(plt, output_dir, output_name, extension = "png") {
   withr::with_dir(output_dir, {
     dir.create("Plots", showWarnings = FALSE)
     withr::with_dir("Plots", {
-      # Save PNG
-      png_name <- paste0(output_name, ".png")
-      png(filename = png_name, width = 1080, height = 450, res = 100)
-      plot(plt)
-      dev.off()
-
-      # Save SVG
-      svg_name <- paste0(output_name, ".svg")
-      svg(filename = svg_name, width = 12)
-      plot(plt)
-      dev.off()
+      if (extension == "png") {
+        # Save PNG
+        png_name <- paste0(output_name, ".png")
+        png(filename = png_name, width = 1080, height = 450, res = 100)
+        plot(plt)
+        dev.off()
+      } else if (extension == "svg") {
+        # Save SVG
+        svg_name <- paste0(output_name, ".svg")
+        svg(filename = svg_name, width = 12)
+        plot(plt)
+        dev.off()
+      }
     })
   })
 }
@@ -350,7 +353,7 @@ create_pipeline <- function() {
     packages = c(
       'structToolbox', 'SummarizedExperiment', 'VIM', 'impute', 'imputeLCMD',
       'missForest', 'caret', 'pcaMethods', 'tidyverse', 'MetaboAnalystR', 'tinytex',
-      'HotellingEllipse', 'ggforce', 'tools', 'cowplot', 'metaboPipe'
+      'HotellingEllipse', 'ggforce', 'tools', 'cowplot', 'metaboPipe', 'sva', 'data.table'
     )
   )
 
