@@ -24,14 +24,22 @@
     pdftitle={Memoria},
     pdfpagemode=FullScreen,
     }
+
+% BIBLIOGRAPHY
 \usepackage[backend=biber, style=nature]{biblatex}
 \addbibresource{library.bib}
 \addbibresource{packages.bib}
 % \bibliography{library.bib}
 \urlstyle{same}
+
+% GLOSSARY
 \usepackage[toc, acronym, xindy]{glossaries}
 \makeglossaries
 \loadglsentries[main]{glossary.tex}
+\setglossarystyle{list}
+\setacronymstyle{long-short}
+
+
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric, arrows.meta, positioning, fit}
 
@@ -138,34 +146,34 @@
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
             %%---------------------------- BEGINDOC ----------------------------%%
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-            \begin{document}
-            
-            \estructura
-            
-            %%%%%%%%%%%%%%%%
-            %--- THANKS ---%
-            %%%%%%%%%%%%%%%%
-            \newpage\null\thispagestyle{empty}
-            
-            \vspace*{0.4\textheight} 
-            
-            \noindent\enquote{\itshape Never let your sense of morality stop you from doing the right thing}\bigbreak 
-            
-            % People think of education as something they can finish - Isaac Asimov
-            
-            % Self-education is, I firmly believe, the only kind of education there is. - Isaac Asimov
-            
-            % Never let your sense of morality stop you from doing the right thing. - Isaac Asimov
+\begin{document}
 
-            \hfill Isaac Asimov
-            
-            \newpage
-            
-            
-            % --- TABLE OF CONTENTS --- %
-            \tableofcontents
-            
-            % --- LIST OF FIGURES --- %
+\estructura
+
+%%%%%%%%%%%%%%%%
+%--- THANKS ---%
+%%%%%%%%%%%%%%%%
+\newpage\null\thispagestyle{empty}
+
+\vspace*{0.4\textheight}
+
+\noindent\enquote{\itshape Never let your sense of morality stop you from doing the right thing}\bigbreak
+
+% People think of education as something they can finish - Isaac Asimov
+
+% Self-education is, I firmly believe, the only kind of education there is. - Isaac Asimov
+
+% Never let your sense of morality stop you from doing the right thing. - Isaac Asimov
+
+\hfill Isaac Asimov
+
+\newpage
+
+
+% --- TABLE OF CONTENTS --- %
+\tableofcontents
+
+% --- LIST OF FIGURES --- %
 \listoffigures
 
 % --- LIST OF TABLES --- %
@@ -184,7 +192,7 @@ Metabolomics, a powerful and evolving field within the realm of systems biology,
 
 \section{Context and justification}
 
-Metabolomics is a rapidly evolving field within biology that focuses on the comprehensive study of the metabolite composition of cell types, tissues, organs, or organisms \cite{pattiMetabolomicsApogeeOmics2012,zhangSerumMetabolomicsNovel2012,chenGuideMetabolomicsAnalysis2022a}. It aims to measure, identify and (semi-)quantify those metabolites. Metabolites are chemical compounds that undergo analysis through conventional chemical assessment methods like \acrfull{ms} and \acrfull{nmr} spectrometry. \acrshort{ms} approaches are commonly integrated with \acrfull{gc} and \acrfull{lc}, leading to the development of two advanced techniques known as \acrfull{gcms} and \acrfull{lcms}. All of these analytical platforms and methodologies generate large amounts of high-dimensional and complex experimental raw data.
+Metabolomics is a rapidly evolving field within biology that focuses on the comprehensive study of the metabolite composition of cell types, tissues, organs, or organisms \cite{pattiMetabolomicsApogeeOmics2012,zhangSerumMetabolomicsNovel2012,chenGuideMetabolomicsAnalysis2022a}. It aims to measure, identify and (semi-)quantify those metabolites. Metabolites are chemical compounds that undergo analysis through conventional chemical assessment methods like \gls{ms} \gls{ms} and \acrfull{nmr} spectrometry. \acrshort{ms} approaches are commonly integrated with \acrfull{gc} and \acrfull{lc}, leading to the development of two advanced techniques known as \acrfull{gcms} and \acrfull{lcms}. All of these analytical platforms and methodologies generate large amounts of high-dimensional and complex experimental raw data.
 
 However, the statistical analysis of metabolomics data presents significant challenges, attributable not only to the inherent complexity of metabolomics as a research discipline but also to the intricate nature of the data itself. Notwithstanding that numerous studies have explored various methodologies for metabolomic data management, the field still lacks an accepted standard for preprocessing and pretreatment of such data.
 
@@ -226,7 +234,7 @@ Within datasets, missing values or zeros can arise due to a variety of factors, 
     \item \textbf{Sampling zeros} refer to peaks present in samples but missed during peak picking.
     \item \textbf{Values below LOD} represent intensities or abundances falling below the detection limit of the mass spectrometer.
     \item \textbf{Negative value zeros} result from negative intensity or abundance values,
-    considered spectral artifacts or noise, and subsequently transformed to zero.
+          considered spectral artifacts or noise, and subsequently transformed to zero.
 \end{enumerate}
 
 Identifying the origins of these zeros poses a challenge, and their prevalence presents a significant obstacle for statistical analyses \cite{sunPretreatingNormalizingMetabolomics2024,martin-fernandezDealingZeros2011}. Hence, practical approaches for managing zeros include:
@@ -242,23 +250,23 @@ However, it's crucial to recognize that valuable biological insights may be embe
 Various methods exist for addressing outliers, including:
 
 \begin{enumerate}
-    \item Assessing metabolite peak areas and comparing the ratio of mean to median, with the median often considered more robust in the presence of outliers. 
+    \item Assessing metabolite peak areas and comparing the ratio of mean to median, with the median often considered more robust in the presence of outliers.
     \item Employing \acrfull{pca} to identify outliers, followed by techniques such as \acrfull{pcpr2} and \acrfull{anova}.
     \item Recent advancements have introduced specialized algorithms for outlier identification in metabolomic data, such as cellwise outlier diagnostics using robust pairwise log ratios (cell-rPLR) and a kernel weight function-based biomarker identification technique.
 \end{enumerate}
 
 
 \subsubsection{Normalization}
-Normalization is a crucial step in data preprocessing that seeks to eliminate unwanted variations between samples. By doing so, it ensures that samples can be directly compared to each other by eliminating or reducing systematic errors, biases, and experimental variance \cite{zachariasStatisticalAnalysisNMR2018}. 
+Normalization is a crucial step in data preprocessing that seeks to eliminate unwanted variations between samples. By doing so, it ensures that samples can be directly compared to each other by eliminating or reducing systematic errors, biases, and experimental variance \cite{zachariasStatisticalAnalysisNMR2018}.
 
-Normalization of data within metabolomic workflows can occur either during sample analysis (preanalytical normalization) or during postanalytical data processing. Normalization of samples is essential due to variations in composition influenced by factors like time of day, health status, and dietary intake. 
+Normalization of data within metabolomic workflows can occur either during sample analysis (preanalytical normalization) or during postanalytical data processing. Normalization of samples is essential due to variations in composition influenced by factors like time of day, health status, and dietary intake.
 
 For instance, blood samples may not require normalization due to the body's control over blood volume and composition. However, urine samples may necessitate normalization due to potential concentration variations \cite{ulaszewskaNutrimetabolomicsIntegrativeAction2019a}.
 
 
 \subsubsection{Centering and Scaling}
 
- Centering aims to shift metabolite concentrations to fluctuate around zero, while scaling adjusts for fold-change differences between metabolites. Both steps are crucial in data preprocessing.
+Centering aims to shift metabolite concentrations to fluctuate around zero, while scaling adjusts for fold-change differences between metabolites. Both steps are crucial in data preprocessing.
 
 \subsubsection[Transf]{Transformation}
 
@@ -267,10 +275,10 @@ Transformation becomes necessary to address data variance after scaling, aiming 
 \section{State of the art}
 
 
-Metabolomic data arrives to the researcher in different shapes and forms depending on the method, the instrument used and the company that analyses. Most of the time those companies do a preprocessing of the data, adjusting for baseline correction, peak picking, and alignment. The preprocessing of this data is a crucial step in the analysis, as it can significantly impact the results and the conclusions drawn from the data. 
+Metabolomic data arrives to the researcher in different shapes and forms depending on the method, the instrument used and the company that analyses. Most of the time those companies do a preprocessing of the data, adjusting for baseline correction, peak picking, and alignment. The preprocessing of this data is a crucial step in the analysis, as it can significantly impact the results and the conclusions drawn from the data.
 For \acrshort{ms}-based analysis, tools like XCMS \cite{R-xcms} and MZmine \cite{schmidIntegrativeAnalysisMultimodal2023} facilitate preprocessing, while for \acrshort{nmr} data, packages like BATMAN \cite{R-batman} and RAMSY \cite{guRAMSYRatioAnalysis2013} offer robust preprocessing capabilities . Pretreatment techniques include handling missing values, outlier detection, imputation and normalization.
 
-Nevertheless the field lacks a standardized approach to metabolomic data preprocessing, with inconsistencies in terminology and methodologies. 
+Nevertheless the field lacks a standardized approach to metabolomic data preprocessing, with inconsistencies in terminology and methodologies.
 \citeauthor{stanstrupMetaRbolomicsToolboxBioconductor2019} in their \citetitle{stanstrupMetaRbolomicsToolboxBioconductor2019} made an extensive revision of both the scientific literature and the R landscape for packages relevant for metabolomic research.
 
 Since there is no consensus on the order those pretreatment techinques should be applied, the researcher has to decide which steps to take and in which order. This can lead to inconsistencies in the results and the conclusions drawn from the data. Furthermore, the amount of packages that there are for performing the preprocessing and pretreatment of metabolomic data can be overwhelming. And thus preparing the data for analysis, changing the order of the steps, or even changing the parameters of the steps can be a time-consuming task.
@@ -278,16 +286,12 @@ Since there is no consensus on the order those pretreatment techinques should be
 The project aims to develop a modular pipeline for targeted metabolomic data pretreatment, implemented in R. The pipeline is designed to enhance efficiency and modularity compared to existing solutions. As a gift to the scientific community, this project is free and open source, with detailed documentation and code available in a public repository. It's encouraged continuous community efforts to improve and expand the package.
 
 
-\todo{Add hypothesis}
-
 \subsection{Hypothesis}
 
 
 \begin{itemize}
-    \item It is possible to design and develop a modular pipeline for the pretreatment of targeted metabolomic data.
-    \item Developing a standardized pretreatment pipeline for targeted metabolomics data will significantly enhance the comparability and reproducibility of results across different studies and laboratories.
-    \item A standarization of the preprocessing and pretreatment of targeted metabolomic data can be achieved by 
-    \item A modular pipeline that allows researchers to customize preprocessing and pretreatment steps will improve the flexibility and efficiency of metabolomic data analysis,
+    \item It is possible to design and develop a general pipeline for the pretreatment of targeted metabolomic data.
+    \item A modular pipeline that allows researchers to customize preprocessing and pretreatment steps will improve the flexibility and efficiency of metabolomic data analysis.
 \end{itemize}
 
 %%%%% OBJECTIVES %%%%%%
@@ -295,35 +299,35 @@ The project aims to develop a modular pipeline for targeted metabolomic data pre
 
 \section{Main Objective}
 \begin{enumerate}
-\item Develop a new pipeline for the preprocessing of targeted metabolomic data with the aim of improving efficiency and modularity compared to existing pipelines. This new pipeline will be implemented in R.
+    \item Develop a new pipeline for the preprocessing of targeted metabolomic data with the aim of improving efficiency and modularity compared to existing pipelines. This new pipeline will be implemented in R.
 \end{enumerate}
 
 \section{Specific Objectives}
 
 \begin{enumerate}
-\item Design a new pipeline for the preprocessing of targeted metabolomic data.
-\item Implement the preprocessing pipeline for targeted metabolomic data using the "targets" package to ensure replicability and efficient management of computational resources.
-\item Select various targeted metabolomic datasets to validate and optimize the performance of the new pipeline, analyzing its quality and consistency.
-\item Make the development accessible to the scientific community by creating detailed documentation and publishing the code in a public repository.
+    \item Design a new pipeline for the preprocessing of targeted metabolomic data.
+    \item Implement the preprocessing pipeline for targeted metabolomic data using the "targets" package to ensure replicability and efficient management of computational resources.
+    \item Select various targeted metabolomic datasets to validate and optimize the performance of the new pipeline, analyzing its quality and consistency.
+    \item Make the development accessible to the scientific community by creating detailed documentation and publishing the code in a public repository.
 \end{enumerate}
 
 
 \chapter{Sustainable development goals}
 \label{s:etic}
 
- Our project aligns with multiple crucial Sustainable Development Goals (SDGs) set by the United Nations, fostering global sustainability and development. The primary objectives of our project focus on developing a pipeline to modulate the pretreatment of metabolomics data and creating an R implementation. This solution holds significant potential to support the following SDGs:  
- 
-\subsubsection{SDG 3: Good Health and Well-being} 
- 
-The use of our pipeline has the potential to reduce the time required for metabolomic data research, accelerating the investigation of rare diseases, cancer, and other medical conditions. By expediting research processes, our project contributes to advancing medical science, improving healthcare outcomes, and ultimately enhancing global health and well-being.
- 
-\subsubsection{SDG 9: Industry, Innovation, and Infrastructure:} 
- 
-Our focus on developing an open-source, well-documented, and user-friendly pipeline fosters innovation and infrastructure development. By opening access to metabolomics research tools, our project empowers individuals from diverse backgrounds to engage in scientific inquiry and innovation, thus promoting inclusive economic growth and technological progress.
- 
-\subsubsection{SDG 10: Reduced Inequalities:} 
+Our project aligns with multiple crucial Sustainable Development Goals (SDGs) set by the United Nations, fostering global sustainability and development. The primary objectives of our project focus on developing a pipeline to modulate the pretreatment of metabolomics data and creating an R implementation. This solution holds significant potential to support the following SDGs:
 
-Through our implementation, we prioritize inclusivity and accessibility, ensuring that individuals regardless of sex, gender, race, wealth, or ability can utilize, learn from, and contribute to our pipeline. By reducing barriers to entry and promoting equal opportunities for participation in scientific endeavors, our project contributes to reducing inequalities and promoting social inclusion. 
+\subsubsection{SDG 3: Good Health and Well-being}
+
+The use of our pipeline has the potential to reduce the time required for metabolomic data research, accelerating the investigation of rare diseases, cancer, and other medical conditions. By expediting research processes, our project contributes to advancing medical science, improving healthcare outcomes, and ultimately enhancing global health and well-being.
+
+\subsubsection{SDG 9: Industry, Innovation, and Infrastructure:}
+
+Our focus on developing an open-source, well-documented, and user-friendly pipeline fosters innovation and infrastructure development. By opening access to metabolomics research tools, our project empowers individuals from diverse backgrounds to engage in scientific inquiry and innovation, thus promoting inclusive economic growth and technological progress.
+
+\subsubsection{SDG 10: Reduced Inequalities:}
+
+Through our implementation, we prioritize inclusivity and accessibility, ensuring that individuals regardless of sex, gender, race, wealth, or ability can utilize, learn from, and contribute to our pipeline. By reducing barriers to entry and promoting equal opportunities for participation in scientific endeavors, our project contributes to reducing inequalities and promoting social inclusion.
 
 \vspace{18pt}
 
@@ -333,17 +337,17 @@ While our project aims to bring about positive change, it is essential to consid
 \chapter{Approach and methodology}
 \section{Methodology}
 
-In the context of enhancing the field of metabolomics and improving the efficiency and accuracy of metabolomics reports, the choice of creating a tool for targeted metabolomic data pretreatement is a strategic decision. This tool will be developed in R, a widely used programming language in the field of bioinformatics and biostatistics. The tool will be designed to streamline the pretreatement of targeted metabolomic data, ensuring that the data is ready for further analysis and interpretation. 
+In the context of enhancing the field of metabolomics and improving the efficiency and accuracy of metabolomics reports, the choice of creating a tool for targeted metabolomic data pretreatement is a strategic decision. This tool will be developed in R, a widely used programming language in the field of bioinformatics and biostatistics. The tool will be designed to streamline the pretreatement of targeted metabolomic data, ensuring that the data is ready for further analysis and interpretation.
 
 The tool will be modular, allowing users to select and apply specific pretreatement steps according to their needs and preferences. This modularity design makes the tool flexible, adaptable and more important expandable, as new pretreatement methods can be easily added to the pipeline and thus to the package using existent methods and tools from other packages.
 
 In order to be modular, the package modules should take as inputs the same object type that outputs. Making it easier to chain the modules in any specific order. To achieve this objective, the package should use a main data structure to store the data. In omics data, the most used data structure is the \texttt{SummarizedExperiment} from the Bioconductor project \cite{R-SummarizedExperiment}. However this data structure is not the most efficient for the pretreatement of the metabolomics data, as the \texttt{SummarizedExperiment} dataframes are designed to store the data features in a row-wise manner and the samples in a column-wise manner. Though this may fit well for other omics data, is not the most intuitive way to manipulate the data in the context of metabolomics.
 
-Since targeted metabolomic data uses multiple dataframes to store the diferent types of data, the most intuitive and already developed data structure will be the \texttt{DatasetExperiment} from the \texttt{structToolbox} package \cite{structToolbox2020}. This data structure is designed to store the data features in a column-wise manner and the samples in a row-wise manner, making it more intuitive to manipulate the data in the context of metabolomics. It also incorporate multiple methods for the manipulation of the data, making it easier to develop the package. 
+Since targeted metabolomic data uses multiple dataframes to store the diferent types of data, the most intuitive and already developed data structure will be the \texttt{DatasetExperiment} from the \texttt{structToolbox} package \cite{structToolbox2020}. This data structure is designed to store the data features in a column-wise manner and the samples in a row-wise manner, making it more intuitive to manipulate the data in the context of metabolomics. It also incorporate multiple methods for the manipulation of the data, making it easier to develop the package.
 
 A deployment controller will be used to manage the order of the modules and the data flow between them. This controler will be created using the \texttt{targets} package \cite{targets2021}, a pipeline toolkit for reproducible research. The \texttt{targets} package will ensure that the pipeline is reproducible, efficient and easy to manage.
 
-The \texttt{targets} package only deploys the steps needed to complete the pipeline as previous steps that do not change its output will not be re-run. This makes the pipeline more efficient and faster, as only the steps that need to be re-run will be re-run. 
+The \texttt{targets} package only deploys the steps needed to complete the pipeline as previous steps that do not change its output will not be re-run. This makes the pipeline more efficient and faster, as only the steps that need to be re-run will be re-run.
 
 The integration of modularity with a deployment controler creates 2 usefull features:
 
@@ -428,22 +432,22 @@ In order to select the methods and tools that will be used in the pipeline, a de
 
 \subsection{Tasks}
 \subsubsection{Main Tasks and prioritization}
-    \begin{enumerate}
-        \item \textbf{Definition of the work plan:} Define the project's scope, objectives, methodology and expected outcomes. Create a project charter outlining the project's purpose and goals as well as a calendar with milestones and dates.
-        \item \textbf{Literature review:} Review multiple publications and replicate the data processing from 3 of them. Review most used methods and tools for metabolomics data processing like normalization, scaling, filtering, transformation, batch effect
-        \item \textbf{Pipeline design:} Propose and code in R a new pipeline to manage the processing of targeted metabolomics data.
-        \item \textbf{Benchmarking:} Replicate again the data processing of the 3 publications using the new pipeline and compare the results.
-    \end{enumerate}
+\begin{enumerate}
+    \item \textbf{Definition of the work plan:} Define the project's scope, objectives, methodology and expected outcomes. Create a project charter outlining the project's purpose and goals as well as a calendar with milestones and dates.
+    \item \textbf{Literature review:} Review multiple publications and replicate the data processing from 3 of them. Review most used methods and tools for metabolomics data processing like normalization, scaling, filtering, transformation, batch effect
+    \item \textbf{Pipeline design:} Propose and code in R a new pipeline to manage the processing of targeted metabolomics data.
+    \item \textbf{Benchmarking:} Replicate again the data processing of the 3 publications using the new pipeline and compare the results.
+\end{enumerate}
 
-    
+
 
 \subsubsection{Extra tasks}
-    \begin{enumerate}
-        \item \textbf{Heavy-workload:} Optimize the pipeline to enable parallelization of the processing.
-        \item \textbf{Documentation:} Write a documentation for the package so its accessibility.
-        \item \textbf{R package implementation:} Pack the code for the pipeline in an R package to easy distribution.
+\begin{enumerate}
+    \item \textbf{Heavy-workload:} Optimize the pipeline to enable parallelization of the processing.
+    \item \textbf{Documentation:} Write a documentation for the package so its accessibility.
+    \item \textbf{R package implementation:} Pack the code for the pipeline in an R package to easy distribution.
 
-    \end{enumerate}
+\end{enumerate}
 
 
 \section{Risk analysis}
@@ -451,31 +455,31 @@ In order to select the methods and tools that will be used in the pipeline, a de
 \begin{table}[!h]
     \centering
     \begin{tabular}{|c|c|c|p{6cm}|}
-    \hline
-    \rowcolor[HTML]{999999} 
-    {\color[HTML]{FFFFFF} \textbf{Risk}} &
-      {\color[HTML]{FFFFFF} \textbf{Severity}} &
-      {\color[HTML]{FFFFFF} \textbf{Likelihood}} &
-      \multicolumn{1}{c|}{\cellcolor[HTML]{999999}{\color[HTML]{FFFFFF} \textbf{Mitigation}}} \\ \hline
-    \textbf{Resource constraints} &
-      \cellcolor[HTML]{FFE599}Moderate &
-      \cellcolor[HTML]{FFE599}Moderate &
-      Develop a clear project timeline, incorporating milestones and allocating adequate time for each phase. Ensure contingency measures are in place to address unforeseen challenges or changes. \\ \hline
-    \textbf{Technical challenges} &
-      \cellcolor[HTML]{FFE599}Moderate &
-      \cellcolor[HTML]{EA9999}High &
-      Perform proper exploration of packages and software and seek guidance and mentorship from professors or experts in relevant fields. \\ \hline
-    \textbf{User adoption and awareness} &
-      \cellcolor[HTML]{EA9999}High &
-      \cellcolor[HTML]{FFE599}Moderate &
-      Be sure to incorporate appropriate cautions regarding the correct application of the chosen modules and data. \\ \hline
-    \textbf{Pipeline branching} &
-      \cellcolor[HTML]{B6D7A8}Low &
-      \cellcolor[HTML]{FFE599}Moderate &
-      Adopt new methods to interactively select the branching \\ \hline
+        \hline
+        \rowcolor[HTML]{999999}
+        {\color[HTML]{FFFFFF} \textbf{Risk}}       &
+        {\color[HTML]{FFFFFF} \textbf{Severity}}   &
+        {\color[HTML]{FFFFFF} \textbf{Likelihood}} &
+        \multicolumn{1}{c|}{\cellcolor[HTML]{999999}{\color[HTML]{FFFFFF} \textbf{Mitigation}}}                                                                                                       \\ \hline
+        \textbf{Resource constraints}              &
+        \cellcolor[HTML]{FFE599}Moderate           &
+        \cellcolor[HTML]{FFE599}Moderate           &
+        Develop a clear project timeline, incorporating milestones and allocating adequate time for each phase. Ensure contingency measures are in place to address unforeseen challenges or changes. \\ \hline
+        \textbf{Technical challenges}              &
+        \cellcolor[HTML]{FFE599}Moderate           &
+        \cellcolor[HTML]{EA9999}High               &
+        Perform proper exploration of packages and software and seek guidance and mentorship from professors or experts in relevant fields.                                                           \\ \hline
+        \textbf{User adoption and awareness}       &
+        \cellcolor[HTML]{EA9999}High               &
+        \cellcolor[HTML]{FFE599}Moderate           &
+        Be sure to incorporate appropriate cautions regarding the correct application of the chosen modules and data.                                                                                 \\ \hline
+        \textbf{Pipeline branching}                &
+        \cellcolor[HTML]{B6D7A8}Low                &
+        \cellcolor[HTML]{FFE599}Moderate           &
+        Adopt new methods to interactively select the branching                                                                                                                                       \\ \hline
     \end{tabular}
     \caption{Risk analysis. This table presents various risks associated with the project, along with
-    their severity, likelihood, and potential mitigation measures.}
+        their severity, likelihood, and potential mitigation measures.}
     \label{tab:risk-analysis}
 \end{table}
 
@@ -487,7 +491,7 @@ In order to select the methods and tools that will be used in the pipeline, a de
     \item A \textbf{R package} crafted to facilitate the seamless integration and modular implementation of the pipeline within the R environment, empowering researchers with flexible and efficient tools for metabolomic data analysis.
     \item A detailed \textbf{documentation} accompanying the pipeline and R package.
     \item A user-friendly \textbf{Shiny app} that enables researchers with varying levels of computational expertise to effortlessly pretreat targeted metabolomic data.
-    % \item A public \textbf{repository} with the projects deliverables, source code of the package and the documentation. Thus encouraging transparency, collaboration, and community-driven enhancements to advance the state-of-the-art in metabolomic data preprocessing.
+          % \item A public \textbf{repository} with the projects deliverables, source code of the package and the documentation. Thus encouraging transparency, collaboration, and community-driven enhancements to advance the state-of-the-art in metabolomic data preprocessing.
     \item A \textbf{PDF report} detailing the project's processes, including investigation, development, results, conclusions, and discussions.
     \item A \textbf{virtual presentation} providing a comprehensive overview of the project. This includes a video recording with explanatory narration to further enhance understanding.
 \end{itemize}
@@ -514,7 +518,7 @@ The datasets selected were 2:
 \begin{itemize}
     \item \textbf{MTBLS79:} \cite{kirwanDirectInfusionMass2014} This dataset represents a systematic evaluation of the reproducibility of a multi-batch direct-infusion mass spectrometry (DIMS)-based metabolomics study of cardiac tissue extracts. It comprises twenty biological samples (cow vs. sheep) that were analysed repeatedly, in 8 batches across 7 days, together with a concurrent set of quality control (QC) samples. Data are presented from each step of the data processing workflow and are available through MetaboLights. This dataset was selected due to its importance in the field of metabolomics and its data aviability.
     \item \textbf{ST000284:} \cite{zhuColorectalCancerDetection2014} This dataset from MetaboWorkbench includes a study on colorectal cancer (CRC) using targeted liquid chromatography-tandem mass spectrometry. It examines 158 metabolites across 25 pathways in 234 serum samples (66 CRC patients, 76 polyp patients, 92 healthy controls). Blood samples were collected after fasting and bowel preparation. This dataset was selected due to its data aviability, its diversity (3 groups) and amount of samples.
-    
+
 \end{itemize}
 
 
@@ -524,105 +528,105 @@ The pipeline was developed using the R programming language \cite{R} and the pac
 \begin{table}[!h]
     \centering
     \begin{tabular}{@{}
-    >{\columncolor[HTML]{FFFFFF}}l 
-    >{\columncolor[HTML]{FFFFFF}}l 
-    >{\columncolor[HTML]{FFFFFF}}c @{}}
-    \toprule
-    \multicolumn{1}{c}{\cellcolor[HTML]{FFFFFF}\textbf{Package}} & \multicolumn{1}{c}{\cellcolor[HTML]{FFFFFF}\textbf{Version}} & \textbf{Ref}                   \\ \midrule
-    {\color[HTML]{000000} arrow}          & {\color[HTML]{000000} \textit{15.0.1}}  & \cite{R-arrow} \\
-    {\color[HTML]{000000} base}           & {\color[HTML]{000000} \textit{4.3.3}}   & \cite{R}  \\
-    {\color[HTML]{000000} BiocStyle}      & {\color[HTML]{000000} \textit{2.30.0}}  & \cite{R-BiocStyle}  \\
-    {\color[HTML]{000000} caret}          & {\color[HTML]{000000} \textit{6.0.94}}  & \cite{R-caret}  \\
-    {\color[HTML]{000000} cowplot}        & {\color[HTML]{000000} \textit{1.1.3}}   & \cite{R-cowplot}  \\
-    {\color[HTML]{000000} crew}           & {\color[HTML]{000000} \textit{0.9.2}}   & \cite{R-crew}  \\
-    {\color[HTML]{000000} datasets}       & {\color[HTML]{000000} \textit{4.3.3}}   & \cite{R}  \\
-    {\color[HTML]{000000} dplyr}          & {\color[HTML]{000000} \textit{1.1.4}}   & \cite{R-dplyr}  \\
-    {\color[HTML]{000000} DT}             & {\color[HTML]{000000} \textit{0.33}}    & \cite{R-DT}  \\
-    {\color[HTML]{000000} fst}            & {\color[HTML]{000000} \textit{0.9.8}}   & \cite{R-fst}  \\
-    {\color[HTML]{000000} ggforce}        & {\color[HTML]{000000} \textit{0.4.2}}   & \cite{R-ggforce}  \\
-    {\color[HTML]{000000} graphics}       & {\color[HTML]{000000} \textit{4.3.3}}   & \cite{R-graph}  \\
-    {\color[HTML]{000000} grDevices}      & {\color[HTML]{000000} \textit{4.3.3}}   & \cite{R}  \\
-    {\color[HTML]{000000} HotellingEllipse}                      & {\color[HTML]{000000} \textit{1.1.0}}                        & \cite{R-HotellingEllipse} \\
-    {\color[HTML]{000000} impute}         & {\color[HTML]{000000} \textit{1.76.0}}  & \cite{R-impute}  \\
-    {\color[HTML]{000000} imputeLCMD}     & {\color[HTML]{000000} \textit{2.1}}     & \cite{R-imputeLCMD}  \\
-    {\color[HTML]{000000} knitr}          & {\color[HTML]{000000} \textit{1.46}}    & \cite{R-knitr}  \\
-    {\color[HTML]{000000} MetaboAnalystR} & {\color[HTML]{000000} \textit{4.0.0}}   & \cite{R-MetaboAnalystR}  \\
-    {\color[HTML]{000000} methods}        & {\color[HTML]{000000} \textit{4.3.3}}   & \cite{R}  \\
-    {\color[HTML]{000000} missForest}     & {\color[HTML]{000000} \textit{1.5}}     & \cite{R-missForest}  \\
-    {\color[HTML]{000000} pcaMethods}     & {\color[HTML]{000000} \textit{1.94.0}}  & \cite{R-pcaMethods}  \\
-    {\color[HTML]{000000} pmp}            & {\color[HTML]{000000} \textit{1.14.1}}  & \cite{R-pmp}  \\
-    {\color[HTML]{000000} purrr}          & {\color[HTML]{000000} \textit{1.0.2}}   & \cite{R-purrr}  \\
-    {\color[HTML]{000000} renv}           & {\color[HTML]{000000} \textit{1.0.7}}   & \cite{R-renv}  \\
-    {\color[HTML]{000000} reshape2}       & {\color[HTML]{000000} \textit{1.4.4}}   & \cite{R-reshape2}  \\
-    {\color[HTML]{000000} rmarkdown}      & {\color[HTML]{000000} \textit{2.27}}    & \cite{R-rmarkdown}  \\
-    {\color[HTML]{000000} shiny}          & {\color[HTML]{000000} \textit{1.8.1.1}} & \cite{R-shiny}  \\
-    {\color[HTML]{000000} shinyFiles}     & {\color[HTML]{000000} \textit{0.9.3}}   & \cite{R-shinyFiles}  \\
-    {\color[HTML]{000000} stats}          & {\color[HTML]{000000} \textit{4.3.3}}   & \cite{R}  \\
-    {\color[HTML]{000000} structToolbox}  & {\color[HTML]{000000} \textit{1.14.0}}  & \cite{R-structToolbox}  \\
-    {\color[HTML]{000000} SummarizedExperiment}                  & {\color[HTML]{000000} \textit{1.32.0}}                       & \cite{R-SummarizedExperiment} \\
-    {\color[HTML]{000000} tarchetypes}    & {\color[HTML]{000000} \textit{0.9.0}}   & \cite{R-tarchetypes}  \\
-    {\color[HTML]{000000} targets}        & {\color[HTML]{000000} \textit{1.7.0}}   & \cite{R-targets}  \\
-    {\color[HTML]{000000} tidyverse}      & {\color[HTML]{000000} \textit{2.0.0}}   & \cite{R-tidyverse}  \\
-    {\color[HTML]{000000} tinytex}        & {\color[HTML]{000000} \textit{0.51}}    & \cite{R-tinytex}  \\
-    {\color[HTML]{000000} tools}          & {\color[HTML]{000000} \textit{4.3.3}}   & \cite{R}  \\
-    {\color[HTML]{000000} usethis}        & {\color[HTML]{000000} \textit{2.2.3}}   & \cite{R-usethis}  \\
-    {\color[HTML]{000000} utils}          & {\color[HTML]{000000} \textit{4.3.3}}   & \cite{R}  \\
-    {\color[HTML]{000000} VIM}            & {\color[HTML]{000000} \textit{6.2.2}}   & \cite{R-VIM}  \\
-    {\color[HTML]{000000} withr}          & {\color[HTML]{000000} \textit{3.0.0}}   & \cite{R-withr}  \\ \bottomrule
+            >{\columncolor[HTML]{FFFFFF}}l
+            >{\columncolor[HTML]{FFFFFF}}l
+            >{\columncolor[HTML]{FFFFFF}}c @{}}
+        \toprule
+        \multicolumn{1}{c}{\cellcolor[HTML]{FFFFFF}\textbf{Package}} & \multicolumn{1}{c}{\cellcolor[HTML]{FFFFFF}\textbf{Version}} & \textbf{Ref}                  \\ \midrule
+        {\color[HTML]{000000} arrow}                                 & {\color[HTML]{000000} \textit{15.0.1}}                       & \cite{R-arrow}                \\
+        {\color[HTML]{000000} base}                                  & {\color[HTML]{000000} \textit{4.3.3}}                        & \cite{R}                      \\
+        {\color[HTML]{000000} BiocStyle}                             & {\color[HTML]{000000} \textit{2.30.0}}                       & \cite{R-BiocStyle}            \\
+        {\color[HTML]{000000} caret}                                 & {\color[HTML]{000000} \textit{6.0.94}}                       & \cite{R-caret}                \\
+        {\color[HTML]{000000} cowplot}                               & {\color[HTML]{000000} \textit{1.1.3}}                        & \cite{R-cowplot}              \\
+        {\color[HTML]{000000} crew}                                  & {\color[HTML]{000000} \textit{0.9.2}}                        & \cite{R-crew}                 \\
+        {\color[HTML]{000000} datasets}                              & {\color[HTML]{000000} \textit{4.3.3}}                        & \cite{R}                      \\
+        {\color[HTML]{000000} dplyr}                                 & {\color[HTML]{000000} \textit{1.1.4}}                        & \cite{R-dplyr}                \\
+        {\color[HTML]{000000} DT}                                    & {\color[HTML]{000000} \textit{0.33}}                         & \cite{R-DT}                   \\
+        {\color[HTML]{000000} fst}                                   & {\color[HTML]{000000} \textit{0.9.8}}                        & \cite{R-fst}                  \\
+        {\color[HTML]{000000} ggforce}                               & {\color[HTML]{000000} \textit{0.4.2}}                        & \cite{R-ggforce}              \\
+        {\color[HTML]{000000} graphics}                              & {\color[HTML]{000000} \textit{4.3.3}}                        & \cite{R-graph}                \\
+        {\color[HTML]{000000} grDevices}                             & {\color[HTML]{000000} \textit{4.3.3}}                        & \cite{R}                      \\
+        {\color[HTML]{000000} HotellingEllipse}                      & {\color[HTML]{000000} \textit{1.1.0}}                        & \cite{R-HotellingEllipse}     \\
+        {\color[HTML]{000000} impute}                                & {\color[HTML]{000000} \textit{1.76.0}}                       & \cite{R-impute}               \\
+        {\color[HTML]{000000} imputeLCMD}                            & {\color[HTML]{000000} \textit{2.1}}                          & \cite{R-imputeLCMD}           \\
+        {\color[HTML]{000000} knitr}                                 & {\color[HTML]{000000} \textit{1.46}}                         & \cite{R-knitr}                \\
+        {\color[HTML]{000000} MetaboAnalystR}                        & {\color[HTML]{000000} \textit{4.0.0}}                        & \cite{R-MetaboAnalystR}       \\
+        {\color[HTML]{000000} methods}                               & {\color[HTML]{000000} \textit{4.3.3}}                        & \cite{R}                      \\
+        {\color[HTML]{000000} missForest}                            & {\color[HTML]{000000} \textit{1.5}}                          & \cite{R-missForest}           \\
+        {\color[HTML]{000000} pcaMethods}                            & {\color[HTML]{000000} \textit{1.94.0}}                       & \cite{R-pcaMethods}           \\
+        {\color[HTML]{000000} pmp}                                   & {\color[HTML]{000000} \textit{1.14.1}}                       & \cite{R-pmp}                  \\
+        {\color[HTML]{000000} purrr}                                 & {\color[HTML]{000000} \textit{1.0.2}}                        & \cite{R-purrr}                \\
+        {\color[HTML]{000000} renv}                                  & {\color[HTML]{000000} \textit{1.0.7}}                        & \cite{R-renv}                 \\
+        {\color[HTML]{000000} reshape2}                              & {\color[HTML]{000000} \textit{1.4.4}}                        & \cite{R-reshape2}             \\
+        {\color[HTML]{000000} rmarkdown}                             & {\color[HTML]{000000} \textit{2.27}}                         & \cite{R-rmarkdown}            \\
+        {\color[HTML]{000000} shiny}                                 & {\color[HTML]{000000} \textit{1.8.1.1}}                      & \cite{R-shiny}                \\
+        {\color[HTML]{000000} shinyFiles}                            & {\color[HTML]{000000} \textit{0.9.3}}                        & \cite{R-shinyFiles}           \\
+        {\color[HTML]{000000} stats}                                 & {\color[HTML]{000000} \textit{4.3.3}}                        & \cite{R}                      \\
+        {\color[HTML]{000000} structToolbox}                         & {\color[HTML]{000000} \textit{1.14.0}}                       & \cite{R-structToolbox}        \\
+        {\color[HTML]{000000} SummarizedExperiment}                  & {\color[HTML]{000000} \textit{1.32.0}}                       & \cite{R-SummarizedExperiment} \\
+        {\color[HTML]{000000} tarchetypes}                           & {\color[HTML]{000000} \textit{0.9.0}}                        & \cite{R-tarchetypes}          \\
+        {\color[HTML]{000000} targets}                               & {\color[HTML]{000000} \textit{1.7.0}}                        & \cite{R-targets}              \\
+        {\color[HTML]{000000} tidyverse}                             & {\color[HTML]{000000} \textit{2.0.0}}                        & \cite{R-tidyverse}            \\
+        {\color[HTML]{000000} tinytex}                               & {\color[HTML]{000000} \textit{0.51}}                         & \cite{R-tinytex}              \\
+        {\color[HTML]{000000} tools}                                 & {\color[HTML]{000000} \textit{4.3.3}}                        & \cite{R}                      \\
+        {\color[HTML]{000000} usethis}                               & {\color[HTML]{000000} \textit{2.2.3}}                        & \cite{R-usethis}              \\
+        {\color[HTML]{000000} utils}                                 & {\color[HTML]{000000} \textit{4.3.3}}                        & \cite{R}                      \\
+        {\color[HTML]{000000} VIM}                                   & {\color[HTML]{000000} \textit{6.2.2}}                        & \cite{R-VIM}                  \\
+        {\color[HTML]{000000} withr}                                 & {\color[HTML]{000000} \textit{3.0.0}}                        & \cite{R-withr}                \\ \bottomrule
     \end{tabular}
     \caption{List of R packages with their versions used to develop \texttt{metaboPipe}}
     \label{tab:packages}
-    \end{table}
+\end{table}
 
 
-    
-    
-    
-    
-    
+
+
+
+
+
 \chapter{Results} \todo{add a summary of 1: Number of functions and 2: Number of lines of code}
 
 \section{Pipeline}
 The literature review provided valuable insights into the most commonly used methods and tools for metabolomic data preprocessing. Based on this information, the proposed pipeline is designed to include the following steps:
 \begin{figure}[ht]
     \centering
-\begin{tikzpicture}[node distance=.75cm and .5cm]
+    \begin{tikzpicture}[node distance=.75cm and .5cm]
 
-    % Subgraph: Data Filtering
-    \node[block] (A) {Filter Missing Values};
-    \node[block, below=of A] (B) {Filter Outliers};
-    
-    \node[decision, below=of B] (C) {Batch effect present?};
-    \node[block, below left=of C, xshift=-1cm] (D) {Batch Correction};
-    \node[block, below=of C] (H) {Data Imputation};
-    \node[block, below=of H] (E) {Data Normalization};
-    \node[block, below=of E] (F) {Data Transformation};
-    \node[block, below=of F] (G) {Data Scaling};
-  
-    % Arrows
-    \path [line] (A) -- (B);
-    \path [line] (B) -- (C);
-    \path [line] (C) -- node[near start, left] {YES} (D);
-    \path [line] (C) -- node[near start, right] {NO} (H);
-    \path [line] (D) -- (H);
-    \path [line] (H) -- (E);
-    \path [line] (E) -- (F);
-    \path [line] (F) -- (G);
-  
-    % Subgraph label
-    \node[draw=black, dashed, fit=(A)(B), inner sep=4pt, label={[label distance=0.5em]north:Data Filtering}] {};
-  
-  \end{tikzpicture}
-  \caption{Flow diagram showing the steps of the metabolomic data preprocessing pipeline proposed.}
-  \label{fig:pipeline}
+        % Subgraph: Data Filtering
+        \node[block] (A) {Filter Missing Values};
+        \node[block, below=of A] (B) {Filter Outliers};
+
+        \node[decision, below=of B] (C) {Batch effect present?};
+        \node[block, below left=of C, xshift=-1cm] (D) {Batch Correction};
+        \node[block, below=of C] (H) {Data Imputation};
+        \node[block, below=of H] (E) {Data Normalization};
+        \node[block, below=of E] (F) {Data Transformation};
+        \node[block, below=of F] (G) {Data Scaling};
+
+        % Arrows
+        \path [line] (A) -- (B);
+        \path [line] (B) -- (C);
+        \path [line] (C) -- node[near start, left] {YES} (D);
+        \path [line] (C) -- node[near start, right] {NO} (H);
+        \path [line] (D) -- (H);
+        \path [line] (H) -- (E);
+        \path [line] (E) -- (F);
+        \path [line] (F) -- (G);
+
+        % Subgraph label
+        \node[draw=black, dashed, fit=(A)(B), inner sep=4pt, label={[label distance=0.5em]north:Data Filtering}] {};
+
+    \end{tikzpicture}
+    \caption{Flow diagram showing the steps of the metabolomic data preprocessing pipeline proposed.}
+    \label{fig:pipeline}
 \end{figure}
-  
+
 In this project, an R package named \texttt{metaboPipe} was developed to preprocess metabolomic data efficiently and accessibly. Metabolomic data preprocessing is a crucial step in ensuring the quality and reliability of downstream analyses. The transformations applied during preprocessing are primarily intended to remove unwanted effects unrelated to the study, but these tools can inadvertently delete meaningful biological data if used without caution. The \texttt{metaboPipe} package leverages the \texttt{targets} and \texttt{structToolbox} packages to create a modular and reproducible pipeline for preprocessing. This section details the components and functionality of \texttt{metaboPipe}.
 
 \section{Package Overview}
 The \texttt{metaboPipe} package is designed to streamline the preprocessing of metabolomic data by creating a series of user-accessible modules that translate into interconnected steps. These steps can be easily added, modified, and rearranged. The package utilizes the \texttt{targets} package to orchestrate task deployment and dependencies, ensuring that each step is executed in the correct order. The \texttt{structToolbox} package provides the \texttt{DatasetExperiment} object, which serves as the primary data structure throughout the pipeline, along with multiple functions for data transformation.
 
-The package can be divided into three main categories:
+The package is hosted on GitHub: \url{https://github.com/eperezme/metaboPipe}. And its main functionalities can be divided into three main categories:
 \begin{itemize}
     \item \textbf{Data manipulation:} These functions are the core of the package, as they transform the data into the desired formats and apply the diversity of methods to perform the preprocessing steps including the visualization.
     \item \textbf{Target factories:} They are the pipeline contruction functions for the users to interact with, as they use the targets package to create pipeline nodes that use the data manipulation functions. Each factory is intended to represent a specific pretreatement step.
@@ -632,17 +636,17 @@ The package can be divided into three main categories:
 \section{Data manipulation}
 For the pretreatement of the data, the package includes the following functions:
 
-\begin{itemize}    
+\begin{itemize}
     \item A function to create a \texttt{DatasetExperiment} object from a list of dataframes.
-    \item A function to filter the data based on the percentage of missing values both in the features and the samples.  
+    \item A function to filter the data based on the percentage of missing values both in the features and the samples.
     \item A function to filter the outliers based on a Hotelling's T2 distribution ellipse.
     \item 8 functions to impute the missing values based on the following methods: \textit{Mean, Median, Random Forest (RF), Quantile Regression Imputation of Left-Censored data (QRILC), k-Nearest Neighbors (kNN), Singular Value Decomposition (SVD), Bayesian Principal Component Analysis (BPCA) and Probabilistic Principal Component Analysis (PPCA)}.
     \item 2 functions to remove the batch effect using either the \textit{Quality Control-Robust Spline Correction (QC-RSC)} method or the \texttt{ComBat} method. \todo{add references to the methods}
     \item A function to normalize, scale and transform the data based on the methods provided by the \texttt{metaboAnalystR} package.
-    \item 12 data visualization functions to create plots. 
-    \item 17 utility functions to perform different tasks. 
+    \item 12 data visualization functions to create plots.
+    \item 17 utility functions to perform different tasks.
 \end{itemize}
-    
+
 
 \section{Target factories}
 For the pipeline construction, the package includes the following 9 functions:
@@ -678,14 +682,18 @@ A shiny app was developed to allow users to interact with the pipeline without t
 \end{itemize}
 
 \chapter{Discussion}
-Different methods for preprocessing metabolomic data are essential to accommodate the diverse types of data encountered in this field. This variety arises due to the numerous factors influencing metabolomic data, which can be biological, technical, or experimental. Each preprocessing method offers unique advantages and disadvantages. Therefore, choosing the appropriate method can be challenging and is guided by the specific biological question, the nature of the data, and the desired analytical outcomes.
+Different methods for preprocessing metabolomic data are essential to accommodate the diverse types of data encountered in this field. This variety arises due to the numerous factors influencing metabolomic data, which can be biological, technical, or experimental. Each preprocessing method offers unique advantages and disadvantages, therefore choosing the appropriate method can be challenging and is guided by the specific biological question, the nature of the data, and the desired analytical outcomes.
 
 In this work, a general workflow for targeted metabolomics data preprocessing has been proposed. This workflow is not specific as the selection of preprocessing methods affects their order. For example, when using singular value decomposition (SVD) as an imputation method, it is recommended to scale and center the data beforehand, but if we impute the data using quantile regression imputation of left-censored data (QRILC), log-transforming the data beforehand is recommended for better accuracy \cite{weiMissingValueImputation2018}. When normalizing Quantile normalization (QN) is not recomended for datasets with $n < 50$ samples \cite{kohlStateoftheArtData2012} and Probabilistic Quotient Normalization (PQN) is not adequate to use when the number of metabolites is $>$ than the number of samples \cite{dongGroupAggregatingNormalization2011}.
 These considerations must be factored in when selecting preprocessing methods, making it impractical to establish a one-size-fits-all pipeline
 
+\todo{pq el ordre de la pipeline}
+
 Due to the diversity of methods and their interactions, this work focuses on developing a tool that facilitates the easy and interactive creation of customized data preprocessing sequences. This tool, the \texttt{metaboPipe} package, offers functions to perform common preprocessing steps and enables the creation of tailored pipelines using these steps. Additionally, the package includes a shiny app that allows users to interact with the pipeline without requiring R programming skills.
 
-To load the data, users need to import two tables in \texttt{.csv} format: \texttt{dataMatrix} and \texttt{sampleMetadata}. The \texttt{dataMatrix} table contains the relative abundance or concentration data (\Cref{tab:dataMatrix-example}), while the \texttt{sampleMetadata} table holds the sample-related data (\Cref{tab:sampleMetadata-example}). 
+The \texttt{metaboPipe} package is designed to work with the \texttt{targets} and \texttt{structToolbox} packages. To create a pipeline using the \texttt{metaboPipe} package, users must define a \texttt{\_targets.R} file that specifies the steps of the pipeline. A pre-configured template is aviable using the \texttt{create\_pipeline()} function that creates a \texttt{\_targets.R} file in the working directory with the necessary packages configured. Then users only have to add the targets or commands to the list in the file and run the pipeline using the \texttt{tar\_make()} function.
+
+To load the data, users need to import two tables in \texttt{.csv} format: \texttt{dataMatrix} and \texttt{sampleMetadata}. The \texttt{dataMatrix} table contains the relative abundance or concentration data (\Cref{tab:dataMatrix-example}), while the \texttt{sampleMetadata} table holds the sample-related data (\Cref{tab:sampleMetadata-example}).
 
 
 % DataMatrix table
@@ -694,88 +702,82 @@ To load the data, users need to import two tables in \texttt{.csv} format: \text
     \caption{A data matrix generated by a metabolomics platform}
     \label{tab:dataMatrix-example}
     \begin{tabular}{@{}lllll@{}}
-      \toprule
-      \multicolumn{1}{c}{$n \times m$} & \multicolumn{1}{c}{$Metabolite_1$} & \multicolumn{1}{c}{$Metabolite_2$} & \multicolumn{1}{c}{$\dots$} & \multicolumn{1}{c}{$Metabolite_m$} \\ \midrule
-      $Sample_1$ &  &  &  &  \\
-      $Sample_2$ &  &  &  &  \\
-      \multicolumn{1}{c}{$\dots$} & \multicolumn{1}{c}{$\dots$} & \multicolumn{1}{c}{$\dots$} & \multicolumn{1}{c}{$\dots$} & \multicolumn{1}{c}{$\dots$} \\ 
-      $Sample_n$ &  &  &  &  \\ \bottomrule
+        \toprule
+        \multicolumn{1}{c}{$n \times m$} & \multicolumn{1}{c}{$Metabolite_1$} & \multicolumn{1}{c}{$Metabolite_2$} & \multicolumn{1}{c}{$\dots$} & \multicolumn{1}{c}{$Metabolite_m$} \\ \midrule
+        $Sample_1$                       &                                    &                                    &                             &                                    \\
+        $Sample_2$                       &                                    &                                    &                             &                                    \\
+        \multicolumn{1}{c}{$\dots$}      & \multicolumn{1}{c}{$\dots$}        & \multicolumn{1}{c}{$\dots$}        & \multicolumn{1}{c}{$\dots$} & \multicolumn{1}{c}{$\dots$}        \\
+        $Sample_n$                       &                                    &                                    &                             &                                    \\ \bottomrule
     \end{tabular}
-  \end{table}
+\end{table}
 % sampleMetadata table
-  \begin{table}[htbp]
+\begin{table}[htbp]
     \centering
     \caption{The sampleMetadata matrix generated by a metabolomics platform}
     \label{tab:sampleMetadata-example}
     \begin{tabular}{@{}lllll@{}}
-      \toprule
-      \multicolumn{1}{c}{$n \times m$} & \multicolumn{1}{c}{$Factor_1$} & \multicolumn{1}{c}{$Factor_2$} & \multicolumn{1}{c}{$\dots$} & \multicolumn{1}{c}{$Factor_m$} \\ \midrule
-      $Sample_1$ &  &  &  &  \\
-      $Sample_2$ &  &  &  &  \\
-      \multicolumn{1}{c}{$\dots$} & \multicolumn{1}{c}{$\dots$} & \multicolumn{1}{c}{$\dots$} & \multicolumn{1}{c}{$\dots$} & \multicolumn{1}{c}{$\dots$} \\ 
-      $Sample_n$ &  &  &  &  \\ \bottomrule
+        \toprule
+        \multicolumn{1}{c}{$n \times m$} & \multicolumn{1}{c}{$Factor_1$} & \multicolumn{1}{c}{$Factor_2$} & \multicolumn{1}{c}{$\dots$} & \multicolumn{1}{c}{$Factor_m$} \\ \midrule
+        $Sample_1$                       &                                &                                &                             &                                \\
+        $Sample_2$                       &                                &                                &                             &                                \\
+        \multicolumn{1}{c}{$\dots$}      & \multicolumn{1}{c}{$\dots$}    & \multicolumn{1}{c}{$\dots$}    & \multicolumn{1}{c}{$\dots$} & \multicolumn{1}{c}{$\dots$}    \\
+        $Sample_n$                       &                                &                                &                             &                                \\ \bottomrule
     \end{tabular}
-  \end{table}
-    
-  
+\end{table}
 
-  For filtering missing values, the modified 80\% rule is adopted by default: if a column or row has more than 20\% missing values, that column or row is removed. Users can manually adjust the threshold for missing values.
 
-  To identify and filter outliers, a Hotelling's T2 distribution ellipse is used with a default significance level of 95\%, adjustable to 99\% if desired. This method is chosen for its robustness and flexibility in detecting outliers in multivariate data, considering the covariance between variables \cite{wuUsingNontargetedLCMS2021, viallonNewPipelineNormalization2021}.
-  
-  Batch effects are a common issue in metabolomics studies, introducing unwanted variability into the data. To correct this effect, two methods have been implemented: the \texttt{QC-RSC} method and the \texttt{ComBat} method, which are widely used \todo{add citations}.
 
-  For normalization, scaling, and transformation of the data, it has been decided to use the methods provided by the \texttt{metaboAnalystR} package as it offers a wide variety of methods, some of which are difficult to implement manually, such as normalization to an internal standard or a physiological constant. However, several functions are implemented to normalize the data using other methods not present in \texttt{metaboAnalystR} such as Probabilistic Quotient Normalization (PQN) or Vector Length Normalization (VLN). These methods, although implemented in \texttt{metaboPipe}, are not incorporated into the shiny application interface nor the \texttt{normalize()} function.
-  
-  The implementation of the PC-PR2 method described by \citeauthor{viallonNewPipelineNormalization2021} is also considered. This method first identifies sources of variation using PCA combined with multiple linear regression and then corrects unwanted variations using a random effects model for each metabolite. However, due to the complexity of robustly integrating this method into the package within the available time, it is deferred to future revisions. Nevertheless, the \texttt{pcpr2()} function can be used to visualize the data and identify sources of variation, although correction is not yet possible.
-  
+For filtering missing values, the modified 80\% rule is adopted by default: if a column or row has more than 20\% missing values, that column or row is removed. Users can manually adjust the threshold for missing values.
+
+To identify and filter outliers, a Hotelling's T2 distribution ellipse is used with a default significance level of 95\%, adjustable to 99\% if desired. This method is chosen for its robustness and flexibility in detecting outliers in multivariate data, considering the covariance between variables \cite{wuUsingNontargetedLCMS2021, viallonNewPipelineNormalization2021}.
+
+Batch effects are a common issue in metabolomics studies, introducing unwanted variability into the data. To correct this effect, two methods have been implemented: the \texttt{QC-RSC} method and the \texttt{ComBat} method, which are widely used \todo{add citations}.
+
+Missing values are imputed using the eight most common methods: Mean of the feature, Median of the feature, Random Forest \acrshort{rf}, Quantile Regression Imputation of Left-Censored data \acrshort{qrilc}, k-Nearest Neighbors \acrshort{knn}, Singular Value Decomposition \acrshort{svd}, Bayesian Principal Component Analysis \acrshort{bpca}, and Probabilistic Principal Component Analysis \acrshort{ppca}. These methods were selected based on their popularity and effectiveness in imputing missing values in metabolomic data \cite{weiMissingValueImputation2018,sunPretreatingNormalizingMetabolomics2024}.
+
+For normalization, scaling, and transformation of the data, it has been decided to use the methods provided by the \texttt{metaboAnalystR} package as it offers a wide variety of methods, some of which are difficult to implement manually, such as normalization to an internal standard or a physiological constant. However, several functions are implemented to normalize the data using other methods not present in \texttt{metaboAnalystR} such as Probabilistic Quotient Normalization (PQN) or Vector Length Normalization (VLN). These methods, although implemented in \texttt{metaboPipe}, are not incorporated into the shiny application interface nor the \texttt{normalize()} function.
+
+The implementation of the PC-PR2 method described by \citeauthor{viallonNewPipelineNormalization2021} is also considered. This method first identifies sources of variation using PCA combined with multiple linear regression and then corrects unwanted variations using a random effects model for each metabolite. However, due to the complexity of robustly integrating this method into the package within the available time, it is deferred to future revisions. Nevertheless, the \texttt{pcpr2()} function can be used to visualize the data and identify sources of variation, although correction is not yet possible.
+
+As \texttt{metaboPipe} is based on the \texttt{structToolbox} package, users can easily access the functions provided by the package to perform additional steps not included in \texttt{metaboPipe} like the filtering of QC samples, the removal of metabolites with greater specific Relative Standard Deviation (RSD) and more.
+
 
 
 
 \chapter{Conclusion and future vision}
-The second one is that it enables the pipeline to be used as a pretreatement method comparable tool. As the easy of use and order can be easily changed, the user can test different pretreatement methods and orders to compare the changes in the data.
 
-%\section{Conclusiones}
-Este capítulo tiene que incluir:
+En este trabajo se ha intentado proponer un pipeline general para el preprocessamiento de datos de metabolomicad dirigida. Sin embargo la diversidad de métodos y sus interacciones hacen que sea imposible establecer un pipeline que se ajuste a todos los casos. Por ello, se ha desarrollado una herramienta que facilita la creación de secuencias de preprocessamiento de datos personalizadas. Al hacerlo de esta manera se ha conseguido crear un metodo de automatizacion para tanto investigadores como analistas de datos indiferntemente de su nivel de conocimiento en programacion.
+
+El preprocessament de dades es una tasca complexa que necessita de molta atenció i coneixement per tal de no incloure variancia no dessitjada en les dades. Fins que una pipeline general que permeti automatitzar aquesta tasca sigui desenvolupada, el paquet \texttt{metaboPipe} pot ser una eina util per a tant suplir aquesta necessitat com per a comparar metodes de preprocessament de dades, ajudant aixi a la desenvolupar aquesta pipeline general.
+
+Davant de tota la feina feta, s'han obert diverses línies de treball futur que es podrien explorar en el futur. Aquestes línies de treball són:
 \begin{itemize}
-\item Una descripción de las conclusiones del trabajo:
-\begin{itemize}
-    \item Una vez se han obtenido los resultados, ¿qué conclusiones se extraen?
-    \item ¿Estos resultados son los esperados? ¿O han sido sorprendentes? ¿Por qué? 
+    \item \textbf{Comparació de la pipeline amb altres pipelines ja preexistents:} S'ha creat una nova pipeline que pot ajudar a millorar el preprocessament de dades de metabolomica, pero encara no s'ha pogut demostrar la seva eficacia. Per això, seria interessant comparar la pipeline amb altres pipelines ja existents per veure si realment millora el preprocessament de dades de metabolomica.
+    \item \textbf{Implementació de més mètodes de preprocessament:} S'han implementat els mètodes més comuns de preprocessament de dades, però encara hi ha molts més mètodes que podrien ser implementats. Aquests mètodes podrien ser implementats en futures versions del paquet.
+    \item \textbf{Millora de la interfície gràfica:} La interfície gràfica del paquet és funcional, però encara es podrien afegir més funcionalitats per millorar la seva usabilitat. Per exemple, es podrien afegir més opcions de configuració per als diferents mètodes de preprocessament, o una pestanya per visualitzar els grafics resultants.
+    \item \textbf{Millora de la documentació:} La documentació del paquet és completa, però encara es podrien afegir més exemples i tutorials per ajudar els usuaris a utilitzar el paquet. També es podrien afegir més explicacions sobre com funcionen els diferents mètodes de preprocessament.
+    \item \textbf{Inclusió del paquet a CRAN:} Actualment, el paquet està disponible a GitHub, aixo tot i ser un metode de facil distribucio per a programadors, crea una barrera de dificultat adicional cap a gent amb menys coneixements en programacio. Per això, seria interessant incloure el paquet a CRAN per facilitar la seva instal·lació i ús per a un públic més ampli.
+    \item \textbf{Inclusio dels metodes de creacio de grafics com a nodes de la pipeline:} Actualment els metodes de creacio de grafics son funcions independents, pero es podrien incloure com a nodes de la pipeline per tal de poder visualitzar els resultats de cada pas de la pipeline i adicionalment a la interficie grafica del shiny.
 \end{itemize}
-\item Una reflexión crítica sobre el logro de los objetivos planteados inicialmente:
+
+Malgrat els esforços realitzats, s'ha conseguit proposar una nova pipeline que pot ajudar a millorar el preprocessament de dades de metabolomica, pero al no disposar de temps per a poder generar i analitzar resultats comparatius, no s'ha pogut demostrar la seva eficacia. Per tant no es pot considerar que s'hagin complert amb èxit.
+
+La planificació ha tingut canvis considerables durant el desenvolupament del projecte, donat que a mesura que nous problemes anaven sorgint, s'han hagut de fer canvis per tal de garantir la continuacio de la feina i mes important, la obtencio d'un producte util per a finals de maig. Tot i això, s'ha aconseguit seguir la planificació en la seva majoria, i s'ha pogut quasi completar el objectiu principal.
+
+Tot i no complir amb els objectius proposats s'ha creat una eina que s'espera que pugui ajudar a complir-los en un futur ja que de manera no prevista una nova funcio ha emergit amb la creacio d'aquest. It enables the package to be used as a pretreatement method comparable tool. As the easy of use and order can be easily changed, the user can test different pretreatement methods and orders to compare the changes in the data.
+
 \begin{itemize}
-    \item ¿Hemos logrado todos los objetivos? Si la respuesta es negativa, ¿por qué motivo?
-\end{itemize}
-\item Un análisis crítico del seguimiento de la planificación y metodología a lo largo del producto:
-\begin{itemize}
+    \item Un análisis crítico del seguimiento de la planificación y metodología a lo largo del producto:
     \item ¿Se ha seguido la planificación?
     \item ¿La metodología prevista ha sido suficientemente adecuada?
-    \item ¿Ha habido que introducir cambios para garantizar el éxito del trabajo? ¿Por qué? 
-\end{itemize}
-\item De los impactos previstos en \ref{s:etic}, ético-sociales, de sostenibilidad y de diversidad, evaluar/mencionar si se han mitigado (si eran negativos) o si se han conseguido (si eran positivos). 
-\item Si han aparecido impactos no previstos a \ref{s:etic}, evaluar/mencionar cómo se han mitigado (si eran negativos) o que han aportado (si eran positivos).
-\item Las líneas de trabajo futuro que no se han podido explorar en este trabajo y han quedado pendientes.
-\item Glossary test:  \gls{latex}
-
-
-%\item Una descripción de las conclusiones del trabajo: Qué lecciones se han aprendido del trabajo?
-%\item Una reflexión crítica sobre el logro de los objetivos planteados inicialmente: Hemos conseguido todos los objetivos? Si la respuesta es negativa, por qué motivo?
-%\item De los impactos previstos a la sección \ref{s:etic}, una evaluación, o al menos, mención, sobre si se han mitigado (si eran negativos) o si se han conseguido (si eran positivos). 
+    \item ¿Ha habido que introducir cambios para garantizar el éxito del trabajo? ¿Por qué?
+    \item De los impactos previstos en \ref{s:etic}, ético-sociales, de sostenibilidad y de diversidad, evaluar/mencionar si se han mitigado (si eran negativos) o si se han conseguido (si eran positivos).
+    \item Si han aparecido impactos no previstos a \ref{s:etic}, evaluar/mencionar cómo se han mitigado (si eran negativos) o que han aportado (si eran positivos).
 \end{itemize}
 
-%\section{Líneas de futuro}
-%Las líneas de trabajo futuro que no se han podido explorar en este trabajo y han quedado pendientes.
 
-%\section{Seguimiento de la planificación}
-%Un análisis crítico del seguimiento de la planificación y metodología a lo largo del trabajo: 
-%\begin{itemize}
-%    \item  Se ha seguido la planificación? 
-%    \item La metodología prevista ha sido la adecuada? 
-%    \item Ha habido que introducir cambios para garantizar el éxito del trabajo? ¿Por qué? 
-%\end{itemize}
 
-\setglossarystyle{list}
+
 \printglossary[title=Glossary, toctitle=Glossary]
 \printglossary[type=\acronymtype, title=Acronyms, toctitle=Acronyms]
 
@@ -787,7 +789,7 @@ Este capítulo tiene que incluir:
 \newpage
 \appendix
 Listado de apartados que son demasiado extensos para incluir dentro de la memoria y tienen un carácter autocontenido (por ejemplo, manuales de usuario, manuales de instalación, etc.)
- 
+
 Dependiendo del tipo de trabajo, es posible que no haya que añadir algún anexo.
 
 \end{document}

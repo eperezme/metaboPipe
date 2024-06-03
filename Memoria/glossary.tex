@@ -1,14 +1,123 @@
 % glossray.tex
 % Glossary of terms
-\newglossaryentry{latex}{
-    name=LaTeX,
-    description={A typesetting system used for document preparation}
-}
-\newglossaryentry{glossary}{
-    name=Glossary,
-    description={A list of terms with their definitions}
+
+\newglossaryentry{gls-lc}{
+    name={Liquid Chromatography},
+    description={A separation technique in which a liquid mobile phase is pumped through a column packed with a stationary phase. The different components in the sample interact with the stationary phase to varying degrees, causing them to elute at different times. This method is widely used for the separation and analysis of complex mixtures, such as those found in pharmaceuticals, environmental samples, and biological materials. The efficiency and specificity of the separation can be influenced by the choice of stationary and mobile phases.}
 }
 
+\newglossaryentry{gls-gc}{
+    name={Gas Chromatography},
+    description={A separation technique in which a gaseous mobile phase is passed through a column packed with a stationary phase. Compounds in the sample are vaporized and carried by an inert gas through the column, where they interact with the stationary phase. This causes them to separate based on their boiling points and affinities to the stationary phase. Gas chromatography is commonly used for the analysis of volatile substances and can be coupled with detectors like mass spectrometry for enhanced identification and quantification.}
+}
+
+\newglossaryentry{gls-ms}{
+    name={Mass Spectrometry},
+    description={An analytical technique that measures the mass-to-charge ratio of ions. It involves ionizing chemical compounds to generate charged molecules or molecule fragments and measuring their mass-to-charge ratios. Mass spectrometry is highly sensitive and can be used to determine the molecular weight of compounds, identify unknown substances, and study the structure and composition of complex mixtures. The technique is widely applied in fields such as chemistry, biochemistry, and pharmacology.}
+}
+
+\newglossaryentry{gls-lcms}{
+    name={Liquid Chromatography-Mass Spectrometry},
+    description={A hyphenated technique that combines liquid chromatography with mass spectrometry. LC-MS integrates the separation capabilities of liquid chromatography with the detection and identification power of mass spectrometry. This combination allows for the separation, identification, and quantification of complex mixtures, making it invaluable in proteomics, metabolomics, and pharmaceutical research. The technique provides high sensitivity and specificity, enabling detailed analysis of biomolecules and small organic compounds.}
+}
+
+\newglossaryentry{gls-gcms}{
+    name={Gas Chromatography-Mass Spectrometry},
+    description={A hyphenated technique that combines gas chromatography with mass spectrometry. GC-MS is used for the separation and identification of volatile and semi-volatile compounds. In this technique, gas chromatography separates the components of a mixture, and mass spectrometry provides detailed molecular information about each component. GC-MS is widely used in forensic science, environmental analysis, and the pharmaceutical industry for its ability to provide both qualitative and quantitative data on complex mixtures.}
+}
+
+\newglossaryentry{gls-hplc}{
+    name={High Performance Liquid Chromatography},
+    description={A type of liquid chromatography that uses high pressure to improve separation efficiency. In HPLC, the sample is forced through a column packed with a stationary phase at high pressure, which enhances the interaction between the sample components and the stationary phase. This results in better resolution and faster analysis compared to traditional liquid chromatography. HPLC is extensively used in the pharmaceutical, environmental, and food industries for the analysis and purification of chemical compounds.}
+}
+
+\newglossaryentry{gls-uhplc}{
+    name={Ultra High Performance Liquid Chromatography},
+    description={An advanced form of high performance liquid chromatography that uses even higher pressures for faster separations. UHPLC utilizes smaller particle sizes in the stationary phase, which increases the surface area for interactions and improves separation efficiency. The technique allows for faster analysis times and higher resolution compared to HPLC. UHPLC is particularly useful in high-throughput environments, such as pharmaceutical development and clinical diagnostics, where speed and precision are critical.}
+}
+
+\newglossaryentry{gls-nmr}{
+    name={Nuclear Magnetic Resonance},
+    description={A spectroscopic technique that exploits the magnetic properties of atomic nuclei. NMR involves applying a magnetic field to a sample and then measuring the absorption of radiofrequency radiation by the nuclei. This provides detailed information about the molecular structure, dynamics, and environment of the atoms within the sample. NMR is widely used in chemistry and biochemistry for the elucidation of molecular structures and in medical imaging as the basis for magnetic resonance imaging (MRI).}
+}
+
+\newglossaryentry{gls-snr}{
+    name={Signal-to-Noise Ratio},
+    description={A measure of the strength of a signal relative to the background noise. SNR is a crucial parameter in various fields, including telecommunications, imaging, and analytical chemistry. A higher SNR indicates a clearer and more reliable signal, making it easier to detect and analyze the information of interest. Improving SNR can involve increasing the signal strength, reducing noise, or both, and is often a key focus in the design and optimization of measurement and detection systems.}
+}
+
+\newglossaryentry{gls-mz}{
+    name={Mass-to-Charge Ratio},
+    description={The ratio of the mass of an ion to its charge. This parameter is fundamental in mass spectrometry, where it is used to characterize and identify ions based on their mass and charge states. The mass-to-charge ratio is denoted as
+            𝑚
+            /
+            𝑧
+            m/z, and analyzing the
+            𝑚
+            /
+            𝑧
+            m/z values allows scientists to determine the molecular weight and structure of compounds. This information is crucial for applications in proteomics, metabolomics, and chemical analysis.}
+}
+
+\newglossaryentry{gls-rt}{
+    name={Retention Time},
+    description={The time it takes for a compound to travel through a chromatographic column. Retention time is a key parameter in chromatography and is used to help identify and quantify the components in a mixture. Each compound has a characteristic retention time under specific chromatographic conditions, allowing for its separation and analysis. Accurate measurement of retention time is essential for reproducibility and comparison across different experiments and laboratories.}
+}
+
+\newglossaryentry{gls-pca}{
+    name={Principal Component Analysis},
+    description={A statistical technique used to reduce the dimensionality of data. PCA transforms the original variables into a new set of uncorrelated variables called principal components, which capture the most variance in the data. This technique simplifies the data while retaining its essential patterns, making it easier to visualize and analyze. PCA is widely used in fields such as bioinformatics, finance, and image processing for data compression, noise reduction, and feature extraction.}
+}
+
+\newglossaryentry{gls-pcpr2}{
+    name={Principal Component Partial R-square},
+    description={A measure of the contribution of each principal component to the explained variance in a regression model. PC-PR2 helps in identifying which principal components are most significant in predicting the dependent variable. This metric is useful in regression analysis when dealing with high-dimensional data, as it aids in selecting the most relevant components and improving model interpretability and performance.}
+}
+
+\newglossaryentry{gls-anova}{
+    name={Analysis of Variance},
+    description={A statistical technique used to analyze the differences between group means. ANOVA tests whether there are any statistically significant differences between the means of three or more independent groups. It decomposes the total variability in the data into variability between groups and within groups, allowing researchers to determine if the group membership explains a significant portion of the variability. ANOVA is widely used in experimental design and research across various scientific disciplines.}
+}
+
+\newglossaryentry{gls-pls}{
+    name={Partial Least Squares},
+    description={A regression technique that combines features of principal component analysis and multiple linear regression. PLS is used to model complex relationships between predictor and response variables, particularly when the predictors are highly collinear or when there are more predictors than observations. It reduces the predictors to a smaller set of uncorrelated components and performs regression on these components. PLS is commonly used in chemometrics, bioinformatics, and social sciences.}
+}
+
+\newglossaryentry{gls-rf}{
+    name={Random Forest},
+    description={An ensemble learning method that combines multiple decision trees to make predictions. Each tree in the forest is built from a random subset of the data and features, and the final prediction is obtained by aggregating the predictions of all trees. Random forests are robust to overfitting and can handle large datasets with high dimensionality. They are widely used for classification, regression, and feature selection tasks in various fields, including bioinformatics, finance, and marketing.}
+}
+
+\newglossaryentry{gls-svm}{
+    name={Support Vector Machine},
+    description={A supervised machine learning algorithm used for classification and regression tasks. SVM works by finding the hyperplane that best separates the data into different classes with the maximum margin. It can handle linear and non-linear data by using kernel functions to map the input features into higher-dimensional spaces. SVM is effective in high-dimensional spaces and is widely used in applications such as image recognition, bioinformatics, and text classification.}
+}
+
+\newglossaryentry{gls-qrilc}{
+    name={Quantile Regression Imputation of Left-Censored Data},
+    description={A statistical method for estimating missing values in left-censored data using quantile regression. Left-censored data occur when measurements fall below a detection limit, resulting in a large number of values reported as below this threshold. QRILC uses quantile regression to estimate the distribution of the censored data and imputes missing values accordingly. This technique is particularly useful in environmental and biomedical studies where such data are common.}
+}
+
+\newglossaryentry{gls-bpca}{
+    name={Bayesian Principal Component Analysis},
+    description={A probabilistic approach to principal component analysis that incorporates prior knowledge. BPCA models the data as a probabilistic distribution and uses Bayesian inference to estimate the principal components. This approach allows for more robust dimensionality reduction, especially in cases with small sample sizes or missing data. BPCA is useful in fields such as bioinformatics and signal processing, where incorporating prior knowledge can improve the analysis and interpretation of complex datasets.}
+}
+
+\newglossaryentry{gls-ppca}{
+    name={Probabilistic Principal Component Analysis},
+    description={A probabilistic approach to principal component analysis that models the data as a probabilistic distribution. PPCA assumes that the observed data are generated by a linear transformation of latent variables with added Gaussian noise. This approach provides a more flexible and robust framework for dimensionality reduction and allows for handling missing data and uncertainty in the analysis. PPCA is widely used in machine learning, bioinformatics, and image processing.}
+}
+
+\newglossaryentry{gls-svd}{
+    name={Singular Value Decomposition},
+    description={A matrix factorization technique that decomposes a matrix into singular values and singular vectors. SVD expresses a matrix as the product of three matrices: a diagonal matrix of singular values and two orthogonal matrices of singular vectors. This decomposition is used in many applications, including data compression, noise reduction, and solving linear systems. SVD is a fundamental tool in numerical linear algebra and is widely used in machine learning, signal processing, and bioinformatics.}
+}
+
+\newglossaryentry{gls-knn}{
+    name={k-Nearest Neighbors},
+    description={A non-parametric classification algorithm that classifies new data points based on their proximity to known data points. KNN assigns a class to a data point by finding the k nearest neighbors in the feature space and taking a majority vote among their classes. This method is simple, intuitive, and effective for many types of data. KNN is widely used in pattern recognition, data mining, and machine learning applications, particularly when the decision boundaries are complex and non-linear.}
+}
 
 % ACRONYMS
 \newacronym{lc}{LC}{Liquid Cromatography}
@@ -28,4 +137,14 @@
 \newacronym{pcpr2}{PCPr2}{Principal Component Partial R-square}
 \newacronym{anova}{ANOVA}{Analysis of Variance}
 \newacronym{pls}{PLS}{Partial Least Squares}
+
+
+\newacronym{rf}{RF}{Random Forest}
+\newacronym{svm}{SVM}{Support Vector Machine}
+\newacronym{qrilc}{qRILC}{Quantile regression imputation of left-censored data}
+\newacronym{bpca}{BPCA}{Bayesian Principal Component Analysis}
+\newacronym{ppca}{PPCA}{Probabilistic Principal Component Analysis}
+\newacronym{svd}{SVD}{Singular Value Decomposition}
+\newacronym{knn}{k-NN}{k-Nearest Neighbors}
+
 
