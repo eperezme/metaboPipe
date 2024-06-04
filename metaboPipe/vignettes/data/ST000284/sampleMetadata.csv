@@ -1,0 +1,235 @@
+﻿Patient_ID,sample_type,Groups,Age,Gender,Smoking,Alcohol,Diagnosis,Stage,Height,Weight,BMI,sample_id
+157,Sample,C,67,M,Some days,Sometimes,Rectal cancer,Stage IV,185.42,83.01,24.14,1
+200,Sample,C,27,M,Some days,Sometimes,Rectal cancer,Stage III,,,,a
+133,Sample,C,76,M,Non-smoker,At least 1 drink/day,Rectal cancer,Stage III,177.8,102.06,32.28,3
+250,Sample,C,40,M,Some days,Sometimes,Rectal cancer,Stage III,,,,4
+109,Sample,C,45,M,Non-smoker,At least 1 drink/day,Rectal cancer,Stage I/II,187.96,95.25,26.96,5
+77,Sample,C,56,M,Some days,At least 1 drink/day,Rectal cancer,Stage I/II,,,,6
+177,Sample,C,63,F,Some days,Sometimes,Rectal cancer,Stage III,,,,b
+132,Sample,C,51,F,Some days,No alcohol,Rectal cancer,Stage I/II,,,,8
+257,Sample,C,50,F,Some days,Sometimes,Rectal cancer,Stage III,,,,9
+173,Sample,C,71,M,Some days,Sometimes,Rectal cancer,Stage IV,,,,10
+284,Sample,C,62,M,Non-smoker,At least 1 drink/day,Rectal cancer,Stage I/II,177.8,70.31,22.24,11
+283,Sample,C,58,M,Everyday,At least 1 drink/day,Rectal cancer,Stage I/II,,,,12
+282,Sample,C,59,F,Some days,Sometimes,Rectal cancer,Stage IV,154.94,52.16,21.73,c
+292,Sample,C,50,M,Non-smoker,At least 1 drink/day,Rectal cancer,Stage III,175.26,79.83,25.99,14
+300,Sample,C,67,F,Some days,At least 1 drink/day,Rectal cancer,Stage I/II,160.02,66.68,26.04,15
+285,Sample,C,86,F,Non-smoker,At least 1 drink/day,Rectal cancer,Stage I/II,,,,16
+281,Sample,C,60,M,Non-smoker,At least 1 drink/day,Rectal cancer,Stage III,,,,17
+295,Sample,C,60,F,Some days,No alcohol,Rectal cancer,Stage I/II,,,,d
+279,Sample,C,50,M,Some days,At least 1 drink/day,Rectal cancer,Stage III,,,,19
+291,Sample,C,30,F,Non-smoker,At least 1 drink/day,Rectal cancer,Stage I/II,,,,20
+5,Sample,C,56,F,Some days,Sometimes,Colon cancer,Stage IV,162.56,72.57,27.46,21
+11,Sample,C,56,M,Some days,Sometimes,Colon cancer,Stage IV,185.42,61.23,17.81,22
+24,Sample,C,74,F,Non-smoker,At least 1 drink/day,Colon cancer,Stage III,157.48,51.71,20.85,23
+34,Sample,C,62,M,Some days,No alcohol,Colon cancer,Stage III,180.34,88.45,27.2,24
+115,Sample,C,53,F,Non-smoker,At least 1 drink/day,Colon cancer,Stage IV,,,,25
+152,Sample,C,52,F,Some days,At least 1 drink/day,Colon cancer,Stage IV,,,,26
+168,Sample,C,53,M,Non-smoker,At least 1 drink/day,Colon cancer,Stage IV,,,,27
+202,Sample,C,47,F,Non-smoker,At least 1 drink/day,Colon cancer,Stage III,167.64,81.65,29.05,28
+253,Sample,C,48,F,Some days,At least 1 drink/day,Colon cancer,Stage IV,165.1,52.16,19.14,29
+263,Sample,C,66,M,Some days,Sometimes,Colon cancer,Stage IV,167.64,72.57,25.82,30
+277,Sample,C,42,F,Non-smoker,At least 1 drink/day,Colon cancer,Stage IV,170.18,90.26,31.17,31
+289,Sample,C,75,M,Non-smoker,At least 1 drink/day,Colon cancer,Stage IV,185.42,93.89,27.31,32
+304,Sample,C,88,F,Non-smoker,At least 1 drink/day,Colon cancer,Stage III,,,,33
+310,Sample,C,45,F,Some days,Sometimes,Colon cancer,Stage IV,,,,34
+312,Sample,C,70,M,Some days,At least 1 drink/day,Colon cancer,Stage IV,175.26,88.45,28.8,35
+561,Sample,C,70,M,Some days,Sometimes,Colon cancer,Stage I/II,165.1,70.31,25.79,36
+575,Sample,C,67,M,Some days,At least 1 drink/day,Colon cancer,Stage I/II,,,,37
+12,Sample,C,55,M,Non-smoker,At least 1 drink/day,Colon cancer,Stage IV,,,,38
+13,Sample,C,29,M,Some days,Sometimes,Colon cancer,Stage IV,180.34,98.88,30.4,39
+14,Sample,C,46,F,Some days,Sometimes,Rectal cancer,Stage IV,152.4,63.96,27.54,40
+20,Sample,C,68,F,Some days,At least 1 drink/day,Rectal cancer,Stage IV,157.48,55.34,22.31,41
+28,Sample,C,45,F,Some days,Sometimes,Colon cancer,Stage IV,175.26,86.18,28.06,42
+49,Sample,C,50,F,Some days,Sometimes,Colon cancer,Stage IV,160.02,58.06,22.67,43
+53,Sample,C,32,M,Some days,Sometimes,Colon cancer,Stage III,175.26,86.18,28.06,44
+122,Sample,C,55,F,Some days,Sometimes,Colon cancer,Stage IV,157.48,63.5,25.61,45
+139,Sample,C,66,F,Some days,Sometimes,Colon cancer,Stage I/II,,,,46
+154,Sample,C,86,F,Some days,Sometimes,Colon cancer,Stage IV,157.48,63.05,25.42,47
+156,Sample,C,65,M,Everyday,At least 1 drink/day,Rectal cancer,Stage III,180.34,79.38,24.41,48
+162,Sample,C,66,F,Some days,At least 1 drink/day,Colon cancer,Stage IV,170.18,69.4,23.96,49
+187,Sample,C,37,M,Everyday,At least 1 drink/day,Colon cancer,Stage IV,,,,50
+193,Sample,C,73,M,Non-smoker,At least 1 drink/day,Colon cancer,Stage IV,,,,51
+214,Sample,C,68,M,Some days,Sometimes,Colon cancer,Stage IV,175.26,84.82,27.61,52
+276,Sample,C,51,M,Some days,At least 1 drink/day,Colon cancer,Stage III,167.64,81.65,29.05,53
+278,Sample,C,45,F,Some days,Sometimes,Colon cancer,Stage IV,160.02,52.16,20.37,54
+454,Sample,C,42,F,Some days,At least 1 drink/day,Colon cancer,Stage I/II,,,,55
+491,Sample,C,77,M,Some days,Sometimes,Colon cancer,Stage III,172.72,96.16,32.23,56
+448,Sample,C,63,M,Some days,Sometimes,Rectal cancer,Stage III,177.8,89.36,28.27,57
+562,Sample,C,46,M,Non-smoker,At least 1 drink/day,Rectal cancer,Stage I/II,170.18,74.84,25.84,58
+452,Sample,C,61,F,Some days,Sometimes,Colon cancer,Stage I/II,165.1,81.19,29.79,59
+575,Sample,C,67,M,Everyday,At least 1 drink/day,Colon cancer,Stage I/II,,,,60
+447,Sample,C,51,M,Some days,Sometimes,Rectal cancer,Stage I/II,,,,61
+427,Sample,C,68,F,Some days,Sometimes,Rectal cancer,Stage I/II,,,,62
+457,Sample,C,62,M,Everyday,At least 1 drink/day,Colon cancer,Stage IV,,,,63
+469,Sample,C,78,F,Non-smoker,At least 1 drink/day,Colon cancer,Stage I/II,,,,64
+561,Sample,C,70,M,Non-smoker,Sometimes,Colon cancer,Stage I/II,165.1,70.31,25.79,65
+455,Sample,C,49,M,Some days,Sometimes,Colon cancer,Stage I/II,187.96,99.79,28.25,66
+131,Sample,H,48,F,Everyday,At least 1 drink/day,,,165.1,64.41,23.63,67
+141,Sample,H,50,M,Non-smoker,Sometimes,,,185.42,72.57,21.11,68
+244,Sample,H,49,M,Some days,At least 1 drink/day,,,182.88,102.06,30.52,69
+179,Sample,H,44,M,Non-smoker,Sometimes,,,182.88,102.06,30.52,70
+205,Sample,H,65,M,Some days,Sometimes,,,185.42,95.25,27.71,71
+163,Sample,H,63,M,Non-smoker,At least 1 drink/day,,,170.18,68.04,23.49,72
+140,Sample,H,57,F,Non-smoker,Sometimes,,,172.72,74.84,25.09,73
+170,Sample,H,52,F,Some days,At least 1 drink/day,,,172.72,108.86,36.49,74
+237,Sample,H,52,F,Some days,No alcohol,,,175.26,81.65,26.58,75
+196,Sample,H,63,F,Non-smoker,At least 1 drink/day,,,172.72,95.25,31.93,76
+59,Sample,H,60,F,Some days,Sometimes,,,157.48,58.97,23.78,77
+213,Sample,H,45,M,Non-smoker,At least 1 drink/day,,,180.34,108.86,33.47,78
+210,Sample,H,64,F,Some days,Sometimes,,,165.1,71.21,26.13,79
+251,Sample,H,52,F,Non-smoker,Sometimes,,,167.64,65.77,23.4,80
+186,Sample,H,56,F,Some days,At least 1 drink/day,,,165.1,130.63,47.93,81
+65,Sample,H,47,F,Some days,Sometimes,,,154.94,73.48,30.61,82
+75,Sample,H,64,F,Non-smoker,At least 1 drink/day,,,152.4,60.78,26.17,83
+113,Sample,H,58,F,Some days,Sometimes,,,167.64,77.11,27.44,84
+88,Sample,H,46,F,Some days,Sometimes,,,165.1,57.15,20.97,85
+87,Sample,H,49,M,Everyday,At least 1 drink/day,,,185.42,147.42,42.88,86
+120,Sample,H,62,M,Some days,Sometimes,,,177.8,90.72,28.7,87
+57,Sample,H,71,M,Some days,Sometimes,,,180.34,73.94,22.73,88
+107,Sample,H,44,F,Some days,Sometimes,,,154.94,102.06,42.51,89
+118,Sample,H,60,M,Non-smoker,No alcohol,,,177.8,70.31,22.24,90
+93,Sample,H,53,M,Non-smoker,At least 1 drink/day,,,187.96,145.15,41.09,91
+119,Sample,H,60,M,Non-smoker,Sometimes,,,180.34,81.65,25.1,92
+63,Sample,H,24,M,Some days,No alcohol,,,180.34,73.94,22.73,93
+79,Sample,H,61,M,Non-smoker,At least 1 drink/day,,,180.34,83.91,25.8,94
+64,Sample,H,57,F,Some days,Sometimes,,,175.26,101.6,33.08,95
+46,Sample,H,57,F,Everyday,Sometimes,,,170.18,61.23,21.14,96
+40,Sample,H,43,M,Some days,At least 1 drink/day,,,200.66,108.86,27.04,97
+78,Sample,H,53,F,Non-smoker,Sometimes,,,165.1,68.04,24.96,98
+76,Sample,H,52,M,Some days,At least 1 drink/day,,,177.8,85.28,26.97,99
+108,Sample,H,51,F,Some days,Sometimes,,,172.72,70.31,23.57,100
+45,Sample,H,54,M,Some days,At least 1 drink/day,,,175.26,74.84,24.37,101
+483,Sample,H,73,M,Some days,No alcohol,,,177.8,94.35,29.84,102
+482,Sample,H,54,M,Some days,No alcohol,,,172.72,89.81,30.11,103
+485,Sample,H,80,M,Non-smoker,Sometimes,,,172.72,77.11,25.85,104
+466,Sample,H,64,M,Non-smoker,At least 1 drink/day,,,170.18,113.4,39.16,105
+433,Sample,H,48,M,Some days,At least 1 drink/day,,,185.42,106.59,31,106
+437,Sample,H,75,M,Some days,Sometimes,,,172.72,76.2,25.54,107
+406,Sample,H,54,M,Some days,Sometimes,,,182.88,108.86,32.55,108
+409,Sample,H,18,F,Some days,At least 1 drink/day,,,170.18,61.23,21.14,109
+442,Sample,H,69,F,Non-smoker,At least 1 drink/day,,,160.02,93.89,36.67,110
+423,Sample,H,36,M,Some days,Sometimes,,,177.8,77.11,24.39,111
+294,Sample,H,56,F,Some days,No alcohol,,,167.64,77.11,27.44,112
+272,Sample,H,63,F,Non-smoker,At least 1 drink/day,,,157.48,78.47,31.64,113
+288,Sample,H,41,F,Some days,At least 1 drink/day,,,160.02,54.43,21.26,114
+271,Sample,H,62,F,Some days,At least 1 drink/day,,,154.94,63.5,26.45,115
+208,Sample,H,49,F,Some days,Sometimes,,,,,,116
+199,Sample,H,54,M,Some days,At least 1 drink/day,,,165.1,70.31,25.79,117
+216,Sample,H,44,F,Some days,At least 1 drink/day,,,160.02,65.77,25.69,118
+3,Sample,H,57,M,Non-smoker,Sometimes,,,177.8,103.87,32.86,119
+6,Sample,H,21,F,Some days,At least 1 drink/day,,,160.02,59.42,23.21,120
+37,Sample,H,68,M,Non-smoker,Sometimes,,,175.26,113.4,36.92,121
+159,Sample,H,57,F,Everyday,Sometimes,,,154.94,60.78,25.32,122
+192,Sample,H,64,F,Non-smoker,At least 1 drink/day,,,175.26,72.57,23.63,123
+252,Sample,H,70,F,Non-smoker,At least 1 drink/day,,,160.02,90.72,35.43,124
+258,Sample,H,63,F,Non-smoker,At least 1 drink/day,,,160.02,68.04,26.57,125
+264,Sample,H,38,M,Non-smoker,Sometimes,,,177.8,133.81,42.33,126
+265,Sample,H,59,F,Some days,No alcohol,,,170.18,125.19,43.23,127
+406,Sample,H,54,M,Some days,Sometimes,,,182.88,108.86,32.55,128
+409,Sample,H,18,F,Some days,At least 1 drink/day,,,170.18,61.23,21.14,129
+423,Sample,H,36,M,Some days,Sometimes,,,177.8,77.11,24.39,130
+433,Sample,H,48,M,Some days,At least 1 drink/day,,,185.42,106.59,31,131
+437,Sample,H,75,M,Some days,Sometimes,,,172.72,76.2,25.54,132
+442,Sample,H,69,F,Non-smoker,At least 1 drink/day,,,160.02,93.89,36.67,133
+581,Sample,H,44,F,Everyday,At least 1 drink/day,,,137.16,72.57,38.58,134
+586,Sample,H,59,M,Non-smoker,At least 1 drink/day,,,180.34,77.11,23.71,135
+475,Sample,H,70,M,Non-smoker,At least 1 drink/day,,,182.88,90.72,27.12,136
+566,Sample,H,76,F,Everyday,Sometimes,,,157.48,49.9,20.12,137
+577,Sample,H,66,F,Non-smoker,At least 1 drink/day,,,157.48,72.57,29.26,138
+581,Sample,H,44,F,Everyday,At least 1 drink/day,,,137.16,72.57,38.58,139
+488,Sample,H,66,F,Some days,At least 1 drink/day,,,172.72,81.19,27.22,140
+489,Sample,H,50,M,Some days,At least 1 drink/day,,,182.88,97.52,29.16,141
+490,Sample,H,60,M,Some days,Sometimes,,,187.96,85.28,24.14,142
+492,Sample,H,60,M,Non-smoker,Sometimes,,,177.8,100.7,31.85,143
+498,Sample,H,78,M,Non-smoker,Sometimes,,,172.72,119.29,39.99,144
+43,Sample,H,25,F,Some days,At least 1 drink/day,,,172.72,81.65,27.37,145
+2,Sample,H,57,M,Non-smoker,At least 1 drink/day,,,190.5,87.09,24,146
+61,Sample,H,21,F,Some days,Sometimes,,,175.26,108.86,35.44,147
+39,Sample,H,36,M,Some days,Sometimes,,,180.34,72.57,22.32,148
+18,Sample,H,52,M,Non-smoker,Sometimes,,,172.72,99.79,33.45,149
+21,Sample,H,61,M,Non-smoker,At least 1 drink/day,,,180.34,81.65,25.1,150
+30,Sample,H,71,F,Some days,Sometimes,,,160.02,53.07,20.73,151
+1,Sample,H,59,F,Non-smoker,At least 1 drink/day,,,165.1,74.84,27.46,152
+7,Sample,H,60,F,Everyday,Sometimes,,,165.1,58.97,21.63,153
+56,Sample,H,74,F,Some days,No alcohol,,,152.4,64.86,27.93,154
+100,Sample,H,31,F,Some days,No alcohol,,,167.64,115.67,41.16,155
+98,Sample,H,51,M,Some days,At least 1 drink/day,,,185.42,70.31,20.45,156
+588,Sample,H,56,F,Everyday,Sometimes,,,165.1,90.72,33.28,157
+586,Sample,H,59,M,Non-smoker,At least 1 drink/day,,,180.34,77.11,23.71,158
+183,Sample,P,63,F,Some days,Sometimes,,,,,,159
+195,Sample,P,64,M,Some days,At least 1 drink/day,,,182.88,88.45,26.45,160
+136,Sample,P,51,M,Some days,Sometimes,,,,,,161
+151,Sample,P,44,M,Some days,Sometimes,,,,,,162
+220,Sample,P,42,M,Some days,Sometimes,,,,,,163
+248,Sample,P,54,F,Some days,Sometimes,,,,,,164
+223,Sample,P,50,F,Some days,Sometimes,,,,,,165
+178,Sample,P,55,M,Some days,At least 1 drink/day,,,175.26,99.79,32.49,166
+241,Sample,P,52,M,Some days,Sometimes,,,,,,167
+221,Sample,P,86,F,Non-smoker,At least 1 drink/day,,,167.64,60.33,21.47,168
+175,Sample,P,57,F,Some days,Sometimes,,,,,,169
+172,Sample,P,59,M,Non-smoker,At least 1 drink/day,,,167.64,70.31,25.02,170
+181,Sample,P,54,M,Non-smoker,At least 1 drink/day,,,177.8,88.45,27.98,171
+190,Sample,P,57,F,Some days,Sometimes,,,,,,172
+182,Sample,P,46,M,Some days,At least 1 drink/day,,,182.88,90.72,27.12,173
+174,Sample,P,56,F,Non-smoker,At least 1 drink/day,,,170.18,81.65,28.19,174
+137,Sample,P,53,F,Some days,At least 1 drink/day,,,149.86,76.2,33.93,175
+155,Sample,P,46,M,Some days,Sometimes,,,,,,176
+239,Sample,P,59,M,Non-smoker,At least 1 drink/day,,,187.96,87.09,24.65,177
+116,Sample,P,56,M,Non-smoker,No alcohol,,,167.64,68.04,24.21,178
+72,Sample,P,39,M,Non-smoker,At least 1 drink/day,,,172.72,72.57,24.33,179
+35,Sample,P,52,M,Some days,At least 1 drink/day,,,180.34,86.18,26.5,180
+106,Sample,P,58,F,Some days,Sometimes,,,,,,181
+86,Sample,P,52,M,Some days,Sometimes,,,,,,182
+52,Sample,P,61,M,Some days,At least 1 drink/day,,,177.8,122.47,38.74,183
+47,Sample,P,62,F,Non-smoker,At least 1 drink/day,,,162.56,76.2,28.84,184
+29,Sample,P,48,F,Some days,At least 1 drink/day,,,162.56,61.69,23.34,185
+123,Sample,P,51,F,Some days,At least 1 drink/day,,,162.56,67.13,25.4,186
+70,Sample,P,62,M,Some days,At least 1 drink/day,,,180.34,90.72,27.89,187
+171,Sample,P,54,M,Some days,Sometimes,,,,,,188
+102,Sample,P,63,F,Non-smoker,At least 1 drink/day,,,167.64,113.4,40.35,189
+74,Sample,P,64,M,Some days,No alcohol,,,175.26,95.25,31.01,190
+596,Sample,P,61,M,Some days,Sometimes,,,,,,191
+598,Sample,P,54,M,Some days,Sometimes,,,,,,192
+474,Sample,P,55,F,Some days,Sometimes,,,,,,193
+556,Sample,P,49,F,Some days,Sometimes,,,170.18,63.5,21.93,194
+413,Sample,P,54,F,Some days,At least 1 drink/day,,,167.64,90.72,32.28,195
+446,Sample,P,58,F,Some days,Sometimes,,,,,,196
+552,Sample,P,57,F,Some days,At least 1 drink/day,,,157.48,88.45,35.67,197
+415,Sample,P,58,F,Some days,At least 1 drink/day,,,172.72,86.18,28.89,198
+470,Sample,P,52,F,Some days,Sometimes,,,,,,199
+255,Sample,P,52,M,Some days,At least 1 drink/day,,,190.5,79.38,21.87,200
+303,Sample,P,50,F,Some days,Sometimes,,,,,,201
+311,Sample,P,50,F,Some days,Sometimes,,,,,,202
+48,Sample,P,58,F,Some days,At least 1 drink/day,,,167.64,172.37,61.33,203
+308,Sample,P,55,M,Non-smoker,At least 1 drink/day,,,182.88,136.08,40.69,204
+290,Sample,P,58,F,Some days,Sometimes,,,,,,205
+266,Sample,P,53,M,Some days,Sometimes,,,,,,206
+267,Sample,P,60,M,Some days,Sometimes,,,,,,207
+269,Sample,P,53,F,Some days,At least 1 drink/day,,,160.02,99.79,38.97,208
+238,Sample,P,55,F,Some days,Sometimes,,,,,,209
+229,Sample,P,62,F,Some days,At least 1 drink/day,,,167.64,108.86,38.74,210
+142,Sample,P,56,F,Some days,Sometimes,,,,,,211
+149,Sample,P,63,M,Some days,Sometimes,,,,,,212
+232,Sample,P,51,F,Some days,Sometimes,,,,,,213
+228,Sample,P,52,M,Some days,At least 1 drink/day,,,172.72,95.25,31.93,214
+160,Sample,P,61,F,Some days,At least 1 drink/day,,,170.18,81.65,28.19,215
+227,Sample,P,63,F,Some days,Sometimes,,,,,,216
+402,Sample,P,52,M,Some days,Sometimes,,,,,,217
+563,Sample,P,63,F,Some days,Sometimes,,,,,,218
+560,Sample,P,53,F,Non-smoker,At least 1 drink/day,,,167.64,45.81,16.3,219
+450,Sample,P,64,M,Everyday,At least 1 drink/day,,,185.42,90.72,26.39,220
+571,Sample,P,51,F,Some days,At least 1 drink/day,,,165.1,62.14,22.8,221
+569,Sample,P,59,F,Some days,Sometimes,,,,,,222
+10,Sample,P,56,M,Some days,At least 1 drink/day,,,162.56,106.14,40.17,223
+4,Sample,P,57,M,Some days,At least 1 drink/day,,,185.42,127.01,36.94,224
+17,Sample,P,61,M,Non-smoker,At least 1 drink/day,,,175.26,79.38,25.84,225
+91,Sample,P,63,M,Non-smoker,At least 1 drink/day,,,172.72,86.18,28.89,226
+99,Sample,P,58,F,Some days,Sometimes,,,,,,227
+479,Sample,P,56,F,Some days,Sometimes,,,,,,228
+580,Sample,P,57,F,Some days,At least 1 drink/day,,,165.1,79.38,29.12,229
+582,Sample,P,41,M,Some days,Sometimes,,,,,,230
+493,Sample,P,37,F,Some days,Sometimes,,,,,,231
+506,Sample,P,46,M,Some days,Sometimes,,,,,,232
+507,Sample,P,62,M,Non-smoker,At least 1 drink/day,,,187.96,108.86,30.81,233
+591,Sample,P,50,M,Some days,Sometimes,,,,,,234

@@ -1,0 +1,12 @@
+inst/doc
+
+*.RData
+*.RDataTmp
+*.Rhistory
+
+_targets/
+_targets_r/
+results/
+Shiny/_targets
+Shiny/Output
+

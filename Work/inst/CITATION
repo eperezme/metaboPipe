@@ -1,9 +1,0 @@
-bibentry(
-  key      = "R-metaboPipe",
-  bibtype  = "Misc",
-  title    = "metaboPipe: Create pipelines for metabolomics data analysis",
-  author   = person("Eduard", "Perez"),
-  year     = "2024",
-  note     = "R package version 0.0.0.9000",
-  url      = "https://github.com/eperezme/metaboPipe"
-)
