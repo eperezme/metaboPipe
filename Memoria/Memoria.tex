@@ -525,7 +525,7 @@ The datasets employed for the purpose of this study were obtained from public re
 
 The datasets selected were 2:
 \begin{itemize}
-    \item \textbf{MTBLS79:} \cite{kirwanDirectInfusionMass2014} This dataset represents a systematic evaluation of the reproducibility of a multi-batch direct-infusion mass spectrometry (DIMS)-based metabolomics study of cardiac tissue extracts. It comprises twenty biological samples (cow vs. sheep) that were analysed repeatedly, in 8 batches across 7 days, together with a concurrent set of quality control (QC) samples. Data are presented from each step of the data processing workflow and are available through MetaboLights. This dataset was selected due to its importance in the field of metabolomics and its data aviability.
+    \item \textbf{MTBLS79:} \cite{kirwanDirectInfusionMass2014} This dataset represents a systematic evaluation of the reproducibility of a multi-batch direct-infusion mass spectrometry (DIMS)-based metabolomics study of cardiac tissue extracts. It comprises twenty biological samples (cow vs. sheep) that were analysed repeatedly, in 8 batches across 7 days, together with a concurrent set of \gls{qc} samples. Data are presented from each step of the data processing workflow and are available through MetaboLights. This dataset was selected due to its importance in the field of metabolomics and its data aviability.
     \item \textbf{ST000284:} \cite{zhuColorectalCancerDetection2014} This dataset from MetaboWorkbench includes a study on colorectal cancer (CRC) using targeted liquid chromatography-tandem mass spectrometry. It examines 158 metabolites across 25 pathways in 234 serum samples (66 CRC patients, 76 polyp patients, 92 healthy controls). Blood samples were collected after fasting and bowel preparation. This dataset was selected due to its data aviability, its diversity (3 groups) and amount of samples.
 
 \end{itemize}
@@ -593,7 +593,7 @@ The pipeline was developed using the R programming language \cite{R} and the pac
 
 
 
-\chapter{Results} \todo{add a summary of 1: Number of functions and 2: Number of lines of code}
+\chapter{Results}
 
 \section{Pipeline}
 The literature review provided valuable insights into the most commonly used methods and tools for metabolomic data preprocessing. Based on this information, the proposed pipeline steps can be viewed on Figure \ref{fig:pipeline}
@@ -677,8 +677,8 @@ For the pipeline construction, the package includes the following 9 functions:
 The package is distributed with documentation that consists of three parts:
 \begin{itemize}
     \item The help documentation for the methods and functions of the package.
-    \item A PDF manual that includes all the aforementioned methods and functions of the package.
-    \item A tutorial vignette that details the processing of the ST000284 dataset using the package to create and execute a pipeline.
+    \item A PDF manual that includes all the aforementioned methods and functions of the package. \todo{add the url}
+    \item A tutorial vignette that details the processing of the ST000284 dataset using the package to create and execute a pipeline. \todo{add the url}
 \end{itemize}
 
 \section{Shiny app}
@@ -689,14 +689,14 @@ The package is distributed with documentation that consists of three parts:
 A shiny app was developed to allow users to interact with the pipeline without the need for R programming knowledge. The app provides 3 main tabs:
 \begin{itemize}
     \item The \texttt{Data upload} tab allows users to either upload their data or use one of the example data provided.
-    \item The \texttt{Data Config} tab allows users to set the global parameters for the data, like the sample\_ID column, the column to be used as QC or Sample identifier, and the main study factor. It also allows users to visualize the data tables they are working with to ensure the data is correctly loaded.
+    \item The \texttt{Data Config} tab allows users to set the global parameters for the data, like the sample\_ID column, the column to be used as \gls{qc} or Sample identifier, and the main study factor. It also allows users to visualize the data tables they are working with to ensure the data is correctly loaded.
     \item The \texttt{Process Selector} tab allows users to select and configure the different steps of the pipeline. Each step is represented by a card that can be expanded to show the parameters of the step. The user can select the steps they want to include in the pipeline and configure them according to their needs. The app will then generate the \texttt{\_targets.R} file and execute the pipeline from the app.
 \end{itemize}
 
 \chapter{Discussion}
 Different methods for preprocessing metabolomic data are essential to accommodate the diverse types of data encountered in this field. This variety arises due to the numerous factors influencing metabolomic data, which can be biological, technical, or experimental. Each preprocessing method offers unique advantages and disadvantages, therefore choosing the appropriate method can be challenging and is guided by the specific biological question, the nature of the data, and the desired analytical outcomes.
 
-In this work, a general workflow for targeted metabolomics data preprocessing has been proposed. This workflow is not specific as the selection of preprocessing methods affects their order. For example, when using singular value decomposition (SVD) as an imputation method, it is recommended to scale and center the data beforehand, but if we impute the data using quantile regression imputation of left-censored data (QRILC), log-transforming the data beforehand is recommended for better accuracy \cite{weiMissingValueImputation2018}. When normalizing Quantile normalization (QN) is not recomended for datasets with $n < 50$ samples \cite{kohlStateoftheArtData2012} and Probabilistic Quotient Normalization (PQN) is not adequate to use when the number of metabolites is $>$ than the number of samples \cite{dongGroupAggregatingNormalization2011}.
+In this work, a general workflow for targeted metabolomics data preprocessing has been proposed. This workflow is not specific as the selection of preprocessing methods affects their order. For example, when using \gls{svd} as an imputation method, it is recommended to scale and center the data beforehand, but if we impute the data using \gls{qrilc}, log-transforming the data beforehand is recommended for better accuracy \cite{weiMissingValueImputation2018}. When normalizing Quantile normalization (QN) is not recomended for datasets with $n < 50$ samples \cite{kohlStateoftheArtData2012} and Probabilistic Quotient Normalization (PQN) is not adequate to use when the number of metabolites is $>$ than the number of samples \cite{dongGroupAggregatingNormalization2011}.
 These considerations must be factored in when selecting preprocessing methods, making it impractical to establish a one-size-fits-all pipeline
 
 \todo{pq el ordre de la pipeline}
@@ -751,7 +751,7 @@ For normalization, scaling, and transformation of the data, it has been decided 
 
 The implementation of the PC-PR2 method described by \citeauthor{viallonNewPipelineNormalization2021} is also considered. This method first identifies sources of variation using PCA combined with multiple linear regression and then corrects unwanted variations using a random effects model for each metabolite. However, due to the complexity of robustly integrating this method into the package within the available time, it is deferred to future revisions. Nevertheless, the \texttt{pcpr2()} function can be used to visualize the data and identify sources of variation, although correction is not yet possible.
 
-As \texttt{metaboPipe} is based on the \texttt{structToolbox} package, users can easily access the functions provided by the package to perform additional steps not included in \texttt{metaboPipe} like the filtering of QC samples, the removal of metabolites with greater specific Relative Standard Deviation (RSD) and more.
+As \texttt{metaboPipe} is based on the \texttt{structToolbox} package, users can easily access the functions provided by the package to perform additional steps not included in \texttt{metaboPipe} like the filtering of \gls{qc} samples, the removal of metabolites with greater specific Relative Standard Deviation (RSD) and more.
 
 
 
