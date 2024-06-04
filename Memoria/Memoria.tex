@@ -596,7 +596,7 @@ The pipeline was developed using the R programming language \cite{R} and the pac
 \chapter{Results} \todo{add a summary of 1: Number of functions and 2: Number of lines of code}
 
 \section{Pipeline}
-The literature review provided valuable insights into the most commonly used methods and tools for metabolomic data preprocessing. Based on this information, the proposed pipeline steps can be viewed on Figure \cref{fig:pipeline}
+The literature review provided valuable insights into the most commonly used methods and tools for metabolomic data preprocessing. Based on this information, the proposed pipeline steps can be viewed on Figure \ref{fig:pipeline}
 \begin{figure}[ht]
     \centering
     \begin{tikzpicture}[node distance=.75cm and .5cm]
@@ -634,6 +634,8 @@ In this project, an R package named \texttt{metaboPipe} was developed to preproc
 
 \section{Package Overview}
 The \texttt{metaboPipe} package is designed to streamline the preprocessing of metabolomic data by creating a series of user-accessible modules that translate into interconnected steps. These steps can be easily added, modified, and rearranged. The package utilizes the \texttt{targets} package to orchestrate task deployment and dependencies, ensuring that each step is executed in the correct order. The \texttt{structToolbox} package provides the \texttt{DatasetExperiment} object, which serves as the primary data structure throughout the pipeline, along with multiple functions for data transformation.
+
+A total of 94+77+19+186+290+158+73+271+333+403+178+304
 
 The package is hosted on GitHub: \url{https://github.com/eperezme/metaboPipe}. And its main functionalities can be divided into three main categories:
 \begin{itemize}

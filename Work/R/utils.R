@@ -353,7 +353,7 @@ create_pipeline <- function() {
     packages = c(
       'structToolbox', 'SummarizedExperiment', 'VIM', 'impute', 'imputeLCMD',
       'missForest', 'caret', 'pcaMethods', 'tidyverse', 'MetaboAnalystR', 'tinytex',
-      'HotellingEllipse', 'ggforce', 'tools', 'cowplot', 'metaboPipe', 'sva', 'data.table'
+      'HotellingEllipse', 'ggforce', 'tools', 'cowplot', 'metaboPipe', 'sva', 'data.table', 'pcpr2'
     )
   )
 

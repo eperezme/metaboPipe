@@ -18,7 +18,7 @@ tar_option_set(
   packages = c(
     "structToolbox", "SummarizedExperiment", "VIM", "impute", "imputeLCMD",
     "missForest", "caret", "pcaMethods", "tidyverse", "MetaboAnalystR", "tinytex",
-    "HotellingEllipse", "ggforce", "tools", "cowplot", "metaboPipe", "sva", "data.table"
+    "HotellingEllipse", "ggforce", "tools", "cowplot", "metaboPipe", "sva", "data.table", "pcpr2"
   )
 )
 # Declare controller
