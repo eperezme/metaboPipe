@@ -364,8 +364,22 @@ create_pipeline <- function() {
   dir.create(outdir, showWarnings = FALSE) # We create the outdir in case there its not created yet
   outdir <- tools::file_path_as_absolute(outdir) # We get the absolute path of the dir for compatibility
 
-  list(
+  ## Data loading ##
+  dataMatrixPath <- 'data/dataMatrix.csv'
+  sampleMetadataPath <- 'data/sampleMetadata.csv'
+  variableMetadataPath <- 'data/variableMetadata.csv'
+  dataSep <- ','
+  sampleSep <- ','
+  variableSep <- ','
 
+  ## Pipeline ##
+  list(
+    
+    # Load data
+    load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath, dataSep, sampleSep, variableSep),
+
+    # Create experiment
+    createExperiment(experiment, data_loaded, experiment_name = 'Experiment', experiment_description = 'Example experiment'),
 
 
 

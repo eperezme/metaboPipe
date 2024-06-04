@@ -285,7 +285,7 @@ Transformation becomes necessary to address data variance after scaling, aiming 
 
 
 Metabolomic data arrives to the researcher in different shapes and forms depending on the method, the instrument used and the company that analyses. Most of the time those companies do a preprocessing of the data, adjusting for baseline correction, peak picking, and alignment. The preprocessing of this data is a crucial step in the analysis, as it can significantly impact the results and the conclusions drawn from the data.
-For \gls{ms}-based analysis, tools like XCMS \cite{R-xcms} and MZmine \cite{schmidIntegrativeAnalysisMultimodal2023} facilitate preprocessing, while for \gls{nmr} data, packages like BATMAN \cite{R-batman} and RAMSY \cite{guRAMSYRatioAnalysis2013} offer robust preprocessing capabilities . Pretreatment techniques include handling missing values, outlier detection, imputation and normalization.
+For \gls{ms}-based analysis, tools like XCMS \cite{R-xcms} and MZmine \cite{schmidIntegrativeAnalysisMultimodal2023} facilitate preprocessing, while for \gls{nmr} data, packages like BATMAN \cite{R-batman} and RAMSY \cite{guRAMSYRatioAnalysis2013} offer robust preprocessing capabilities. Pretreatment techniques include handling missing values, outlier detection, imputation and normalization.
 
 Nevertheless the field lacks a standardized approach to metabolomic data preprocessing, with inconsistencies in terminology and methodologies.
 \citeauthor{stanstrupMetaRbolomicsToolboxBioconductor2019} in their \citetitle{stanstrupMetaRbolomicsToolboxBioconductor2019} made an extensive revision of both the scientific literature and the R landscape for packages relevant for metabolomic research.
@@ -315,7 +315,7 @@ The project aims to develop a modular pipeline for targeted metabolomic data pre
 
 \begin{enumerate}
     \item Design a new pipeline for the preprocessing of targeted metabolomic data.
-    \item Implement the preprocessing pipeline for targeted metabolomic data using the "targets" package to ensure replicability and efficient management of computational resources.
+    \item Implement the preprocessing pipeline for targeted metabolomic data using the \texttt{targets} package to ensure replicability and efficient management of computational resources.
     \item Select various targeted metabolomic datasets to validate and optimize the performance of the new pipeline, analyzing its quality and consistency.
     \item Make the development accessible to the scientific community by creating detailed documentation and publishing the code in a public repository.
 \end{enumerate}
@@ -635,7 +635,8 @@ In this project, an R package named \texttt{metaboPipe} was developed to preproc
 \section{Package Overview}
 The \texttt{metaboPipe} package is designed to streamline the preprocessing of metabolomic data by creating a series of user-accessible modules that translate into interconnected steps. These steps can be easily added, modified, and rearranged. The package utilizes the \texttt{targets} package to orchestrate task deployment and dependencies, ensuring that each step is executed in the correct order. The \texttt{structToolbox} package provides the \texttt{DatasetExperiment} object, which serves as the primary data structure throughout the pipeline, along with multiple functions for data transformation.
 
-A total of 94+77+19+186+290+158+73+271+333+403+178+304
+%94+77+19+186+290+158+73+271+333+417+178+304 = 2400
+A total of 2400 lines of code were written to develop the \texttt{metaboPipe} package, without counting the vignette and the documentation.
 
 The package is hosted on GitHub: \url{https://github.com/eperezme/metaboPipe}. And its main functionalities can be divided into three main categories:
 \begin{itemize}
@@ -652,7 +653,7 @@ For the pretreatement of the data, the package includes the following functions:
     \item A function to filter the data based on the percentage of missing values both in the features and the samples.
     \item A function to filter the outliers based on a Hotelling's T2 distribution ellipse.
     \item 8 functions to impute the missing values based on the following methods: \textit{Mean, Median, Random Forest (RF), Quantile Regression Imputation of Left-Censored data (QRILC), k-Nearest Neighbors (kNN), Singular Value Decomposition (SVD), Bayesian Principal Component Analysis (BPCA) and Probabilistic Principal Component Analysis (PPCA)}.
-    \item 2 functions to remove the batch effect using either the \textit{Quality Control-Robust Spline Correction (QC-RSC)} method or the \texttt{ComBat} method. \todo{add references to the methods}
+    \item 2 functions to remove the batch effect using either the \textit{Quality Control-Robust Spline Correction (QC-RSC)} method or the \texttt{ComBat} method \cite{kirwan_characterising_2013,johnsonAdjustingBatchEffects2007}.
     \item A function to normalize, scale and transform the data based on the methods provided by the \texttt{metaboAnalystR} package.
     \item 12 data visualization functions to create plots.
     \item 17 utility functions to perform different tasks.
