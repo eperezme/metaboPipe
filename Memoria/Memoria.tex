@@ -1,3 +1,10 @@
+% arara: xelatex
+% arara: makeglossaries
+% arara: xelatex
+% arara: biber
+% arara: xelatex
+
+
 %!TEX program = xelatex
 \documentclass[ENG, BIB]{TFUOC}%IB: CASTELLANO, CAT: CATALÁN, ENG: ANGLÈS
 
@@ -34,12 +41,12 @@
 \urlstyle{same}
 
 % GLOSSARY
-\usepackage[toc, acronym, xindy]{glossaries}
+\usepackage[toc, acronym, nomain]{glossaries}
 \makeglossaries
-\loadglsentries[main]{glossary.tex}
-\setglossarystyle{list}
-\setacronymstyle{long-short}
 \setacronymstyle{long-short-desc}
+\loadglsentries[acronym]{glossary.tex}
+%\setglossarystyle{list}
+%\setacronymstyle{long-short}
 
 
 \usepackage{tikz}
@@ -218,8 +225,8 @@ While the primary objective of preprocessing is to render data comparable across
 
 \subsubsection{MS-based data preprocessing}
 
-\gls{ms}-based analysis involves the measurement of \gls{mz}. When combined with either \gls{lc} or \gls{gc}, the resulting raw GC/LC-MS data encompass three measured variables: \gls{mz}, chromatographic \gls{rt}, and intensity count, thereby constituting a three-dimensional (3D) data structure.
-To streamline the data and eliminate spectral noise and irrelevant biological variability, a two-dimensional (2D) features table is generated through peak picking. This table encompasses all quantified metabolic features from the analyzed samples, with rows corresponding to samples and columns representing variables such as peak areas or intensities, characterized by m/z and retention time in minutes or scan number (m/z-RT pairs).
+\gls{ms}-based analysis involves the measurement of \gls{mz}. When combined with either \gls{lc} or \gls{gc}, the resulting raw \gls{gc}/\gls{lc}-MS data encompass three measured variables: \gls{mz}, chromatographic \gls{rt}, and intensity count, thereby constituting a three-dimensional (3D) data structure.
+To streamline the data and eliminate spectral noise and irrelevant biological variability, a two-dimensional (2D) features table is generated through peak picking. This table encompasses all quantified metabolic features from the analyzed samples, with rows corresponding to samples and columns representing variables such as peak areas or intensities, characterized by \gls{mz} and \gls{rt} in minutes or scan number (m/z-RT pairs).
 The preprocessing of \gls{ms} data involves several steps: 1) denoising and baseline correction; 2) alignment across all samples; 3) peak picking; 4) merging the peaks; and 5) creating a data matrix \cite{chenGuideMetabolomicsAnalysis2022a,sunPretreatingNormalizingMetabolomics2024,xiaoMetaboliteIdentificationQuantitation2012, defernezChapterElevenStrategies2013,troisiChapterDataAnalysis2022,burtonInstrumentalExperimentalEffects2008,trygg01BackgroundEstimation2009,alonsoAnalyticalMethodsUntargeted2015,bloembergWarpingMethodsSpectroscopic2013}.
 
 
@@ -780,8 +787,7 @@ Tot i no complir amb els objectius proposats s'ha creat una eina que s'espera qu
 
 
 
-\printglossary[title=Glossary, toctitle=Glossary]
-\printglossary[type=\acronymtype, title=Acronyms, toctitle=Acronyms]
+\printglossary[type=acronym, style=altlist, title=Glossary, toctitle=Glossary]
 
 
 

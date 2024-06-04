@@ -39,20 +39,20 @@
 				],
 				// Edit the following property to change export directory
 				// "latex-workshop.latex.outDir": "./PDF",
-				"latex-workshop.latex.autoClean.run": "onBuilt",
+				//"latex-workshop.latex.autoClean.run": "onBuilt",
 				"latex-workshop.latex.build.forceRecipeUsage": false,
-				"latex-workshop.synctex.afterBuild.enabled": true,
+				//"latex-workshop.synctex.afterBuild.enabled": true,
 				"latex-workshop.view.pdf.viewer": "tab",
-				"latex-workshop.latex.clean.subfolder.enabled": true,
+				//"latex-workshop.latex.clean.subfolder.enabled": true,
 				// "latex-workshop.latex.magic.args": [
 				// 	"-output-directory=PDF", // to change the output directory
 				// 	"%DOC%"
 				// ],
 				// Remove / comment the next 3 lines to remove dark view for pdf
-				"latex-workshop.view.pdf.color.dark.pageColorsBackground": "#171717", // For Dark Viewwer
-				"latex-workshop.latex.autoBuild.run": "never",
-				"latex-workshop.view.pdf.color.dark.pageColorsForeground": "#FFFFFF", // For Dark Viewer
-				"latex-workshop.view.pdf.color.dark.backgroundColor": "#171717", // For Dark Viewer
+				//"latex-workshop.view.pdf.color.dark.pageColorsBackground": "#171717", // For Dark Viewwer
+				//"latex-workshop.latex.autoBuild.run": "never",
+				//"latex-workshop.view.pdf.color.dark.pageColorsForeground": "#FFFFFF", // For Dark Viewer
+				//"latex-workshop.view.pdf.color.dark.backgroundColor": "#171717", // For Dark Viewer
 				"editor.formatOnSave": true,
 				"latex-workshop.latex.pdfWatch.delay": 500,
 				//"latex-workshop.latex.watch.delay": 500, // Deprecated. See here: https://github.com/sanjib-sen/WebLaTex/issues/8
@@ -65,13 +65,167 @@
 						"language": "latex",
 						"scheme": "file"
 					}
-				]
+				],
+					"latex-workshop.latex.tools": [
+		
+		{
+			"name": "latexmk",
+			"command": "latexmk",
+			"args": [
+				"-synctex=1",
+				"-interaction=nonstopmode",
+				"-file-line-error",
+				"-pdf",
+				"-outdir=%OUTDIR%",
+				"%DOC%"
+			],
+			"env": {}
+		},
+		{
+			"name": "lualatexmk",
+			"command": "latexmk",
+			"args": [
+				"-synctex=1",
+				"-interaction=nonstopmode",
+				"-file-line-error",
+				"-lualatex",
+				"-outdir=%OUTDIR%",
+				"%DOC%"
+			],
+			"env": {}
+		},
+		{
+			"name": "xelatexmk",
+			"command": "latexmk",
+			"args": [
+				"-synctex=1",
+				"-interaction=nonstopmode",
+				"-file-line-error",
+				"-xelatex",
+				"-outdir=%OUTDIR%",
+				"%DOC%"
+			],
+			"env": {}
+		},
+		{
+			"name": "makeglossaries",
+			"command": "makeglossaries",
+			"args": [
+				"%DOCFILE%"
+			]
+		},
+		{
+			"name": "latexmk_rconly",
+			"command": "latexmk",
+			"args": [
+				"%DOC%"
+			],
+			"env": {}
+		},
+		{
+			"name": "pdflatex",
+			"command": "pdflatex",
+			"args": [
+				"-synctex=1",
+				"-interaction=nonstopmode",
+				"-file-line-error",
+				"%DOC%"
+			],
+			"env": {}
+		},
+		{
+			"name": "bibtex",
+			"command": "bibtex",
+			"args": [
+				"%DOCFILE%"
+			],
+			"env": {}
+		},
+		{
+			"name": "rnw2tex",
+			"command": "Rscript",
+			"args": [
+				"-e",
+				"knitr::opts_knit$set(concordance = TRUE); knitr::knit('%DOCFILE_EXT%')"
+			],
+			"env": {}
+		},
+		{
+			"name": "jnw2tex",
+			"command": "julia",
+			"args": [
+				"-e",
+				"using Weave; weave(\"%DOC_EXT%\", doctype=\"tex\")"
+			],
+			"env": {}
+		},
+		{
+			"name": "jnw2texminted",
+			"command": "julia",
+			"args": [
+				"-e",
+				"using Weave; weave(\"%DOC_EXT%\", doctype=\"texminted\")"
+			],
+			"env": {}
+		},
+		{
+			"name": "pnw2tex",
+			"command": "pweave",
+			"args": [
+				"-f",
+				"tex",
+				"%DOC_EXT%"
+			],
+			"env": {}
+		},
+		{
+			"name": "pnw2texminted",
+			"command": "pweave",
+			"args": [
+				"-f",
+				"texminted",
+				"%DOC_EXT%"
+			],
+			"env": {}
+		},
+		{
+			"name": "tectonic",
+			"command": "tectonic",
+			"args": [
+				"--synctex",
+				"--keep-logs",
+				"%DOC%.tex"
+			],
+			"env": {}
+		},
+		{
+			"name": "biber",
+			"command": "biber",
+			"args": [
+				"%DOCFILE%"
+			],
+			"env": {}
+}
+	],
+	"latex-workshop.intellisense.citation.backend": "biblatex",
+	"latex-workshop.latex.recipes": [
+		{
+			"name": "FullXelatex",
+			"tools": [
+				"xelatexmk",
+				"makeglossaries",
+				"xelatexmk",
+				"biber",
+				"xelatexmk"
+			]
+		},
+	]
 			},
 			"extensions": [
 				"James-Yu.latex-workshop",
 				"GitHub.copilot",
 				// Remove the line below if you do not want Live-Collaboration Feature
-				"ms-vsliveshare.vsliveshare",
+				//"ms-vsliveshare.vsliveshare",
 				// Uncomment the line below if you do not want LanguageTool Support
 				// "valentjn.vscode-ltex",
 				// Remove the line below if you do not want Grammarly
