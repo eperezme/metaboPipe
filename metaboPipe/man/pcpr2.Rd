@@ -27,7 +27,7 @@ pcpr2(
 \item{out_name}{The name of the output plot file. Default is "pcpr2".}
 }
 \value{
-The plot object showing the variability in metabolomic data explained by covariates.
+The pcpr2 output object.
 }
 \description{
 This function performs PCPR2 analysis on metabolomic data to assess the variability explained by covariates.
