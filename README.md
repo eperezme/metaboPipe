@@ -30,7 +30,7 @@ You can install the development version of metaboPipe from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("eperezme/metaboPipe", subdir = "Work")
+devtools::install_github("eperezme/metaboPipe", subdir = "metaboPipe")
 ```
 
 ## Introduction to `metaboPipe` and its functionalities
@@ -141,7 +141,7 @@ tar_option_set(
   packages = c(
     "structToolbox", "SummarizedExperiment", "VIM", "impute", "imputeLCMD",
     "missForest", "caret", "pcaMethods", "tidyverse", "MetaboAnalystR", "tinytex",
-    "HotellingEllipse", "ggforce", "tools", "cowplot", "metaboPipe"
+    "HotellingEllipse", "ggforce", "tools", "cowplot", "metaboPipe", "sva", "data.table", "pcpr2"
   )
 )
 ```
