@@ -506,7 +506,7 @@ In order to select the methods and tools that will be used in the pipeline, a de
 \end{itemize}
 
 
-\chapter{Materials and methods} \todo{Metodes: Com Desenvolupo // Materials: Amb que ho fas}
+\chapter{Materials and methods}
 
 \section{Literature review}
 The literature selected for the review was obtained from multiple journals. The search was conducted using the following keywords: "metabolomics", "data preprocessing", "data pretreatment", "metabolomics pipeline", "metabolomics tools", "metabolomics R packages", "targeted metabolomics", "nutrimetabolomics", "metabolomics proce". The search was limited to articles published in the last 20 years, with a focus on metabolomics data preprocessing and pretreatment methodologies. The review aimed to identify the most commonly used methods and tools for metabolomic data preprocessing and pretreatment, as well as to explore recent advancements in the field. The review also sought to identify gaps in the existing literature and to inform the development of the new pipeline.
@@ -652,7 +652,7 @@ The \texttt{metaboPipe} package is designed to streamline the pretreatement of m
 %94+77+19+186+290+158+73+271+333+417+178+304 = 2400
 A total of 2400 lines of code were written to develop the \texttt{metaboPipe} package, without counting the vignette and the documentation.
 
-The package is hosted on GitHub: \url{https://github.com/eperezme/metaboPipe}. And its main functionalities can be divided into three main categories:
+The package is hosted on \href{https://github.com/eperezme/metaboPipe}{GitHub}. And its main functionalities can be divided into three main categories:
 \begin{itemize}
     \item \textbf{Data manipulation:} These functions are the core of the package, as they transform the data into the desired formats and apply the diversity of methods to perform the pretreatement steps including the visualization.
     \item \textbf{Target factories:} They are the pipeline contruction functions for the users to interact with, as they use the targets package to create pipeline nodes that use the data manipulation functions. Each factory is intended to represent a specific pretreatement step.
@@ -691,8 +691,8 @@ For the pipeline construction, the package includes the following 9 functions:
 The package is distributed with documentation that consists of three parts:
 \begin{itemize}
     \item The help documentation for the methods and functions of the package.
-    \item A PDF manual that includes all the aforementioned methods and functions of the package. \todo{add the url}
-    \item A tutorial vignette that details the processing of the ST000284 dataset using the package to create and execute a pipeline. \todo{add the url}
+    \item A \href{https://github.com/eperezme/metaboPipe/blob/main/metaboPipe_0.1.pdf}{PDF manual} that includes all the aforementioned methods and functions of the package.
+    \item A \href{https://github.com/eperezme/metaboPipe/tree/main/metaboPipe/vignettes}{tutorial vignette} that details the processing of the ST000284 dataset using the package to create and execute a pipeline.
 \end{itemize}
 
 \section{Shiny app}
