@@ -61,7 +61,6 @@
 }
 \usepackage{lscape}
 \usepackage{longtable}
-% \usepackage{tocloft} % For adjusting space in table of contents
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%-------------- Document Headers and font settings ---------------%%
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -105,7 +104,7 @@
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%-------------- TEMP DOCUMENT SETTINGS FOR COMMENTS ---------------%%
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage[colorinlistoftodos, textwidth=65mm, shadow]{todonotes}
+% \usepackage[colorinlistoftodos, textwidth=65mm, shadow]{todonotes}
 
 
     
@@ -713,7 +712,7 @@ Different methods for pretreatement metabolomic data are essential to accommodat
 In this work, a general workflow for targeted metabolomics data pretreatement has been proposed. This workflow is not specific as the selection of pretreatement methods affects their order. For example, when using \gls{svd} as an imputation method, it is recommended to scale and center the data beforehand, but if we impute the data using \gls{qrilc}, log-transforming the data beforehand is recommended for better accuracy \cite{weiMissingValueImputation2018}. When normalizing Quantile normalization (QN) is not recomended for datasets with $n < 50$ samples \cite{kohlStateoftheArtData2012} and Probabilistic Quotient Normalization (PQN) is not adequate to use when the number of metabolites is $>$ than the number of samples \cite{dongGroupAggregatingNormalization2011}.
 These considerations must be factored in when selecting pretreatement methods, making it impractical to establish a one-size-fits-all pipeline
 
-\todo{pq el ordre de la pipeline}
+% \todo{pq el ordre de la pipeline}
 
 Due to the diversity of methods and their interactions, this work focuses on developing a tool that facilitates the easy and interactive creation of customized data pretreatement sequences. This tool, the \texttt{metaboPipe} package, offers functions to perform common pretreatement steps and enables the creation of tailored pipelines using these steps. Additionally, the package includes a shiny app that allows users to interact with the pipeline without requiring R programming skills.
 
@@ -757,7 +756,9 @@ For filtering missing values, the modified 80\% rule is adopted by default: if a
 
 To identify and filter outliers, a Hotelling's T2 distribution ellipse is used with a default significance level of 95\%, adjustable to 99\% if desired. This method is chosen for its robustness and flexibility in detecting outliers in multivariate data, considering the covariance between variables \cite{wuUsingNontargetedLCMS2021, viallonNewPipelineNormalization2021}.
 
-Batch effects are a common issue in metabolomics studies, introducing unwanted variability into the data. To correct this effect, two methods have been implemented: the \texttt{QC-RSC} method and the \texttt{ComBat} method, which are widely used \todo{add citations}.
+Batch effects are a common issue in metabolomics studies, introducing unwanted variability into the data. To correct this effect, two methods have been implemented: the \texttt{QC-RSC} method and the \texttt{ComBat} method, which are widely used \
+
+% \todo{add citations}.
 
 Missing values are imputed using the eight most common methods: Mean of the feature, Median of the feature,\gls{rf}, \gls{qrilc}, \gls{knn}, \gls{svd}, \gls{bpca}, and \gls{ppca}. These methods were selected based on their popularity and effectiveness in imputing missing values in metabolomic data \cite{weiMissingValueImputation2018,sunPretreatingNormalizingMetabolomics2024}.
 

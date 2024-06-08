@@ -49,8 +49,8 @@
 %% --------------- Basat en l'estil article -------------------
 
 \LoadClass[12pt]{report}
-% \RequirePackage{geometry}
-\RequirePackage[paperwidth=275.9mm, paperheight=279.4mm]{geometry} 
+\RequirePackage{geometry}
+% \RequirePackage[paperwidth=275.9mm, paperheight=279.4mm]{geometry} 
 
 \RequirePackage{sectsty}
 \chapterfont{\color{darkblueUOC}}  % sets colour of chapters
@@ -69,8 +69,8 @@
 \setlength{\textheight}{23cm}
 \setlength{\textwidth}{17cm}
 \setlength{\oddsidemargin}{0.75cm}
-% \setlength{\evensidemargin}{0.75cm}
-\setlength{\evensidemargin}{0.95cm}
+\setlength{\evensidemargin}{0.75cm}
+% \setlength{\evensidemargin}{0.95cm}
 \setlength{\headheight}{1cm}
 \setlength{\hoffset}{-1truecm}
 \setlength{\voffset}{-2truecm}
