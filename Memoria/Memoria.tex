@@ -61,7 +61,6 @@
 }
 \usepackage{lscape}
 \usepackage{longtable}
-% \usepackage{tocloft} % For adjusting space in table of contents
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%-------------- Document Headers and font settings ---------------%%
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -105,7 +104,7 @@
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%-------------- TEMP DOCUMENT SETTINGS FOR COMMENTS ---------------%%
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage[colorinlistoftodos, textwidth=65mm, shadow]{todonotes}
+% \usepackage[colorinlistoftodos, textwidth=65mm, shadow]{todonotes}
 
 
     
@@ -114,7 +113,7 @@
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
     %Introducción de datos del trabajo
-    \title{metaboPipe: A Modular Pipeline for Metabolomic Data Pretreatement}
+    \title{metaboPipe: A Modular Pipeline for Metabolomic Data pretreatment}
     \titcrt{metaboPipe} %Título corto que aparecerá a la cabecera
     \author{Eduard Pérez Méndez}
     \date{\today}
@@ -126,7 +125,7 @@
     \area{Statistical Bioinformatics and \newline Machine Learning}
     \idioma{English}
     \credits{15}
-    \parcla{targeted metabolomics, pretreatement, pipeline}
+    \parcla{targeted metabolomics, pretreatment, pipeline}
     
     \licenc{ccByNcSa}
     %Posibles licencias
@@ -150,7 +149,7 @@
         
         % Resumen en inglés.
         \abstractenglish{
-            A maximum of 250 words
+            As metabolomics as a field continue growing the need for tools that ease the pretreatment of the data is gaining importance. There are currently many tools specialized in multiple tasks for the pretreatment of data, but all of them require extensive knowledge both in programming and metabolomics. In response to this challenge, we have developed \texttt{metaboPipe}, an R package designed to create pretreatment pipelines that automate studies and enhance their reproducibility. The pipelines are modular allowing interchangable methods and steps order an easy task. The package includes an optional user interface to create the pipelines regardless of the user's familiarity with R. The package is open source and available in GitHub.
             }
             
             
@@ -307,7 +306,7 @@ The project aims to develop a modular pipeline for targeted metabolomic data pre
 
 \begin{itemize}
     \item It is possible to design and develop a general pipeline for the pretreatment of targeted metabolomic data.
-    \item A modular pipeline that allows researchers to customize pretreatement steps will improve the flexibility and efficiency of metabolomic data analysis.
+    \item A modular pipeline that allows researchers to customize pretreatment steps will improve the flexibility and efficiency of metabolomic data analysis.
 \end{itemize}
 
 %%%%% OBJECTIVES %%%%%%
@@ -315,14 +314,14 @@ The project aims to develop a modular pipeline for targeted metabolomic data pre
 
 \section{Main Objective}
 \begin{enumerate}
-    \item Develop a new pipeline for the pretreatement of targeted metabolomic data with the aim of improving efficiency and modularity compared to existing pipelines. This new pipeline will be implemented in R.
+    \item Develop a new pipeline for the pretreatment of targeted metabolomic data with the aim of improving efficiency and modularity compared to existing pipelines. This new pipeline will be implemented in R.
 \end{enumerate}
 
 \section{Specific Objectives}
 
 \begin{enumerate}
-    \item Design a new pipeline for the pretreatement of targeted metabolomic data.
-    \item Implement the pretreatement pipeline for targeted metabolomic data using the \texttt{targets} package to ensure replicability and efficient management of computational resources.
+    \item Design a new pipeline for the pretreatment of targeted metabolomic data.
+    \item Implement the pretreatment pipeline for targeted metabolomic data using the \texttt{targets} package to ensure replicability and efficient management of computational resources.
     \item Select various targeted metabolomic datasets to validate and optimize the performance of the new pipeline, analyzing its quality and consistency.
     \item Make the development accessible to the scientific community by creating detailed documentation and publishing the code in a public repository.
 \end{enumerate}
@@ -353,11 +352,11 @@ While our project aims to bring about positive change, it is essential to consid
 \chapter{Approach and methodology}
 \section{Methodology}
 
-In the context of enhancing the field of metabolomics and improving the efficiency and accuracy of metabolomics reports, the choice of creating a tool for targeted metabolomic data pretreatement is a strategic decision. This tool will be developed in R, a widely used programming language in the field of bioinformatics and biostatistics. The tool will be designed to streamline the pretreatement of targeted metabolomic data, ensuring that the data is ready for further analysis and interpretation.
+In the context of enhancing the field of metabolomics and improving the efficiency and accuracy of metabolomics reports, the choice of creating a tool for targeted metabolomic data pretreatment is a strategic decision. This tool will be developed in R, a widely used programming language in the field of bioinformatics and biostatistics. The tool will be designed to streamline the pretreatment of targeted metabolomic data, ensuring that the data is ready for further analysis and interpretation.
 
-The tool will be modular, allowing users to select and apply specific pretreatement steps according to their needs and preferences. This modularity design makes the tool flexible, adaptable and more important expandable, as new pretreatement methods can be easily added to the pipeline and thus to the package using existent methods and tools from other packages.
+The tool will be modular, allowing users to select and apply specific pretreatment steps according to their needs and preferences. This modularity design makes the tool flexible, adaptable and more important expandable, as new pretreatment methods can be easily added to the pipeline and thus to the package using existent methods and tools from other packages.
 
-In order to be modular, the package modules should take as inputs the same object type that outputs. Making it easier to chain the modules in any specific order. To achieve this objective, the package should use a main data structure to store the data. In omics data, the most used data structure is the \texttt{SummarizedExperiment} from the Bioconductor project \cite{R-SummarizedExperiment}. However this data structure is not the most efficient for the pretreatement of the metabolomics data, as the \texttt{SummarizedExperiment} dataframes are designed to store the data features in a row-wise manner and the samples in a column-wise manner. Though this may fit well for other omics data, is not the most intuitive way to manipulate the data in the context of metabolomics.
+In order to be modular, the package modules should take as inputs the same object type that outputs. Making it easier to chain the modules in any specific order. To achieve this objective, the package should use a main data structure to store the data. In omics data, the most used data structure is the \texttt{SummarizedExperiment} from the Bioconductor project \cite{R-SummarizedExperiment}. However this data structure is not the most efficient for the pretreatment of the metabolomics data, as the \texttt{SummarizedExperiment} dataframes are designed to store the data features in a row-wise manner and the samples in a column-wise manner. Though this may fit well for other omics data, is not the most intuitive way to manipulate the data in the context of metabolomics.
 
 Since targeted metabolomic data uses multiple dataframes to store the diferent types of data, the most intuitive and already developed data structure will be the \texttt{DatasetExperiment} from the \texttt{structToolbox} package \cite{structToolbox2020}. This data structure is designed to store the data features in a column-wise manner and the samples in a row-wise manner, making it more intuitive to manipulate the data in the context of metabolomics. It also incorporate multiple methods for the manipulation of the data, making it easier to develop the package.
 
@@ -365,7 +364,7 @@ A deployment controller will be used to manage the order of the modules and the 
 
 The \texttt{targets} package only deploys the steps needed to complete the pipeline as previous steps that do not change its output will not be re-run. This makes the pipeline more efficient and faster, as only the steps that need to be re-run will be re-run.
 
-In order to select the methods and tools that will be used in the pipeline, a deep review of the literature will be performed. This review will explore recent publications of metabolomics data and also comparative reviews of the most used methods and tools for the pretreatement of targeted metabolomic data to select the most used methods for metabolomic data pretreatement. This review will also explore and select datasets to validate and optimize the performance of the pipeline.
+In order to select the methods and tools that will be used in the pipeline, a deep review of the literature will be performed. This review will explore recent publications of metabolomics data and also comparative reviews of the most used methods and tools for the pretreatment of targeted metabolomic data to select the most used methods for metabolomic data pretreatment. This review will also explore and select datasets to validate and optimize the performance of the pipeline.
 
 
 
@@ -496,7 +495,7 @@ In order to select the methods and tools that will be used in the pipeline, a de
 
 \section{Final products}
 \begin{itemize}
-    \item A \textbf{pipeline} for targeted metabolomic data pretreatement designed to streamline data pretreatment tasks, optimize workflows, and ensure reproducibility in metabolomic research endeavors.
+    \item A \textbf{pipeline} for targeted metabolomic data pretreatment designed to streamline data pretreatment tasks, optimize workflows, and ensure reproducibility in metabolomic research endeavors.
     \item A \textbf{R package} crafted to facilitate the seamless integration and modular implementation of the pipeline within the R environment, empowering researchers with flexible and efficient tools for metabolomic data analysis.
     \item A detailed \textbf{documentation} accompanying the pipeline and R package.
     \item A user-friendly \textbf{Shiny app} that enables researchers with varying levels of computational expertise to effortlessly pretreat targeted metabolomic data.
@@ -506,7 +505,7 @@ In order to select the methods and tools that will be used in the pipeline, a de
 \end{itemize}
 
 
-\chapter{Materials and methods} \todo{Metodes: Com Desenvolupo // Materials: Amb que ho fas}
+\chapter{Materials and methods}
 
 \section{Literature review}
 The literature selected for the review was obtained from multiple journals. The search was conducted using the following keywords: "metabolomics", "data preprocessing", "data pretreatment", "metabolomics pipeline", "metabolomics tools", "metabolomics R packages", "targeted metabolomics", "nutrimetabolomics", "metabolomics proce". The search was limited to articles published in the last 20 years, with a focus on metabolomics data preprocessing and pretreatment methodologies. The review aimed to identify the most commonly used methods and tools for metabolomic data preprocessing and pretreatment, as well as to explore recent advancements in the field. The review also sought to identify gaps in the existing literature and to inform the development of the new pipeline.
@@ -610,7 +609,7 @@ The pipeline was developed using the R programming language \cite{R} and the pac
 \chapter{Results}
 
 \section{Pipeline}
-The literature review provided valuable insights into the most commonly used methods and tools for metabolomic data pretreatement. Based on this information, the proposed pipeline steps can be viewed on Figure \ref{fig:pipeline}
+The literature review provided valuable insights into the most commonly used methods and tools for metabolomic data pretreatment. Based on this information, the proposed pipeline steps can be viewed on Figure \ref{fig:pipeline}
 \begin{figure}[ht]
     \centering
     \begin{tikzpicture}[node distance=.75cm and .5cm]
@@ -640,27 +639,27 @@ The literature review provided valuable insights into the most commonly used met
         \node[draw=black, dashed, fit=(A)(B), inner sep=4pt, label={[label distance=0.5em]north:Data Filtering}] {};
 
     \end{tikzpicture}
-    \caption{Flow diagram showing the steps of the metabolomic data pretreatement pipeline proposed.}
+    \caption{Flow diagram showing the steps of the metabolomic data pretreatment pipeline proposed.}
     \label{fig:pipeline}
 \end{figure}
 
-In this project, an R package named \texttt{metaboPipe} was developed to preprocess metabolomic data efficiently and accessibly. Metabolomic data pretreatement is a crucial step in ensuring the quality and reliability of downstream analyses. The transformations applied during pretreatement are primarily intended to remove unwanted effects unrelated to the study, but these tools can inadvertently delete meaningful biological data if used without caution. The \texttt{metaboPipe} package leverages the \texttt{targets} and \texttt{structToolbox} packages to create a modular and reproducible pipeline for pretreatement. This section details the components and functionality of \texttt{metaboPipe}.
+In this project, an R package named \texttt{metaboPipe} was developed to preprocess metabolomic data efficiently and accessibly. Metabolomic data pretreatment is a crucial step in ensuring the quality and reliability of downstream analyses. The transformations applied during pretreatment are primarily intended to remove unwanted effects unrelated to the study, but these tools can inadvertently delete meaningful biological data if used without caution. The \texttt{metaboPipe} package leverages the \texttt{targets} and \texttt{structToolbox} packages to create a modular and reproducible pipeline for pretreatment. This section details the components and functionality of \texttt{metaboPipe}.
 
 \section{Package Overview}
-The \texttt{metaboPipe} package is designed to streamline the pretreatement of metabolomic data by creating a series of user-accessible modules that translate into interconnected steps. These steps can be easily added, modified, and rearranged. The package utilizes the \texttt{targets} package to orchestrate task deployment and dependencies, ensuring that each step is executed in the correct order. The \texttt{structToolbox} package provides the \texttt{DatasetExperiment} object, which serves as the primary data structure throughout the pipeline, along with multiple functions for data transformation.
+The \texttt{metaboPipe} package is designed to streamline the pretreatment of metabolomic data by creating a series of user-accessible modules that translate into interconnected steps. These steps can be easily added, modified, and rearranged. The package utilizes the \texttt{targets} package to orchestrate task deployment and dependencies, ensuring that each step is executed in the correct order. The \texttt{structToolbox} package provides the \texttt{DatasetExperiment} object, which serves as the primary data structure throughout the pipeline, along with multiple functions for data transformation.
 
 %94+77+19+186+290+158+73+271+333+417+178+304 = 2400
 A total of 2400 lines of code were written to develop the \texttt{metaboPipe} package, without counting the vignette and the documentation.
 
-The package is hosted on GitHub: \url{https://github.com/eperezme/metaboPipe}. And its main functionalities can be divided into three main categories:
+The package is hosted on \href{https://github.com/eperezme/metaboPipe}{GitHub}. And its main functionalities can be divided into three main categories:
 \begin{itemize}
-    \item \textbf{Data manipulation:} These functions are the core of the package, as they transform the data into the desired formats and apply the diversity of methods to perform the pretreatement steps including the visualization.
-    \item \textbf{Target factories:} They are the pipeline contruction functions for the users to interact with, as they use the targets package to create pipeline nodes that use the data manipulation functions. Each factory is intended to represent a specific pretreatement step.
+    \item \textbf{Data manipulation:} These functions are the core of the package, as they transform the data into the desired formats and apply the diversity of methods to perform the pretreatment steps including the visualization.
+    \item \textbf{Target factories:} They are the pipeline contruction functions for the users to interact with, as they use the targets package to create pipeline nodes that use the data manipulation functions. Each factory is intended to represent a specific pretreatment step.
     \item \textbf{Shiny app:} This is a user-friendly interface that allows users to create and run the pipeline without the need for R programming knowledge.
 \end{itemize}
 
 \section{Data manipulation}
-For the pretreatement of the data, the package includes the following functions:
+For the pretreatment of the data, the package includes the following functions:
 
 \begin{itemize}
     \item A function to create a \texttt{DatasetExperiment} object from a list of dataframes.
@@ -691,8 +690,8 @@ For the pipeline construction, the package includes the following 9 functions:
 The package is distributed with documentation that consists of three parts:
 \begin{itemize}
     \item The help documentation for the methods and functions of the package.
-    \item A PDF manual that includes all the aforementioned methods and functions of the package. \todo{add the url}
-    \item A tutorial vignette that details the processing of the ST000284 dataset using the package to create and execute a pipeline. \todo{add the url}
+    \item A \href{https://github.com/eperezme/metaboPipe/blob/main/metaboPipe_0.1.pdf}{PDF manual} that includes all the aforementioned methods and functions of the package.
+    \item A \href{https://github.com/eperezme/metaboPipe/tree/main/metaboPipe/vignettes}{tutorial vignette} that details the processing of the ST000284 dataset using the package to create and execute a pipeline.
 \end{itemize}
 
 \section{Shiny app}
@@ -708,14 +707,14 @@ A shiny app was developed to allow users to interact with the pipeline without t
 \end{itemize}
 
 \chapter{Discussion}
-Different methods for pretreatement metabolomic data are essential to accommodate the diverse types of data encountered in this field. This variety arises due to the numerous factors influencing metabolomic data, which can be biological, technical, or experimental. Each pretreatement method offers unique advantages and disadvantages, therefore choosing the appropriate method can be challenging and is guided by the specific biological question, the nature of the data, and the desired analytical outcomes.
+Different methods for pretreatment metabolomic data are essential to accommodate the diverse types of data encountered in this field. This variety arises due to the numerous factors influencing metabolomic data, which can be biological, technical, or experimental. Each pretreatment method offers unique advantages and disadvantages, therefore choosing the appropriate method can be challenging and is guided by the specific biological question, the nature of the data, and the desired analytical outcomes.
 
-In this work, a general workflow for targeted metabolomics data pretreatement has been proposed. This workflow is not specific as the selection of pretreatement methods affects their order. For example, when using \gls{svd} as an imputation method, it is recommended to scale and center the data beforehand, but if we impute the data using \gls{qrilc}, log-transforming the data beforehand is recommended for better accuracy \cite{weiMissingValueImputation2018}. When normalizing Quantile normalization (QN) is not recomended for datasets with $n < 50$ samples \cite{kohlStateoftheArtData2012} and Probabilistic Quotient Normalization (PQN) is not adequate to use when the number of metabolites is $>$ than the number of samples \cite{dongGroupAggregatingNormalization2011}.
-These considerations must be factored in when selecting pretreatement methods, making it impractical to establish a one-size-fits-all pipeline
+In this work, a general workflow for targeted metabolomics data pretreatment has been proposed. This workflow is not specific as the selection of pretreatment methods affects their order. For example, when using \gls{svd} as an imputation method, it is recommended to scale and center the data beforehand, but if we impute the data using \gls{qrilc}, log-transforming the data beforehand is recommended for better accuracy \cite{weiMissingValueImputation2018}. When normalizing Quantile normalization (QN) is not recomended for datasets with $n < 50$ samples \cite{kohlStateoftheArtData2012} and Probabilistic Quotient Normalization (PQN) is not adequate to use when the number of metabolites is $>$ than the number of samples \cite{dongGroupAggregatingNormalization2011}.
+These considerations must be factored in when selecting pretreatment methods, making it impractical to establish a one-size-fits-all pipeline
 
-\todo{pq el ordre de la pipeline}
+% \todo{pq el ordre de la pipeline}
 
-Due to the diversity of methods and their interactions, this work focuses on developing a tool that facilitates the easy and interactive creation of customized data pretreatement sequences. This tool, the \texttt{metaboPipe} package, offers functions to perform common pretreatement steps and enables the creation of tailored pipelines using these steps. Additionally, the package includes a shiny app that allows users to interact with the pipeline without requiring R programming skills.
+Due to the diversity of methods and their interactions, this work focuses on developing a tool that facilitates the easy and interactive creation of customized data pretreatment sequences. This tool, the \texttt{metaboPipe} package, offers functions to perform common pretreatment steps and enables the creation of tailored pipelines using these steps. Additionally, the package includes a shiny app that allows users to interact with the pipeline without requiring R programming skills.
 
 The \texttt{metaboPipe} package is designed to work with the \texttt{targets} and \texttt{structToolbox} packages. To create a pipeline using the \texttt{metaboPipe} package, users must define a \texttt{\_targets.R} file that specifies the steps of the pipeline. A pre-configured template is aviable using the \texttt{create\_pipeline()} function that creates a \texttt{\_targets.R} file in the working directory with the necessary packages configured. Then users only have to add the targets or commands to the list in the file and run the pipeline using the \texttt{tar\_make()} function.
 
@@ -757,7 +756,9 @@ For filtering missing values, the modified 80\% rule is adopted by default: if a
 
 To identify and filter outliers, a Hotelling's T2 distribution ellipse is used with a default significance level of 95\%, adjustable to 99\% if desired. This method is chosen for its robustness and flexibility in detecting outliers in multivariate data, considering the covariance between variables \cite{wuUsingNontargetedLCMS2021, viallonNewPipelineNormalization2021}.
 
-Batch effects are a common issue in metabolomics studies, introducing unwanted variability into the data. To correct this effect, two methods have been implemented: the \texttt{QC-RSC} method and the \texttt{ComBat} method, which are widely used \todo{add citations}.
+Batch effects are a common issue in metabolomics studies, introducing unwanted variability into the data. To correct this effect, two methods have been implemented: the \texttt{QC-RSC} method and the \texttt{ComBat} method, which are widely used \
+
+% \todo{add citations}.
 
 Missing values are imputed using the eight most common methods: Mean of the feature, Median of the feature,\gls{rf}, \gls{qrilc}, \gls{knn}, \gls{svd}, \gls{bpca}, and \gls{ppca}. These methods were selected based on their popularity and effectiveness in imputing missing values in metabolomic data \cite{weiMissingValueImputation2018,sunPretreatingNormalizingMetabolomics2024}.
 
@@ -771,24 +772,24 @@ As \texttt{metaboPipe} is based on the \texttt{structToolbox} package, users can
 
 
 \chapter{Conclusion and future vision}
-In this work, an attempt has been made to propose a general pipeline for the pretreatement of targeted metabolomics data. However, the diversity of methods and their interactions make it impossible to establish a pipeline that fits all cases in the timespan of a master's thesis. Therefore, a tool has been developed that facilitates the creation of customized data pretreatement sequences. By doing it this way, a tool for automation has been created for both researchers and data analysts, regardless of their level of programming knowledge.
+In this work, an attempt has been made to propose a general pipeline for the pretreatment of targeted metabolomics data. However, the diversity of methods and their interactions make it impossible to establish a pipeline that fits all cases in the timespan of a master's thesis. Therefore, a tool has been developed that facilitates the creation of customized data pretreatment sequences. By doing it this way, a tool for automation has been created for both researchers and data analysts, regardless of their level of programming knowledge.
 
-Data pretreatement is a complex task that requires significant attention and expertise to avoid introducing unwanted variance into the data. Until a universal pipeline is developed, the \texttt{metaboPipe} package can serve as a valuable tool to address this need and to compare various data pretreatement methods, thereby aiding in the development of a comprehensive pipeline.
+Data pretreatment is a complex task that requires significant attention and expertise to avoid introducing unwanted variance into the data. Until a universal pipeline is developed, the \texttt{metaboPipe} package can serve as a valuable tool to address this need and to compare various data pretreatment methods, thereby aiding in the development of a comprehensive pipeline.
 
 The project's planning underwent significant changes as new challenges emerged, requiring adjustments to ensure the continuation of the work and the creation of a useful product by the end of May. Nevertheless, it was possible to adhere to the planning for the most part, and the main objective was nearly completed.
 
-Overall, the positive impacts anticipated in section \ref{s:etic} have been largely achieved, while potential negative impacts have been actively mitigated through careful planning and ethical considerations. Our project has made significant contributions to sustainable development goals, fostering a more inclusive and equitable scientific community.
+Overall, the positive impacts anticipated in Section \ref{s:etic} have been largely achieved, while potential negative impacts have been actively mitigated through careful planning and ethical considerations. Our project has made significant contributions to sustainable development goals, fostering a more inclusive and equitable scientific community.
 
-The planned methodology was sufficiently adequate in terms of its strategic decisions, choice of tools, and overall design. It successfully created a modular, flexible, and efficient tool for metabolomics data pretreatement. However, time constraints and the need for methodological adjustments during the project development phase indicate areas where the methodology could have been further optimized or expanded given more time and resources. Despite these challenges, the project has laid a strong foundation for future development and refinement.
+The planned methodology was sufficiently adequate in terms of its strategic decisions, choice of tools, and overall design. It successfully created a modular, flexible, and efficient tool for metabolomics data pretreatment. However, time constraints and the need for methodological adjustments during the project development phase indicate areas where the methodology could have been further optimized or expanded given more time and resources. Despite these challenges, the project has laid a strong foundation for future development and refinement.
 
-Despite the efforts made, while a new pipeline has been proposed to improve the pretreatement of metabolomics data, the lack of time to generate and analyze comparative results means that its effectiveness has not been demonstrated. Consequently, it cannot be stated that the objectives have been fully met.
+Despite the efforts made, while a new pipeline has been proposed to improve the pretreatment of metabolomics data, the lack of time to generate and analyze comparative results means that its effectiveness has not been demonstrated. Consequently, it cannot be stated that the objectives have been fully met.
 
 Several lines of future work have been identified as a result of this project. These areas for further exploration include:
 \begin{itemize}
-    \item \textbf{Comparison with existing pipelines:} While a new pipeline has been created that potentially enhances the pretreatement of metabolomics data, its effectiveness has yet to be demonstrated. It would be beneficial to compare this pipeline with existing ones to evaluate its impact on data pretreatement.
-    \item \textbf{Implementation of additional pretreatement methods:} Although the most common pretreatement methods have been implemented, there are many more that could be incorporated. Future versions of the package could include these additional methods to further enhance its capabilities.
-    \item \textbf{Enhancement of the graphical interface:} The current graphical interface is functional but could be improved by adding more features. For example, more configuration options for different pretreatement methods or a tab for visualizing resulting graphs could greatly enhance usability.
-    \item \textbf{Expansion of documentation:} While the package documentation is comprehensive, it could benefit from more examples and tutorials to assist users. Additionally, more detailed explanations of how different pretreatement methods work could be included.
+    \item \textbf{Comparison with existing pipelines:} While a new pipeline has been created that potentially enhances the pretreatment of metabolomics data, its effectiveness has yet to be demonstrated. It would be beneficial to compare this pipeline with existing ones to evaluate its impact on data pretreatment.
+    \item \textbf{Implementation of additional pretreatment methods:} Although the most common pretreatment methods have been implemented, there are many more that could be incorporated. Future versions of the package could include these additional methods to further enhance its capabilities.
+    \item \textbf{Enhancement of the graphical interface:} The current graphical interface is functional but could be improved by adding more features. For example, more configuration options for different pretreatment methods or a tab for visualizing resulting graphs could greatly enhance usability.
+    \item \textbf{Expansion of documentation:} While the package documentation is comprehensive, it could benefit from more examples and tutorials to assist users. Additionally, more detailed explanations of how different pretreatment methods work could be included.
     \item \textbf{Inclusion in CRAN:} Presently, the package is available on GitHub, which, although convenient for programmers, can pose an additional barrier for those with limited programming knowledge. Including the package in CRAN would make installation and usage easier for a broader audience.
     \item \textbf{Integration of graphics creation methods as pipeline nodes:} Currently, graphics creation methods are independent functions. Integrating these as pipeline nodes would allow users to visualize results at each step of the pipeline, enhancing the overall functionality and user experience in the Shiny graphical interface.
 \end{itemize}
