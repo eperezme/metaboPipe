@@ -30,7 +30,7 @@ You can install the development version of metaboPipe from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("eperezme/metaboPipe", subdir = "metaboPipe")
+devtools::install_github("eperezme/metaboPipe", subdir = "metaboPipe", build_vignettes = TRUE, build_manual = TRUE)
 ```
 
 ## Introduction to `metaboPipe` and its functionalities
@@ -41,7 +41,6 @@ description of the dataset by running the following command:
 ``` r
 DE <- metaboPipe::ST000284
 DE
-#> Loading required package: struct
 #> A "DatasetExperiment" object
 #> ----------------------------
 #> name:          Colorectal Cancer Detection Using Targeted Serum Metabolic Profiling
@@ -685,40 +684,60 @@ sessionInfo()
 #> attached base packages:
 #> [1] stats     graphics  grDevices datasets  utils     methods   base     
 #> 
-#> other attached packages:
-#> [1] struct_1.14.1
-#> 
 #> loaded via a namespace (and not attached):
-#>  [1] utf8_1.2.4                  renv_1.0.7                 
-#>  [3] SparseArray_1.2.4           bitops_1.0-7               
-#>  [5] lattice_0.22-6              digest_0.6.35              
-#>  [7] magrittr_2.0.3              grid_4.3.3                 
-#>  [9] evaluate_0.23               fastmap_1.2.0              
-#> [11] Matrix_1.6-5                ontologyIndex_2.12         
-#> [13] processx_3.8.4              backports_1.4.1            
-#> [15] GenomeInfoDb_1.38.8         secretbase_0.5.0           
-#> [17] ps_1.7.6                    BiocManager_1.30.23        
-#> [19] purrr_1.0.2                 fansi_1.0.6                
-#> [21] codetools_0.2-20            abind_1.4-5                
-#> [23] cli_3.6.2                   crayon_1.5.2               
-#> [25] rlang_1.1.3                 XVector_0.42.0             
-#> [27] metaboPipe_0.0.0.9000       Biobase_2.62.0             
-#> [29] DelayedArray_0.28.0         yaml_2.3.8                 
-#> [31] S4Arrays_1.2.1              tools_4.3.3                
-#> [33] base64url_1.4               GenomeInfoDbData_1.2.11    
-#> [35] SummarizedExperiment_1.32.0 BiocGenerics_0.48.1        
-#> [37] vctrs_0.6.5                 R6_2.5.1                   
-#> [39] matrixStats_1.3.0           stats4_4.3.3               
-#> [41] lifecycle_1.0.4             zlibbioc_1.48.2            
-#> [43] S4Vectors_0.40.2            fs_1.6.4                   
-#> [45] IRanges_2.36.0              usethis_2.2.3              
-#> [47] targets_1.7.0               pkgconfig_2.0.3            
-#> [49] callr_3.7.6                 pillar_1.9.0               
-#> [51] data.table_1.15.4           glue_1.7.0                 
-#> [53] xfun_0.44                   tibble_3.2.1               
-#> [55] GenomicRanges_1.54.1        tidyselect_1.2.1           
-#> [57] rstudioapi_0.16.0           MatrixGenerics_1.14.0      
-#> [59] knitr_1.46                  htmltools_0.5.8.1          
-#> [61] igraph_2.0.3                rmarkdown_2.27             
-#> [63] compiler_4.3.3              RCurl_1.98-1.14
+#>   [1] bitops_1.0-7                pROC_1.18.5                
+#>   [3] gridExtra_2.3               rlang_1.1.3                
+#>   [5] magrittr_2.0.3              matrixStats_1.3.0          
+#>   [7] compiler_4.3.3              callr_3.7.6                
+#>   [9] vctrs_0.6.5                 reshape2_1.4.4             
+#>  [11] stringr_1.5.1               pkgconfig_2.0.3            
+#>  [13] crayon_1.5.2                fastmap_1.2.0              
+#>  [15] backports_1.5.0             XVector_0.42.0             
+#>  [17] utf8_1.2.4                  rmarkdown_2.27             
+#>  [19] prodlim_2023.08.28          ps_1.7.6                   
+#>  [21] structToolbox_1.14.0        purrr_1.0.2                
+#>  [23] xfun_0.44                   zlibbioc_1.48.2            
+#>  [25] GenomeInfoDb_1.38.8         recipes_1.0.10             
+#>  [27] DelayedArray_0.28.0         parallel_4.3.3             
+#>  [29] R6_2.5.1                    stringi_1.8.4              
+#>  [31] parallelly_1.37.1           rpart_4.1.23               
+#>  [33] GenomicRanges_1.54.1        lubridate_1.9.3            
+#>  [35] Rcpp_1.0.12                 SummarizedExperiment_1.32.0
+#>  [37] iterators_1.0.14            knitr_1.47                 
+#>  [39] future.apply_1.11.2         usethis_2.2.3              
+#>  [41] IRanges_2.36.0              igraph_2.0.3               
+#>  [43] Matrix_1.6-5                splines_4.3.3              
+#>  [45] nnet_7.3-19                 timechange_0.3.0           
+#>  [47] tidyselect_1.2.1            rstudioapi_0.16.0          
+#>  [49] abind_1.4-5                 yaml_2.3.8                 
+#>  [51] metaboPipe_0.1.0            targets_1.7.0              
+#>  [53] timeDate_4032.109           codetools_0.2-20           
+#>  [55] processx_3.8.4              listenv_0.9.1              
+#>  [57] lattice_0.22-6              struct_1.14.1              
+#>  [59] tibble_3.2.1                plyr_1.8.9                 
+#>  [61] Biobase_2.62.0              withr_3.0.0                
+#>  [63] evaluate_0.23               ontologyIndex_2.12         
+#>  [65] future_1.33.2               survival_3.6-4             
+#>  [67] pillar_1.9.0                BiocManager_1.30.23        
+#>  [69] MatrixGenerics_1.14.0       renv_1.0.7                 
+#>  [71] foreach_1.5.2               stats4_4.3.3               
+#>  [73] generics_0.1.3              sp_2.1-4                   
+#>  [75] RCurl_1.98-1.14             S4Vectors_0.40.2           
+#>  [77] ggplot2_3.5.1               munsell_0.5.1              
+#>  [79] scales_1.3.0                globals_0.16.3             
+#>  [81] base64url_1.4               class_7.3-22               
+#>  [83] glue_1.7.0                  tools_4.3.3                
+#>  [85] data.table_1.15.4           ModelMetrics_1.2.2.2       
+#>  [87] gower_1.0.1                 fs_1.6.4                   
+#>  [89] grid_4.3.3                  ipred_0.9-14               
+#>  [91] pcpr2_0.0.0.1               colorspace_2.1-0           
+#>  [93] nlme_3.1-164                GenomeInfoDbData_1.2.11    
+#>  [95] cli_3.6.2                   fansi_1.0.6                
+#>  [97] ggthemes_5.1.0              S4Arrays_1.2.1             
+#>  [99] lava_1.8.0                  dplyr_1.1.4                
+#> [101] gtable_0.3.5                digest_0.6.35              
+#> [103] BiocGenerics_0.48.1         caret_6.0-94               
+#> [105] SparseArray_1.2.4           htmltools_0.5.8.1          
+#> [107] lifecycle_1.0.4             secretbase_0.5.0           
+#> [109] hardhat_1.3.1               MASS_7.3-60.0.1
 ```
