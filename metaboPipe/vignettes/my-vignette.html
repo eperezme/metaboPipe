@@ -11,7 +11,7 @@
 
 <meta name="author" content="Perez Mendez, Eduard" />
 
-<meta name="date" content="2024-05-28" />
+<meta name="date" content="2024-06-15" />
 
 <title>Data Processing of metabolomics datasets using metaboPipe</title>
 
@@ -7151,7 +7151,7 @@ function toggle_visibility(id1) {
 
 <h1 class="title toc-ignore">Data Processing of metabolomics datasets using metaboPipe</h1>
 <p class="author-name">Perez Mendez, Eduard</p>
-<h4 class="date">2024-05-28</h4>
+<h4 class="date">2024-06-15</h4>
 
 </div>
 
@@ -7167,7 +7167,7 @@ function toggle_visibility(id1) {
 <pre class="r"><code># Install the package
 install.packages(&quot;devtools&quot;)
 devtools::install_github(&quot;https://github.com/eperezme/metaboPipe&quot;,
-    subdir = &quot;Work&quot;)</code></pre>
+    subdir = &quot;metaboPipe&quot;, build_vignettes = TRUE, build_manual = TRUE)</code></pre>
 </div>
 <div id="introduction-to-metabopipe-and-its-functionalities" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Introduction to <code>metaboPipe</code> and its functionalities</h2>
@@ -7229,7 +7229,8 @@ library(metaboPipe)
 tar_option_set(packages = c(&quot;structToolbox&quot;, &quot;SummarizedExperiment&quot;,
     &quot;VIM&quot;, &quot;impute&quot;, &quot;imputeLCMD&quot;, &quot;missForest&quot;, &quot;caret&quot;, &quot;pcaMethods&quot;,
     &quot;tidyverse&quot;, &quot;MetaboAnalystR&quot;, &quot;tinytex&quot;, &quot;HotellingEllipse&quot;,
-    &quot;ggforce&quot;, &quot;tools&quot;, &quot;cowplot&quot;, &quot;metaboPipe&quot;))</code></pre>
+    &quot;ggforce&quot;, &quot;tools&quot;, &quot;cowplot&quot;, &quot;metaboPipe&quot;, &quot;sva&quot;, &quot;data.table&quot;,
+    &quot;pcpr2&quot;))</code></pre>
 <p>Now that the packages for our pipeline are set up, we can define the pipeline workflow. The pipeline consists of several steps, including data loading, filtering, batch correction, imputation, and normalization. Each step is defined as a function in the script but those functions create multiple targets, and the targets are executed sequentially to process the data.</p>
 <p>The targets should be defined inside a <code>list()</code> function.
 We can load the data using the <code>tar_target()</code> function, which defines a target that loads the data from the specified file path.
@@ -7527,16 +7528,9 @@ list(load_data(data_loaded, dataMatrixPath, sampleMetadataPath,
 <div id="running-the-pipeline" class="section level2" number="2.9">
 <h2><span class="header-section-number">2.9</span> Running the pipeline</h2>
 <p>Now we are ready to run the pipeline. We can view a node map of the steps if we use the <code>tar_visnetwork()</code> function of the <code>targets</code> package. And we can view a full list of the steps with the function using <code>tar_manifest()</code>.</p>
-<pre class="r"><code>targets::tar_visnetwork(targets_only = TRUE)
-#&gt; You are running {targets} version 1.7.0, and the pipeline was last run with
-#&gt; version 1.6.0. Just after version 1.6.0, {targets} made changes that cause the
-#&gt; targets in old pipelines to rerun. For details, please see
-#&gt; https://github.com/ropensci/targets/blob/main/NEWS.md. Sorry for the
-#&gt; inconvenience. As a workaround, you can either rerun this pipeline from
-#&gt; scratch, or you can stop/interrupt the pipeline and downgrade to {targets}
-#&gt; version 1.6.0 to keep your work up to date in the short term.</code></pre>
+<pre class="r"><code>targets::tar_visnetwork(targets_only = TRUE)</code></pre>
 <div class="visNetwork html-widget html-fill-item" id="htmlwidget-1898b961be2c3b35ceb4" style="width:100%;height:528px;"></div>
-<script type="application/json" data-for="htmlwidget-1898b961be2c3b35ceb4">{"x":{"nodes":{"name":["after_filtered_experiment_plot","before_filtered_experiment_plot","data_loaded_data","data_loaded_matrixFile","data_loaded_sample","data_loaded_sampleFile","data_loaded_variable","data_loaded_variableFile","experiment","export","factorized_experiment","factorized_experiment_na","filtered_experiment","filtered_experiment_missingval","filtered_experiment_outliers_plot","imputed_experiment","normalized_experiment","scaled_experiment","transformed_experiment"],"type":["stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem"],"description":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"status":["outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated"],"seconds":[0.25,0.375,0.015,0,0,5.344,0,0,0.156,0.047,0.016,0.047,0.265,0.829,3.25,21.984,2.219,1.922,1.938],"bytes":[54,54,88293,191608,14078,16515,3646,3294,93710,38,93647,93647,87882,93644,54,88241,134043,152663,141511],"branches":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"label":["after_filtered_experiment_plot","before_filtered_experiment_plot","data_loaded_data","data_loaded_matrixFile","data_loaded_sample","data_loaded_sampleFile","data_loaded_variable","data_loaded_variableFile","experiment","export","factorized_experiment","factorized_experiment_na","filtered_experiment","filtered_experiment_missingval","filtered_experiment_outliers_plot","imputed_experiment","normalized_experiment","scaled_experiment","transformed_experiment"],"color":["#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5"],"id":["after_filtered_experiment_plot","before_filtered_experiment_plot","data_loaded_data","data_loaded_matrixFile","data_loaded_sample","data_loaded_sampleFile","data_loaded_variable","data_loaded_variableFile","experiment","export","factorized_experiment","factorized_experiment_na","filtered_experiment","filtered_experiment_missingval","filtered_experiment_outliers_plot","imputed_experiment","normalized_experiment","scaled_experiment","transformed_experiment"],"level":[8,5,2,1,2,1,2,1,3,12,4,5,7,6,7,8,9,10,11],"shape":["dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot"]},"edges":{"from":["filtered_experiment","factorized_experiment","filtered_experiment_missingval","imputed_experiment","filtered_experiment","data_loaded_variableFile","transformed_experiment","experiment","data_loaded_matrixFile","scaled_experiment","factorized_experiment_na","filtered_experiment_missingval","normalized_experiment","data_loaded_sampleFile","data_loaded_data","data_loaded_sample","data_loaded_variable","factorized_experiment"],"to":["imputed_experiment","factorized_experiment_na","filtered_experiment","normalized_experiment","after_filtered_experiment_plot","data_loaded_variable","export","factorized_experiment","data_loaded_data","transformed_experiment","filtered_experiment_missingval","filtered_experiment_outliers_plot","scaled_experiment","data_loaded_sample","experiment","experiment","experiment","before_filtered_experiment_plot"],"arrows":["to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"interaction":{"zoomSpeed":1},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":true,"hoverNearest":false,"degree":{"from":1,"to":1},"algorithm":"hierarchical","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Outdated","Stem"],"color":["#78B7C5","#899DA4"],"shape":["dot","dot"]},"nodesToDataframe":true},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);"},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-1898b961be2c3b35ceb4">{"x":{"nodes":{"name":["after_filtered_experiment_plot","before_filtered_experiment_plot","data_loaded_data","data_loaded_matrixFile","data_loaded_sample","data_loaded_sampleFile","data_loaded_variable","data_loaded_variableFile","experiment","export","factorized_experiment","factorized_experiment_na","filtered_experiment","filtered_experiment_missingval","filtered_experiment_outliers_plot","imputed_experiment","normalized_experiment","scaled_experiment","transformed_experiment"],"type":["stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem"],"description":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"status":["outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated","outdated"],"seconds":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"bytes":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"branches":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"label":["after_filtered_experiment_plot","before_filtered_experiment_plot","data_loaded_data","data_loaded_matrixFile","data_loaded_sample","data_loaded_sampleFile","data_loaded_variable","data_loaded_variableFile","experiment","export","factorized_experiment","factorized_experiment_na","filtered_experiment","filtered_experiment_missingval","filtered_experiment_outliers_plot","imputed_experiment","normalized_experiment","scaled_experiment","transformed_experiment"],"color":["#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5","#78B7C5"],"id":["after_filtered_experiment_plot","before_filtered_experiment_plot","data_loaded_data","data_loaded_matrixFile","data_loaded_sample","data_loaded_sampleFile","data_loaded_variable","data_loaded_variableFile","experiment","export","factorized_experiment","factorized_experiment_na","filtered_experiment","filtered_experiment_missingval","filtered_experiment_outliers_plot","imputed_experiment","normalized_experiment","scaled_experiment","transformed_experiment"],"level":[8,5,2,1,2,1,2,1,3,12,4,5,7,6,7,8,9,10,11],"shape":["dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot"]},"edges":{"from":["filtered_experiment","factorized_experiment","filtered_experiment_missingval","imputed_experiment","filtered_experiment","data_loaded_variableFile","transformed_experiment","experiment","data_loaded_matrixFile","scaled_experiment","factorized_experiment_na","filtered_experiment_missingval","normalized_experiment","data_loaded_sampleFile","data_loaded_data","data_loaded_sample","data_loaded_variable","factorized_experiment"],"to":["imputed_experiment","factorized_experiment_na","filtered_experiment","normalized_experiment","after_filtered_experiment_plot","data_loaded_variable","export","factorized_experiment","data_loaded_data","transformed_experiment","filtered_experiment_missingval","filtered_experiment_outliers_plot","scaled_experiment","data_loaded_sample","experiment","experiment","experiment","before_filtered_experiment_plot"],"arrows":["to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"interaction":{"zoomSpeed":1},"layout":{"hierarchical":{"enabled":true,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":true,"hoverNearest":false,"degree":{"from":1,"to":1},"algorithm":"hierarchical","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Outdated","Stem"],"color":["#78B7C5","#899DA4"],"shape":["dot","dot"]},"nodesToDataframe":true},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);"},"evals":[],"jsHooks":[]}</script>
 <pre class="r"><code>targets::tar_manifest()
 #&gt; # A tibble: 19 × 2
 #&gt;    name                              command                                    
@@ -7544,9 +7538,9 @@ list(load_data(data_loaded, dataMatrixPath, sampleMetadataPath,
 #&gt;  1 data_loaded_sampleFile            &quot;\&quot;data/ST000284/sampleMetadata.csv\&quot;&quot;     
 #&gt;  2 data_loaded_variableFile          &quot;\&quot;data/ST000284/variableMetadata.csv\&quot;&quot;   
 #&gt;  3 data_loaded_matrixFile            &quot;\&quot;data/ST000284/dataMatrix.csv\&quot;&quot;         
-#&gt;  4 data_loaded_sample                &quot;read.csv(data_loaded_sampleFile, sep = \&quot;…
-#&gt;  5 data_loaded_variable              &quot;read.csv(data_loaded_variableFile, sep = …
-#&gt;  6 data_loaded_data                  &quot;read.csv(data_loaded_matrixFile, sep = \&quot;…
+#&gt;  4 data_loaded_sample                &quot;data.table::fread(data_loaded_sampleFile,…
+#&gt;  5 data_loaded_variable              &quot;data.table::fread(data_loaded_variableFil…
+#&gt;  6 data_loaded_data                  &quot;data.table::fread(data_loaded_matrixFile,…
 #&gt;  7 experiment                        &quot;warper_createExperiment(data_loaded_data,…
 #&gt;  8 factorized_experiment             &quot;warper_factor_sample_col(experiment, c(\&quot;…
 #&gt;  9 factorized_experiment_na          &quot;zero_to_na(factorized_experiment)&quot;        
@@ -7594,7 +7588,7 @@ In order to call the app:</p>
 #&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     
 #&gt; 
 #&gt; other attached packages:
-#&gt; [1] BiocStyle_2.30.0      metaboPipe_0.0.0.9000
+#&gt; [1] BiocStyle_2.30.0 metaboPipe_0.1.0
 #&gt; 
 #&gt; loaded via a namespace (and not attached):
 #&gt;   [1] fs_1.6.4                    matrixStats_1.3.0          
@@ -7602,112 +7596,118 @@ In order to call the app:</p>
 #&gt;   [5] lubridate_1.9.3             httr_1.4.7                 
 #&gt;   [7] RColorBrewer_1.1-3          targets_1.7.0              
 #&gt;   [9] profvis_0.3.8               tools_4.3.3                
-#&gt;  [11] doRNG_1.8.6                 backports_1.4.1            
+#&gt;  [11] doRNG_1.8.6                 backports_1.5.0            
 #&gt;  [13] DT_0.33                     utf8_1.2.4                 
-#&gt;  [15] R6_2.5.1                    lazyeval_0.2.2             
-#&gt;  [17] urlchecker_1.0.1            withr_3.0.0                
-#&gt;  [19] sp_2.1-4                    gridExtra_2.3              
-#&gt;  [21] cli_3.6.2                   Biobase_2.62.0             
-#&gt;  [23] formatR_1.14                Cairo_1.6-2                
-#&gt;  [25] flashClust_1.01-2           struct_1.14.1              
-#&gt;  [27] sandwich_3.1-0              sass_0.4.9.9000            
-#&gt;  [29] fstcore_0.9.18              mvtnorm_1.2-4              
-#&gt;  [31] robustbase_0.99-2           randomForest_4.7-1.1       
-#&gt;  [33] proxy_0.4-27                commonmark_1.9.1           
-#&gt;  [35] siggenes_1.76.0             parallelly_1.37.1          
-#&gt;  [37] sessioninfo_1.2.2           scrime_1.3.5               
-#&gt;  [39] itertools_0.1-3             limma_3.58.1               
-#&gt;  [41] rstudioapi_0.16.0           impute_1.76.0              
-#&gt;  [43] RSQLite_2.3.6               visNetwork_2.1.2           
-#&gt;  [45] generics_0.1.3              RApiSerialize_0.1.3        
-#&gt;  [47] crmn_0.0.21                 gtools_3.9.5               
-#&gt;  [49] car_3.1-2                   dplyr_1.1.4                
-#&gt;  [51] structToolbox_1.14.0        leaps_3.1                  
-#&gt;  [53] Matrix_1.6-5                fansi_1.0.6                
-#&gt;  [55] S4Vectors_0.40.2            imputeLCMD_2.1             
-#&gt;  [57] abind_1.4-5                 secretbase_0.5.0           
-#&gt;  [59] lifecycle_1.0.4             scatterplot3d_0.3-44       
-#&gt;  [61] yaml_2.3.8                  edgeR_4.0.16               
-#&gt;  [63] carData_3.0-5               SummarizedExperiment_1.32.0
-#&gt;  [65] gplots_3.1.3.1              recipes_1.0.10             
-#&gt;  [67] SparseArray_1.2.4           grid_4.3.3                 
-#&gt;  [69] blob_1.2.4                  promises_1.3.0             
-#&gt;  [71] crayon_1.5.2                miniUI_0.1.1.1             
-#&gt;  [73] lattice_0.22-6              cowplot_1.1.3              
-#&gt;  [75] MetaboAnalystR_4.0.0        pillar_1.9.0               
-#&gt;  [77] knitr_1.46                  fgsea_1.28.0               
-#&gt;  [79] GenomicRanges_1.54.1        boot_1.3-30                
-#&gt;  [81] estimability_1.5.1          future.apply_1.11.2        
-#&gt;  [83] codetools_0.2-20            pmp_1.14.1                 
-#&gt;  [85] fastmatch_1.1-4             glue_1.7.0                 
-#&gt;  [87] pcaMethods_1.94.0           data.table_1.15.4          
-#&gt;  [89] remotes_2.5.0               vcd_1.4-12                 
-#&gt;  [91] vctrs_0.6.5                 gtable_0.3.5               
-#&gt;  [93] cachem_1.1.0                gower_1.0.1                
-#&gt;  [95] xfun_0.44                   S4Arrays_1.2.1             
-#&gt;  [97] mime_0.12                   prodlim_2023.08.28         
-#&gt;  [99] tidyverse_2.0.0             survival_3.6-4             
-#&gt; [101] timeDate_4032.109           iterators_1.0.14           
-#&gt; [103] gmm_1.8                     tinytex_0.51               
-#&gt; [105] hardhat_1.3.1               lava_1.8.0                 
-#&gt; [107] statmod_1.5.0               HotellingEllipse_1.1.0     
-#&gt; [109] ellipsis_0.3.2              ipred_0.9-14               
-#&gt; [111] nlme_3.1-164                usethis_2.2.3              
-#&gt; [113] bit64_4.0.5                 GenomeInfoDb_1.38.8        
-#&gt; [115] rprojroot_2.0.4             bslib_0.7.0                
-#&gt; [117] tmvtnorm_1.6                KernSmooth_2.23-24         
-#&gt; [119] rpart_4.1.23                colorspace_2.1-0           
-#&gt; [121] BiocGenerics_0.48.1         DBI_1.2.2                  
-#&gt; [123] nnet_7.3-19                 tidyselect_1.2.1           
-#&gt; [125] processx_3.8.4              emmeans_1.10.2             
-#&gt; [127] bit_4.0.5                   compiler_4.3.3             
-#&gt; [129] ontologyIndex_2.12          crew_0.9.2                 
-#&gt; [131] xml2_1.3.6                  desc_1.4.3                 
-#&gt; [133] DelayedArray_0.28.0         plotly_4.10.4              
-#&gt; [135] bookdown_0.39               stringfish_0.16.0          
-#&gt; [137] scales_1.3.0                caTools_1.18.2             
-#&gt; [139] DEoptimR_1.1-3              lmtest_0.9-40              
-#&gt; [141] callr_3.7.6                 multcompView_0.1-10        
-#&gt; [143] getip_0.1-4                 stringr_1.5.1              
-#&gt; [145] digest_0.6.35               mirai_1.0.0                
-#&gt; [147] rmarkdown_2.27              XVector_0.42.0             
-#&gt; [149] htmltools_0.5.8.1           pkgconfig_2.0.3            
-#&gt; [151] fst_0.9.8                   MatrixGenerics_1.14.0      
-#&gt; [153] FactoMineR_2.11             fastmap_1.2.0              
-#&gt; [155] rlang_1.1.3                 htmlwidgets_1.6.4          
-#&gt; [157] ggthemes_5.1.0              tarchetypes_0.9.0          
-#&gt; [159] shiny_1.8.1.1               jquerylib_0.1.4            
-#&gt; [161] farver_2.1.2                zoo_1.8-12                 
-#&gt; [163] jsonlite_1.8.8              BiocParallel_1.36.0        
-#&gt; [165] ModelMetrics_1.2.2.2        RCurl_1.98-1.14            
-#&gt; [167] magrittr_2.0.3              GenomeInfoDbData_1.2.11    
-#&gt; [169] munsell_0.5.1               Rcpp_1.0.12                
-#&gt; [171] stringi_1.8.4               pROC_1.18.5                
-#&gt; [173] zlibbioc_1.48.2             MASS_7.3-60.0.1            
-#&gt; [175] plyr_1.8.9                  pkgbuild_1.4.4             
-#&gt; [177] ggrepel_0.9.5               parallel_4.3.3             
-#&gt; [179] listenv_0.9.1               splines_4.3.3              
-#&gt; [181] multtest_2.58.0             locfit_1.5-9.9             
-#&gt; [183] ps_1.7.6                    igraph_2.0.3               
-#&gt; [185] ranger_0.16.0               base64url_1.4              
-#&gt; [187] rngtools_1.5.2              reshape2_1.4.4             
-#&gt; [189] stats4_4.3.3                pkgload_1.3.4              
-#&gt; [191] evaluate_0.23               BiocManager_1.30.23        
-#&gt; [193] RcppParallel_5.1.7          laeken_0.5.3               
-#&gt; [195] nanonext_1.0.0              tweenr_2.0.3               
-#&gt; [197] foreach_1.5.2               missForest_1.5             
-#&gt; [199] httpuv_1.6.15               VIM_6.2.2                  
-#&gt; [201] polyclip_1.10-6             tidyr_1.3.1                
-#&gt; [203] purrr_1.0.2                 qs_0.26.3                  
-#&gt; [205] future_1.33.2               norm_1.0-11.1              
-#&gt; [207] ggplot2_3.5.1               ggforce_0.4.2              
-#&gt; [209] xtable_1.8-4                e1071_1.7-14               
-#&gt; [211] roxygen2_7.3.1              later_1.3.2                
-#&gt; [213] glasso_1.11                 viridisLite_0.4.2          
-#&gt; [215] class_7.3-22                tibble_3.2.1               
-#&gt; [217] memoise_2.0.1               IRanges_2.36.0             
-#&gt; [219] cluster_2.1.6               timechange_0.3.0           
-#&gt; [221] globals_0.16.3              caret_6.0-94</code></pre>
+#&gt;  [15] R6_2.5.1                    mgcv_1.9-1                 
+#&gt;  [17] lazyeval_0.2.2              urlchecker_1.0.1           
+#&gt;  [19] withr_3.0.0                 sp_2.1-4                   
+#&gt;  [21] gridExtra_2.3               cli_3.6.2                  
+#&gt;  [23] Biobase_2.62.0              formatR_1.14               
+#&gt;  [25] Cairo_1.6-2                 flashClust_1.01-2          
+#&gt;  [27] struct_1.14.1               sandwich_3.1-0             
+#&gt;  [29] sass_0.4.9.9000             fstcore_0.9.18             
+#&gt;  [31] mvtnorm_1.2-5               robustbase_0.99-2          
+#&gt;  [33] genefilter_1.84.0           randomForest_4.7-1.1       
+#&gt;  [35] proxy_0.4-27                commonmark_1.9.1           
+#&gt;  [37] siggenes_1.76.0             parallelly_1.37.1          
+#&gt;  [39] sessioninfo_1.2.2           scrime_1.3.5               
+#&gt;  [41] itertools_0.1-3             limma_3.58.1               
+#&gt;  [43] rstudioapi_0.16.0           impute_1.76.0              
+#&gt;  [45] RSQLite_2.3.6               visNetwork_2.1.2           
+#&gt;  [47] generics_0.1.3              RApiSerialize_0.1.3        
+#&gt;  [49] crmn_0.0.21                 gtools_3.9.5               
+#&gt;  [51] car_3.1-2                   dplyr_1.1.4                
+#&gt;  [53] structToolbox_1.14.0        leaps_3.1                  
+#&gt;  [55] Matrix_1.6-5                fansi_1.0.6                
+#&gt;  [57] S4Vectors_0.40.2            imputeLCMD_2.1             
+#&gt;  [59] abind_1.4-5                 secretbase_0.5.0           
+#&gt;  [61] lifecycle_1.0.4             scatterplot3d_0.3-44       
+#&gt;  [63] yaml_2.3.8                  edgeR_4.0.16               
+#&gt;  [65] carData_3.0-5               SummarizedExperiment_1.32.0
+#&gt;  [67] gplots_3.1.3.1              recipes_1.0.10             
+#&gt;  [69] SparseArray_1.2.4           grid_4.3.3                 
+#&gt;  [71] blob_1.2.4                  promises_1.3.0             
+#&gt;  [73] crayon_1.5.2                miniUI_0.1.1.1             
+#&gt;  [75] lattice_0.22-6              cowplot_1.1.3              
+#&gt;  [77] annotate_1.80.0             KEGGREST_1.42.0            
+#&gt;  [79] MetaboAnalystR_4.0.0        pillar_1.9.0               
+#&gt;  [81] knitr_1.47                  fgsea_1.28.0               
+#&gt;  [83] GenomicRanges_1.54.1        boot_1.3-30                
+#&gt;  [85] estimability_1.5.1          future.apply_1.11.2        
+#&gt;  [87] codetools_0.2-20            pmp_1.14.1                 
+#&gt;  [89] fastmatch_1.1-4             glue_1.7.0                 
+#&gt;  [91] pcaMethods_1.94.0           data.table_1.15.4          
+#&gt;  [93] remotes_2.5.0               vcd_1.4-12                 
+#&gt;  [95] png_0.1-8                   vctrs_0.6.5                
+#&gt;  [97] testthat_3.2.1.1            gtable_0.3.5               
+#&gt;  [99] cachem_1.1.0                gower_1.0.1                
+#&gt; [101] xfun_0.44                   S4Arrays_1.2.1             
+#&gt; [103] mime_0.12                   prodlim_2023.08.28         
+#&gt; [105] tidyverse_2.0.0             survival_3.6-4             
+#&gt; [107] timeDate_4032.109           iterators_1.0.14           
+#&gt; [109] gmm_1.8                     tinytex_0.51               
+#&gt; [111] hardhat_1.3.1               lava_1.8.0                 
+#&gt; [113] statmod_1.5.0               HotellingEllipse_1.1.0     
+#&gt; [115] ellipsis_0.3.2              ipred_0.9-14               
+#&gt; [117] nlme_3.1-164                usethis_2.2.3              
+#&gt; [119] bit64_4.0.5                 GenomeInfoDb_1.38.8        
+#&gt; [121] rprojroot_2.0.4             bslib_0.7.0                
+#&gt; [123] tmvtnorm_1.6                KernSmooth_2.23-24         
+#&gt; [125] rpart_4.1.23                colorspace_2.1-0           
+#&gt; [127] BiocGenerics_0.48.1         DBI_1.2.2                  
+#&gt; [129] nnet_7.3-19                 tidyselect_1.2.1           
+#&gt; [131] processx_3.8.4              emmeans_1.10.2             
+#&gt; [133] bit_4.0.5                   compiler_4.3.3             
+#&gt; [135] ontologyIndex_2.12          crew_0.9.2                 
+#&gt; [137] xml2_1.3.6                  desc_1.4.3                 
+#&gt; [139] DelayedArray_0.28.0         plotly_4.10.4              
+#&gt; [141] bookdown_0.39               stringfish_0.16.0          
+#&gt; [143] scales_1.3.0                caTools_1.18.2             
+#&gt; [145] DEoptimR_1.1-3              lmtest_0.9-40              
+#&gt; [147] callr_3.7.6                 multcompView_0.1-10        
+#&gt; [149] getip_0.1-4                 stringr_1.5.1              
+#&gt; [151] digest_0.6.35               mirai_1.0.0                
+#&gt; [153] rmarkdown_2.27              XVector_0.42.0             
+#&gt; [155] htmltools_0.5.8.1           pkgconfig_2.0.3            
+#&gt; [157] fst_0.9.8                   MatrixGenerics_1.14.0      
+#&gt; [159] FactoMineR_2.11             fastmap_1.2.0              
+#&gt; [161] rlang_1.1.3                 htmlwidgets_1.6.4          
+#&gt; [163] ggthemes_5.1.0              tarchetypes_0.9.0          
+#&gt; [165] shiny_1.8.1.1               jquerylib_0.1.4            
+#&gt; [167] farver_2.1.2                zoo_1.8-12                 
+#&gt; [169] jsonlite_1.8.8              BiocParallel_1.36.0        
+#&gt; [171] ModelMetrics_1.2.2.2        RCurl_1.98-1.14            
+#&gt; [173] magrittr_2.0.3              GenomeInfoDbData_1.2.11    
+#&gt; [175] munsell_0.5.1               Rcpp_1.0.12                
+#&gt; [177] stringi_1.8.4               pROC_1.18.5                
+#&gt; [179] brio_1.1.5                  zlibbioc_1.48.2            
+#&gt; [181] MASS_7.3-60.0.1             plyr_1.8.9                 
+#&gt; [183] pkgbuild_1.4.4              ggrepel_0.9.5              
+#&gt; [185] parallel_4.3.3              listenv_0.9.1              
+#&gt; [187] Biostrings_2.70.3           splines_4.3.3              
+#&gt; [189] multtest_2.58.0             locfit_1.5-9.9             
+#&gt; [191] ps_1.7.6                    igraph_2.0.3               
+#&gt; [193] ranger_0.16.0               base64url_1.4              
+#&gt; [195] rngtools_1.5.2              reshape2_1.4.4             
+#&gt; [197] stats4_4.3.3                pkgload_1.3.4              
+#&gt; [199] XML_3.99-0.16.1             evaluate_0.23              
+#&gt; [201] BiocManager_1.30.23         RcppParallel_5.1.7         
+#&gt; [203] laeken_0.5.3                nanonext_1.0.0             
+#&gt; [205] tweenr_2.0.3                pcpr2_0.0.0.1              
+#&gt; [207] foreach_1.5.2               missForest_1.5             
+#&gt; [209] httpuv_1.6.15               VIM_6.2.2                  
+#&gt; [211] polyclip_1.10-6             tidyr_1.3.1                
+#&gt; [213] purrr_1.0.2                 qs_0.26.3                  
+#&gt; [215] future_1.33.2               norm_1.0-11.1              
+#&gt; [217] ggplot2_3.5.1               ggforce_0.4.2              
+#&gt; [219] xtable_1.8-4                e1071_1.7-14               
+#&gt; [221] roxygen2_7.3.1              later_1.3.2                
+#&gt; [223] viridisLite_0.4.2           glasso_1.11                
+#&gt; [225] class_7.3-22                tibble_3.2.1               
+#&gt; [227] AnnotationDbi_1.64.1        memoise_2.0.1              
+#&gt; [229] IRanges_2.36.0              cluster_2.1.6              
+#&gt; [231] sva_3.50.0                  timechange_0.3.0           
+#&gt; [233] globals_0.16.3              caret_6.0-94</code></pre>
 </div>
 
 

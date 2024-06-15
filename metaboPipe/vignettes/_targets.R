@@ -18,7 +18,7 @@ tar_option_set(
   packages = c(
     "structToolbox", "SummarizedExperiment", "VIM", "impute", "imputeLCMD",
     "missForest", "caret", "pcaMethods", "tidyverse", "MetaboAnalystR", "tinytex",
-    "HotellingEllipse", "ggforce", "tools", "cowplot"
+    "HotellingEllipse", "ggforce", "tools", "cowplot", "metaboPipe", "sva", "data.table", "pcpr2"
   )
 )
 
@@ -57,12 +57,12 @@ sample_id_col = "sample_id"
 
 list(
   load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath, dataSep, sampleSep, variableSep),
-  createExperiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
+  create_experiment(experiment, data_loaded, experiment_name = name, experiment_description = description),
   factorize_cols(factorized_experiment, experiment, columns),
   filter_step(filtered_experiment, factorized_experiment, threshold = 0.8, filter_outliers = TRUE, conf.limit = "0.95", out_dir = outdir),
   impute(imputed_experiment, filtered_experiment, method = 'RF', k = 5),
   normalize(normalized_experiment, imputed_experiment, factor_col = factor_col, sample_id_col = sample_id_col, rowNorm = 'CompNorm', ref = 'Creatine (132.1 / 90.0)', out_dir = outdir),
   normalize(scaled_experiment, normalized_experiment,factor_col = factor_col, sample_id_col = sample_id_col, scaleNorm = "AutoNorm", out_dir = outdir),
   normalize(transformed_experiment, scaled_experiment, factor_col = factor_col, sample_id_col = sample_id_col, transNorm = "LogNorm", out_dir= outdir),
-  exportData(export, transformed_experiment, out_dir= outdir)
+  export_data(export, transformed_experiment, out_dir= outdir)
 )

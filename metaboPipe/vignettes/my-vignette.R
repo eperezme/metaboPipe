@@ -12,7 +12,7 @@ set.seed(57475)
 ## ----installation, eval=FALSE-------------------------------------------------
 #  # Install the package
 #  install.packages("devtools")
-#  devtools::install_github("https://github.com/eperezme/metaboPipe", subdir = "Work")
+#  devtools::install_github("https://github.com/eperezme/metaboPipe", subdir = "metaboPipe", build_vignettes = TRUE, build_manual = TRUE)
 
 ## -----------------------------------------------------------------------------
 DE <- metaboPipe::ST000284
@@ -36,7 +36,7 @@ DE
 #    packages = c(
 #      "structToolbox", "SummarizedExperiment", "VIM", "impute", "imputeLCMD",
 #      "missForest", "caret", "pcaMethods", "tidyverse", "MetaboAnalystR", "tinytex",
-#      "HotellingEllipse", "ggforce", "tools", "cowplot", "metaboPipe"
+#      "HotellingEllipse", "ggforce", "tools", "cowplot", "metaboPipe", "sva", "data.table", "pcpr2"
 #    )
 #  )
 

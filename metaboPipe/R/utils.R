@@ -294,8 +294,8 @@ save_plot <- function(plt, output_dir, output_name, extension = "png") {
 #' @export
 #'
 #' @examples
-#' export_data(dataset_exp, out_dir, out_name)
-export_data <- function(dataset_exp, out_dir, out_name) {
+#' warper_export_data(dataset_exp, out_dir, out_name)
+warper_export_data <- function(dataset_exp, out_dir, out_name) {
   dir.create(out_dir, showWarnings = FALSE)
   withr::with_dir(out_dir, {
     # Extract data matrix
@@ -379,7 +379,7 @@ create_pipeline <- function() {
     load_data(data_loaded, dataMatrixPath, sampleMetadataPath, variableMetadataPath, dataSep, sampleSep, variableSep),
 
     # Create experiment
-    createExperiment(experiment, data_loaded, experiment_name = 'Experiment', experiment_description = 'Example experiment'),
+    create_experiment(experiment, data_loaded, experiment_name = 'Experiment', experiment_description = 'Example experiment'),
 
 
 
