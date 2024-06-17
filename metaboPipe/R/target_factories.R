@@ -316,8 +316,9 @@ normalize <- function(output_name, input_name, factor_col, sample_id_col, rowNor
 #' @param output_name The name of the exported dataset.
 #' @param input_name The name of the input dataset to be exported.
 #' @param out_dir The directory where the exported dataset will be saved.
+#' @param out_name The name of the exported dataset (default is "Processed").
 #'
-#' @return A list containing the target for exporting the dataset.
+#' @return Nothing, but saves the dataset to the specified directory.
 #' @export
 #'
 #' @examples

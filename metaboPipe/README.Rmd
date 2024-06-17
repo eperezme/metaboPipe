@@ -43,7 +43,7 @@ You can install the development version of metaboPipe from [GitHub](https://gith
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("eperezme/metaboPipe", subdir = "metaboPipe")
+devtools::install_github("eperezme/metaboPipe", subdir = "metaboPipe", build_vignettes = TRUE, build_manual = TRUE)
 ```
 
 

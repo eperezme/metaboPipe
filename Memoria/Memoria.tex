@@ -508,7 +508,7 @@ In order to select the methods and tools that will be used in the pipeline, a de
 \chapter{Materials and methods}
 
 \section{Literature review}
-The literature selected for the review was obtained from multiple journals. The search was conducted using the following keywords: "metabolomics", "data preprocessing", "data pretreatment", "metabolomics pipeline", "metabolomics tools", "metabolomics R packages", "targeted metabolomics", "nutrimetabolomics", "metabolomics proce". The search was limited to articles published in the last 20 years, with a focus on metabolomics data preprocessing and pretreatment methodologies. The review aimed to identify the most commonly used methods and tools for metabolomic data preprocessing and pretreatment, as well as to explore recent advancements in the field. The review also sought to identify gaps in the existing literature and to inform the development of the new pipeline.
+The literature selected for the review was obtained from multiple journals. The search was conducted using the following keywords: "metabolomics", "preprocessing", "pretreatment", "metabolomics pipeline", "metabolomics tools", "metabolomics R packages", "targeted metabolomics", "nutrimetabolomics". The search was limited to articles published in the last 20 years, with a focus on metabolomics data preprocessing and pretreatment methodologies. The review aimed to identify the most commonly used methods and tools for metabolomic data preprocessing and pretreatment, as well as to explore recent advancements in the field. The review also sought to identify gaps in the existing literature and to inform the development of the new pipeline.
 
 \section{Pipeline design}
 The methods selected to be included in the pipeline were based on the results of the literature review. The pipeline was designed to be as modular as possible so a variety of methods are included to perform the same step, allowing users to select and apply specific pretreatment steps according to the data caracteristics and user needs and preferences.
@@ -666,7 +666,7 @@ For the pretreatment of the data, the package includes the following functions:
     \item A function to filter the data based on the percentage of missing values both in the features and the samples.
     \item A function to filter the outliers based on a Hotelling's T2 distribution ellipse.
     \item 8 functions to impute the missing values based on the following methods: \textit{Mean, Median, Random Forest (RF), Quantile Regression Imputation of Left-Censored data (QRILC), k-Nearest Neighbors (kNN), Singular Value Decomposition (SVD), Bayesian Principal Component Analysis (BPCA) and Probabilistic Principal Component Analysis (PPCA)}.
-    \item 2 functions to remove the batch effect using either the \textit{Quality Control-Robust Spline Correction (QC-RSC)} method or the \texttt{ComBat} method \cite{kirwan_characterising_2013,johnsonAdjustingBatchEffects2007}.
+    \item 2 functions to remove the batch effect using either the \textit{Quality Control-Robust Spline Correction (QC-RSC)} method or the \texttt{ComBat} method \cite{kirwanCharacterisingCorrectingBatch2013,johnsonAdjustingBatchEffects2007}.
     \item A function to normalize, scale and transform the data based on the methods provided by the \texttt{metaboAnalystR} package.
     \item 12 data visualization functions to create plots.
     \item 17 utility functions to perform different tasks.
